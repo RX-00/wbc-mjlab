@@ -154,19 +154,33 @@ into the same campaign root:
 .. code-block:: bash
 
    bash scripts/cluster/submit_six.sh /shared/images/wbc-mjlab-cu128.sif /shared/runs/campaign smoke
+   bash scripts/cluster/submit_six.sh /shared/images/wbc-mjlab-cu128.sif /shared/runs/campaign stability
    bash scripts/cluster/submit_six.sh /shared/images/wbc-mjlab-cu128.sif /shared/runs/campaign train
 
 These are six separate jobs; a failed task does not cancel another. Every full
 run starts fresh with seed 42, 2,048 environments, 24 rollout steps, 200,000 PPO
 iterations, and checkpoint interval 5,000. The sample motions are loaded from the
 snapshot. All tasks use ``njmax=1024`` to provide more constraint capacity than
-the G1 default of 250. The runner rejects reported ``nefc``/``ncon`` overflows,
+the G1 default of 250, and ``contact_sensor_maxmatch=128`` (the original sample
+campaign reported a required capacity of 65). The runner rejects reported
+``nefc``, ``ncon``, and contact-match overflows,
 propagates training failures, and verifies the final checkpoint, saved common
 settings, and exported artifacts. Smoke results are separate and are never
 loaded into full training.
 
-``jobs_smoke.tsv`` and ``jobs_train.tsv`` record task/job IDs. Slurm output is in
-``console/``, training outputs are in ``smoke/`` or ``train/``, and finished jobs
+The optional ``stability`` phase runs 1,000 fresh PPO iterations per task. Run
+smoke and stability checks to completion before submitting full training; the
+launcher does not automatically gate one phase on another.
+
+Cluster jobs enable per-term observation checks with ``nan_policy=error`` for
+both actor and critic, and a 32-state physics NaN guard. A physics NaN/Inf dump
+also fails the job, even if an environment reset would otherwise hide it.
+Dumps and model files persist under
+``diagnostics/<phase>_<task>_job<id>/`` inside the campaign. The JSON result records
+this directory. These checks stop on invalid values; they do not sanitize them.
+
+``jobs_smoke.tsv``, ``jobs_stability.tsv``, and ``jobs_train.tsv`` record task/job IDs. Slurm output is in
+``console/``, training outputs are in ``smoke/``, ``stability/``, or ``train/``, and finished jobs
 write JSON results in ``status/``. Missing JSON may indicate that Slurm killed a
 job before the wrapper finished; always also check ``sacct``. A normal fresh
 200,000-iteration run ends at zero-based checkpoint ``model_199999.pt``.
@@ -183,3 +197,20 @@ Tips
    - :doc:`deploy` — export the trained policy for a robot
    - :doc:`../concepts/adaptive_sampling` — what the sampling curves show
    - :ref:`cli-train` — every option
+
+October 2026 campaign diagnosis
+-------------------------------
+
+The October 8 seed-42 campaign completed both EE tasks; G1, G1-SE, Zest, and
+Zest-SE exited on nonfinite rollout observations. Their latest saved checkpoints
+and the motion arrays were finite. G1 and G1-SE had unusually large assistive
+torque normalization statistics, but the original runs did not save physics
+NaN dumps. Frozen-policy replay did not reproduce a natural crash, so the
+initial trigger of all four failures remains unproven.
+
+Controlled tests reproduced two reset defects: cached wrench observations
+survived resets, and clip wraps exposed pre-reset body kinematics. Both are now
+covered by simulator regression tests and corrected. The cluster diagnostics
+above are required for a subsequent campaign to establish whether any other
+numerical failure remains. Short validation runs cannot establish stability for
+200,000 iterations.

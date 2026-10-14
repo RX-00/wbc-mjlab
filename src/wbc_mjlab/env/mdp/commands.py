@@ -35,9 +35,9 @@ from wbc_mjlab.env.mdp.sampling import (
   resolve_tracking_reward_indices,
   rsi_failure_signal_label,
   sample_adaptive_bins,
-  trajectory_conditional_prob_row,
   step_tracking_reward_similarity,
   step_tracking_similarity,
+  trajectory_conditional_prob_row,
   update_failure_ema,
 )
 from wbc_mjlab.viewer.motion_vis import (
@@ -758,6 +758,9 @@ class MotionCommand(CommandTerm):
     root_state = torch.cat([root_pos, root_ori, root_lin_vel, root_ang_vel], dim=-1)
     self.robot.write_root_state_to_sim(root_state, env_ids=env_ids)
     self.robot.reset(env_ids=env_ids)
+    # These observations describe the current episode, just like simulator state.
+    self.assist_force_w[env_ids] = 0.0
+    self.assist_torque_w[env_ids] = 0.0
 
   def _resample_command(self, env_ids: torch.Tensor):
     rsi = self.cfg.rsi
@@ -917,6 +920,9 @@ class MotionCommand(CommandTerm):
       wrap_ids = torch.where(advance & (self.time_steps >= seg_end))[0]
       if wrap_ids.numel() > 0:
         self._resample_command(wrap_ids)
+        # Commands run after the environment's forward pass. A clip wrap writes
+        # new qpos/qvel, so refresh derived kinematics before sensing/observing.
+        self._env.sim.forward()
 
     self.update_relative_body_poses()
 

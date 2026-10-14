@@ -84,3 +84,17 @@ API: :doc:`../api/mdp` (Motion command).
    - :doc:`rsi` — how start frames are sampled
    - :doc:`observations`, :doc:`rewards` — terms that consume the command
    - :doc:`../reference/data_formats` — motion NPZ format
+
+Reset consistency
+-----------------
+
+Episode resets, viewer frame resets, and clip wraps clear the affected
+environments' cached assistive force and torque observations together with the
+robot state. Clip wraps also refresh simulator-derived kinematics before the
+next observation; command updates occur after the environment's normal forward
+pass. Other environments retain their current wrench observations.
+
+The assistive event only evaluates environments with positive assistance gain
+that are not pending termination. This avoids computing a wrench from discarded
+terminal state or multiplying nonfinite dynamics by zero gain. Invalid values
+in active environments remain visible to diagnostics.

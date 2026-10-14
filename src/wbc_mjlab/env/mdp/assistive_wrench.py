@@ -6,7 +6,6 @@ from dataclasses import dataclass
 from typing import TYPE_CHECKING, cast
 
 import torch
-
 from mjlab.entity import Entity
 from mjlab.managers.scene_entity_config import SceneEntityCfg
 from mjlab.utils.lab_api.math import quat_box_minus
@@ -84,7 +83,10 @@ class AssistiveWrenchEvent:
     forces = torch.zeros(num_envs, 1, 3, device=env.device)
     torques = torch.zeros(num_envs, 1, 3, device=env.device)
 
-    if not enabled or beta.max() <= 0.0:
+    # Step events run after termination detection but before automatic reset.
+    # Do not evaluate terminal physics or multiply invalid values by zero beta.
+    active = torch.where((beta > 0.0) & ~env.reset_buf)[0]
+    if not enabled or active.numel() == 0:
       command.assist_force_w.zero_()
       command.assist_torque_w.zero_()
       asset.write_external_wrench_to_sim(
@@ -94,17 +96,17 @@ class AssistiveWrenchEvent:
       )
       return
 
-    ref_pos = command.anchor_pos_w
-    ref_quat = command.anchor_quat_w
-    ref_lin_vel = command.anchor_lin_vel_w
-    ref_ang_vel = command.anchor_ang_vel_w
-    ref_lin_acc = command.anchor_lin_acc_w
-    ref_ang_acc = command.anchor_ang_acc_w
+    ref_pos = command.anchor_pos_w[active]
+    ref_quat = command.anchor_quat_w[active]
+    ref_lin_vel = command.anchor_lin_vel_w[active]
+    ref_ang_vel = command.anchor_ang_vel_w[active]
+    ref_lin_acc = command.anchor_lin_acc_w[active]
+    ref_ang_acc = command.anchor_ang_acc_w[active]
 
-    pos = asset.data.body_link_pos_w[:, self._anchor_body_index]
-    quat = asset.data.body_link_quat_w[:, self._anchor_body_index]
-    lin_vel = asset.data.body_link_lin_vel_w[:, self._anchor_body_index]
-    ang_vel = asset.data.body_link_ang_vel_w[:, self._anchor_body_index]
+    pos = asset.data.body_link_pos_w[active, self._anchor_body_index]
+    quat = asset.data.body_link_quat_w[active, self._anchor_body_index]
+    lin_vel = asset.data.body_link_lin_vel_w[active, self._anchor_body_index]
+    ang_vel = asset.data.body_link_ang_vel_w[active, self._anchor_body_index]
 
     pos_err = ref_pos - pos
     lin_vel_err = ref_lin_vel - lin_vel
@@ -113,24 +115,24 @@ class AssistiveWrenchEvent:
 
     nominal = self._nominal
     M = nominal.mass
-    I = nominal.inertia
+    inertia = nominal.inertia
     g = nominal.gravity
 
     # Eq. 13a: F_b = M v̇̂ + kvp(p̂−p) + kvd(v̂−v) − g
     f_nominal = M * ref_lin_acc + kvp * pos_err + kvd * lin_vel_err - g
 
     # Eq. 13b: M_b = I ω̇̂ + kp Φ̂⊟Φ + kd(ω̂−ω) + ω×(Iω) − r×Mg
-    root_pos = asset.data.root_link_pos_w
-    subtree_com = asset.data.data.subtree_com[:, asset.indexing.root_body_id]
+    root_pos = asset.data.root_link_pos_w[active]
+    subtree_com = asset.data.data.subtree_com[active, asset.indexing.root_body_id]
     rb_com = subtree_com - root_pos
     mg = M * g
-    rb_cross_mg = torch.cross(rb_com, mg.expand(num_envs, 3), dim=-1)
+    rb_cross_mg = torch.cross(rb_com, mg.expand(active.numel(), 3), dim=-1)
 
-    i_omega = torch.einsum("ij,nj->ni", I, ang_vel)
+    i_omega = torch.einsum("ij,nj->ni", inertia, ang_vel)
     omega_cross_i_omega = torch.cross(ang_vel, i_omega, dim=-1)
-    i_ang_acc = torch.einsum("ij,nj->ni", I, ref_ang_acc)
-    i_ori_err = torch.einsum("ij,nj->ni", I, ori_err)
-    i_ang_vel_err = torch.einsum("ij,nj->ni", I, ang_vel_err)
+    i_ang_acc = torch.einsum("ij,nj->ni", inertia, ref_ang_acc)
+    i_ori_err = torch.einsum("ij,nj->ni", inertia, ori_err)
+    i_ang_vel_err = torch.einsum("ij,nj->ni", inertia, ang_vel_err)
 
     m_nominal = (
       i_ang_acc
@@ -140,8 +142,8 @@ class AssistiveWrenchEvent:
       - rb_cross_mg
     )
 
-    forces[:, 0] = beta.unsqueeze(-1) * f_nominal
-    torques[:, 0] = beta.unsqueeze(-1) * m_nominal
+    forces[active, 0] = beta[active, None] * f_nominal
+    torques[active, 0] = beta[active, None] * m_nominal
     command.assist_force_w[:] = forces[:, 0]
     command.assist_torque_w[:] = torques[:, 0]
 
