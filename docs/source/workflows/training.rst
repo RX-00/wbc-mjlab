@@ -161,6 +161,53 @@ GPU ids. Single-GPU (default ``--gpu-ids 0``) runs in-process without torchrunx.
 
 Worker logs go to ``<run_dir>/torchrunx/`` unless overridden with ``--torchrunx-log-dir``.
 
+Slurm and Apptainer
+-------------------
+
+``scripts/cluster/`` provides an Apptainer build and independent Slurm jobs for
+the six WBC/Zest-family G1 tasks. The launcher defaults to the A2R cluster's
+``debug`` partition, one RTX 5090, eight CPUs, 16 GiB RAM, and exclusion of
+``a2r-main``. Adapt these resource directives for another cluster.
+
+Build on a machine with Apptainer fakeroot support and sufficient local scratch
+space. First convert the bundled sample motions. The build script snapshots the
+tracked checkout, local scripts, and converted samples, and installs the frozen
+CUDA dependencies from ``uv.lock`` into a Python 3.12 image:
+
+.. code-block:: bash
+
+   bash scripts/cluster/build_image.sh
+
+The printed build directory contains ``context/`` (the source/data snapshot),
+``wbc-mjlab-cu128.sif``, and ``IMAGE.sha256``. Copy ``context/`` to the shared
+cluster checkout and the image plus its checksum to one shared image directory.
+Keep the checkout fixed throughout the campaign. Jobs validate the snapshot and
+image checksums, preserve Slurm's allocated GPU visibility, and use a node-local
+Warp cache.
+
+Submit short validation runs, inspect all six job results, then submit training
+into the same campaign root:
+
+.. code-block:: bash
+
+   bash scripts/cluster/submit_six.sh /shared/images/wbc-mjlab-cu128.sif /shared/runs/campaign smoke
+   bash scripts/cluster/submit_six.sh /shared/images/wbc-mjlab-cu128.sif /shared/runs/campaign train
+
+These are six separate jobs; a failed task does not cancel another. Every full
+run starts fresh with seed 42, 2,048 environments, 24 rollout steps, 200,000 PPO
+iterations, and checkpoint interval 5,000. The sample motions are loaded from the
+snapshot. All tasks use ``njmax=1024`` to provide more constraint capacity than
+the G1 default of 250. The runner rejects reported ``nefc``/``ncon`` overflows,
+propagates training failures, and verifies the final checkpoint, saved common
+settings, and exported artifacts. Smoke results are separate and are never
+loaded into full training.
+
+``jobs_smoke.tsv`` and ``jobs_train.tsv`` record task/job IDs. Slurm output is in
+``console/``, training outputs are in ``smoke/`` or ``train/``, and finished jobs
+write JSON results in ``status/``. Missing JSON may indicate that Slurm killed a
+job before the wrapper finished; always also check ``sacct``. A normal fresh
+200,000-iteration run ends at zero-based checkpoint ``model_199999.pt``.
+
 Tips
 ----
 

@@ -1,0 +1,30 @@
+Bootstrap: docker
+From: python@sha256:2b4f19dae3a777dfc3b76730bda1e82e1f66ab2a2686fa93ca78edbfb4f04ffe
+
+%files
+    {{ context }} /workspace/wbc-mjlab
+    {{ uv_binary }} /usr/local/bin/uv
+
+%post
+    set -eu
+    export DEBIAN_FRONTEND=noninteractive
+    apt-get update
+    apt-get install -y --no-install-recommends ca-certificates git libegl1 libgl1 libglfw3 libgomp1 libglib2.0-0
+    rm -rf /var/lib/apt/lists/*
+    uv pip install --system --no-cache -r /workspace/wbc-mjlab/pylock.toml
+    uv pip install --system --no-cache --no-deps -e /workspace/wbc-mjlab
+    uv pip check --system
+    mkdir -p /runs /cache
+
+%environment
+    export PYTHONUNBUFFERED=1
+    export PYTHONDONTWRITEBYTECODE=1
+    export MUJOCO_GL=egl
+    export PYOPENGL_PLATFORM=egl
+
+%test
+    python -c 'import sys, torch, mujoco, mujoco_warp, mjlab, wbc_mjlab; assert sys.version_info[:2] == (3, 12); print("Python:", sys.version); print("Torch:", torch.__version__, "CUDA:", torch.version.cuda)'
+    wbc-mjlab-list-envs
+
+%labels
+    Description Locked WBC-MJLab CUDA training environment
