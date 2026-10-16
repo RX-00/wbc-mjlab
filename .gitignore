@@ -34,3 +34,5 @@ data/**
 # Local technical report (keep untracked until ready to publish)
 wbc_report/
 TODO
+# Preserve the captured G1-SE investigation state dump.
+!docs/investigations/2026-10-16-g1-se-nonfinite/evidence/nan_dump_20261016_045537.npz

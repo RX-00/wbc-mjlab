@@ -1,0 +1,253 @@
+{
+  "artifact_checksums_match_server": true,
+  "mujoco_version_used_for_inspection": "3.11.0",
+  "model": {
+    "nq": 36,
+    "nv": 35,
+    "na": 0
+  },
+  "metadata": {
+    "num_envs_total": 2048,
+    "num_envs_dumped": 1,
+    "nan_env_ids": [
+      1476
+    ],
+    "dumped_env_ids": [
+      1476
+    ],
+    "state_spec": 30,
+    "state_size": 71,
+    "buffer_size": 32,
+    "detection_step": 17868079,
+    "timestamp": "20261016_045537",
+    "model_file": "model_20261016_045537.mjb",
+    "note": "States captured using mj_getState with state_spec. Use mj_setState with the same spec to restore. Model saved as MJB for easy reloading."
+  },
+  "states": [
+    {
+      "step": 17868047,
+      "env_id": 1476,
+      "all_saved_values_finite": true,
+      "max_abs_qpos": 27.810914993286133,
+      "max_abs_qvel": 53.33513259887695
+    },
+    {
+      "step": 17868048,
+      "env_id": 1476,
+      "all_saved_values_finite": true,
+      "max_abs_qpos": 27.810644149780273,
+      "max_abs_qvel": 38.965797424316406
+    },
+    {
+      "step": 17868049,
+      "env_id": 1476,
+      "all_saved_values_finite": true,
+      "max_abs_qpos": 27.81097984313965,
+      "max_abs_qvel": 29.185100555419922
+    },
+    {
+      "step": 17868050,
+      "env_id": 1476,
+      "all_saved_values_finite": true,
+      "max_abs_qpos": 27.812583923339844,
+      "max_abs_qvel": 31.207508087158203
+    },
+    {
+      "step": 17868051,
+      "env_id": 1476,
+      "all_saved_values_finite": true,
+      "max_abs_qpos": 27.81546401977539,
+      "max_abs_qvel": 32.34297180175781
+    },
+    {
+      "step": 17868052,
+      "env_id": 1476,
+      "all_saved_values_finite": true,
+      "max_abs_qpos": 27.819368362426758,
+      "max_abs_qvel": 36.93745040893555
+    },
+    {
+      "step": 17868053,
+      "env_id": 1476,
+      "all_saved_values_finite": true,
+      "max_abs_qpos": 27.821247100830078,
+      "max_abs_qvel": 34.05194091796875
+    },
+    {
+      "step": 17868054,
+      "env_id": 1476,
+      "all_saved_values_finite": true,
+      "max_abs_qpos": 27.821748733520508,
+      "max_abs_qvel": 42.670997619628906
+    },
+    {
+      "step": 17868055,
+      "env_id": 1476,
+      "all_saved_values_finite": true,
+      "max_abs_qpos": 27.821983337402344,
+      "max_abs_qvel": 48.18373489379883
+    },
+    {
+      "step": 17868056,
+      "env_id": 1476,
+      "all_saved_values_finite": true,
+      "max_abs_qpos": 27.821762084960938,
+      "max_abs_qvel": 49.23335647583008
+    },
+    {
+      "step": 17868057,
+      "env_id": 1476,
+      "all_saved_values_finite": true,
+      "max_abs_qpos": 27.822540283203125,
+      "max_abs_qvel": 38.97693634033203
+    },
+    {
+      "step": 17868058,
+      "env_id": 1476,
+      "all_saved_values_finite": true,
+      "max_abs_qpos": 27.824459075927734,
+      "max_abs_qvel": 51.259117126464844
+    },
+    {
+      "step": 17868059,
+      "env_id": 1476,
+      "all_saved_values_finite": true,
+      "max_abs_qpos": 27.827367782592773,
+      "max_abs_qvel": 54.24641036987305
+    },
+    {
+      "step": 17868060,
+      "env_id": 1476,
+      "all_saved_values_finite": true,
+      "max_abs_qpos": 27.830793380737305,
+      "max_abs_qvel": 51.9817008972168
+    },
+    {
+      "step": 17868061,
+      "env_id": 1476,
+      "all_saved_values_finite": true,
+      "max_abs_qpos": 27.831220626831055,
+      "max_abs_qvel": 34.157203674316406
+    },
+    {
+      "step": 17868062,
+      "env_id": 1476,
+      "all_saved_values_finite": true,
+      "max_abs_qpos": 27.829599380493164,
+      "max_abs_qvel": 52.85251235961914
+    },
+    {
+      "step": 17868063,
+      "env_id": 1476,
+      "all_saved_values_finite": true,
+      "max_abs_qpos": 27.826457977294922,
+      "max_abs_qvel": 64.21302795410156
+    },
+    {
+      "step": 17868064,
+      "env_id": 1476,
+      "all_saved_values_finite": true,
+      "max_abs_qpos": 27.824432373046875,
+      "max_abs_qvel": 66.42807006835938
+    },
+    {
+      "step": 17868065,
+      "env_id": 1476,
+      "all_saved_values_finite": true,
+      "max_abs_qpos": 27.828147888183594,
+      "max_abs_qvel": 57.26468276977539
+    },
+    {
+      "step": 17868066,
+      "env_id": 1476,
+      "all_saved_values_finite": true,
+      "max_abs_qpos": 27.83860206604004,
+      "max_abs_qvel": 92.8786849975586
+    },
+    {
+      "step": 17868067,
+      "env_id": 1476,
+      "all_saved_values_finite": true,
+      "max_abs_qpos": 27.853713989257812,
+      "max_abs_qvel": 111.94852447509766
+    },
+    {
+      "step": 17868068,
+      "env_id": 1476,
+      "all_saved_values_finite": true,
+      "max_abs_qpos": 27.863378524780273,
+      "max_abs_qvel": 82.22440338134766
+    },
+    {
+      "step": 17868069,
+      "env_id": 1476,
+      "all_saved_values_finite": true,
+      "max_abs_qpos": 27.85755157470703,
+      "max_abs_qvel": 126.68559265136719
+    },
+    {
+      "step": 17868070,
+      "env_id": 1476,
+      "all_saved_values_finite": true,
+      "max_abs_qpos": 27.84381675720215,
+      "max_abs_qvel": 151.03677368164062
+    },
+    {
+      "step": 17868071,
+      "env_id": 1476,
+      "all_saved_values_finite": true,
+      "max_abs_qpos": 27.823226928710938,
+      "max_abs_qvel": 141.28781127929688
+    },
+    {
+      "step": 17868072,
+      "env_id": 1476,
+      "all_saved_values_finite": true,
+      "max_abs_qpos": 27.81287956237793,
+      "max_abs_qvel": 197.5924835205078
+    },
+    {
+      "step": 17868073,
+      "env_id": 1476,
+      "all_saved_values_finite": true,
+      "max_abs_qpos": 27.845319747924805,
+      "max_abs_qvel": 213.9209442138672
+    },
+    {
+      "step": 17868074,
+      "env_id": 1476,
+      "all_saved_values_finite": true,
+      "max_abs_qpos": 27.878820419311523,
+      "max_abs_qvel": 269.58984375
+    },
+    {
+      "step": 17868075,
+      "env_id": 1476,
+      "all_saved_values_finite": true,
+      "max_abs_qpos": 27.905513763427734,
+      "max_abs_qvel": 883.0753173828125
+    },
+    {
+      "step": 17868076,
+      "env_id": 1476,
+      "all_saved_values_finite": true,
+      "max_abs_qpos": 27.687641143798828,
+      "max_abs_qvel": 3921.724853515625
+    },
+    {
+      "step": 17868077,
+      "env_id": 1476,
+      "all_saved_values_finite": true,
+      "max_abs_qpos": 576.1331176757812,
+      "max_abs_qvel": 118222.171875
+    },
+    {
+      "step": 17868078,
+      "env_id": 1476,
+      "all_saved_values_finite": true,
+      "max_abs_qpos": 145816.40625,
+      "max_abs_qvel": 29163178.0
+    }
+  ],
+  "limitation": "The guard captures qpos/qvel before each physics step. These are pre-failure states, not the post-step tensor that triggered detection. They do not include the complete training state or all simulator inputs."
+}

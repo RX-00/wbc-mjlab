@@ -1,0 +1,1 @@
+JOB FAILED: Nonfinite physics state; see persistent diagnostic dump

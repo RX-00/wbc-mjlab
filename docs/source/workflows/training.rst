@@ -214,3 +214,10 @@ covered by simulator regression tests and corrected. The cluster diagnostics
 above are required for a subsequent campaign to establish whether any other
 numerical failure remains. Short validation runs cannot establish stability for
 200,000 iterations.
+
+The revised October 14 campaign exposed a remaining G1-SE physics failure near
+iteration 186125 despite those reset fixes. A timestamped `investigation handoff
+and evidence bundle <https://github.com/RX-00/wbc-mjlab/tree/main/docs/investigations/2026-10-16-g1-se-nonfinite>`_
+contains the state dump, matching compressed MuJoCo model, failure logs,
+configuration, artifact hashes, and investigation limits. G1 completed the revised
+200,000-iteration run. Other task statuses in that bundle are historical snapshots.
