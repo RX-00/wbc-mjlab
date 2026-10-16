@@ -85,6 +85,8 @@ Included artifacts and validation
   completed/failed wrapper results, checkpoint paths, failure-log excerpt,
   original diagnostic sizes and SHA-256 hashes.
 * ``evidence/failure.stdout.tail.txt`` and ``failure.stderr.txt``: failure context.
+  The readable stdout excerpt removes ANSI styling and trailing whitespace;
+  ``audit.json`` retains the original captured text.
 * ``evidence/nan_dump_20261016_045537.npz``: original 20,160-byte state dump.
 * ``evidence/model_20261016_045537.mjb.gz``: losslessly compressed matching model
   (about 34.8 MB compressed; 71,161,551 bytes decompressed).

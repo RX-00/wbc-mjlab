@@ -16,13 +16,13 @@
                                     ETA: 2:38:37
 
 ################################################################################
-[1m                        Learning iteration 186123/200000                        [0m 
+                        Learning iteration 186123/200000
 
                                Run name: train_seed42_job12886
-                            Total steps: 9148366848 
-                       Steps per second: 71697 
-                        Collection time: 0.587s 
-                          Learning time: 0.099s 
+                            Total steps: 9148366848
+                       Steps per second: 71697
+                        Collection time: 0.587s
+                          Learning time: 0.099s
                         Mean value loss: 0.0713
                     Mean surrogate loss: -0.0101
                       Mean entropy loss: 14.9298
@@ -72,13 +72,13 @@ Episode_Reward/actuator_torque_soft_limit: 0.0000
                                     ETA: 2:38:37
 
 ################################################################################
-[1m                        Learning iteration 186124/200000                        [0m 
+                        Learning iteration 186124/200000
 
                                Run name: train_seed42_job12886
-                            Total steps: 9148416000 
-                       Steps per second: 71489 
-                        Collection time: 0.589s 
-                          Learning time: 0.099s 
+                            Total steps: 9148416000
+                       Steps per second: 71489
+                        Collection time: 0.589s
+                          Learning time: 0.099s
                         Mean value loss: 0.0663
                     Mean surrogate loss: -0.0114
                       Mean entropy loss: 14.9327
