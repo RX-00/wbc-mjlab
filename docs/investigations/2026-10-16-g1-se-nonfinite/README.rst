@@ -153,3 +153,29 @@ No specialist skill is required for SSH, Slurm, or simulator debugging. Use the
 ``handoff`` skill if another transfer of the investigation is requested. Follow
 repository AGENTS instructions, preserve user changes, and keep verified facts
 separate from hypotheses.
+
+Scheduling change: October 16, 2026
+-----------------------------------
+
+After the evidence capture, the user authorized freeing ``a2r-fox`` for a
+labmate and serializing the remaining campaign on ``a2r-wolf``. Job **12888**
+(Zest-SE) was intentionally cancelled; this is not a numerical failure. Its
+outputs and ``model_15000.pt`` checkpoint remain in the original run directory.
+
+The replacement is **12932**, a fresh Zest-SE run using the same training
+revision, image, seed, dataset, and full 200,000-iteration budget. It does not
+resume the interrupted checkpoint. Queued jobs are pinned to wolf and ordered
+using ``afterany`` dependencies:
+
+* Zest **12887** continues on wolf.
+* EE **12889** follows 12887.
+* EE-SE **12890** follows 12889.
+* Fresh Zest-SE **12932** follows 12890.
+
+The campaign's ``jobs_train.tsv`` and ``CAMPAIGN.json`` now identify 12932 as
+the active Zest-SE job. ``jobs_train.original.tsv`` preserves the original
+mapping. ``evidence/single_gpu_relocation.json`` records the authorized changes,
+scheduler verification, preserved checkpoint, and final fox GPU process check.
+Fox was verified idle with no GPU compute processes at that check; recheck its
+current state before claiming availability. G1-SE job 12886 was not restarted
+or otherwise changed by this scheduling operation. Training code was unchanged.
