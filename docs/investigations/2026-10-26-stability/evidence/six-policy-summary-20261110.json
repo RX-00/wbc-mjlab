@@ -1,0 +1,896 @@
+{
+  "observed_utc": "2026-11-10T16:51:19.436044+00:00",
+  "scope": "All six fresh seed-42 200k policies under frozen v12. Campaign artifacts complete; known validation failures are explicitly retained.",
+  "policies": [
+    {
+      "task": "Wbc-G1",
+      "job": 20236,
+      "checkpoint_sha256": "e0606d2bc2e86984642a8d46aa076f92860a105d8302475d7a0bb371b0b86609",
+      "result_sha256": "a15485a89a939ff449c7f99bb35afc3539989f7448106be76a293aae4d4b664f",
+      "full": {
+        "planned": 10,
+        "completed": 8,
+        "falls": 2,
+        "numerical_failures": 0,
+        "completion_rate": 0.8,
+        "observed_steps": 78451,
+        "planned_steps": 78563,
+        "trials_with_metrics": 10,
+        "mean_trial_metrics": {
+          "anchor_drift_m": 2.456903893014475,
+          "body_global_m": 2.4649021789996763,
+          "body_root_relative_m": 0.0432525984892133,
+          "body_orientation_rad": 0.9312083258183165,
+          "joint_position_rmse_rad": 0.14256981320129758,
+          "joint_velocity_rmse_rad_s": 1.5670202547203076,
+          "body_linear_velocity_m_s": 0.9869765241622896,
+          "body_angular_velocity_rad_s": 3.0126602007164385,
+          "anchor_linear_velocity_m_s": 0.787679614164034
+        }
+      },
+      "full_coverage": 0.9985743925257436,
+      "segment_completions": {
+        "segment_0.25": 8,
+        "segment_0.5": 8,
+        "segment_0.75": 10
+      },
+      "full_failures": [
+        {
+          "name": "backflip",
+          "observed_steps": 22,
+          "steps": 88,
+          "status": "fall"
+        },
+        {
+          "name": "gainer_flip",
+          "observed_steps": 95,
+          "steps": 141,
+          "status": "fall"
+        }
+      ],
+      "parity_observations_per_export": 1729,
+      "trace_samples": 84244,
+      "video_frames": 78461,
+      "video_directory": "logs/stability-final-v12/completed/Wbc-G1-20236/full-videos-gpu",
+      "all_tracking_targets_met": false,
+      "summary": {
+        "full": {
+          "planned": 10,
+          "completed": 8,
+          "falls": 2,
+          "numerical_failures": 0,
+          "completion_rate": 0.8,
+          "observed_steps": 78451,
+          "planned_steps": 78563,
+          "trials_with_metrics": 10,
+          "mean_trial_metrics": {
+            "anchor_drift_m": 2.456903893014475,
+            "body_global_m": 2.4649021789996763,
+            "body_root_relative_m": 0.0432525984892133,
+            "body_orientation_rad": 0.9312083258183165,
+            "joint_position_rmse_rad": 0.14256981320129758,
+            "joint_velocity_rmse_rad_s": 1.5670202547203076,
+            "body_linear_velocity_m_s": 0.9869765241622896,
+            "body_angular_velocity_rad_s": 3.0126602007164385,
+            "anchor_linear_velocity_m_s": 0.787679614164034
+          }
+        },
+        "segment_0.25": {
+          "planned": 10,
+          "completed": 8,
+          "falls": 2,
+          "numerical_failures": 0,
+          "completion_rate": 0.8,
+          "observed_steps": 2011,
+          "planned_steps": 2107,
+          "trials_with_metrics": 10,
+          "mean_trial_metrics": {
+            "anchor_drift_m": 0.27164942204911513,
+            "body_global_m": 0.2909938754485671,
+            "body_root_relative_m": 0.049955399757431004,
+            "body_orientation_rad": 0.3269495819804814,
+            "joint_position_rmse_rad": 0.15243645883410134,
+            "joint_velocity_rmse_rad_s": 1.6654873526197143,
+            "body_linear_velocity_m_s": 0.6874852058189485,
+            "body_angular_velocity_rad_s": 2.9069276700125544,
+            "anchor_linear_velocity_m_s": 0.4593332563905476
+          }
+        },
+        "segment_0.5": {
+          "planned": 10,
+          "completed": 8,
+          "falls": 2,
+          "numerical_failures": 0,
+          "completion_rate": 0.8,
+          "observed_steps": 1912,
+          "planned_steps": 1988,
+          "trials_with_metrics": 10,
+          "mean_trial_metrics": {
+            "anchor_drift_m": 0.16476465232707482,
+            "body_global_m": 0.1764589288104303,
+            "body_root_relative_m": 0.047874876789334116,
+            "body_orientation_rad": 0.32505355167794153,
+            "joint_position_rmse_rad": 0.14732622445109717,
+            "joint_velocity_rmse_rad_s": 1.7199269272598794,
+            "body_linear_velocity_m_s": 0.6635854663338664,
+            "body_angular_velocity_rad_s": 2.766869682894223,
+            "anchor_linear_velocity_m_s": 0.47803635259326693
+          }
+        },
+        "segment_0.75": {
+          "planned": 10,
+          "completed": 10,
+          "falls": 0,
+          "numerical_failures": 0,
+          "completion_rate": 1.0,
+          "observed_steps": 1870,
+          "planned_steps": 1870,
+          "trials_with_metrics": 10,
+          "mean_trial_metrics": {
+            "anchor_drift_m": 0.14886376048879008,
+            "body_global_m": 0.1566038448677427,
+            "body_root_relative_m": 0.03790095914034363,
+            "body_orientation_rad": 0.21966809702642257,
+            "joint_position_rmse_rad": 0.1269759663167443,
+            "joint_velocity_rmse_rad_s": 1.2751450338098749,
+            "body_linear_velocity_m_s": 0.397682791112887,
+            "body_angular_velocity_rad_s": 1.889306286418293,
+            "anchor_linear_velocity_m_s": 0.27306115844976797
+          }
+        }
+      }
+    },
+    {
+      "task": "Wbc-G1-SE",
+      "job": 19791,
+      "checkpoint_sha256": "3450917ffd7b197bbcfdb702c2bb7d45963acfb6e7d3bd689f4cdde05713d003",
+      "result_sha256": "d038e1b028b01d72cf5d2838ea5349e11f14d9ea772a8e517c9c4bff7a0ec8c9",
+      "full": {
+        "planned": 10,
+        "completed": 8,
+        "falls": 2,
+        "numerical_failures": 0,
+        "completion_rate": 0.8,
+        "observed_steps": 78464,
+        "planned_steps": 78563,
+        "trials_with_metrics": 10,
+        "mean_trial_metrics": {
+          "anchor_drift_m": 0.1124812995761747,
+          "body_global_m": 0.1304821304480162,
+          "body_root_relative_m": 0.04752689181754508,
+          "body_orientation_rad": 0.24226482011511252,
+          "joint_position_rmse_rad": 0.13552794338523755,
+          "joint_velocity_rmse_rad_s": 1.525796886088593,
+          "body_linear_velocity_m_s": 0.5334820954244899,
+          "body_angular_velocity_rad_s": 2.4348725788366155,
+          "anchor_linear_velocity_m_s": 0.33454088537065374
+        }
+      },
+      "full_coverage": 0.9987398648218627,
+      "segment_completions": {
+        "segment_0.25": 8,
+        "segment_0.5": 8,
+        "segment_0.75": 10
+      },
+      "full_failures": [
+        {
+          "name": "backflip",
+          "observed_steps": 35,
+          "steps": 88,
+          "status": "fall"
+        },
+        {
+          "name": "gainer_flip",
+          "observed_steps": 95,
+          "steps": 141,
+          "status": "fall"
+        }
+      ],
+      "parity_observations_per_export": 1729,
+      "trace_samples": 84258,
+      "video_frames": 78474,
+      "video_directory": "logs/stability-final-v12/completed/Wbc-G1-SE-19791/full-videos-cpu",
+      "all_tracking_targets_met": false,
+      "summary": {
+        "full": {
+          "planned": 10,
+          "completed": 8,
+          "falls": 2,
+          "numerical_failures": 0,
+          "completion_rate": 0.8,
+          "observed_steps": 78464,
+          "planned_steps": 78563,
+          "trials_with_metrics": 10,
+          "mean_trial_metrics": {
+            "anchor_drift_m": 0.1124812995761747,
+            "body_global_m": 0.1304821304480162,
+            "body_root_relative_m": 0.04752689181754508,
+            "body_orientation_rad": 0.24226482011511252,
+            "joint_position_rmse_rad": 0.13552794338523755,
+            "joint_velocity_rmse_rad_s": 1.525796886088593,
+            "body_linear_velocity_m_s": 0.5334820954244899,
+            "body_angular_velocity_rad_s": 2.4348725788366155,
+            "anchor_linear_velocity_m_s": 0.33454088537065374
+          }
+        },
+        "segment_0.25": {
+          "planned": 10,
+          "completed": 8,
+          "falls": 2,
+          "numerical_failures": 0,
+          "completion_rate": 0.8,
+          "observed_steps": 2012,
+          "planned_steps": 2107,
+          "trials_with_metrics": 10,
+          "mean_trial_metrics": {
+            "anchor_drift_m": 0.10381337970098511,
+            "body_global_m": 0.12323288895667077,
+            "body_root_relative_m": 0.050404324042556535,
+            "body_orientation_rad": 0.2752068050021153,
+            "joint_position_rmse_rad": 0.14043100303708678,
+            "joint_velocity_rmse_rad_s": 1.6491000861864873,
+            "body_linear_velocity_m_s": 0.6282680863235022,
+            "body_angular_velocity_rad_s": 2.8204491316185973,
+            "anchor_linear_velocity_m_s": 0.4133208436208854
+          }
+        },
+        "segment_0.5": {
+          "planned": 10,
+          "completed": 8,
+          "falls": 2,
+          "numerical_failures": 0,
+          "completion_rate": 0.8,
+          "observed_steps": 1912,
+          "planned_steps": 1988,
+          "trials_with_metrics": 10,
+          "mean_trial_metrics": {
+            "anchor_drift_m": 0.11356309632536651,
+            "body_global_m": 0.12492712807361975,
+            "body_root_relative_m": 0.05063513692547674,
+            "body_orientation_rad": 0.2811694935688934,
+            "joint_position_rmse_rad": 0.1405753419876597,
+            "joint_velocity_rmse_rad_s": 1.7270422320906718,
+            "body_linear_velocity_m_s": 0.6098257119756001,
+            "body_angular_velocity_rad_s": 2.728948287039836,
+            "anchor_linear_velocity_m_s": 0.4340527084942229
+          }
+        },
+        "segment_0.75": {
+          "planned": 10,
+          "completed": 10,
+          "falls": 0,
+          "numerical_failures": 0,
+          "completion_rate": 1.0,
+          "observed_steps": 1870,
+          "planned_steps": 1870,
+          "trials_with_metrics": 10,
+          "mean_trial_metrics": {
+            "anchor_drift_m": 0.08722728047687822,
+            "body_global_m": 0.10073533814864655,
+            "body_root_relative_m": 0.037778635362559994,
+            "body_orientation_rad": 0.20906778459028091,
+            "joint_position_rmse_rad": 0.11480029017402253,
+            "joint_velocity_rmse_rad_s": 1.180144793967477,
+            "body_linear_velocity_m_s": 0.36654858844103677,
+            "body_angular_velocity_rad_s": 1.7957613746314454,
+            "anchor_linear_velocity_m_s": 0.2235018223120367
+          }
+        }
+      }
+    },
+    {
+      "task": "Wbc-G1-Zest",
+      "job": 19792,
+      "checkpoint_sha256": "094d472c9889e68053cc91c77fddaa5acc9e98c9e432f55a05fd0d7e5da26661",
+      "result_sha256": "0e4a82756e55f73c5e8ed9b28ab51bb850710efe5097fd23ec8e21ecfafc84d4",
+      "full": {
+        "planned": 10,
+        "completed": 8,
+        "falls": 2,
+        "numerical_failures": 0,
+        "completion_rate": 0.8,
+        "observed_steps": 77741,
+        "planned_steps": 78563,
+        "trials_with_metrics": 10,
+        "mean_trial_metrics": {
+          "anchor_drift_m": 2.2195356471521874,
+          "body_global_m": 2.2340618573221294,
+          "body_root_relative_m": 0.05129178686687621,
+          "body_orientation_rad": 0.9659216511299276,
+          "joint_position_rmse_rad": 0.15430736671512404,
+          "joint_velocity_rmse_rad_s": 1.6485383876220236,
+          "body_linear_velocity_m_s": 1.0657062106534232,
+          "body_angular_velocity_rad_s": 3.262308416063854,
+          "anchor_linear_velocity_m_s": 0.8276281232479226
+        }
+      },
+      "full_coverage": 0.9895370594300116,
+      "segment_completions": {
+        "segment_0.25": 9,
+        "segment_0.5": 8,
+        "segment_0.75": 10
+      },
+      "full_failures": [
+        {
+          "name": "backflip",
+          "observed_steps": 35,
+          "steps": 88,
+          "status": "fall"
+        },
+        {
+          "name": "dance1_subject1",
+          "observed_steps": 5804,
+          "steps": 6573,
+          "status": "fall"
+        }
+      ],
+      "parity_observations_per_export": 1717,
+      "trace_samples": 83582,
+      "video_frames": 77751,
+      "video_directory": "logs/stability-final-v12/completed/Wbc-G1-Zest-19792/full-videos-cpu",
+      "all_tracking_targets_met": false,
+      "summary": {
+        "full": {
+          "planned": 10,
+          "completed": 8,
+          "falls": 2,
+          "numerical_failures": 0,
+          "completion_rate": 0.8,
+          "observed_steps": 77741,
+          "planned_steps": 78563,
+          "trials_with_metrics": 10,
+          "mean_trial_metrics": {
+            "anchor_drift_m": 2.2195356471521874,
+            "body_global_m": 2.2340618573221294,
+            "body_root_relative_m": 0.05129178686687621,
+            "body_orientation_rad": 0.9659216511299276,
+            "joint_position_rmse_rad": 0.15430736671512404,
+            "joint_velocity_rmse_rad_s": 1.6485383876220236,
+            "body_linear_velocity_m_s": 1.0657062106534232,
+            "body_angular_velocity_rad_s": 3.262308416063854,
+            "anchor_linear_velocity_m_s": 0.8276281232479226
+          }
+        },
+        "segment_0.25": {
+          "planned": 10,
+          "completed": 9,
+          "falls": 1,
+          "numerical_failures": 0,
+          "completion_rate": 0.9,
+          "observed_steps": 2057,
+          "planned_steps": 2107,
+          "trials_with_metrics": 10,
+          "mean_trial_metrics": {
+            "anchor_drift_m": 0.2316492112621562,
+            "body_global_m": 0.257244442532818,
+            "body_root_relative_m": 0.05326686221038054,
+            "body_orientation_rad": 0.42726451802006016,
+            "joint_position_rmse_rad": 0.16749764666158337,
+            "joint_velocity_rmse_rad_s": 1.845067516360825,
+            "body_linear_velocity_m_s": 0.717147919775475,
+            "body_angular_velocity_rad_s": 3.144644375173642,
+            "anchor_linear_velocity_m_s": 0.42001024233615586
+          }
+        },
+        "segment_0.5": {
+          "planned": 10,
+          "completed": 8,
+          "falls": 2,
+          "numerical_failures": 0,
+          "completion_rate": 0.8,
+          "observed_steps": 1914,
+          "planned_steps": 1988,
+          "trials_with_metrics": 10,
+          "mean_trial_metrics": {
+            "anchor_drift_m": 0.21843272852068257,
+            "body_global_m": 0.2388231286516398,
+            "body_root_relative_m": 0.054839327569407736,
+            "body_orientation_rad": 0.4062307787208053,
+            "joint_position_rmse_rad": 0.1836664254947649,
+            "joint_velocity_rmse_rad_s": 2.0963002712702363,
+            "body_linear_velocity_m_s": 0.7403693855795828,
+            "body_angular_velocity_rad_s": 3.3961340330310223,
+            "anchor_linear_velocity_m_s": 0.4880479309007254
+          }
+        },
+        "segment_0.75": {
+          "planned": 10,
+          "completed": 10,
+          "falls": 0,
+          "numerical_failures": 0,
+          "completion_rate": 1.0,
+          "observed_steps": 1870,
+          "planned_steps": 1870,
+          "trials_with_metrics": 10,
+          "mean_trial_metrics": {
+            "anchor_drift_m": 0.11252832818276506,
+            "body_global_m": 0.12409928182184049,
+            "body_root_relative_m": 0.03594904798987873,
+            "body_orientation_rad": 0.21068997071185377,
+            "joint_position_rmse_rad": 0.12847512919768236,
+            "joint_velocity_rmse_rad_s": 1.3468975433657373,
+            "body_linear_velocity_m_s": 0.4152422289603998,
+            "body_angular_velocity_rad_s": 1.9674889263838782,
+            "anchor_linear_velocity_m_s": 0.2693959202822672
+          }
+        }
+      }
+    },
+    {
+      "task": "Wbc-G1-Zest-SE",
+      "job": 19794,
+      "checkpoint_sha256": "69f9d0f2b9e1b66f77ef526d910bf6e0637ec66c3c249795829573b79582df8b",
+      "result_sha256": "8b63220074b2649483db1040c716c85866faa64d603d59d02807fe08bc748695",
+      "full": {
+        "planned": 10,
+        "completed": 8,
+        "falls": 2,
+        "numerical_failures": 0,
+        "completion_rate": 0.8,
+        "observed_steps": 78452,
+        "planned_steps": 78563,
+        "trials_with_metrics": 10,
+        "mean_trial_metrics": {
+          "anchor_drift_m": 0.11134938694116467,
+          "body_global_m": 0.1269902638797888,
+          "body_root_relative_m": 0.04484060212911844,
+          "body_orientation_rad": 0.23798018701726847,
+          "joint_position_rmse_rad": 0.13914235786092183,
+          "joint_velocity_rmse_rad_s": 1.5842999178765844,
+          "body_linear_velocity_m_s": 0.5370769035375405,
+          "body_angular_velocity_rad_s": 2.4721637980311963,
+          "anchor_linear_velocity_m_s": 0.31398946919156256
+        }
+      },
+      "full_coverage": 0.9985871211639067,
+      "segment_completions": {
+        "segment_0.25": 8,
+        "segment_0.5": 8,
+        "segment_0.75": 10
+      },
+      "full_failures": [
+        {
+          "name": "backflip",
+          "observed_steps": 23,
+          "steps": 88,
+          "status": "fall"
+        },
+        {
+          "name": "gainer_flip",
+          "observed_steps": 95,
+          "steps": 141,
+          "status": "fall"
+        }
+      ],
+      "parity_observations_per_export": 1729,
+      "trace_samples": 84248,
+      "video_frames": 78462,
+      "video_directory": "logs/stability-final-v12/completed/Wbc-G1-Zest-SE-19794/full-videos-gpu",
+      "all_tracking_targets_met": false,
+      "summary": {
+        "full": {
+          "planned": 10,
+          "completed": 8,
+          "falls": 2,
+          "numerical_failures": 0,
+          "completion_rate": 0.8,
+          "observed_steps": 78452,
+          "planned_steps": 78563,
+          "trials_with_metrics": 10,
+          "mean_trial_metrics": {
+            "anchor_drift_m": 0.11134938694116467,
+            "body_global_m": 0.1269902638797888,
+            "body_root_relative_m": 0.04484060212911844,
+            "body_orientation_rad": 0.23798018701726847,
+            "joint_position_rmse_rad": 0.13914235786092183,
+            "joint_velocity_rmse_rad_s": 1.5842999178765844,
+            "body_linear_velocity_m_s": 0.5370769035375405,
+            "body_angular_velocity_rad_s": 2.4721637980311963,
+            "anchor_linear_velocity_m_s": 0.31398946919156256
+          }
+        },
+        "segment_0.25": {
+          "planned": 10,
+          "completed": 8,
+          "falls": 2,
+          "numerical_failures": 0,
+          "completion_rate": 0.8,
+          "observed_steps": 2016,
+          "planned_steps": 2107,
+          "trials_with_metrics": 10,
+          "mean_trial_metrics": {
+            "anchor_drift_m": 0.10866490374377284,
+            "body_global_m": 0.131784758100915,
+            "body_root_relative_m": 0.05265714917377965,
+            "body_orientation_rad": 0.30716240800041367,
+            "joint_position_rmse_rad": 0.15552633120392406,
+            "joint_velocity_rmse_rad_s": 1.831898840387791,
+            "body_linear_velocity_m_s": 0.6667657264010913,
+            "body_angular_velocity_rad_s": 3.0071079897462845,
+            "anchor_linear_velocity_m_s": 0.4102807921890525
+          }
+        },
+        "segment_0.5": {
+          "planned": 10,
+          "completed": 8,
+          "falls": 2,
+          "numerical_failures": 0,
+          "completion_rate": 0.8,
+          "observed_steps": 1910,
+          "planned_steps": 1988,
+          "trials_with_metrics": 10,
+          "mean_trial_metrics": {
+            "anchor_drift_m": 0.09670909648999851,
+            "body_global_m": 0.11689095896420647,
+            "body_root_relative_m": 0.05380405283284393,
+            "body_orientation_rad": 0.3065541583159765,
+            "joint_position_rmse_rad": 0.16599626768091327,
+            "joint_velocity_rmse_rad_s": 2.0195867332617543,
+            "body_linear_velocity_m_s": 0.6943125069257795,
+            "body_angular_velocity_rad_s": 3.1931731229221727,
+            "anchor_linear_velocity_m_s": 0.4474968601237407
+          }
+        },
+        "segment_0.75": {
+          "planned": 10,
+          "completed": 10,
+          "falls": 0,
+          "numerical_failures": 0,
+          "completion_rate": 1.0,
+          "observed_steps": 1870,
+          "planned_steps": 1870,
+          "trials_with_metrics": 10,
+          "mean_trial_metrics": {
+            "anchor_drift_m": 0.0813077616642886,
+            "body_global_m": 0.09331113186788262,
+            "body_root_relative_m": 0.03492346315315755,
+            "body_orientation_rad": 0.187969865998148,
+            "joint_position_rmse_rad": 0.11337768023848818,
+            "joint_velocity_rmse_rad_s": 1.2550058603420724,
+            "body_linear_velocity_m_s": 0.39583219333525316,
+            "body_angular_velocity_rad_s": 1.8928318030256441,
+            "anchor_linear_velocity_m_s": 0.2390759192463648
+          }
+        }
+      }
+    },
+    {
+      "task": "Wbc-G1-EE",
+      "job": 19795,
+      "checkpoint_sha256": "c37df53e7704f3a54b97104ece0cfcb787614c5f446bd29223d6c57c113f6f85",
+      "result_sha256": "7ca751d33df70f0dc7ae3994cc5a488eee81aa7fd04c2453bb2daaf9b024cf1b",
+      "full": {
+        "planned": 10,
+        "completed": 7,
+        "falls": 3,
+        "numerical_failures": 0,
+        "completion_rate": 0.7,
+        "observed_steps": 77248,
+        "planned_steps": 78563,
+        "trials_with_metrics": 10,
+        "mean_trial_metrics": {
+          "anchor_drift_m": 0.11971573556712363,
+          "body_global_m": 0.13901101771378216,
+          "body_root_relative_m": 0.04845045193810855,
+          "body_orientation_rad": 0.2886810611282243,
+          "joint_position_rmse_rad": 0.1917743284043464,
+          "joint_velocity_rmse_rad_s": 1.5843112529336636,
+          "body_linear_velocity_m_s": 0.556477065711914,
+          "body_angular_velocity_rad_s": 2.4586051662314627,
+          "anchor_linear_velocity_m_s": 0.32721293694636316
+        }
+      },
+      "full_coverage": 0.9832618408156512,
+      "segment_completions": {
+        "segment_0.25": 8,
+        "segment_0.5": 8,
+        "segment_0.75": 10
+      },
+      "full_failures": [
+        {
+          "name": "backflip",
+          "observed_steps": 35,
+          "steps": 88,
+          "status": "fall"
+        },
+        {
+          "name": "dance1_subject1",
+          "observed_steps": 5355,
+          "steps": 6573,
+          "status": "fall"
+        },
+        {
+          "name": "gainer_flip",
+          "observed_steps": 97,
+          "steps": 141,
+          "status": "fall"
+        }
+      ],
+      "parity_observations_per_export": 1704,
+      "trace_samples": 83049,
+      "video_frames": 77258,
+      "video_directory": "logs/stability-final-v12/completed/Wbc-G1-EE-19795/full-videos-gpu",
+      "all_tracking_targets_met": false,
+      "summary": {
+        "full": {
+          "planned": 10,
+          "completed": 7,
+          "falls": 3,
+          "numerical_failures": 0,
+          "completion_rate": 0.7,
+          "observed_steps": 77248,
+          "planned_steps": 78563,
+          "trials_with_metrics": 10,
+          "mean_trial_metrics": {
+            "anchor_drift_m": 0.11971573556712363,
+            "body_global_m": 0.13901101771378216,
+            "body_root_relative_m": 0.04845045193810855,
+            "body_orientation_rad": 0.2886810611282243,
+            "joint_position_rmse_rad": 0.1917743284043464,
+            "joint_velocity_rmse_rad_s": 1.5843112529336636,
+            "body_linear_velocity_m_s": 0.556477065711914,
+            "body_angular_velocity_rad_s": 2.4586051662314627,
+            "anchor_linear_velocity_m_s": 0.32721293694636316
+          }
+        },
+        "segment_0.25": {
+          "planned": 10,
+          "completed": 8,
+          "falls": 2,
+          "numerical_failures": 0,
+          "completion_rate": 0.8,
+          "observed_steps": 2015,
+          "planned_steps": 2107,
+          "trials_with_metrics": 10,
+          "mean_trial_metrics": {
+            "anchor_drift_m": 0.09810484323000675,
+            "body_global_m": 0.1239372190047144,
+            "body_root_relative_m": 0.0511555230240614,
+            "body_orientation_rad": 0.31625420903886664,
+            "joint_position_rmse_rad": 0.19189216895056133,
+            "joint_velocity_rmse_rad_s": 1.7627089584852236,
+            "body_linear_velocity_m_s": 0.6017658982827283,
+            "body_angular_velocity_rad_s": 2.840413298682457,
+            "anchor_linear_velocity_m_s": 0.3677154781024793
+          }
+        },
+        "segment_0.5": {
+          "planned": 10,
+          "completed": 8,
+          "falls": 2,
+          "numerical_failures": 0,
+          "completion_rate": 0.8,
+          "observed_steps": 1916,
+          "planned_steps": 1988,
+          "trials_with_metrics": 10,
+          "mean_trial_metrics": {
+            "anchor_drift_m": 0.10244425025523433,
+            "body_global_m": 0.11601041869996509,
+            "body_root_relative_m": 0.05709678534037645,
+            "body_orientation_rad": 0.3493989466587117,
+            "joint_position_rmse_rad": 0.1994247710857483,
+            "joint_velocity_rmse_rad_s": 1.9784957127310583,
+            "body_linear_velocity_m_s": 0.6256814208668879,
+            "body_angular_velocity_rad_s": 3.016824764881348,
+            "anchor_linear_velocity_m_s": 0.45640970528896485
+          }
+        },
+        "segment_0.75": {
+          "planned": 10,
+          "completed": 10,
+          "falls": 0,
+          "numerical_failures": 0,
+          "completion_rate": 1.0,
+          "observed_steps": 1870,
+          "planned_steps": 1870,
+          "trials_with_metrics": 10,
+          "mean_trial_metrics": {
+            "anchor_drift_m": 0.08092510670574482,
+            "body_global_m": 0.09093839914931579,
+            "body_root_relative_m": 0.03657189684479041,
+            "body_orientation_rad": 0.21277642600796423,
+            "joint_position_rmse_rad": 0.14862882544800843,
+            "joint_velocity_rmse_rad_s": 1.2368744609014368,
+            "body_linear_velocity_m_s": 0.3553835615400868,
+            "body_angular_velocity_rad_s": 1.7917462713539134,
+            "anchor_linear_velocity_m_s": 0.2324246674587354
+          }
+        }
+      }
+    },
+    {
+      "task": "Wbc-G1-EE-SE",
+      "job": 19796,
+      "checkpoint_sha256": "cb397092fa2e04cd88ce62d7e2d94935aaf5d37b449e195321bd2888800f8c67",
+      "result_sha256": "95677770869c9d60c45ff9205c0386e808401e5cc8132b59502e10c062354db1",
+      "full": {
+        "planned": 10,
+        "completed": 7,
+        "falls": 3,
+        "numerical_failures": 0,
+        "completion_rate": 0.7,
+        "observed_steps": 77238,
+        "planned_steps": 78563,
+        "trials_with_metrics": 10,
+        "mean_trial_metrics": {
+          "anchor_drift_m": 0.1051368897586262,
+          "body_global_m": 0.12473593252843909,
+          "body_root_relative_m": 0.04754761857998479,
+          "body_orientation_rad": 0.26246161760008613,
+          "joint_position_rmse_rad": 0.17971104098291957,
+          "joint_velocity_rmse_rad_s": 1.5415164878544356,
+          "body_linear_velocity_m_s": 0.5261868759691624,
+          "body_angular_velocity_rad_s": 2.300377228560044,
+          "anchor_linear_velocity_m_s": 0.32860442761920833
+        }
+      },
+      "full_coverage": 0.9831345544340211,
+      "segment_completions": {
+        "segment_0.25": 8,
+        "segment_0.5": 8,
+        "segment_0.75": 10
+      },
+      "full_failures": [
+        {
+          "name": "backflip",
+          "observed_steps": 20,
+          "steps": 88,
+          "status": "fall"
+        },
+        {
+          "name": "dance1_subject1",
+          "observed_steps": 5352,
+          "steps": 6573,
+          "status": "fall"
+        },
+        {
+          "name": "gainer_flip",
+          "observed_steps": 105,
+          "steps": 141,
+          "status": "fall"
+        }
+      ],
+      "parity_observations_per_export": 1705,
+      "trace_samples": 83046,
+      "video_frames": 77248,
+      "video_directory": "logs/stability-final-v12/completed/Wbc-G1-EE-SE-19796/full-videos-gpu",
+      "all_tracking_targets_met": false,
+      "summary": {
+        "full": {
+          "planned": 10,
+          "completed": 7,
+          "falls": 3,
+          "numerical_failures": 0,
+          "completion_rate": 0.7,
+          "observed_steps": 77238,
+          "planned_steps": 78563,
+          "trials_with_metrics": 10,
+          "mean_trial_metrics": {
+            "anchor_drift_m": 0.1051368897586262,
+            "body_global_m": 0.12473593252843909,
+            "body_root_relative_m": 0.04754761857998479,
+            "body_orientation_rad": 0.26246161760008613,
+            "joint_position_rmse_rad": 0.17971104098291957,
+            "joint_velocity_rmse_rad_s": 1.5415164878544356,
+            "body_linear_velocity_m_s": 0.5261868759691624,
+            "body_angular_velocity_rad_s": 2.300377228560044,
+            "anchor_linear_velocity_m_s": 0.32860442761920833
+          }
+        },
+        "segment_0.25": {
+          "planned": 10,
+          "completed": 8,
+          "falls": 2,
+          "numerical_failures": 0,
+          "completion_rate": 0.8,
+          "observed_steps": 2028,
+          "planned_steps": 2107,
+          "trials_with_metrics": 10,
+          "mean_trial_metrics": {
+            "anchor_drift_m": 0.10345500584423506,
+            "body_global_m": 0.12654244168228931,
+            "body_root_relative_m": 0.05353871283738304,
+            "body_orientation_rad": 0.31432628800490675,
+            "joint_position_rmse_rad": 0.1838558327865741,
+            "joint_velocity_rmse_rad_s": 1.7346420196319028,
+            "body_linear_velocity_m_s": 0.6307951812261313,
+            "body_angular_velocity_rad_s": 2.8347161072027243,
+            "anchor_linear_velocity_m_s": 0.40783737454885516
+          }
+        },
+        "segment_0.5": {
+          "planned": 10,
+          "completed": 8,
+          "falls": 2,
+          "numerical_failures": 0,
+          "completion_rate": 0.8,
+          "observed_steps": 1910,
+          "planned_steps": 1988,
+          "trials_with_metrics": 10,
+          "mean_trial_metrics": {
+            "anchor_drift_m": 0.09412598399811724,
+            "body_global_m": 0.10486537320190026,
+            "body_root_relative_m": 0.05708599723069506,
+            "body_orientation_rad": 0.29954019106368723,
+            "joint_position_rmse_rad": 0.178352306596015,
+            "joint_velocity_rmse_rad_s": 1.9859985748418052,
+            "body_linear_velocity_m_s": 0.6118543394170355,
+            "body_angular_velocity_rad_s": 2.9426434788481712,
+            "anchor_linear_velocity_m_s": 0.4323162866867091
+          }
+        },
+        "segment_0.75": {
+          "planned": 10,
+          "completed": 10,
+          "falls": 0,
+          "numerical_failures": 0,
+          "completion_rate": 1.0,
+          "observed_steps": 1870,
+          "planned_steps": 1870,
+          "trials_with_metrics": 10,
+          "mean_trial_metrics": {
+            "anchor_drift_m": 0.08579713139536524,
+            "body_global_m": 0.09699958556217568,
+            "body_root_relative_m": 0.038371360488003076,
+            "body_orientation_rad": 0.2119776445944627,
+            "joint_position_rmse_rad": 0.14876667787384085,
+            "joint_velocity_rmse_rad_s": 1.229261003352008,
+            "body_linear_velocity_m_s": 0.36922389552129553,
+            "body_angular_velocity_rad_s": 1.8123566891178844,
+            "anchor_linear_velocity_m_s": 0.24024525096669996
+          }
+        }
+      }
+    }
+  ],
+  "protocol": {
+    "version": 3,
+    "seed": 42,
+    "control_period_s": 0.02,
+    "collision_capacity": {
+      "nconmax": 128,
+      "njmax": 1024,
+      "contact_sensor_maxmatch": 128
+    },
+    "segment_fractions": [
+      0.25,
+      0.5,
+      0.75
+    ],
+    "segment_steps": 250,
+    "failure": {
+      "anchor_height_error_m": 0.25,
+      "gravity_z_error": 0.8
+    },
+    "onnx_atol": 1e-05,
+    "onnx_rtol": 0.0001,
+    "initialization": "Reference pose (joint positions clipped to soft limits), reference velocities; reference position targets, zero velocity/feedforward targets and warmstart before forward",
+    "randomization": "None; model nominal friction/inertia/COM, zero encoder bias, no pushes",
+    "assistance": "Command disabled, all events removed, gain and applied wrench verified zero",
+    "sensing": "Ideal simulator state, actor corruption disabled",
+    "coverage": "Training-set tracking; errors include samples up to and including failure",
+    "metrics": "Post-control state against newly advanced reference; mean over joints/bodies then time",
+    "tracking_targets": {
+      "completion_rate": 0.9,
+      "body_global_m": 0.15,
+      "joint_position_rmse_rad": 0.3
+    },
+    "target_scope": "Initial nominal tracking targets, reported separately from numerical stability"
+  },
+  "totals": {
+    "trials": 240,
+    "full_trials": 60,
+    "full_completed": 46,
+    "numerical_failures": 0,
+    "trace_samples": 502427,
+    "parity_observations_per_export": 10313,
+    "full_videos": 60,
+    "video_frames": 467654
+  },
+  "validation_limits": [
+    "GPU suite: 105 passed, 3 terminal-qpos comparisons failed at unchanged atol=rtol=1e-3; no fully passing GPU suite.",
+    "Historical numerical-failure causality and earlier G1 native crash cause remain unproven.",
+    "None of six policies meets the frozen 90% full-clip completion target.",
+    "One seed, training clips, nominal ideal-state sensing; no generalization or deployment claim."
+  ]
+}

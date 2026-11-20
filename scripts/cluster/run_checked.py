@@ -3,6 +3,8 @@
 from __future__ import annotations
 
 import argparse
+import hashlib
+import importlib.metadata
 import json
 import os
 import re
@@ -26,11 +28,37 @@ TASKS = (
 
 
 def check_simulator_output(line):
-  if re.search(r"\b(?:nefc|ncon|contact match) overflow\b", line, re.IGNORECASE):
+  if re.search(r"\boverflow\b", line, re.IGNORECASE):
     raise RuntimeError("Simulator capacity overflow; stopping this policy")
   if "[NanGuard] Detected NaN/Inf" in line:
     # NanGuard prints this only after writing the state dump and model.
     raise RuntimeError("Nonfinite physics state; see persistent diagnostic dump")
+
+
+def run_monitored(command):
+  """Run a child with the same fatal physics checks for training and evaluation."""
+  process = subprocess.Popen(
+    command,
+    stdout=subprocess.PIPE,
+    stderr=subprocess.STDOUT,
+    text=True,
+    bufsize=1,
+    start_new_session=True,
+  )
+  try:
+    assert process.stdout is not None
+    for line in process.stdout:
+      print(line, end="", flush=True)
+      check_simulator_output(line)
+    return process.wait()
+  finally:
+    if process.poll() is None:
+      os.killpg(process.pid, signal.SIGTERM)
+      try:
+        process.wait(timeout=30)
+      except subprocess.TimeoutExpired:
+        os.killpg(process.pid, signal.SIGKILL)
+        process.wait()
 
 
 def finite_tensors(value):
@@ -73,7 +101,7 @@ def validate_outputs(args, run_name):
     (int(env["sim"]["njmax"]), args.njmax),
     (int(env["sim"]["contact_sensor_maxmatch"]), 128),
     (env["sim"]["nan_guard"]["enabled"].lower(), "true"),
-    (int(env["sim"]["nan_guard"]["buffer_size"]), 32),
+    (int(env["sim"]["nan_guard"]["buffer_size"]), round(0.16 / args.physics_dt)),
     (env["sim"]["nan_guard"]["output_dir"], str(diagnostic_path(args))),
     (env["observations"]["actor"]["nan_policy"], "error"),
     (env["observations"]["critic"]["nan_policy"], "error"),
@@ -81,6 +109,20 @@ def validate_outputs(args, run_name):
     (int(agent["max_iterations"]), args.iterations),
     (int(agent["num_steps_per_env"]), 24),
     (agent["resume"].lower(), "false"),
+    (float(env["sim"]["mujoco"]["timestep"]), args.physics_dt),
+    (int(env["decimation"]), round(0.02 / args.physics_dt)),
+    (env["scene"]["sensors"][1]["name"], "self_collision"),
+    (int(env["scene"]["sensors"][1]["history_length"]), round(0.02 / args.physics_dt)),
+    (env["sim"]["mujoco"]["integrator"], "implicitfast"),
+    (env["sim"]["mujoco"]["solver"], "newton"),
+    (int(env["sim"]["mujoco"]["iterations"]), 10),
+    (int(env["sim"]["mujoco"]["ls_iterations"]), 20),
+    (env["sim"]["mujoco"]["cone"], "pyramidal"),
+    (float(env["sim"]["mujoco"]["impratio"]), 1.0),
+    (
+      float(env["rewards"]["actuator_torque_soft_limit"]["weight"]),
+      -0.1 if args.torque_penalty == "corrected" else 0.0,
+    ),
   )
   if any(actual != wanted for actual, wanted in expected):
     raise ValueError(
@@ -103,6 +145,17 @@ def main():
   parser.add_argument("--num-envs", type=int, default=2048)
   parser.add_argument("--seed", type=int, default=42)
   parser.add_argument("--njmax", type=int, default=1024)
+  parser.add_argument(
+    "--physics-dt", type=float, choices=(0.005, 0.0025, 0.001), default=0.005
+  )
+  parser.add_argument(
+    "--torque-penalty", choices=("corrected", "disabled"), default="corrected"
+  )
+  parser.add_argument(
+    "--evaluate",
+    action="store_true",
+    help="Evaluate the final checkpoint before declaring the job complete",
+  )
   args = parser.parse_args()
   for count in (args.iterations, args.num_envs, args.njmax):
     if count <= 0:
@@ -126,7 +179,7 @@ def main():
     "--enable-nan-guard",
     "True",
     "--env.sim.nan-guard.buffer-size",
-    "32",
+    str(round(0.16 / args.physics_dt)),
     "--env.sim.nan-guard.output-dir",
     str(diagnostic_path(args)),
     "--env.observations.actor.nan-policy",
@@ -149,6 +202,14 @@ def main():
     run_name,
     "--log-root",
     str(args.run_root / args.phase),
+    "--env.sim.mujoco.timestep",
+    str(args.physics_dt),
+    "--env.decimation",
+    str(round(0.02 / args.physics_dt)),
+    "--env.scene.sensors.1.history-length",
+    str(round(0.02 / args.physics_dt)),
+    "--env.rewards.actuator-torque-soft-limit.weight",
+    "-0.1" if args.torque_penalty == "corrected" else "0.0",
   ]
   start = time.time()
   result = dict(
@@ -159,27 +220,58 @@ def main():
     started=start,
     command=command,
     diagnostics=str(diagnostic_path(args)),
+    versions={
+      name: importlib.metadata.version(name)
+      for name in (
+        "mjlab",
+        "mujoco",
+        "mujoco-warp",
+        "warp-lang",
+        "torch",
+      )
+    },
+    actuator_model="unitree_speed_envelope_then_passive_friction_v1",
+    torque_penalty=args.torque_penalty,
   )
+  snapshot = Path("SNAPSHOT.sha256")
+  if snapshot.is_file():
+    result["snapshot_manifest_sha256"] = hashlib.sha256(
+      snapshot.read_bytes()
+    ).hexdigest()
   status = 1
-  process = None
   try:
     print("COMMAND=" + json.dumps(command), flush=True)
-    process = subprocess.Popen(
-      command,
-      stdout=subprocess.PIPE,
-      stderr=subprocess.STDOUT,
-      text=True,
-      bufsize=1,
-      start_new_session=True,
-    )
-    assert process.stdout is not None
-    for line in process.stdout:
-      print(line, end="", flush=True)
-      check_simulator_output(line)
-    status = process.wait()
+    status = run_monitored(command)
     if status != 0:
       raise RuntimeError(f"Training exited with status {status}")
     result["checkpoint"] = validate_outputs(args, run_name)
+    if args.evaluate:
+      evaluation = (
+        args.run_root / "evaluation" / f"{args.phase}_{args.task}_job{args.job_id}"
+      )
+      evaluation_command = [
+        sys.executable,
+        "-m",
+        "wbc_mjlab.scripts.evaluate",
+        "--task",
+        args.task,
+        "--checkpoint",
+        result["checkpoint"],
+        "--onnx-file",
+        str(Path(result["checkpoint"]).parent / "params/policy.onnx"),
+        "--motion-file",
+        "/workspace/wbc-mjlab/data/g1/samples",
+        "--physics-dt",
+        str(args.physics_dt),
+        "--output",
+        str(evaluation),
+      ]
+      result["evaluation_command"] = evaluation_command
+      print("EVALUATION=" + json.dumps(evaluation_command), flush=True)
+      status = run_monitored(evaluation_command)
+      if status != 0:
+        raise RuntimeError(f"Evaluation exited with status {status}")
+      result["evaluation"] = str(evaluation / "results.json")
     result["state"] = "completed"
     status = 0
   except Exception as error:
@@ -187,13 +279,6 @@ def main():
     result.update(state="failed", error=str(error))
     status = status or 1
   finally:
-    if process is not None and process.poll() is None:
-      os.killpg(process.pid, signal.SIGTERM)
-      try:
-        process.wait(timeout=30)
-      except subprocess.TimeoutExpired:
-        os.killpg(process.pid, signal.SIGKILL)
-        process.wait()
     result.update(
       exit_code=status, finished=time.time(), elapsed_seconds=time.time() - start
     )

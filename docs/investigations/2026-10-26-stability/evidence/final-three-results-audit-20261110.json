@@ -1,0 +1,711 @@
+{
+  "observed_utc": "2026-11-10T16:46:46.187215+00:00",
+  "artifact_hashes_verified": 201,
+  "policies": {
+    "Wbc-G1": {
+      "checkpoint_sha256": "e0606d2bc2e86984642a8d46aa076f92860a105d8302475d7a0bb371b0b86609",
+      "iteration": 199999,
+      "finite_tensors": 92,
+      "tensor_elements": 11332229,
+      "saved_configuration_checks": {
+        "num_envs": {
+          "actual": 2048,
+          "expected": 2048
+        },
+        "seed": {
+          "actual": 42,
+          "expected": 42
+        },
+        "resume": {
+          "actual": "false",
+          "expected": "false"
+        },
+        "iterations": {
+          "actual": 200000,
+          "expected": 200000
+        },
+        "rollout_steps": {
+          "actual": 24,
+          "expected": 24
+        },
+        "save_interval": {
+          "actual": 5000,
+          "expected": 5000
+        },
+        "dt": {
+          "actual": 0.0025,
+          "expected": 0.0025
+        },
+        "decimation": {
+          "actual": 8,
+          "expected": 8
+        },
+        "integrator": {
+          "actual": "implicitfast",
+          "expected": "implicitfast"
+        },
+        "solver": {
+          "actual": "newton",
+          "expected": "newton"
+        },
+        "solver_iterations": {
+          "actual": 10,
+          "expected": 10
+        },
+        "ls_iterations": {
+          "actual": 20,
+          "expected": 20
+        },
+        "cone": {
+          "actual": "pyramidal",
+          "expected": "pyramidal"
+        },
+        "impratio": {
+          "actual": 1.0,
+          "expected": 1.0
+        },
+        "njmax": {
+          "actual": 1024,
+          "expected": 1024
+        },
+        "contact_maxmatch": {
+          "actual": 128,
+          "expected": 128
+        },
+        "contact_history": {
+          "actual": 8,
+          "expected": 8
+        },
+        "nan_buffer": {
+          "actual": 64,
+          "expected": 64
+        },
+        "nan_guard": {
+          "actual": "true",
+          "expected": "true"
+        },
+        "actor_nan": {
+          "actual": "error",
+          "expected": "error"
+        },
+        "critic_nan": {
+          "actual": "error",
+          "expected": "error"
+        },
+        "torque_penalty_weight": {
+          "actual": -0.1,
+          "expected": -0.1
+        },
+        "diagnostic_output": {
+          "actual": "/runs/diagnostics/train_Wbc-G1_job20236",
+          "expected": "/runs/diagnostics/train_Wbc-G1_job20236"
+        }
+      },
+      "trials": 40,
+      "trace_samples": 84244,
+      "trace_finiteness_frames_terminal_states_checked": true,
+      "initial_states_match_first_pair": true,
+      "shared_protocol_data_metrics_verified": true,
+      "summary": {
+        "full": {
+          "planned": 10,
+          "completed": 8,
+          "falls": 2,
+          "numerical_failures": 0,
+          "completion_rate": 0.8,
+          "observed_steps": 78451,
+          "planned_steps": 78563,
+          "trials_with_metrics": 10,
+          "mean_trial_metrics": {
+            "anchor_drift_m": 2.456903893014475,
+            "body_global_m": 2.4649021789996763,
+            "body_root_relative_m": 0.0432525984892133,
+            "body_orientation_rad": 0.9312083258183165,
+            "joint_position_rmse_rad": 0.14256981320129758,
+            "joint_velocity_rmse_rad_s": 1.5670202547203076,
+            "body_linear_velocity_m_s": 0.9869765241622896,
+            "body_angular_velocity_rad_s": 3.0126602007164385,
+            "anchor_linear_velocity_m_s": 0.787679614164034
+          }
+        },
+        "segment_0.25": {
+          "planned": 10,
+          "completed": 8,
+          "falls": 2,
+          "numerical_failures": 0,
+          "completion_rate": 0.8,
+          "observed_steps": 2011,
+          "planned_steps": 2107,
+          "trials_with_metrics": 10,
+          "mean_trial_metrics": {
+            "anchor_drift_m": 0.27164942204911513,
+            "body_global_m": 0.2909938754485671,
+            "body_root_relative_m": 0.049955399757431004,
+            "body_orientation_rad": 0.3269495819804814,
+            "joint_position_rmse_rad": 0.15243645883410134,
+            "joint_velocity_rmse_rad_s": 1.6654873526197143,
+            "body_linear_velocity_m_s": 0.6874852058189485,
+            "body_angular_velocity_rad_s": 2.9069276700125544,
+            "anchor_linear_velocity_m_s": 0.4593332563905476
+          }
+        },
+        "segment_0.5": {
+          "planned": 10,
+          "completed": 8,
+          "falls": 2,
+          "numerical_failures": 0,
+          "completion_rate": 0.8,
+          "observed_steps": 1912,
+          "planned_steps": 1988,
+          "trials_with_metrics": 10,
+          "mean_trial_metrics": {
+            "anchor_drift_m": 0.16476465232707482,
+            "body_global_m": 0.1764589288104303,
+            "body_root_relative_m": 0.047874876789334116,
+            "body_orientation_rad": 0.32505355167794153,
+            "joint_position_rmse_rad": 0.14732622445109717,
+            "joint_velocity_rmse_rad_s": 1.7199269272598794,
+            "body_linear_velocity_m_s": 0.6635854663338664,
+            "body_angular_velocity_rad_s": 2.766869682894223,
+            "anchor_linear_velocity_m_s": 0.47803635259326693
+          }
+        },
+        "segment_0.75": {
+          "planned": 10,
+          "completed": 10,
+          "falls": 0,
+          "numerical_failures": 0,
+          "completion_rate": 1.0,
+          "observed_steps": 1870,
+          "planned_steps": 1870,
+          "trials_with_metrics": 10,
+          "mean_trial_metrics": {
+            "anchor_drift_m": 0.14886376048879008,
+            "body_global_m": 0.1566038448677427,
+            "body_root_relative_m": 0.03790095914034363,
+            "body_orientation_rad": 0.21966809702642257,
+            "joint_position_rmse_rad": 0.1269759663167443,
+            "joint_velocity_rmse_rad_s": 1.2751450338098749,
+            "body_linear_velocity_m_s": 0.397682791112887,
+            "body_angular_velocity_rad_s": 1.889306286418293,
+            "anchor_linear_velocity_m_s": 0.27306115844976797
+          }
+        }
+      },
+      "full_failures": [
+        {
+          "name": "backflip",
+          "status": "fall",
+          "observed_steps": 22,
+          "steps": 88
+        },
+        {
+          "name": "gainer_flip",
+          "status": "fall",
+          "observed_steps": 95,
+          "steps": 141
+        }
+      ],
+      "local_cpu_export_rechecks": [
+        {
+          "model": "logs/stability-final-v12/completed/Wbc-G1-20236/evaluation/policy.onnx",
+          "samples": 1729,
+          "maximum_absolute_difference": 2.6226043701171875e-06,
+          "passed": true
+        },
+        {
+          "model": "logs/stability-final-v12/completed/Wbc-G1-20236/params/policy.onnx",
+          "samples": 1729,
+          "maximum_absolute_difference": 2.6226043701171875e-06,
+          "passed": true
+        }
+      ],
+      "export_parity": {
+        "samples": 1729,
+        "passed": true,
+        "engine": "onnx.reference.ReferenceEvaluator",
+        "elu_implementation": "negative_branch_only_v1",
+        "existing_export_checked": true
+      },
+      "tracking_targets_met": {
+        "completion_rate": false,
+        "body_global_m": false,
+        "joint_position_rmse_rad": true
+      }
+    },
+    "Wbc-G1-EE": {
+      "checkpoint_sha256": "c37df53e7704f3a54b97104ece0cfcb787614c5f446bd29223d6c57c113f6f85",
+      "iteration": 199999,
+      "finite_tensors": 92,
+      "tensor_elements": 11353754,
+      "saved_configuration_checks": {
+        "num_envs": {
+          "actual": 2048,
+          "expected": 2048
+        },
+        "seed": {
+          "actual": 42,
+          "expected": 42
+        },
+        "resume": {
+          "actual": "false",
+          "expected": "false"
+        },
+        "iterations": {
+          "actual": 200000,
+          "expected": 200000
+        },
+        "rollout_steps": {
+          "actual": 24,
+          "expected": 24
+        },
+        "save_interval": {
+          "actual": 5000,
+          "expected": 5000
+        },
+        "dt": {
+          "actual": 0.0025,
+          "expected": 0.0025
+        },
+        "decimation": {
+          "actual": 8,
+          "expected": 8
+        },
+        "integrator": {
+          "actual": "implicitfast",
+          "expected": "implicitfast"
+        },
+        "solver": {
+          "actual": "newton",
+          "expected": "newton"
+        },
+        "solver_iterations": {
+          "actual": 10,
+          "expected": 10
+        },
+        "ls_iterations": {
+          "actual": 20,
+          "expected": 20
+        },
+        "cone": {
+          "actual": "pyramidal",
+          "expected": "pyramidal"
+        },
+        "impratio": {
+          "actual": 1.0,
+          "expected": 1.0
+        },
+        "njmax": {
+          "actual": 1024,
+          "expected": 1024
+        },
+        "contact_maxmatch": {
+          "actual": 128,
+          "expected": 128
+        },
+        "contact_history": {
+          "actual": 8,
+          "expected": 8
+        },
+        "nan_buffer": {
+          "actual": 64,
+          "expected": 64
+        },
+        "nan_guard": {
+          "actual": "true",
+          "expected": "true"
+        },
+        "actor_nan": {
+          "actual": "error",
+          "expected": "error"
+        },
+        "critic_nan": {
+          "actual": "error",
+          "expected": "error"
+        },
+        "torque_penalty_weight": {
+          "actual": -0.1,
+          "expected": -0.1
+        },
+        "diagnostic_output": {
+          "actual": "/runs/diagnostics/train_Wbc-G1-EE_job19795",
+          "expected": "/runs/diagnostics/train_Wbc-G1-EE_job19795"
+        }
+      },
+      "trials": 40,
+      "trace_samples": 83049,
+      "trace_finiteness_frames_terminal_states_checked": true,
+      "initial_states_match_first_pair": true,
+      "shared_protocol_data_metrics_verified": true,
+      "summary": {
+        "full": {
+          "planned": 10,
+          "completed": 7,
+          "falls": 3,
+          "numerical_failures": 0,
+          "completion_rate": 0.7,
+          "observed_steps": 77248,
+          "planned_steps": 78563,
+          "trials_with_metrics": 10,
+          "mean_trial_metrics": {
+            "anchor_drift_m": 0.11971573556712363,
+            "body_global_m": 0.13901101771378216,
+            "body_root_relative_m": 0.04845045193810855,
+            "body_orientation_rad": 0.2886810611282243,
+            "joint_position_rmse_rad": 0.1917743284043464,
+            "joint_velocity_rmse_rad_s": 1.5843112529336636,
+            "body_linear_velocity_m_s": 0.556477065711914,
+            "body_angular_velocity_rad_s": 2.4586051662314627,
+            "anchor_linear_velocity_m_s": 0.32721293694636316
+          }
+        },
+        "segment_0.25": {
+          "planned": 10,
+          "completed": 8,
+          "falls": 2,
+          "numerical_failures": 0,
+          "completion_rate": 0.8,
+          "observed_steps": 2015,
+          "planned_steps": 2107,
+          "trials_with_metrics": 10,
+          "mean_trial_metrics": {
+            "anchor_drift_m": 0.09810484323000675,
+            "body_global_m": 0.1239372190047144,
+            "body_root_relative_m": 0.0511555230240614,
+            "body_orientation_rad": 0.31625420903886664,
+            "joint_position_rmse_rad": 0.19189216895056133,
+            "joint_velocity_rmse_rad_s": 1.7627089584852236,
+            "body_linear_velocity_m_s": 0.6017658982827283,
+            "body_angular_velocity_rad_s": 2.840413298682457,
+            "anchor_linear_velocity_m_s": 0.3677154781024793
+          }
+        },
+        "segment_0.5": {
+          "planned": 10,
+          "completed": 8,
+          "falls": 2,
+          "numerical_failures": 0,
+          "completion_rate": 0.8,
+          "observed_steps": 1916,
+          "planned_steps": 1988,
+          "trials_with_metrics": 10,
+          "mean_trial_metrics": {
+            "anchor_drift_m": 0.10244425025523433,
+            "body_global_m": 0.11601041869996509,
+            "body_root_relative_m": 0.05709678534037645,
+            "body_orientation_rad": 0.3493989466587117,
+            "joint_position_rmse_rad": 0.1994247710857483,
+            "joint_velocity_rmse_rad_s": 1.9784957127310583,
+            "body_linear_velocity_m_s": 0.6256814208668879,
+            "body_angular_velocity_rad_s": 3.016824764881348,
+            "anchor_linear_velocity_m_s": 0.45640970528896485
+          }
+        },
+        "segment_0.75": {
+          "planned": 10,
+          "completed": 10,
+          "falls": 0,
+          "numerical_failures": 0,
+          "completion_rate": 1.0,
+          "observed_steps": 1870,
+          "planned_steps": 1870,
+          "trials_with_metrics": 10,
+          "mean_trial_metrics": {
+            "anchor_drift_m": 0.08092510670574482,
+            "body_global_m": 0.09093839914931579,
+            "body_root_relative_m": 0.03657189684479041,
+            "body_orientation_rad": 0.21277642600796423,
+            "joint_position_rmse_rad": 0.14862882544800843,
+            "joint_velocity_rmse_rad_s": 1.2368744609014368,
+            "body_linear_velocity_m_s": 0.3553835615400868,
+            "body_angular_velocity_rad_s": 1.7917462713539134,
+            "anchor_linear_velocity_m_s": 0.2324246674587354
+          }
+        }
+      },
+      "full_failures": [
+        {
+          "name": "backflip",
+          "status": "fall",
+          "observed_steps": 35,
+          "steps": 88
+        },
+        {
+          "name": "dance1_subject1",
+          "status": "fall",
+          "observed_steps": 5355,
+          "steps": 6573
+        },
+        {
+          "name": "gainer_flip",
+          "status": "fall",
+          "observed_steps": 97,
+          "steps": 141
+        }
+      ],
+      "local_cpu_export_rechecks": [
+        {
+          "model": "logs/stability-final-v12/completed/Wbc-G1-EE-19795/evaluation/policy.onnx",
+          "samples": 1704,
+          "maximum_absolute_difference": 1.9073486328125e-06,
+          "passed": true
+        },
+        {
+          "model": "logs/stability-final-v12/completed/Wbc-G1-EE-19795/params/policy.onnx",
+          "samples": 1704,
+          "maximum_absolute_difference": 1.9073486328125e-06,
+          "passed": true
+        }
+      ],
+      "export_parity": {
+        "samples": 1704,
+        "passed": true,
+        "engine": "onnx.reference.ReferenceEvaluator",
+        "elu_implementation": "negative_branch_only_v1",
+        "existing_export_checked": true
+      },
+      "tracking_targets_met": {
+        "completion_rate": false,
+        "body_global_m": true,
+        "joint_position_rmse_rad": true
+      }
+    },
+    "Wbc-G1-EE-SE": {
+      "checkpoint_sha256": "cb397092fa2e04cd88ce62d7e2d94935aaf5d37b449e195321bd2888800f8c67",
+      "iteration": 199999,
+      "finite_tensors": 92,
+      "tensor_elements": 11359904,
+      "saved_configuration_checks": {
+        "num_envs": {
+          "actual": 2048,
+          "expected": 2048
+        },
+        "seed": {
+          "actual": 42,
+          "expected": 42
+        },
+        "resume": {
+          "actual": "false",
+          "expected": "false"
+        },
+        "iterations": {
+          "actual": 200000,
+          "expected": 200000
+        },
+        "rollout_steps": {
+          "actual": 24,
+          "expected": 24
+        },
+        "save_interval": {
+          "actual": 5000,
+          "expected": 5000
+        },
+        "dt": {
+          "actual": 0.0025,
+          "expected": 0.0025
+        },
+        "decimation": {
+          "actual": 8,
+          "expected": 8
+        },
+        "integrator": {
+          "actual": "implicitfast",
+          "expected": "implicitfast"
+        },
+        "solver": {
+          "actual": "newton",
+          "expected": "newton"
+        },
+        "solver_iterations": {
+          "actual": 10,
+          "expected": 10
+        },
+        "ls_iterations": {
+          "actual": 20,
+          "expected": 20
+        },
+        "cone": {
+          "actual": "pyramidal",
+          "expected": "pyramidal"
+        },
+        "impratio": {
+          "actual": 1.0,
+          "expected": 1.0
+        },
+        "njmax": {
+          "actual": 1024,
+          "expected": 1024
+        },
+        "contact_maxmatch": {
+          "actual": 128,
+          "expected": 128
+        },
+        "contact_history": {
+          "actual": 8,
+          "expected": 8
+        },
+        "nan_buffer": {
+          "actual": 64,
+          "expected": 64
+        },
+        "nan_guard": {
+          "actual": "true",
+          "expected": "true"
+        },
+        "actor_nan": {
+          "actual": "error",
+          "expected": "error"
+        },
+        "critic_nan": {
+          "actual": "error",
+          "expected": "error"
+        },
+        "torque_penalty_weight": {
+          "actual": -0.1,
+          "expected": -0.1
+        },
+        "diagnostic_output": {
+          "actual": "/runs/diagnostics/train_Wbc-G1-EE-SE_job19796",
+          "expected": "/runs/diagnostics/train_Wbc-G1-EE-SE_job19796"
+        }
+      },
+      "trials": 40,
+      "trace_samples": 83046,
+      "trace_finiteness_frames_terminal_states_checked": true,
+      "initial_states_match_first_pair": true,
+      "shared_protocol_data_metrics_verified": true,
+      "summary": {
+        "full": {
+          "planned": 10,
+          "completed": 7,
+          "falls": 3,
+          "numerical_failures": 0,
+          "completion_rate": 0.7,
+          "observed_steps": 77238,
+          "planned_steps": 78563,
+          "trials_with_metrics": 10,
+          "mean_trial_metrics": {
+            "anchor_drift_m": 0.1051368897586262,
+            "body_global_m": 0.12473593252843909,
+            "body_root_relative_m": 0.04754761857998479,
+            "body_orientation_rad": 0.26246161760008613,
+            "joint_position_rmse_rad": 0.17971104098291957,
+            "joint_velocity_rmse_rad_s": 1.5415164878544356,
+            "body_linear_velocity_m_s": 0.5261868759691624,
+            "body_angular_velocity_rad_s": 2.300377228560044,
+            "anchor_linear_velocity_m_s": 0.32860442761920833
+          }
+        },
+        "segment_0.25": {
+          "planned": 10,
+          "completed": 8,
+          "falls": 2,
+          "numerical_failures": 0,
+          "completion_rate": 0.8,
+          "observed_steps": 2028,
+          "planned_steps": 2107,
+          "trials_with_metrics": 10,
+          "mean_trial_metrics": {
+            "anchor_drift_m": 0.10345500584423506,
+            "body_global_m": 0.12654244168228931,
+            "body_root_relative_m": 0.05353871283738304,
+            "body_orientation_rad": 0.31432628800490675,
+            "joint_position_rmse_rad": 0.1838558327865741,
+            "joint_velocity_rmse_rad_s": 1.7346420196319028,
+            "body_linear_velocity_m_s": 0.6307951812261313,
+            "body_angular_velocity_rad_s": 2.8347161072027243,
+            "anchor_linear_velocity_m_s": 0.40783737454885516
+          }
+        },
+        "segment_0.5": {
+          "planned": 10,
+          "completed": 8,
+          "falls": 2,
+          "numerical_failures": 0,
+          "completion_rate": 0.8,
+          "observed_steps": 1910,
+          "planned_steps": 1988,
+          "trials_with_metrics": 10,
+          "mean_trial_metrics": {
+            "anchor_drift_m": 0.09412598399811724,
+            "body_global_m": 0.10486537320190026,
+            "body_root_relative_m": 0.05708599723069506,
+            "body_orientation_rad": 0.29954019106368723,
+            "joint_position_rmse_rad": 0.178352306596015,
+            "joint_velocity_rmse_rad_s": 1.9859985748418052,
+            "body_linear_velocity_m_s": 0.6118543394170355,
+            "body_angular_velocity_rad_s": 2.9426434788481712,
+            "anchor_linear_velocity_m_s": 0.4323162866867091
+          }
+        },
+        "segment_0.75": {
+          "planned": 10,
+          "completed": 10,
+          "falls": 0,
+          "numerical_failures": 0,
+          "completion_rate": 1.0,
+          "observed_steps": 1870,
+          "planned_steps": 1870,
+          "trials_with_metrics": 10,
+          "mean_trial_metrics": {
+            "anchor_drift_m": 0.08579713139536524,
+            "body_global_m": 0.09699958556217568,
+            "body_root_relative_m": 0.038371360488003076,
+            "body_orientation_rad": 0.2119776445944627,
+            "joint_position_rmse_rad": 0.14876667787384085,
+            "joint_velocity_rmse_rad_s": 1.229261003352008,
+            "body_linear_velocity_m_s": 0.36922389552129553,
+            "body_angular_velocity_rad_s": 1.8123566891178844,
+            "anchor_linear_velocity_m_s": 0.24024525096669996
+          }
+        }
+      },
+      "full_failures": [
+        {
+          "name": "backflip",
+          "status": "fall",
+          "observed_steps": 20,
+          "steps": 88
+        },
+        {
+          "name": "dance1_subject1",
+          "status": "fall",
+          "observed_steps": 5352,
+          "steps": 6573
+        },
+        {
+          "name": "gainer_flip",
+          "status": "fall",
+          "observed_steps": 105,
+          "steps": 141
+        }
+      ],
+      "local_cpu_export_rechecks": [
+        {
+          "model": "logs/stability-final-v12/completed/Wbc-G1-EE-SE-19796/evaluation/policy.onnx",
+          "samples": 1705,
+          "maximum_absolute_difference": 2.384185791015625e-06,
+          "passed": true
+        },
+        {
+          "model": "logs/stability-final-v12/completed/Wbc-G1-EE-SE-19796/params/policy.onnx",
+          "samples": 1705,
+          "maximum_absolute_difference": 2.384185791015625e-06,
+          "passed": true
+        }
+      ],
+      "export_parity": {
+        "samples": 1705,
+        "passed": true,
+        "engine": "onnx.reference.ReferenceEvaluator",
+        "elu_implementation": "negative_branch_only_v1",
+        "existing_export_checked": true
+      },
+      "tracking_targets_met": {
+        "completion_rate": false,
+        "body_global_m": true,
+        "joint_position_rmse_rad": true
+      }
+    }
+  }
+}

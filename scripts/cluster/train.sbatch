@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 # One independent GPU policy per job. Resource/time overrides belong to sbatch.
 #SBATCH --partition=debug
+#SBATCH --nodelist=a2r-wolf
 #SBATCH --exclude=a2r-main
 #SBATCH --nodes=1
 #SBATCH --ntasks=1
@@ -15,6 +16,7 @@ ITERATIONS=${3:?iterations}
 REPO=${4:?repository}
 RUN_ROOT=${5:?output root}
 IMAGE=${6:?SIF image}
+shift 6
 : "${SLURM_JOB_ID:?Run through sbatch}"
 : "${CUDA_VISIBLE_DEVICES:?Slurm must allocate a GPU}"
 [[ -n "$CUDA_VISIBLE_DEVICES" ]]
@@ -35,6 +37,7 @@ container=(apptainer exec --nv --cleanenv --no-home
   --env XDG_CACHE_HOME=/cache --env WARP_CACHE_PATH=/cache/warp
   --env MPLCONFIGDIR=/cache/matplotlib
   --env PYTHONUNBUFFERED=1 --env PYTHONDONTWRITEBYTECODE=1
+  --env PYTHONFAULTHANDLER=1
   "$IMAGE")
 # The batch step already has Slurm's CPU/RAM/GPU allocation. A2R workers do
 # not install the client-side srun executable; use their existing job pattern.
@@ -48,4 +51,4 @@ print('GPU preflight passed:', torch.cuda.get_device_name(0), torch.__version__,
 PY
 "${container[@]}" python scripts/cluster/run_checked.py \
   --task "$TASK" --phase "$PHASE" --iterations "$ITERATIONS" \
-  --job-id "$SLURM_JOB_ID"
+  --job-id "$SLURM_JOB_ID" "$@"

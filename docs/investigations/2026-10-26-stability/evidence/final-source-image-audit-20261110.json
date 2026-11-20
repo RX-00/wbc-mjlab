@@ -1,0 +1,1073 @@
+{
+  "observed_utc": "2026-11-10T16:48:54.742264+00:00",
+  "server_source_and_image_verification": "./LICENSE: OK\n./README.md: OK\n./assets/wbc_g1_collage.gif: OK\n./assets/wbc_mjlab_logo.png: OK\n./data/README.md: OK\n./data/g1/.gitkeep: OK\n./data/g1/README.md: OK\n./data/g1/samples/README.md: OK\n./data/g1/samples/backflip.csv: OK\n./data/g1/samples/dance.csv: OK\n./data/g1/samples/dance1_subject1.csv: OK\n./data/g1/samples/fallAndGetUp1_subject1.csv: OK\n./data/g1/samples/fight1_subject2.csv: OK\n./data/g1/samples/fightAndSports1_subject1.csv: OK\n./data/g1/samples/gainer_flip.csv: OK\n./data/g1/samples/npz/backflip.npz: OK\n./data/g1/samples/npz/dance.npz: OK\n./data/g1/samples/npz/dance1_subject1.npz: OK\n./data/g1/samples/npz/fallAndGetUp1_subject1.npz: OK\n./data/g1/samples/npz/fight1_subject2.npz: OK\n./data/g1/samples/npz/fightAndSports1_subject1.npz: OK\n./data/g1/samples/npz/gainer_flip.npz: OK\n./data/g1/samples/npz/run1_subject2.npz: OK\n./data/g1/samples/npz/sprint1_subject2.npz: OK\n./data/g1/samples/npz/walk1_subject1.npz: OK\n./data/g1/samples/run1_subject2.csv: OK\n./data/g1/samples/sprint1_subject2.csv: OK\n./data/g1/samples/walk1_subject1.csv: OK\n./demos/README.md: OK\n./demos/wbc_g1/model.pt: OK\n./docs/source/_static/.gitkeep: OK\n./docs/source/_static/css/custom.css: OK\n./docs/source/_static/refs.bib: OK\n./docs/source/_static/wbc_mjlab_logo.png: OK\n./docs/source/api/export.rst: OK\n./docs/source/api/extension.rst: OK\n./docs/source/api/index.rst: OK\n./docs/source/api/mdp.rst: OK\n./docs/source/api/presets.rst: OK\n./docs/source/api/registry.rst: OK\n./docs/source/api/studio.rst: OK\n./docs/source/architecture.rst: OK\n./docs/source/concepts/adaptive_sampling.rst: OK\n./docs/source/concepts/index.rst: OK\n./docs/source/concepts/modularity.rst: OK\n./docs/source/concepts/presets_and_tasks.rst: OK\n./docs/source/concepts/robots_and_extensions.rst: OK\n./docs/source/contributing.rst: OK\n./docs/source/data.rst: OK\n./docs/source/extensions/custom_robots.rst: OK\n./docs/source/extensions/example_extension.rst: OK\n./docs/source/extensions/extensions.rst: OK\n./docs/source/extensions/index.rst: OK\n./docs/source/extensions/robot_entity.rst: OK\n./docs/source/installation.rst: OK\n./docs/source/mdp/actions.rst: OK\n./docs/source/mdp/events.rst: OK\n./docs/source/mdp/index.rst: OK\n./docs/source/mdp/motion_command.rst: OK\n./docs/source/mdp/observations.rst: OK\n./docs/source/mdp/rewards.rst: OK\n./docs/source/mdp/rsi.rst: OK\n./docs/source/mdp/terminations.rst: OK\n./docs/source/recipes.rst: OK\n./docs/source/reference/configuration.rst: OK\n./docs/source/reference/data_formats.rst: OK\n./docs/source/reference/studio_api.rst: OK\n./docs/source/research.rst: OK\n./docs/source/roadmap.rst: OK\n./docs/source/studio.rst: OK\n./docs/source/tasks/adding.rst: OK\n./docs/source/tasks/index.rst: OK\n./docs/source/tasks/wbc-g1-binary-failure.rst: OK\n./docs/source/tasks/wbc-g1-ee-se.rst: OK\n./docs/source/tasks/wbc-g1-ee.rst: OK\n./docs/source/tasks/wbc-g1-se.rst: OK\n./docs/source/tasks/wbc-g1-terrain-scan.rst: OK\n./docs/source/tasks/wbc-g1-zest-se.rst: OK\n./docs/source/tasks/wbc-g1-zest.rst: OK\n./docs/source/tasks/wbc-g1.rst: OK\n./docs/source/troubleshooting.rst: OK\n./docs/source/usage.rst: OK\n./docs/source/visualization.rst: OK\n./docs/source/workflows/demo.rst: OK\n./docs/source/workflows/deploy.rst: OK\n./docs/source/workflows/quickstart.rst: OK\n./docs/source/workflows/training.rst: OK\n./pyproject.toml: OK\n./scripts/cluster/analyze_friction.py: OK\n./scripts/cluster/build_image.sh: OK\n./scripts/cluster/check.sbatch: OK\n./scripts/cluster/compare_timesteps.py: OK\n./scripts/cluster/diagnose_parity.py: OK\n./scripts/cluster/gpu_tests.py: OK\n./scripts/cluster/run_checked.py: OK\n./scripts/cluster/submit_six.sh: OK\n./scripts/cluster/test_requirements.txt: OK\n./scripts/cluster/train.sbatch: OK\n./scripts/cluster/wbc.def: OK\n./scripts/setup_training_conda.sh: OK\n./scripts/train_six.sh: OK\n./src/wbc_mjlab/__init__.py: OK\n./src/wbc_mjlab/data_paths.py: OK\n./src/wbc_mjlab/demo_assets.py: OK\n./src/wbc_mjlab/deploy_paths.py: OK\n./src/wbc_mjlab/diagnostics.py: OK\n./src/wbc_mjlab/env/__init__.py: OK\n./src/wbc_mjlab/env/mdp/__init__.py: OK\n./src/wbc_mjlab/env/mdp/actions.py: OK\n./src/wbc_mjlab/env/mdp/assistive_wrench.py: OK\n./src/wbc_mjlab/env/mdp/commands.py: OK\n./src/wbc_mjlab/env/mdp/curriculums.py: OK\n./src/wbc_mjlab/env/mdp/metrics.py: OK\n./src/wbc_mjlab/env/mdp/observations.py: OK\n./src/wbc_mjlab/env/mdp/rewards.py: OK\n./src/wbc_mjlab/env/mdp/sampling.py: OK\n./src/wbc_mjlab/env/mdp/terminations.py: OK\n./src/wbc_mjlab/env/mdp/torque_envelope.py: OK\n./src/wbc_mjlab/env/wbc_env_cfg.py: OK\n./src/wbc_mjlab/export/__init__.py: OK\n./src/wbc_mjlab/export/export_cli.py: OK\n./src/wbc_mjlab/export/policy_bundle.py: OK\n./src/wbc_mjlab/export/tracking_params_yaml.py: OK\n./src/wbc_mjlab/export/web_reference.py: OK\n./src/wbc_mjlab/export/web_reference_bundle.py: OK\n./src/wbc_mjlab/extension.py: OK\n./src/wbc_mjlab/mjlab_entry.py: OK\n./src/wbc_mjlab/motion/__init__.py: OK\n./src/wbc_mjlab/motion/data_to_npz.py: OK\n./src/wbc_mjlab/motion/manifest.py: OK\n./src/wbc_mjlab/motion/motion_export_bundle.py: OK\n./src/wbc_mjlab/motion/motion_formats.py: OK\n./src/wbc_mjlab/motion/motion_mirror.py: OK\n./src/wbc_mjlab/motion/motion_z_debias.py: OK\n./src/wbc_mjlab/motion/robot_assets.py: OK\n./src/wbc_mjlab/motion/stack_bundle.py: OK\n./src/wbc_mjlab/motion/tyro_cli.py: OK\n./src/wbc_mjlab/presets/__init__.py: OK\n./src/wbc_mjlab/presets/binary_failure.py: OK\n./src/wbc_mjlab/presets/end_effector.py: OK\n./src/wbc_mjlab/presets/se_actor.py: OK\n./src/wbc_mjlab/presets/terrain.py: OK\n./src/wbc_mjlab/presets/wbc.py: OK\n./src/wbc_mjlab/presets/zest.py: OK\n./src/wbc_mjlab/rl/__init__.py: OK\n./src/wbc_mjlab/rl/runner.py: OK\n./src/wbc_mjlab/robots/__init__.py: OK\n./src/wbc_mjlab/robots/custom.py: OK\n./src/wbc_mjlab/robots/env.py: OK\n./src/wbc_mjlab/robots/g1/__init__.py: OK\n./src/wbc_mjlab/robots/g1/actuators.py: OK\n./src/wbc_mjlab/robots/g1/base.py: OK\n./src/wbc_mjlab/robots/g1/constants.py: OK\n./src/wbc_mjlab/robots/g1/envelope.py: OK\n./src/wbc_mjlab/robots/g1/rl_cfg.py: OK\n./src/wbc_mjlab/robots/g1/symmetry.py: OK\n./src/wbc_mjlab/robots/g1/tasks.py: OK\n./src/wbc_mjlab/robots/g1/xmls/assets/head_link.STL: OK\n./src/wbc_mjlab/robots/g1/xmls/assets/left_ankle_pitch_link.STL: OK\n./src/wbc_mjlab/robots/g1/xmls/assets/left_ankle_roll_link.STL: OK\n./src/wbc_mjlab/robots/g1/xmls/assets/left_elbow_link.STL: OK\n./src/wbc_mjlab/robots/g1/xmls/assets/left_hip_pitch_link.STL: OK\n./src/wbc_mjlab/robots/g1/xmls/assets/left_hip_roll_link.STL: OK\n./src/wbc_mjlab/robots/g1/xmls/assets/left_hip_yaw_link.STL: OK\n./src/wbc_mjlab/robots/g1/xmls/assets/left_knee_link.STL: OK\n./src/wbc_mjlab/robots/g1/xmls/assets/left_rubber_hand.STL: OK\n./src/wbc_mjlab/robots/g1/xmls/assets/left_shoulder_pitch_link.STL: OK\n./src/wbc_mjlab/robots/g1/xmls/assets/left_shoulder_roll_link.STL: OK\n./src/wbc_mjlab/robots/g1/xmls/assets/left_shoulder_yaw_link.STL: OK\n./src/wbc_mjlab/robots/g1/xmls/assets/left_wrist_pitch_link.STL: OK\n./src/wbc_mjlab/robots/g1/xmls/assets/left_wrist_roll_link.STL: OK\n./src/wbc_mjlab/robots/g1/xmls/assets/left_wrist_roll_rubber_hand.STL: OK\n./src/wbc_mjlab/robots/g1/xmls/assets/left_wrist_yaw_link.STL: OK\n./src/wbc_mjlab/robots/g1/xmls/assets/logo_link.STL: OK\n./src/wbc_mjlab/robots/g1/xmls/assets/pelvis.STL: OK\n./src/wbc_mjlab/robots/g1/xmls/assets/pelvis_contour_link.STL: OK\n./src/wbc_mjlab/robots/g1/xmls/assets/right_ankle_pitch_link.STL: OK\n./src/wbc_mjlab/robots/g1/xmls/assets/right_ankle_roll_link.STL: OK\n./src/wbc_mjlab/robots/g1/xmls/assets/right_elbow_link.STL: OK\n./src/wbc_mjlab/robots/g1/xmls/assets/right_hip_pitch_link.STL: OK\n./src/wbc_mjlab/robots/g1/xmls/assets/right_hip_roll_link.STL: OK\n./src/wbc_mjlab/robots/g1/xmls/assets/right_hip_yaw_link.STL: OK\n./src/wbc_mjlab/robots/g1/xmls/assets/right_knee_link.STL: OK\n./src/wbc_mjlab/robots/g1/xmls/assets/right_rubber_hand.STL: OK\n./src/wbc_mjlab/robots/g1/xmls/assets/right_shoulder_pitch_link.STL: OK\n./src/wbc_mjlab/robots/g1/xmls/assets/right_shoulder_roll_link.STL: OK\n./src/wbc_mjlab/robots/g1/xmls/assets/right_shoulder_yaw_link.STL: OK\n./src/wbc_mjlab/robots/g1/xmls/assets/right_wrist_pitch_link.STL: OK\n./src/wbc_mjlab/robots/g1/xmls/assets/right_wrist_roll_link.STL: OK\n./src/wbc_mjlab/robots/g1/xmls/assets/right_wrist_roll_rubber_hand.STL: OK\n./src/wbc_mjlab/robots/g1/xmls/assets/right_wrist_yaw_link.STL: OK\n./src/wbc_mjlab/robots/g1/xmls/assets/torso_link_23dof_rev_1_0.STL: OK\n./src/wbc_mjlab/robots/g1/xmls/assets/torso_link_rev_1_0.STL: OK\n./src/wbc_mjlab/robots/g1/xmls/assets/waist_roll_link_rev_1_0.STL: OK\n./src/wbc_mjlab/robots/g1/xmls/assets/waist_yaw_link_rev_1_0.STL: OK\n./src/wbc_mjlab/robots/g1/xmls/g1.xml: OK\n./src/wbc_mjlab/robots/g1/xmls/g1_23dof.xml: OK\n./src/wbc_mjlab/robots/g1/xmls/scene_g1.xml: OK\n./src/wbc_mjlab/robots/g1/xmls/scene_g1_23dof.xml: OK\n./src/wbc_mjlab/robots/ids.py: OK\n./src/wbc_mjlab/robots/symmetry.py: OK\n./src/wbc_mjlab/scripts/demo.py: OK\n./src/wbc_mjlab/scripts/evaluate.py: OK\n./src/wbc_mjlab/scripts/list_envs.py: OK\n./src/wbc_mjlab/scripts/play.py: OK\n./src/wbc_mjlab/scripts/plot_rsi_bins.py: OK\n./src/wbc_mjlab/scripts/render_evaluation.py: OK\n./src/wbc_mjlab/scripts/studio.py: OK\n./src/wbc_mjlab/scripts/train.py: OK\n./src/wbc_mjlab/scripts/vis_data.py: OK\n./src/wbc_mjlab/scripts/wbc_cli.py: OK\n./src/wbc_mjlab/studio/__init__.py: OK\n./src/wbc_mjlab/studio/clips.py: OK\n./src/wbc_mjlab/studio/core.py: OK\n./src/wbc_mjlab/studio/data.py: OK\n./src/wbc_mjlab/studio/jobs.py: OK\n./src/wbc_mjlab/studio/play.py: OK\n./src/wbc_mjlab/studio/presets.py: OK\n./src/wbc_mjlab/studio/robot_import.py: OK\n./src/wbc_mjlab/studio/robots.py: OK\n./src/wbc_mjlab/studio/scene.py: OK\n./src/wbc_mjlab/studio/tensorboard.py: OK\n./src/wbc_mjlab/studio/terrain.py: OK\n./src/wbc_mjlab/studio/train_preset.py: OK\n./src/wbc_mjlab/studio/training.py: OK\n./src/wbc_mjlab/studio/viser_app.py: OK\n./src/wbc_mjlab/studio/web/__init__.py: OK\n./src/wbc_mjlab/studio/web/server.py: OK\n./src/wbc_mjlab/studio/web/static/brand/logo-64.png: OK\n./src/wbc_mjlab/studio/web/static/brand/logo.png: OK\n./src/wbc_mjlab/studio/web/static/index.html: OK\n./src/wbc_mjlab/studio/web/static/js/app.js: OK\n./src/wbc_mjlab/studio/web/static/js/chart.js: OK\n./src/wbc_mjlab/studio/web/static/js/panes/data.js: OK\n./src/wbc_mjlab/studio/web/static/js/panes/play.js: OK\n./src/wbc_mjlab/studio/web/static/js/panes/preset.js: OK\n./src/wbc_mjlab/studio/web/static/js/panes/robots.js: OK\n./src/wbc_mjlab/studio/web/static/js/panes/train.js: OK\n./src/wbc_mjlab/studio/web/static/js/ui.js: OK\n./src/wbc_mjlab/studio/web/static/js/viewer.js: OK\n./src/wbc_mjlab/studio/web/static/style.css: OK\n./src/wbc_mjlab/tasks/__init__.py: OK\n./src/wbc_mjlab/tasks/config.py: OK\n./src/wbc_mjlab/user_config.py: OK\n./src/wbc_mjlab/viewer/__init__.py: OK\n./src/wbc_mjlab/viewer/motion_vis.py: OK\n./src/wbc_mjlab/viewer/viser_play.py: OK\n./tests/smoke_test.py: OK\n./tests/test_assistive_wrench.py: OK\n./tests/test_cluster_checks.py: OK\n./tests/test_data_paths.py: OK\n./tests/test_end_effector_preset.py: OK\n./tests/test_evaluation.py: OK\n./tests/test_extension.py: OK\n./tests/test_motion_mirror.py: OK\n./tests/test_motion_reset.py: OK\n./tests/test_physics_comparison.py: OK\n./tests/test_rsi_vis.py: OK\n./tests/test_studio.py: OK\n./tests/test_terrain_scan_preset.py: OK\n./tests/test_unitree_actuator.py: OK\n./tests/test_web_reference.py: OK\n./uv.lock: OK\nc6bcb6916fa9bdc641b5d7126c3a5f5074143233260cc4029542e7894be62b29  /home/rxing/wbc-mjlab-images/2026-10-14_cbc0cf3/wbc-mjlab-cu128.sif\n",
+  "manifest_sha256": "b327448336d595a857ee3603daecf5c2b9b3835270ccffdb5da88c111d17b722",
+  "local_comparison": [
+    {
+      "path": "./LICENSE",
+      "matches": true
+    },
+    {
+      "path": "./README.md",
+      "matches": true
+    },
+    {
+      "path": "./assets/wbc_g1_collage.gif",
+      "matches": true
+    },
+    {
+      "path": "./assets/wbc_mjlab_logo.png",
+      "matches": true
+    },
+    {
+      "path": "./data/README.md",
+      "matches": true
+    },
+    {
+      "path": "./data/g1/.gitkeep",
+      "matches": true
+    },
+    {
+      "path": "./data/g1/README.md",
+      "matches": true
+    },
+    {
+      "path": "./data/g1/samples/README.md",
+      "matches": true
+    },
+    {
+      "path": "./data/g1/samples/backflip.csv",
+      "matches": true
+    },
+    {
+      "path": "./data/g1/samples/dance.csv",
+      "matches": true
+    },
+    {
+      "path": "./data/g1/samples/dance1_subject1.csv",
+      "matches": true
+    },
+    {
+      "path": "./data/g1/samples/fallAndGetUp1_subject1.csv",
+      "matches": true
+    },
+    {
+      "path": "./data/g1/samples/fight1_subject2.csv",
+      "matches": true
+    },
+    {
+      "path": "./data/g1/samples/fightAndSports1_subject1.csv",
+      "matches": true
+    },
+    {
+      "path": "./data/g1/samples/gainer_flip.csv",
+      "matches": true
+    },
+    {
+      "path": "./data/g1/samples/npz/backflip.npz",
+      "matches": true
+    },
+    {
+      "path": "./data/g1/samples/npz/dance.npz",
+      "matches": true
+    },
+    {
+      "path": "./data/g1/samples/npz/dance1_subject1.npz",
+      "matches": true
+    },
+    {
+      "path": "./data/g1/samples/npz/fallAndGetUp1_subject1.npz",
+      "matches": true
+    },
+    {
+      "path": "./data/g1/samples/npz/fight1_subject2.npz",
+      "matches": true
+    },
+    {
+      "path": "./data/g1/samples/npz/fightAndSports1_subject1.npz",
+      "matches": true
+    },
+    {
+      "path": "./data/g1/samples/npz/gainer_flip.npz",
+      "matches": true
+    },
+    {
+      "path": "./data/g1/samples/npz/run1_subject2.npz",
+      "matches": true
+    },
+    {
+      "path": "./data/g1/samples/npz/sprint1_subject2.npz",
+      "matches": true
+    },
+    {
+      "path": "./data/g1/samples/npz/walk1_subject1.npz",
+      "matches": true
+    },
+    {
+      "path": "./data/g1/samples/run1_subject2.csv",
+      "matches": true
+    },
+    {
+      "path": "./data/g1/samples/sprint1_subject2.csv",
+      "matches": true
+    },
+    {
+      "path": "./data/g1/samples/walk1_subject1.csv",
+      "matches": true
+    },
+    {
+      "path": "./demos/README.md",
+      "matches": true
+    },
+    {
+      "path": "./demos/wbc_g1/model.pt",
+      "matches": true
+    },
+    {
+      "path": "./docs/source/_static/.gitkeep",
+      "matches": true
+    },
+    {
+      "path": "./docs/source/_static/css/custom.css",
+      "matches": true
+    },
+    {
+      "path": "./docs/source/_static/refs.bib",
+      "matches": true
+    },
+    {
+      "path": "./docs/source/_static/wbc_mjlab_logo.png",
+      "matches": true
+    },
+    {
+      "path": "./docs/source/api/export.rst",
+      "matches": true
+    },
+    {
+      "path": "./docs/source/api/extension.rst",
+      "matches": true
+    },
+    {
+      "path": "./docs/source/api/index.rst",
+      "matches": true
+    },
+    {
+      "path": "./docs/source/api/mdp.rst",
+      "matches": true
+    },
+    {
+      "path": "./docs/source/api/presets.rst",
+      "matches": true
+    },
+    {
+      "path": "./docs/source/api/registry.rst",
+      "matches": true
+    },
+    {
+      "path": "./docs/source/api/studio.rst",
+      "matches": true
+    },
+    {
+      "path": "./docs/source/architecture.rst",
+      "matches": true
+    },
+    {
+      "path": "./docs/source/concepts/adaptive_sampling.rst",
+      "matches": true
+    },
+    {
+      "path": "./docs/source/concepts/index.rst",
+      "matches": true
+    },
+    {
+      "path": "./docs/source/concepts/modularity.rst",
+      "matches": true
+    },
+    {
+      "path": "./docs/source/concepts/presets_and_tasks.rst",
+      "matches": true
+    },
+    {
+      "path": "./docs/source/concepts/robots_and_extensions.rst",
+      "matches": true
+    },
+    {
+      "path": "./docs/source/contributing.rst",
+      "matches": true
+    },
+    {
+      "path": "./docs/source/data.rst",
+      "matches": true
+    },
+    {
+      "path": "./docs/source/extensions/custom_robots.rst",
+      "matches": true
+    },
+    {
+      "path": "./docs/source/extensions/example_extension.rst",
+      "matches": true
+    },
+    {
+      "path": "./docs/source/extensions/extensions.rst",
+      "matches": true
+    },
+    {
+      "path": "./docs/source/extensions/index.rst",
+      "matches": true
+    },
+    {
+      "path": "./docs/source/extensions/robot_entity.rst",
+      "matches": true
+    },
+    {
+      "path": "./docs/source/installation.rst",
+      "matches": true
+    },
+    {
+      "path": "./docs/source/mdp/actions.rst",
+      "matches": true
+    },
+    {
+      "path": "./docs/source/mdp/events.rst",
+      "matches": true
+    },
+    {
+      "path": "./docs/source/mdp/index.rst",
+      "matches": true
+    },
+    {
+      "path": "./docs/source/mdp/motion_command.rst",
+      "matches": true
+    },
+    {
+      "path": "./docs/source/mdp/observations.rst",
+      "matches": true
+    },
+    {
+      "path": "./docs/source/mdp/rewards.rst",
+      "matches": true
+    },
+    {
+      "path": "./docs/source/mdp/rsi.rst",
+      "matches": true
+    },
+    {
+      "path": "./docs/source/mdp/terminations.rst",
+      "matches": true
+    },
+    {
+      "path": "./docs/source/recipes.rst",
+      "matches": true
+    },
+    {
+      "path": "./docs/source/reference/configuration.rst",
+      "matches": true
+    },
+    {
+      "path": "./docs/source/reference/data_formats.rst",
+      "matches": true
+    },
+    {
+      "path": "./docs/source/reference/studio_api.rst",
+      "matches": true
+    },
+    {
+      "path": "./docs/source/research.rst",
+      "matches": true
+    },
+    {
+      "path": "./docs/source/roadmap.rst",
+      "matches": true
+    },
+    {
+      "path": "./docs/source/studio.rst",
+      "matches": true
+    },
+    {
+      "path": "./docs/source/tasks/adding.rst",
+      "matches": true
+    },
+    {
+      "path": "./docs/source/tasks/index.rst",
+      "matches": true
+    },
+    {
+      "path": "./docs/source/tasks/wbc-g1-binary-failure.rst",
+      "matches": true
+    },
+    {
+      "path": "./docs/source/tasks/wbc-g1-ee-se.rst",
+      "matches": true
+    },
+    {
+      "path": "./docs/source/tasks/wbc-g1-ee.rst",
+      "matches": true
+    },
+    {
+      "path": "./docs/source/tasks/wbc-g1-se.rst",
+      "matches": true
+    },
+    {
+      "path": "./docs/source/tasks/wbc-g1-terrain-scan.rst",
+      "matches": true
+    },
+    {
+      "path": "./docs/source/tasks/wbc-g1-zest-se.rst",
+      "matches": true
+    },
+    {
+      "path": "./docs/source/tasks/wbc-g1-zest.rst",
+      "matches": true
+    },
+    {
+      "path": "./docs/source/tasks/wbc-g1.rst",
+      "matches": true
+    },
+    {
+      "path": "./docs/source/troubleshooting.rst",
+      "matches": true
+    },
+    {
+      "path": "./docs/source/usage.rst",
+      "matches": true
+    },
+    {
+      "path": "./docs/source/visualization.rst",
+      "matches": true
+    },
+    {
+      "path": "./docs/source/workflows/demo.rst",
+      "matches": true
+    },
+    {
+      "path": "./docs/source/workflows/deploy.rst",
+      "matches": true
+    },
+    {
+      "path": "./docs/source/workflows/quickstart.rst",
+      "matches": true
+    },
+    {
+      "path": "./docs/source/workflows/training.rst",
+      "matches": false
+    },
+    {
+      "path": "./pyproject.toml",
+      "matches": true
+    },
+    {
+      "path": "./scripts/cluster/analyze_friction.py",
+      "matches": true
+    },
+    {
+      "path": "./scripts/cluster/build_image.sh",
+      "matches": true
+    },
+    {
+      "path": "./scripts/cluster/check.sbatch",
+      "matches": false
+    },
+    {
+      "path": "./scripts/cluster/compare_timesteps.py",
+      "matches": true
+    },
+    {
+      "path": "./scripts/cluster/diagnose_parity.py",
+      "matches": true
+    },
+    {
+      "path": "./scripts/cluster/gpu_tests.py",
+      "matches": true
+    },
+    {
+      "path": "./scripts/cluster/run_checked.py",
+      "matches": true
+    },
+    {
+      "path": "./scripts/cluster/submit_six.sh",
+      "matches": true
+    },
+    {
+      "path": "./scripts/cluster/test_requirements.txt",
+      "matches": true
+    },
+    {
+      "path": "./scripts/cluster/train.sbatch",
+      "matches": false
+    },
+    {
+      "path": "./scripts/cluster/wbc.def",
+      "matches": true
+    },
+    {
+      "path": "./scripts/setup_training_conda.sh",
+      "matches": true
+    },
+    {
+      "path": "./scripts/train_six.sh",
+      "matches": true
+    },
+    {
+      "path": "./src/wbc_mjlab/__init__.py",
+      "matches": true
+    },
+    {
+      "path": "./src/wbc_mjlab/data_paths.py",
+      "matches": true
+    },
+    {
+      "path": "./src/wbc_mjlab/demo_assets.py",
+      "matches": true
+    },
+    {
+      "path": "./src/wbc_mjlab/deploy_paths.py",
+      "matches": true
+    },
+    {
+      "path": "./src/wbc_mjlab/diagnostics.py",
+      "matches": true
+    },
+    {
+      "path": "./src/wbc_mjlab/env/__init__.py",
+      "matches": true
+    },
+    {
+      "path": "./src/wbc_mjlab/env/mdp/__init__.py",
+      "matches": true
+    },
+    {
+      "path": "./src/wbc_mjlab/env/mdp/actions.py",
+      "matches": true
+    },
+    {
+      "path": "./src/wbc_mjlab/env/mdp/assistive_wrench.py",
+      "matches": true
+    },
+    {
+      "path": "./src/wbc_mjlab/env/mdp/commands.py",
+      "matches": true
+    },
+    {
+      "path": "./src/wbc_mjlab/env/mdp/curriculums.py",
+      "matches": true
+    },
+    {
+      "path": "./src/wbc_mjlab/env/mdp/metrics.py",
+      "matches": true
+    },
+    {
+      "path": "./src/wbc_mjlab/env/mdp/observations.py",
+      "matches": true
+    },
+    {
+      "path": "./src/wbc_mjlab/env/mdp/rewards.py",
+      "matches": true
+    },
+    {
+      "path": "./src/wbc_mjlab/env/mdp/sampling.py",
+      "matches": true
+    },
+    {
+      "path": "./src/wbc_mjlab/env/mdp/terminations.py",
+      "matches": true
+    },
+    {
+      "path": "./src/wbc_mjlab/env/mdp/torque_envelope.py",
+      "matches": true
+    },
+    {
+      "path": "./src/wbc_mjlab/env/wbc_env_cfg.py",
+      "matches": true
+    },
+    {
+      "path": "./src/wbc_mjlab/export/__init__.py",
+      "matches": true
+    },
+    {
+      "path": "./src/wbc_mjlab/export/export_cli.py",
+      "matches": true
+    },
+    {
+      "path": "./src/wbc_mjlab/export/policy_bundle.py",
+      "matches": true
+    },
+    {
+      "path": "./src/wbc_mjlab/export/tracking_params_yaml.py",
+      "matches": true
+    },
+    {
+      "path": "./src/wbc_mjlab/export/web_reference.py",
+      "matches": true
+    },
+    {
+      "path": "./src/wbc_mjlab/export/web_reference_bundle.py",
+      "matches": true
+    },
+    {
+      "path": "./src/wbc_mjlab/extension.py",
+      "matches": true
+    },
+    {
+      "path": "./src/wbc_mjlab/mjlab_entry.py",
+      "matches": true
+    },
+    {
+      "path": "./src/wbc_mjlab/motion/__init__.py",
+      "matches": true
+    },
+    {
+      "path": "./src/wbc_mjlab/motion/data_to_npz.py",
+      "matches": true
+    },
+    {
+      "path": "./src/wbc_mjlab/motion/manifest.py",
+      "matches": true
+    },
+    {
+      "path": "./src/wbc_mjlab/motion/motion_export_bundle.py",
+      "matches": true
+    },
+    {
+      "path": "./src/wbc_mjlab/motion/motion_formats.py",
+      "matches": true
+    },
+    {
+      "path": "./src/wbc_mjlab/motion/motion_mirror.py",
+      "matches": true
+    },
+    {
+      "path": "./src/wbc_mjlab/motion/motion_z_debias.py",
+      "matches": true
+    },
+    {
+      "path": "./src/wbc_mjlab/motion/robot_assets.py",
+      "matches": true
+    },
+    {
+      "path": "./src/wbc_mjlab/motion/stack_bundle.py",
+      "matches": true
+    },
+    {
+      "path": "./src/wbc_mjlab/motion/tyro_cli.py",
+      "matches": true
+    },
+    {
+      "path": "./src/wbc_mjlab/presets/__init__.py",
+      "matches": true
+    },
+    {
+      "path": "./src/wbc_mjlab/presets/binary_failure.py",
+      "matches": true
+    },
+    {
+      "path": "./src/wbc_mjlab/presets/end_effector.py",
+      "matches": true
+    },
+    {
+      "path": "./src/wbc_mjlab/presets/se_actor.py",
+      "matches": true
+    },
+    {
+      "path": "./src/wbc_mjlab/presets/terrain.py",
+      "matches": true
+    },
+    {
+      "path": "./src/wbc_mjlab/presets/wbc.py",
+      "matches": true
+    },
+    {
+      "path": "./src/wbc_mjlab/presets/zest.py",
+      "matches": true
+    },
+    {
+      "path": "./src/wbc_mjlab/rl/__init__.py",
+      "matches": true
+    },
+    {
+      "path": "./src/wbc_mjlab/rl/runner.py",
+      "matches": true
+    },
+    {
+      "path": "./src/wbc_mjlab/robots/__init__.py",
+      "matches": true
+    },
+    {
+      "path": "./src/wbc_mjlab/robots/custom.py",
+      "matches": true
+    },
+    {
+      "path": "./src/wbc_mjlab/robots/env.py",
+      "matches": true
+    },
+    {
+      "path": "./src/wbc_mjlab/robots/g1/__init__.py",
+      "matches": true
+    },
+    {
+      "path": "./src/wbc_mjlab/robots/g1/actuators.py",
+      "matches": true
+    },
+    {
+      "path": "./src/wbc_mjlab/robots/g1/base.py",
+      "matches": true
+    },
+    {
+      "path": "./src/wbc_mjlab/robots/g1/constants.py",
+      "matches": true
+    },
+    {
+      "path": "./src/wbc_mjlab/robots/g1/envelope.py",
+      "matches": true
+    },
+    {
+      "path": "./src/wbc_mjlab/robots/g1/rl_cfg.py",
+      "matches": true
+    },
+    {
+      "path": "./src/wbc_mjlab/robots/g1/symmetry.py",
+      "matches": true
+    },
+    {
+      "path": "./src/wbc_mjlab/robots/g1/tasks.py",
+      "matches": true
+    },
+    {
+      "path": "./src/wbc_mjlab/robots/g1/xmls/assets/head_link.STL",
+      "matches": true
+    },
+    {
+      "path": "./src/wbc_mjlab/robots/g1/xmls/assets/left_ankle_pitch_link.STL",
+      "matches": true
+    },
+    {
+      "path": "./src/wbc_mjlab/robots/g1/xmls/assets/left_ankle_roll_link.STL",
+      "matches": true
+    },
+    {
+      "path": "./src/wbc_mjlab/robots/g1/xmls/assets/left_elbow_link.STL",
+      "matches": true
+    },
+    {
+      "path": "./src/wbc_mjlab/robots/g1/xmls/assets/left_hip_pitch_link.STL",
+      "matches": true
+    },
+    {
+      "path": "./src/wbc_mjlab/robots/g1/xmls/assets/left_hip_roll_link.STL",
+      "matches": true
+    },
+    {
+      "path": "./src/wbc_mjlab/robots/g1/xmls/assets/left_hip_yaw_link.STL",
+      "matches": true
+    },
+    {
+      "path": "./src/wbc_mjlab/robots/g1/xmls/assets/left_knee_link.STL",
+      "matches": true
+    },
+    {
+      "path": "./src/wbc_mjlab/robots/g1/xmls/assets/left_rubber_hand.STL",
+      "matches": true
+    },
+    {
+      "path": "./src/wbc_mjlab/robots/g1/xmls/assets/left_shoulder_pitch_link.STL",
+      "matches": true
+    },
+    {
+      "path": "./src/wbc_mjlab/robots/g1/xmls/assets/left_shoulder_roll_link.STL",
+      "matches": true
+    },
+    {
+      "path": "./src/wbc_mjlab/robots/g1/xmls/assets/left_shoulder_yaw_link.STL",
+      "matches": true
+    },
+    {
+      "path": "./src/wbc_mjlab/robots/g1/xmls/assets/left_wrist_pitch_link.STL",
+      "matches": true
+    },
+    {
+      "path": "./src/wbc_mjlab/robots/g1/xmls/assets/left_wrist_roll_link.STL",
+      "matches": true
+    },
+    {
+      "path": "./src/wbc_mjlab/robots/g1/xmls/assets/left_wrist_roll_rubber_hand.STL",
+      "matches": true
+    },
+    {
+      "path": "./src/wbc_mjlab/robots/g1/xmls/assets/left_wrist_yaw_link.STL",
+      "matches": true
+    },
+    {
+      "path": "./src/wbc_mjlab/robots/g1/xmls/assets/logo_link.STL",
+      "matches": true
+    },
+    {
+      "path": "./src/wbc_mjlab/robots/g1/xmls/assets/pelvis.STL",
+      "matches": true
+    },
+    {
+      "path": "./src/wbc_mjlab/robots/g1/xmls/assets/pelvis_contour_link.STL",
+      "matches": true
+    },
+    {
+      "path": "./src/wbc_mjlab/robots/g1/xmls/assets/right_ankle_pitch_link.STL",
+      "matches": true
+    },
+    {
+      "path": "./src/wbc_mjlab/robots/g1/xmls/assets/right_ankle_roll_link.STL",
+      "matches": true
+    },
+    {
+      "path": "./src/wbc_mjlab/robots/g1/xmls/assets/right_elbow_link.STL",
+      "matches": true
+    },
+    {
+      "path": "./src/wbc_mjlab/robots/g1/xmls/assets/right_hip_pitch_link.STL",
+      "matches": true
+    },
+    {
+      "path": "./src/wbc_mjlab/robots/g1/xmls/assets/right_hip_roll_link.STL",
+      "matches": true
+    },
+    {
+      "path": "./src/wbc_mjlab/robots/g1/xmls/assets/right_hip_yaw_link.STL",
+      "matches": true
+    },
+    {
+      "path": "./src/wbc_mjlab/robots/g1/xmls/assets/right_knee_link.STL",
+      "matches": true
+    },
+    {
+      "path": "./src/wbc_mjlab/robots/g1/xmls/assets/right_rubber_hand.STL",
+      "matches": true
+    },
+    {
+      "path": "./src/wbc_mjlab/robots/g1/xmls/assets/right_shoulder_pitch_link.STL",
+      "matches": true
+    },
+    {
+      "path": "./src/wbc_mjlab/robots/g1/xmls/assets/right_shoulder_roll_link.STL",
+      "matches": true
+    },
+    {
+      "path": "./src/wbc_mjlab/robots/g1/xmls/assets/right_shoulder_yaw_link.STL",
+      "matches": true
+    },
+    {
+      "path": "./src/wbc_mjlab/robots/g1/xmls/assets/right_wrist_pitch_link.STL",
+      "matches": true
+    },
+    {
+      "path": "./src/wbc_mjlab/robots/g1/xmls/assets/right_wrist_roll_link.STL",
+      "matches": true
+    },
+    {
+      "path": "./src/wbc_mjlab/robots/g1/xmls/assets/right_wrist_roll_rubber_hand.STL",
+      "matches": true
+    },
+    {
+      "path": "./src/wbc_mjlab/robots/g1/xmls/assets/right_wrist_yaw_link.STL",
+      "matches": true
+    },
+    {
+      "path": "./src/wbc_mjlab/robots/g1/xmls/assets/torso_link_23dof_rev_1_0.STL",
+      "matches": true
+    },
+    {
+      "path": "./src/wbc_mjlab/robots/g1/xmls/assets/torso_link_rev_1_0.STL",
+      "matches": true
+    },
+    {
+      "path": "./src/wbc_mjlab/robots/g1/xmls/assets/waist_roll_link_rev_1_0.STL",
+      "matches": true
+    },
+    {
+      "path": "./src/wbc_mjlab/robots/g1/xmls/assets/waist_yaw_link_rev_1_0.STL",
+      "matches": true
+    },
+    {
+      "path": "./src/wbc_mjlab/robots/g1/xmls/g1.xml",
+      "matches": true
+    },
+    {
+      "path": "./src/wbc_mjlab/robots/g1/xmls/g1_23dof.xml",
+      "matches": true
+    },
+    {
+      "path": "./src/wbc_mjlab/robots/g1/xmls/scene_g1.xml",
+      "matches": true
+    },
+    {
+      "path": "./src/wbc_mjlab/robots/g1/xmls/scene_g1_23dof.xml",
+      "matches": true
+    },
+    {
+      "path": "./src/wbc_mjlab/robots/ids.py",
+      "matches": true
+    },
+    {
+      "path": "./src/wbc_mjlab/robots/symmetry.py",
+      "matches": true
+    },
+    {
+      "path": "./src/wbc_mjlab/scripts/demo.py",
+      "matches": true
+    },
+    {
+      "path": "./src/wbc_mjlab/scripts/evaluate.py",
+      "matches": false
+    },
+    {
+      "path": "./src/wbc_mjlab/scripts/list_envs.py",
+      "matches": true
+    },
+    {
+      "path": "./src/wbc_mjlab/scripts/play.py",
+      "matches": true
+    },
+    {
+      "path": "./src/wbc_mjlab/scripts/plot_rsi_bins.py",
+      "matches": true
+    },
+    {
+      "path": "./src/wbc_mjlab/scripts/render_evaluation.py",
+      "matches": true
+    },
+    {
+      "path": "./src/wbc_mjlab/scripts/studio.py",
+      "matches": true
+    },
+    {
+      "path": "./src/wbc_mjlab/scripts/train.py",
+      "matches": true
+    },
+    {
+      "path": "./src/wbc_mjlab/scripts/vis_data.py",
+      "matches": true
+    },
+    {
+      "path": "./src/wbc_mjlab/scripts/wbc_cli.py",
+      "matches": true
+    },
+    {
+      "path": "./src/wbc_mjlab/studio/__init__.py",
+      "matches": true
+    },
+    {
+      "path": "./src/wbc_mjlab/studio/clips.py",
+      "matches": true
+    },
+    {
+      "path": "./src/wbc_mjlab/studio/core.py",
+      "matches": true
+    },
+    {
+      "path": "./src/wbc_mjlab/studio/data.py",
+      "matches": true
+    },
+    {
+      "path": "./src/wbc_mjlab/studio/jobs.py",
+      "matches": true
+    },
+    {
+      "path": "./src/wbc_mjlab/studio/play.py",
+      "matches": true
+    },
+    {
+      "path": "./src/wbc_mjlab/studio/presets.py",
+      "matches": true
+    },
+    {
+      "path": "./src/wbc_mjlab/studio/robot_import.py",
+      "matches": true
+    },
+    {
+      "path": "./src/wbc_mjlab/studio/robots.py",
+      "matches": true
+    },
+    {
+      "path": "./src/wbc_mjlab/studio/scene.py",
+      "matches": true
+    },
+    {
+      "path": "./src/wbc_mjlab/studio/tensorboard.py",
+      "matches": true
+    },
+    {
+      "path": "./src/wbc_mjlab/studio/terrain.py",
+      "matches": true
+    },
+    {
+      "path": "./src/wbc_mjlab/studio/train_preset.py",
+      "matches": true
+    },
+    {
+      "path": "./src/wbc_mjlab/studio/training.py",
+      "matches": true
+    },
+    {
+      "path": "./src/wbc_mjlab/studio/viser_app.py",
+      "matches": true
+    },
+    {
+      "path": "./src/wbc_mjlab/studio/web/__init__.py",
+      "matches": true
+    },
+    {
+      "path": "./src/wbc_mjlab/studio/web/server.py",
+      "matches": true
+    },
+    {
+      "path": "./src/wbc_mjlab/studio/web/static/brand/logo-64.png",
+      "matches": true
+    },
+    {
+      "path": "./src/wbc_mjlab/studio/web/static/brand/logo.png",
+      "matches": true
+    },
+    {
+      "path": "./src/wbc_mjlab/studio/web/static/index.html",
+      "matches": true
+    },
+    {
+      "path": "./src/wbc_mjlab/studio/web/static/js/app.js",
+      "matches": true
+    },
+    {
+      "path": "./src/wbc_mjlab/studio/web/static/js/chart.js",
+      "matches": true
+    },
+    {
+      "path": "./src/wbc_mjlab/studio/web/static/js/panes/data.js",
+      "matches": true
+    },
+    {
+      "path": "./src/wbc_mjlab/studio/web/static/js/panes/play.js",
+      "matches": true
+    },
+    {
+      "path": "./src/wbc_mjlab/studio/web/static/js/panes/preset.js",
+      "matches": true
+    },
+    {
+      "path": "./src/wbc_mjlab/studio/web/static/js/panes/robots.js",
+      "matches": true
+    },
+    {
+      "path": "./src/wbc_mjlab/studio/web/static/js/panes/train.js",
+      "matches": true
+    },
+    {
+      "path": "./src/wbc_mjlab/studio/web/static/js/ui.js",
+      "matches": true
+    },
+    {
+      "path": "./src/wbc_mjlab/studio/web/static/js/viewer.js",
+      "matches": true
+    },
+    {
+      "path": "./src/wbc_mjlab/studio/web/static/style.css",
+      "matches": true
+    },
+    {
+      "path": "./src/wbc_mjlab/tasks/__init__.py",
+      "matches": true
+    },
+    {
+      "path": "./src/wbc_mjlab/tasks/config.py",
+      "matches": true
+    },
+    {
+      "path": "./src/wbc_mjlab/user_config.py",
+      "matches": true
+    },
+    {
+      "path": "./src/wbc_mjlab/viewer/__init__.py",
+      "matches": true
+    },
+    {
+      "path": "./src/wbc_mjlab/viewer/motion_vis.py",
+      "matches": true
+    },
+    {
+      "path": "./src/wbc_mjlab/viewer/viser_play.py",
+      "matches": true
+    },
+    {
+      "path": "./tests/smoke_test.py",
+      "matches": true
+    },
+    {
+      "path": "./tests/test_assistive_wrench.py",
+      "matches": true
+    },
+    {
+      "path": "./tests/test_cluster_checks.py",
+      "matches": true
+    },
+    {
+      "path": "./tests/test_data_paths.py",
+      "matches": true
+    },
+    {
+      "path": "./tests/test_end_effector_preset.py",
+      "matches": true
+    },
+    {
+      "path": "./tests/test_evaluation.py",
+      "matches": false
+    },
+    {
+      "path": "./tests/test_extension.py",
+      "matches": true
+    },
+    {
+      "path": "./tests/test_motion_mirror.py",
+      "matches": true
+    },
+    {
+      "path": "./tests/test_motion_reset.py",
+      "matches": true
+    },
+    {
+      "path": "./tests/test_physics_comparison.py",
+      "matches": true
+    },
+    {
+      "path": "./tests/test_rsi_vis.py",
+      "matches": true
+    },
+    {
+      "path": "./tests/test_studio.py",
+      "matches": true
+    },
+    {
+      "path": "./tests/test_terrain_scan_preset.py",
+      "matches": true
+    },
+    {
+      "path": "./tests/test_unitree_actuator.py",
+      "matches": true
+    },
+    {
+      "path": "./tests/test_web_reference.py",
+      "matches": true
+    },
+    {
+      "path": "./uv.lock",
+      "matches": true
+    }
+  ],
+  "local_differences": [
+    "./docs/source/workflows/training.rst",
+    "./scripts/cluster/check.sbatch",
+    "./scripts/cluster/train.sbatch",
+    "./src/wbc_mjlab/scripts/evaluate.py",
+    "./tests/test_evaluation.py"
+  ],
+  "local_difference_explanations": {
+    "src/wbc_mjlab/scripts/evaluate.py": "Formatting only; parsed Python ASTs are identical.",
+    "tests/test_evaluation.py": "Formatting only; parsed Python ASTs are identical.",
+    "scripts/cluster/check.sbatch": "Adds PYTHONFAULTHANDLER=1 to the container environment; frozen campaign launcher remains unchanged.",
+    "scripts/cluster/train.sbatch": "Adds PYTHONFAULTHANDLER=1 to the container environment; frozen campaign launcher remains unchanged.",
+    "docs/source/workflows/training.rst": "Workflow documentation was updated after source freeze."
+  }
+}

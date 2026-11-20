@@ -1,0 +1,527 @@
+{
+  "state": "six_completed_with_documented_validation_limits",
+  "source_snapshot": "/home/rxing/wbc-mjlab-revisions/stability-20261028-final-v12",
+  "snapshot_manifest_sha256": "b327448336d595a857ee3603daecf5c2b9b3835270ccffdb5da88c111d17b722",
+  "runtime_equivalence": {
+    "reference_snapshot": "stability-20261027-capacity-v9",
+    "identical_python_and_training_launcher_files": 93,
+    "method": "Byte-for-byte comparison on server",
+    "evaluation_only_change": "Reference ELU computes exp only on nonpositive inputs; training source and physics remain unchanged from v11/v9.",
+    "v11_comparison_evidence": "evidence/snapshot-v12-equivalence.json"
+  },
+  "image": "/home/rxing/wbc-mjlab-images/2026-10-14_cbc0cf3/wbc-mjlab-cu128.sif",
+  "image_sha256": "c6bcb6916fa9bdc641b5d7126c3a5f5074143233260cc4029542e7894be62b29",
+  "versions": {
+    "mjlab": "1.6.0",
+    "mujoco": "3.11.0",
+    "mujoco-warp": "3.11.0",
+    "warp-lang": "1.14.0",
+    "torch": "2.11.0+cu128"
+  },
+  "data_sha256": {
+    "npz/backflip.npz": "2b57d308d87f2f29fccc1d25b71af0251a99a57b95246a360a393dab3aae89fe",
+    "npz/dance.npz": "056d9a6ad3f945ec7c60dde2d28587953b277d6639c30d739cfc67f16286bc95",
+    "npz/dance1_subject1.npz": "1187e177e5a47e184d7a8f26a4890ca8b2a95bf7e53f7be5dbe08c65b21e2900",
+    "npz/fallAndGetUp1_subject1.npz": "a59e7f7b31728f2c375c279253a34b930590e216b84a975a0ab29629ca87e59a",
+    "npz/fight1_subject2.npz": "d4b58f28a11154c7f39afbc42ca6e7a4765f8474436500035e5ac642a10fb755",
+    "npz/fightAndSports1_subject1.npz": "1f2b829ed31e90c15d2facb55cd5ce976565a3725557b84e60ded1b025256019",
+    "npz/gainer_flip.npz": "28da8eb796e6a80fe2374490f68e8e0f18f8d7e466cfc785cdb20e34f1c575cb",
+    "npz/run1_subject2.npz": "175dc76fb5813fe9029219f7882f7a070938e2783ded4fe47ab9ff1ecebb7304",
+    "npz/sprint1_subject2.npz": "9c370f335752e10aec615318249fd03647b686f5e3ab483f786ca1cb8b5582a0",
+    "npz/walk1_subject1.npz": "4dd39c96c958aff0b1b8ec15ead6386b946407d48791acfaeaa1652a72a77e56"
+  },
+  "tasks_in_order": [
+    "Wbc-G1-SE",
+    "Wbc-G1-Zest",
+    "Wbc-G1",
+    "Wbc-G1-Zest-SE",
+    "Wbc-G1-EE",
+    "Wbc-G1-EE-SE"
+  ],
+  "shared_training": {
+    "seed": 42,
+    "resume": false,
+    "num_envs": 2048,
+    "iterations": 200000,
+    "final_checkpoint": "model_199999.pt",
+    "save_interval": 5000,
+    "num_steps_per_env": 24,
+    "physics_dt_s": 0.0025,
+    "decimation": 8,
+    "control_period_s": 0.02,
+    "integrator": "implicitfast",
+    "solver": "newton",
+    "solver_iterations": 10,
+    "line_search_iterations": 20,
+    "cone": "pyramidal",
+    "impratio": 1,
+    "njmax": 1024,
+    "contact_sensor_maxmatch": 128,
+    "contact_history_steps": 8,
+    "nan_guard_buffer_steps": 64,
+    "nan_policy": "error",
+    "actuator": "Unitree speed envelope before unchanged passive friction",
+    "torque_penalty_weight": -0.1,
+    "evaluate_final_checkpoint": true
+  },
+  "evaluation": {
+    "protocol_version": 3,
+    "physics_dt_s": 0.0025,
+    "nconmax": 128,
+    "assistance": false,
+    "policy": "deterministic mean",
+    "include_failures": true,
+    "validate_training_export": true
+  },
+  "submission": {
+    "state": "submitted",
+    "run_root": "/home/rxing/wbc-mjlab-runs/2026-10-26_stability/final-v12-2p5ms",
+    "helper": "Explicit sbatch commands matching submit_six.sh, with first job also dependent on historical comparison 19788",
+    "phase": "train",
+    "extra_args": [
+      "--physics-dt",
+      "0.0025",
+      "--evaluate"
+    ],
+    "dependencies": "Two concurrent qualifiers 19791/19792; 19793 and 19794 each afterok both qualifiers; 19795 and 19796 each afterok both second-pair jobs.",
+    "jobs": [
+      {
+        "task": "Wbc-G1-SE",
+        "job": "19791",
+        "command": [
+          "sbatch",
+          "--parsable",
+          "--time=7-00:00:00",
+          "--dependency=afterok:19788",
+          "--job-name=wbc_train_Wbc-G1-SE",
+          "--output=/home/rxing/wbc-mjlab-runs/2026-10-26_stability/final-v12-2p5ms/console/%x-%j.out",
+          "--error=/home/rxing/wbc-mjlab-runs/2026-10-26_stability/final-v12-2p5ms/console/%x-%j.err",
+          "/home/rxing/wbc-mjlab-revisions/stability-20261028-final-v12/scripts/cluster/train.sbatch",
+          "Wbc-G1-SE",
+          "train",
+          "200000",
+          "/home/rxing/wbc-mjlab-revisions/stability-20261028-final-v12",
+          "/home/rxing/wbc-mjlab-runs/2026-10-26_stability/final-v12-2p5ms",
+          "/home/rxing/wbc-mjlab-images/2026-10-14_cbc0cf3/wbc-mjlab-cu128.sif",
+          "--physics-dt",
+          "0.0025",
+          "--evaluate"
+        ]
+      },
+      {
+        "task": "Wbc-G1-Zest",
+        "job": "19792",
+        "command": [
+          "sbatch",
+          "--parsable",
+          "--time=7-00:00:00",
+          "--dependency=afterok:19791",
+          "--job-name=wbc_train_Wbc-G1-Zest",
+          "--output=/home/rxing/wbc-mjlab-runs/2026-10-26_stability/final-v12-2p5ms/console/%x-%j.out",
+          "--error=/home/rxing/wbc-mjlab-runs/2026-10-26_stability/final-v12-2p5ms/console/%x-%j.err",
+          "/home/rxing/wbc-mjlab-revisions/stability-20261028-final-v12/scripts/cluster/train.sbatch",
+          "Wbc-G1-Zest",
+          "train",
+          "200000",
+          "/home/rxing/wbc-mjlab-revisions/stability-20261028-final-v12",
+          "/home/rxing/wbc-mjlab-runs/2026-10-26_stability/final-v12-2p5ms",
+          "/home/rxing/wbc-mjlab-images/2026-10-14_cbc0cf3/wbc-mjlab-cu128.sif",
+          "--physics-dt",
+          "0.0025",
+          "--evaluate"
+        ]
+      },
+      {
+        "task": "Wbc-G1",
+        "job": "19793",
+        "command": [
+          "sbatch",
+          "--parsable",
+          "--time=7-00:00:00",
+          "--dependency=afterok:19792",
+          "--job-name=wbc_train_Wbc-G1",
+          "--output=/home/rxing/wbc-mjlab-runs/2026-10-26_stability/final-v12-2p5ms/console/%x-%j.out",
+          "--error=/home/rxing/wbc-mjlab-runs/2026-10-26_stability/final-v12-2p5ms/console/%x-%j.err",
+          "/home/rxing/wbc-mjlab-revisions/stability-20261028-final-v12/scripts/cluster/train.sbatch",
+          "Wbc-G1",
+          "train",
+          "200000",
+          "/home/rxing/wbc-mjlab-revisions/stability-20261028-final-v12",
+          "/home/rxing/wbc-mjlab-runs/2026-10-26_stability/final-v12-2p5ms",
+          "/home/rxing/wbc-mjlab-images/2026-10-14_cbc0cf3/wbc-mjlab-cu128.sif",
+          "--physics-dt",
+          "0.0025",
+          "--evaluate"
+        ]
+      },
+      {
+        "task": "Wbc-G1-Zest-SE",
+        "job": "19794",
+        "command": [
+          "sbatch",
+          "--parsable",
+          "--time=7-00:00:00",
+          "--dependency=afterok:19793",
+          "--job-name=wbc_train_Wbc-G1-Zest-SE",
+          "--output=/home/rxing/wbc-mjlab-runs/2026-10-26_stability/final-v12-2p5ms/console/%x-%j.out",
+          "--error=/home/rxing/wbc-mjlab-runs/2026-10-26_stability/final-v12-2p5ms/console/%x-%j.err",
+          "/home/rxing/wbc-mjlab-revisions/stability-20261028-final-v12/scripts/cluster/train.sbatch",
+          "Wbc-G1-Zest-SE",
+          "train",
+          "200000",
+          "/home/rxing/wbc-mjlab-revisions/stability-20261028-final-v12",
+          "/home/rxing/wbc-mjlab-runs/2026-10-26_stability/final-v12-2p5ms",
+          "/home/rxing/wbc-mjlab-images/2026-10-14_cbc0cf3/wbc-mjlab-cu128.sif",
+          "--physics-dt",
+          "0.0025",
+          "--evaluate"
+        ]
+      },
+      {
+        "task": "Wbc-G1-EE",
+        "job": "19795",
+        "command": [
+          "sbatch",
+          "--parsable",
+          "--time=7-00:00:00",
+          "--dependency=afterok:19794",
+          "--job-name=wbc_train_Wbc-G1-EE",
+          "--output=/home/rxing/wbc-mjlab-runs/2026-10-26_stability/final-v12-2p5ms/console/%x-%j.out",
+          "--error=/home/rxing/wbc-mjlab-runs/2026-10-26_stability/final-v12-2p5ms/console/%x-%j.err",
+          "/home/rxing/wbc-mjlab-revisions/stability-20261028-final-v12/scripts/cluster/train.sbatch",
+          "Wbc-G1-EE",
+          "train",
+          "200000",
+          "/home/rxing/wbc-mjlab-revisions/stability-20261028-final-v12",
+          "/home/rxing/wbc-mjlab-runs/2026-10-26_stability/final-v12-2p5ms",
+          "/home/rxing/wbc-mjlab-images/2026-10-14_cbc0cf3/wbc-mjlab-cu128.sif",
+          "--physics-dt",
+          "0.0025",
+          "--evaluate"
+        ]
+      },
+      {
+        "task": "Wbc-G1-EE-SE",
+        "job": "19796",
+        "command": [
+          "sbatch",
+          "--parsable",
+          "--time=7-00:00:00",
+          "--dependency=afterok:19795",
+          "--job-name=wbc_train_Wbc-G1-EE-SE",
+          "--output=/home/rxing/wbc-mjlab-runs/2026-10-26_stability/final-v12-2p5ms/console/%x-%j.out",
+          "--error=/home/rxing/wbc-mjlab-runs/2026-10-26_stability/final-v12-2p5ms/console/%x-%j.err",
+          "/home/rxing/wbc-mjlab-revisions/stability-20261028-final-v12/scripts/cluster/train.sbatch",
+          "Wbc-G1-EE-SE",
+          "train",
+          "200000",
+          "/home/rxing/wbc-mjlab-revisions/stability-20261028-final-v12",
+          "/home/rxing/wbc-mjlab-runs/2026-10-26_stability/final-v12-2p5ms",
+          "/home/rxing/wbc-mjlab-images/2026-10-14_cbc0cf3/wbc-mjlab-cu128.sif",
+          "--physics-dt",
+          "0.0025",
+          "--evaluate"
+        ]
+      }
+    ],
+    "first_training_job_state": "completed",
+    "first_training_job_observation": "November 2: October 30 fresh restart completed 200k and evaluation; final checkpoint/config/hash/parity audit passed. Full clips 8/10; mean global error 0.1305 m. Overall tracking targets not met.",
+    "scheduling_override_evidence": "evidence/scheduling-20261029.json",
+    "eligible_nodes": {
+      "19791": [
+        "a2r-wolf"
+      ],
+      "19792": [
+        "a2r-fox",
+        "a2r-wolf"
+      ],
+      "19793": [
+        "a2r-wolf"
+      ],
+      "19794": [
+        "a2r-fox",
+        "a2r-wolf"
+      ],
+      "19795": [
+        "a2r-wolf"
+      ],
+      "19796": [
+        "a2r-fox",
+        "a2r-wolf"
+      ]
+    },
+    "second_training_job_state": "completed",
+    "restart_audit": "evidence/node-failure-20261030.json",
+    "second_training_job_observation": "November 2: October 30 fresh restart completed 200k and evaluation; final checkpoint/config/hash/parity audit passed. Full clips 8/10; mean global error 2.2341 m. Overall tracking targets not met.",
+    "latest_intermediate_audit": "evidence/restart-130k-audit-20261031.json",
+    "completed_results_audit": "evidence/final-first-pair-results-audit-20261102.json",
+    "current_training_jobs": [],
+    "pending_training_jobs": [],
+    "full_video_jobs_state": "All completed; 60 full videos hash/frame/format checked and sampled visually.",
+    "local_full_video_render_launch": "evidence/full-video-cpu-launch-20261102.json",
+    "failed_training_jobs": [
+      19793
+    ],
+    "failed_diagnostic_jobs": [
+      20229
+    ],
+    "recovery_scheduling_evidence": "evidence/g1-recovery-scheduling-20261103.json",
+    "latest_failure_evidence": "evidence/g1-native-repro-failure-20261103.json",
+    "current_dependencies": "All campaign training and video jobs terminal; queue empty on November 10.",
+    "local_full_video_completion_audit": "evidence/full-video-completion-audit-20261103.json",
+    "native_debugger_job": 20234,
+    "native_debugger_submission_evidence": "evidence/g1-native-gdb20k-submission-20261104.json",
+    "native_debugger_state": "completed",
+    "zest_se_intermediate_audit": "evidence/zest-se-155k-audit-20261103.json",
+    "completed_native_debugger_jobs": [
+      20233,
+      20234
+    ],
+    "native_debugger_completion_audit": "evidence/g1-native-gdb-completion-20261104.json",
+    "native_debugger_start_audit": "evidence/g1-native-gdb20k-start-audit-20261104.json",
+    "completed_training_jobs": [
+      19791,
+      19792,
+      20236,
+      19794,
+      19795,
+      19796
+    ],
+    "fresh_recovery_scheduling": "evidence/fresh-g1-recovery-scheduling-20261104.json",
+    "cancelled_superseded_pending_jobs": [
+      20230,
+      20231
+    ],
+    "zest_se_final_audit": "evidence/final-zest-se-results-audit-20261104.json",
+    "latest_training_log_audit": "evidence/training-log-audit-20261105.json",
+    "fresh_g1_configuration_audit": "evidence/fresh-g1-configuration-audit-20261105.json",
+    "zest_se_video_audit": "evidence/zest-se-video-audit-20261105.json",
+    "latest_training_status_audit": "evidence/training-status-20261106.json",
+    "final_three_results_audit": "evidence/final-three-results-audit-20261110.json",
+    "final_three_remote_audit": "evidence/final-three-remote-audit-20261110.json",
+    "six_policy_summary": "evidence/six-policy-summary-20261110.json"
+  },
+  "evidence": {
+    "g1_se_10k_job": 19342,
+    "g1_se_10k_state": "completed",
+    "g1_se_10k_full_completion": 0.3,
+    "zest_10k_job": 19343,
+    "zest_10k_state": "completed",
+    "cpu_suite": "88 passed, 20 slow cases deselected",
+    "last_gpu_suite": "19781: 105 passed, 3 terminal-qpos comparison failures; all new ELU tests passed; unchanged tolerances",
+    "zest_10k_full_completion": 0.7,
+    "zest_10k_full_body_global_m": 2.9408737603022947,
+    "zest_10k_export_parity_samples": 1703,
+    "v12_gpu_check_job": 19781,
+    "intermediate_se_checkpoint_audit": "evidence/final-se-60k-audit.json"
+  },
+  "limitations": [
+    "GPU suite: 105 passed, 3 terminal-qpos comparisons failed at unchanged atol=rtol=1e-3; no fully passing GPU suite.",
+    "Historical numerical-failure causality and earlier G1 native crash cause remain unproven.",
+    "None of six policies meets the frozen 90% full-clip completion target.",
+    "One seed, training clips, nominal ideal-state sensing; no generalization or deployment claim."
+  ],
+  "profile_selection": {
+    "decision": "2.5 ms, decimation 8, implicitfast, Newton 10/20, original friction, finite torque penalty -0.1",
+    "rationale": [
+      "Both fresh 10k pilots completed without logged numerical/capacity failures and passed export parity.",
+      "All six 2.5 ms smoke runs completed; corrected 1k pilots and reward ablations were evaluated.",
+      "Matched short-trace sensitivity improves over 5 ms at lower cost than 1 ms; full-clip outcomes are mixed.",
+      "Poor 10k global tracking and incomplete full clips remain explicit; 200k training is needed to assess the requested final policies."
+    ],
+    "not_established": [
+      "Universal numerical stability across seeds/states",
+      "Tracking acceptance (none of six meets all frozen targets)",
+      "Historical crash causality or native-crash fix",
+      "Terminal-tolerance rollout reproducibility"
+    ]
+  },
+  "videos": {
+    "state": "all_six_rendered_and_sampled_visually_audited",
+    "source_snapshot": "/home/rxing/wbc-mjlab-revisions/stability-20261028-final-v12",
+    "scope": "All ten full-clip trials per policy; actual saved initial states and trajectories, including falls",
+    "rendering": "640x480, 50 Hz, common torso-tracking camera, task/clip/model/time/outcome labels",
+    "dependencies": "Each render follows its own successful training and final evaluation; training jobs unchanged",
+    "jobs": [
+      {
+        "task": "Wbc-G1-SE",
+        "job": "19806",
+        "training_job": "19791",
+        "command": [
+          "sbatch",
+          "--parsable",
+          "--time=02:00:00",
+          "--dependency=afterok:19791",
+          "--export=ALL,WBC_MUJOCO_GL=egl",
+          "--job-name=wbc_video_Wbc-G1-SE",
+          "--output=/home/rxing/wbc-mjlab-runs/2026-10-26_stability/final-v12-2p5ms/console/%x-%j.out",
+          "--error=/home/rxing/wbc-mjlab-runs/2026-10-26_stability/final-v12-2p5ms/console/%x-%j.err",
+          "/home/rxing/wbc-mjlab-revisions/stability-20261028-final-v12/scripts/cluster/check.sbatch",
+          "/home/rxing/wbc-mjlab-revisions/stability-20261028-final-v12",
+          "/home/rxing/wbc-mjlab-runs/2026-10-26_stability/final-v12-2p5ms",
+          "/home/rxing/wbc-mjlab-images/2026-10-14_cbc0cf3/wbc-mjlab-cu128.sif",
+          "-m",
+          "wbc_mjlab.scripts.render_evaluation",
+          "--evaluation",
+          "/runs/evaluation/train_Wbc-G1-SE_job19791",
+          "--output",
+          "/runs/videos/Wbc-G1-SE"
+        ]
+      },
+      {
+        "task": "Wbc-G1-Zest",
+        "job": "19807",
+        "training_job": "19792",
+        "command": [
+          "sbatch",
+          "--parsable",
+          "--time=02:00:00",
+          "--dependency=afterok:19792",
+          "--export=ALL,WBC_MUJOCO_GL=egl",
+          "--job-name=wbc_video_Wbc-G1-Zest",
+          "--output=/home/rxing/wbc-mjlab-runs/2026-10-26_stability/final-v12-2p5ms/console/%x-%j.out",
+          "--error=/home/rxing/wbc-mjlab-runs/2026-10-26_stability/final-v12-2p5ms/console/%x-%j.err",
+          "/home/rxing/wbc-mjlab-revisions/stability-20261028-final-v12/scripts/cluster/check.sbatch",
+          "/home/rxing/wbc-mjlab-revisions/stability-20261028-final-v12",
+          "/home/rxing/wbc-mjlab-runs/2026-10-26_stability/final-v12-2p5ms",
+          "/home/rxing/wbc-mjlab-images/2026-10-14_cbc0cf3/wbc-mjlab-cu128.sif",
+          "-m",
+          "wbc_mjlab.scripts.render_evaluation",
+          "--evaluation",
+          "/runs/evaluation/train_Wbc-G1-Zest_job19792",
+          "--output",
+          "/runs/videos/Wbc-G1-Zest"
+        ]
+      },
+      {
+        "task": "Wbc-G1",
+        "job": "19808",
+        "training_job": "19793",
+        "command": [
+          "sbatch",
+          "--parsable",
+          "--time=02:00:00",
+          "--dependency=afterok:19793",
+          "--export=ALL,WBC_MUJOCO_GL=egl",
+          "--job-name=wbc_video_Wbc-G1",
+          "--output=/home/rxing/wbc-mjlab-runs/2026-10-26_stability/final-v12-2p5ms/console/%x-%j.out",
+          "--error=/home/rxing/wbc-mjlab-runs/2026-10-26_stability/final-v12-2p5ms/console/%x-%j.err",
+          "/home/rxing/wbc-mjlab-revisions/stability-20261028-final-v12/scripts/cluster/check.sbatch",
+          "/home/rxing/wbc-mjlab-revisions/stability-20261028-final-v12",
+          "/home/rxing/wbc-mjlab-runs/2026-10-26_stability/final-v12-2p5ms",
+          "/home/rxing/wbc-mjlab-images/2026-10-14_cbc0cf3/wbc-mjlab-cu128.sif",
+          "-m",
+          "wbc_mjlab.scripts.render_evaluation",
+          "--evaluation",
+          "/runs/evaluation/train_Wbc-G1_job19793",
+          "--output",
+          "/runs/videos/Wbc-G1"
+        ]
+      },
+      {
+        "task": "Wbc-G1-Zest-SE",
+        "job": "19809",
+        "training_job": "19794",
+        "command": [
+          "sbatch",
+          "--parsable",
+          "--time=02:00:00",
+          "--dependency=afterok:19794",
+          "--export=ALL,WBC_MUJOCO_GL=egl",
+          "--job-name=wbc_video_Wbc-G1-Zest-SE",
+          "--output=/home/rxing/wbc-mjlab-runs/2026-10-26_stability/final-v12-2p5ms/console/%x-%j.out",
+          "--error=/home/rxing/wbc-mjlab-runs/2026-10-26_stability/final-v12-2p5ms/console/%x-%j.err",
+          "/home/rxing/wbc-mjlab-revisions/stability-20261028-final-v12/scripts/cluster/check.sbatch",
+          "/home/rxing/wbc-mjlab-revisions/stability-20261028-final-v12",
+          "/home/rxing/wbc-mjlab-runs/2026-10-26_stability/final-v12-2p5ms",
+          "/home/rxing/wbc-mjlab-images/2026-10-14_cbc0cf3/wbc-mjlab-cu128.sif",
+          "-m",
+          "wbc_mjlab.scripts.render_evaluation",
+          "--evaluation",
+          "/runs/evaluation/train_Wbc-G1-Zest-SE_job19794",
+          "--output",
+          "/runs/videos/Wbc-G1-Zest-SE"
+        ]
+      },
+      {
+        "task": "Wbc-G1-EE",
+        "job": "19810",
+        "training_job": "19795",
+        "command": [
+          "sbatch",
+          "--parsable",
+          "--time=02:00:00",
+          "--dependency=afterok:19795",
+          "--export=ALL,WBC_MUJOCO_GL=egl",
+          "--job-name=wbc_video_Wbc-G1-EE",
+          "--output=/home/rxing/wbc-mjlab-runs/2026-10-26_stability/final-v12-2p5ms/console/%x-%j.out",
+          "--error=/home/rxing/wbc-mjlab-runs/2026-10-26_stability/final-v12-2p5ms/console/%x-%j.err",
+          "/home/rxing/wbc-mjlab-revisions/stability-20261028-final-v12/scripts/cluster/check.sbatch",
+          "/home/rxing/wbc-mjlab-revisions/stability-20261028-final-v12",
+          "/home/rxing/wbc-mjlab-runs/2026-10-26_stability/final-v12-2p5ms",
+          "/home/rxing/wbc-mjlab-images/2026-10-14_cbc0cf3/wbc-mjlab-cu128.sif",
+          "-m",
+          "wbc_mjlab.scripts.render_evaluation",
+          "--evaluation",
+          "/runs/evaluation/train_Wbc-G1-EE_job19795",
+          "--output",
+          "/runs/videos/Wbc-G1-EE"
+        ]
+      },
+      {
+        "task": "Wbc-G1-EE-SE",
+        "job": "19811",
+        "training_job": "19796",
+        "command": [
+          "sbatch",
+          "--parsable",
+          "--time=02:00:00",
+          "--dependency=afterok:19796",
+          "--export=ALL,WBC_MUJOCO_GL=egl",
+          "--job-name=wbc_video_Wbc-G1-EE-SE",
+          "--output=/home/rxing/wbc-mjlab-runs/2026-10-26_stability/final-v12-2p5ms/console/%x-%j.out",
+          "--error=/home/rxing/wbc-mjlab-runs/2026-10-26_stability/final-v12-2p5ms/console/%x-%j.err",
+          "/home/rxing/wbc-mjlab-revisions/stability-20261028-final-v12/scripts/cluster/check.sbatch",
+          "/home/rxing/wbc-mjlab-revisions/stability-20261028-final-v12",
+          "/home/rxing/wbc-mjlab-runs/2026-10-26_stability/final-v12-2p5ms",
+          "/home/rxing/wbc-mjlab-images/2026-10-14_cbc0cf3/wbc-mjlab-cu128.sif",
+          "-m",
+          "wbc_mjlab.scripts.render_evaluation",
+          "--evaluation",
+          "/runs/evaluation/train_Wbc-G1-EE-SE_job19796",
+          "--output",
+          "/runs/videos/Wbc-G1-EE-SE"
+        ]
+      }
+    ],
+    "output_root": "/home/rxing/wbc-mjlab-runs/2026-10-26_stability/final-v12-2p5ms/videos",
+    "replacement_jobs": [
+      {
+        "task": "Wbc-G1",
+        "job": "20231",
+        "training_job": "20230",
+        "replaces": "19808"
+      },
+      {
+        "task": "Wbc-G1",
+        "job": "20237",
+        "training_job": "20236",
+        "replaces": "20231"
+      }
+    ]
+  },
+  "historical_comparison": {
+    "state": "completed",
+    "jobs": [
+      19787,
+      19788
+    ],
+    "evaluations": 8,
+    "trials": 320,
+    "numerical_failure_trials": 0,
+    "export_parity_samples": 13380,
+    "original_artifacts_unchanged": true,
+    "report": "historical-comparison.rst",
+    "evidence": "evidence/historical-v12-results-audit.json"
+  }
+}

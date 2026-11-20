@@ -15,7 +15,6 @@ import math
 from typing import TYPE_CHECKING, cast
 
 import torch
-
 from mjlab.entity import Entity
 from mjlab.managers.scene_entity_config import SceneEntityCfg
 from mjlab.sensor import ContactSensor
@@ -416,14 +415,27 @@ def actuator_torque_soft_limit(
   soft_ratio: float = 0.95,
   asset_cfg: SceneEntityCfg = _DEFAULT_ASSET_CFG,
 ) -> torch.Tensor:
-  """Penalize actuator forces approaching MuJoCo torque limits (normalized soft margin)."""
+  """Sum excess active motor utilization above ``soft_ratio``.
+
+  Normalize the last physics substep's clipped active torque by the finite
+  stationary peak rating (y2), not the unbounded MuJoCo motor transmission.
+  Passive friction is excluded. At overspeed active torque is zero, so the
+  penalty remains finite and zero without dividing by zero available torque.
+  This is a stationary-rating margin, not a speed-dependent saturation cost.
+  """
+  from wbc_mjlab.robots.g1.actuators import UnitreeActuator
+
+  if not 0.0 <= soft_ratio <= 1.0:
+    raise ValueError("soft_ratio must lie in [0, 1]")
   asset: Entity = env.scene[asset_cfg.name]
-  forces = asset.data.actuator_force
-  ctrl_ids = asset.indexing.ctrl_ids
-  tau_max = env.sim.model.actuator_forcerange[:, ctrl_ids, 1]
-  ratio = torch.abs(forces) / tau_max.clamp(min=1.0e-6)
-  violation = torch.clamp(ratio - soft_ratio, min=0.0)
-  return torch.sum(violation, dim=-1)
+  cost = torch.zeros(env.num_envs, device=env.device)
+  for actuator in asset.actuators:
+    if not isinstance(actuator, UnitreeActuator):
+      raise TypeError("Active motor utilization requires UnitreeActuator")
+    assert actuator.motor_effort is not None
+    ratio = actuator.motor_effort.abs() / actuator.cfg.y2
+    cost += (ratio - soft_ratio).clamp(min=0.0).sum(dim=-1)
+  return cost
 
 
 def angular_momentum_penalty(

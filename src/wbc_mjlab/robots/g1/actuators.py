@@ -2,11 +2,11 @@
 
 from __future__ import annotations
 
+import math
 from dataclasses import dataclass
 from typing import TYPE_CHECKING, Generic, TypeVar
 
 import torch
-
 from mjlab.actuator.actuator import ActuatorCmd
 from mjlab.actuator.pd_actuator import IdealPdActuator, IdealPdActuatorCfg
 from mjlab.entity import EntityArticulationInfoCfg
@@ -95,6 +95,10 @@ class UnitreeActuatorCfg(IdealPdActuatorCfg):
   def __post_init__(self) -> None:
     if self.y2 is None:
       self.y2 = self.y1
+    if not all(math.isfinite(v) for v in (self.x1, self.x2, self.y1, self.y2)):
+      raise ValueError("Motor envelope must be finite")
+    if not (0 <= self.x1 < self.x2 and 0 < self.y1 <= self.y2):
+      raise ValueError("Motor envelope requires 0 <= x1 < x2 and 0 < y1 <= y2")
     super().__post_init__()
 
   @property
@@ -145,7 +149,7 @@ class UnitreeActuator(IdealPdActuator[UnitreeCfgT], Generic[UnitreeCfgT]):
     target_names: list[str],
   ) -> None:
     super().__init__(cfg, entity, target_ids, target_names)
-    self._joint_vel: torch.Tensor | None = None
+    self.motor_effort: torch.Tensor | None = None
     self._envelope: TorqueSpeedEnvelopeTensors | None = None
     self._friction_static: torch.Tensor | None = None
     self._friction_dynamic: torch.Tensor | None = None
@@ -163,7 +167,7 @@ class UnitreeActuator(IdealPdActuator[UnitreeCfgT], Generic[UnitreeCfgT]):
     num_joints = len(self._target_names)
     cfg = self.cfg
 
-    self._joint_vel = torch.zeros(num_envs, num_joints, device=device)
+    self.motor_effort = torch.zeros(num_envs, num_joints, device=device)
     self._envelope = TorqueSpeedEnvelopeTensors(
       x1=torch.full((num_envs, num_joints), cfg.x1, device=device),
       x2=torch.full((num_envs, num_joints), cfg.x2, device=device),
@@ -175,9 +179,13 @@ class UnitreeActuator(IdealPdActuator[UnitreeCfgT], Generic[UnitreeCfgT]):
     self._activation_vel = torch.full((num_envs, num_joints), cfg.va, device=device)
 
   def compute(self, cmd: ActuatorCmd) -> torch.Tensor:
-    assert self._joint_vel is not None
-    self._joint_vel[:] = cmd.vel
-    effort = super().compute(cmd)
+    # mjlab 1.6 dispatches through control_law, not _clip_effort. Keep a
+    # custom compute so fusion cannot bypass this envelope or passive drag.
+    # The inherited limit/setter bounds active torque before speed clipping.
+    assert self._envelope is not None
+    assert self.motor_effort is not None
+    effort = clip_unitree_effort(super().compute(cmd), cmd.vel, self._envelope)
+    self.motor_effort.copy_(effort)
     assert self._friction_static is not None
     assert self._friction_dynamic is not None
     assert self._activation_vel is not None
@@ -185,12 +193,6 @@ class UnitreeActuator(IdealPdActuator[UnitreeCfgT], Generic[UnitreeCfgT]):
       self._friction_static * torch.tanh(cmd.vel / self._activation_vel)
       + self._friction_dynamic * cmd.vel
     )
-
-  def _clip_effort(self, effort: torch.Tensor) -> torch.Tensor:
-    assert self._joint_vel is not None
-    assert self._envelope is not None
-    return clip_unitree_effort(effort, self._joint_vel, self._envelope)
-
 
 ##
 # G1 joint groups (order matters for ``G1_ACTUATOR_GROUPS`` envelope lookup).

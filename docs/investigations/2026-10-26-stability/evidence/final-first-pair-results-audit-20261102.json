@@ -1,0 +1,615 @@
+{
+  "scope": "First two completed fresh 200k policies, October 30 restart attempts; remaining four policies and videos pending.",
+  "evaluations": [
+    {
+      "task": "Wbc-G1-SE",
+      "job": 19791,
+      "result": "evidence/final-v12-results/Wbc-G1-SE.json",
+      "result_sha256": "d038e1b028b01d72cf5d2838ea5349e11f14d9ea772a8e517c9c4bff7a0ec8c9",
+      "checkpoint_sha256": "3450917ffd7b197bbcfdb702c2bb7d45963acfb6e7d3bd689f4cdde05713d003",
+      "final_iteration": 199999,
+      "all_checkpoint_tensors_finite": true,
+      "checkpoint_tensors": 92,
+      "checkpoint_elements": 11338379,
+      "all_downloaded_hashes_match_server": true,
+      "saved_config_identical_to_130k_audit": true,
+      "trials": 40,
+      "trace_samples": 84258,
+      "trace_finiteness_frames_terminal_states_checked": true,
+      "initial_array_sha256": {
+        "state": "5bd6305bad58b494315f4f7cec611e4dcc64e7a95153612ce9a173a1f34da75a",
+        "ctrl": "005cd30c504b223d7b0528e62bb37420545e22949577d0d578126ee0e229f3d3"
+      },
+      "summary": {
+        "full": {
+          "planned": 10,
+          "completed": 8,
+          "falls": 2,
+          "numerical_failures": 0,
+          "completion_rate": 0.8,
+          "observed_steps": 78464,
+          "planned_steps": 78563,
+          "trials_with_metrics": 10,
+          "mean_trial_metrics": {
+            "anchor_drift_m": 0.1124812995761747,
+            "body_global_m": 0.1304821304480162,
+            "body_root_relative_m": 0.04752689181754508,
+            "body_orientation_rad": 0.24226482011511252,
+            "joint_position_rmse_rad": 0.13552794338523755,
+            "joint_velocity_rmse_rad_s": 1.525796886088593,
+            "body_linear_velocity_m_s": 0.5334820954244899,
+            "body_angular_velocity_rad_s": 2.4348725788366155,
+            "anchor_linear_velocity_m_s": 0.33454088537065374
+          }
+        },
+        "segment_0.25": {
+          "planned": 10,
+          "completed": 8,
+          "falls": 2,
+          "numerical_failures": 0,
+          "completion_rate": 0.8,
+          "observed_steps": 2012,
+          "planned_steps": 2107,
+          "trials_with_metrics": 10,
+          "mean_trial_metrics": {
+            "anchor_drift_m": 0.10381337970098511,
+            "body_global_m": 0.12323288895667077,
+            "body_root_relative_m": 0.050404324042556535,
+            "body_orientation_rad": 0.2752068050021153,
+            "joint_position_rmse_rad": 0.14043100303708678,
+            "joint_velocity_rmse_rad_s": 1.6491000861864873,
+            "body_linear_velocity_m_s": 0.6282680863235022,
+            "body_angular_velocity_rad_s": 2.8204491316185973,
+            "anchor_linear_velocity_m_s": 0.4133208436208854
+          }
+        },
+        "segment_0.5": {
+          "planned": 10,
+          "completed": 8,
+          "falls": 2,
+          "numerical_failures": 0,
+          "completion_rate": 0.8,
+          "observed_steps": 1912,
+          "planned_steps": 1988,
+          "trials_with_metrics": 10,
+          "mean_trial_metrics": {
+            "anchor_drift_m": 0.11356309632536651,
+            "body_global_m": 0.12492712807361975,
+            "body_root_relative_m": 0.05063513692547674,
+            "body_orientation_rad": 0.2811694935688934,
+            "joint_position_rmse_rad": 0.1405753419876597,
+            "joint_velocity_rmse_rad_s": 1.7270422320906718,
+            "body_linear_velocity_m_s": 0.6098257119756001,
+            "body_angular_velocity_rad_s": 2.728948287039836,
+            "anchor_linear_velocity_m_s": 0.4340527084942229
+          }
+        },
+        "segment_0.75": {
+          "planned": 10,
+          "completed": 10,
+          "falls": 0,
+          "numerical_failures": 0,
+          "completion_rate": 1.0,
+          "observed_steps": 1870,
+          "planned_steps": 1870,
+          "trials_with_metrics": 10,
+          "mean_trial_metrics": {
+            "anchor_drift_m": 0.08722728047687822,
+            "body_global_m": 0.10073533814864655,
+            "body_root_relative_m": 0.037778635362559994,
+            "body_orientation_rad": 0.20906778459028091,
+            "joint_position_rmse_rad": 0.11480029017402253,
+            "joint_velocity_rmse_rad_s": 1.180144793967477,
+            "body_linear_velocity_m_s": 0.36654858844103677,
+            "body_angular_velocity_rad_s": 1.7957613746314454,
+            "anchor_linear_velocity_m_s": 0.2235018223120367
+          }
+        }
+      },
+      "export_parity": {
+        "samples": 1729,
+        "passed": true,
+        "engine": "onnx.reference.ReferenceEvaluator",
+        "elu_implementation": "negative_branch_only_v1",
+        "existing_export_checked": true
+      },
+      "local_cpu_export_rechecks": [
+        {
+          "model": "logs/stability-final-v12/completed/Wbc-G1-SE-19791/evaluation/policy.onnx",
+          "samples": 1729,
+          "maximum_absolute_difference": 4.291534423828125e-06,
+          "passed": true
+        },
+        {
+          "model": "logs/stability-final-v12/completed/Wbc-G1-SE-19791/params/policy.onnx",
+          "samples": 1729,
+          "maximum_absolute_difference": 4.291534423828125e-06,
+          "passed": true
+        }
+      ],
+      "tracking_targets_met": {
+        "completion_rate": false,
+        "body_global_m": true,
+        "joint_position_rmse_rad": true
+      },
+      "full_trials": [
+        {
+          "clip": "backflip",
+          "status": "fall",
+          "observed_steps": 35,
+          "planned_steps": 88,
+          "metrics": {
+            "anchor_drift_m": 0.1230850768209036,
+            "body_global_m": 0.18618704667314886,
+            "body_root_relative_m": 0.10626139217721564,
+            "body_orientation_rad": 0.5064751016242164,
+            "joint_position_rmse_rad": 0.23979406830455577,
+            "joint_velocity_rmse_rad_s": 3.18944708108902,
+            "body_linear_velocity_m_s": 1.5616449475288392,
+            "body_angular_velocity_rad_s": 6.432735242162432,
+            "anchor_linear_velocity_m_s": 1.00719614561115
+          }
+        },
+        {
+          "clip": "dance",
+          "status": "completed",
+          "observed_steps": 246,
+          "planned_steps": 246,
+          "metrics": {
+            "anchor_drift_m": 0.10190135862761579,
+            "body_global_m": 0.12412250080198897,
+            "body_root_relative_m": 0.056449088127905035,
+            "body_orientation_rad": 0.2841884299082969,
+            "joint_position_rmse_rad": 0.16798703260416906,
+            "joint_velocity_rmse_rad_s": 1.7448387187186296,
+            "body_linear_velocity_m_s": 0.5759300402994079,
+            "body_angular_velocity_rad_s": 2.7139376145068224,
+            "anchor_linear_velocity_m_s": 0.3181058537760159
+          }
+        },
+        {
+          "clip": "dance1_subject1",
+          "status": "completed",
+          "observed_steps": 6573,
+          "planned_steps": 6573,
+          "metrics": {
+            "anchor_drift_m": 0.11778576210510708,
+            "body_global_m": 0.12963212606333882,
+            "body_root_relative_m": 0.037312496943413764,
+            "body_orientation_rad": 0.20298114226739664,
+            "joint_position_rmse_rad": 0.11877390353563676,
+            "joint_velocity_rmse_rad_s": 1.3894870911872081,
+            "body_linear_velocity_m_s": 0.3596005260960094,
+            "body_angular_velocity_rad_s": 2.033479625451842,
+            "anchor_linear_velocity_m_s": 0.2102119618003147
+          }
+        },
+        {
+          "clip": "fallAndGetUp1_subject1",
+          "status": "completed",
+          "observed_steps": 8409,
+          "planned_steps": 8409,
+          "metrics": {
+            "anchor_drift_m": 0.11139488838468943,
+            "body_global_m": 0.11873135379673301,
+            "body_root_relative_m": 0.03606623814546811,
+            "body_orientation_rad": 0.19876161293090205,
+            "joint_position_rmse_rad": 0.12231209502399379,
+            "joint_velocity_rmse_rad_s": 1.039525998542093,
+            "body_linear_velocity_m_s": 0.2881197292775333,
+            "body_angular_velocity_rad_s": 1.465969739948077,
+            "anchor_linear_velocity_m_s": 0.1878224648101238
+          }
+        },
+        {
+          "clip": "fight1_subject2",
+          "status": "completed",
+          "observed_steps": 12243,
+          "planned_steps": 12243,
+          "metrics": {
+            "anchor_drift_m": 0.10238926082835316,
+            "body_global_m": 0.11487439858163404,
+            "body_root_relative_m": 0.03738032895474144,
+            "body_orientation_rad": 0.19564765507287935,
+            "joint_position_rmse_rad": 0.11249002688929875,
+            "joint_velocity_rmse_rad_s": 1.3426380927607455,
+            "body_linear_velocity_m_s": 0.36655243563300777,
+            "body_angular_velocity_rad_s": 1.86973551954223,
+            "anchor_linear_velocity_m_s": 0.22332318236809923
+          }
+        },
+        {
+          "clip": "fightAndSports1_subject1",
+          "status": "completed",
+          "observed_steps": 12256,
+          "planned_steps": 12256,
+          "metrics": {
+            "anchor_drift_m": 0.1144076181198104,
+            "body_global_m": 0.12635487784967347,
+            "body_root_relative_m": 0.03584596425581811,
+            "body_orientation_rad": 0.19396032316396838,
+            "joint_position_rmse_rad": 0.11596254455399828,
+            "joint_velocity_rmse_rad_s": 1.2258413660579528,
+            "body_linear_velocity_m_s": 0.34200911150152363,
+            "body_angular_velocity_rad_s": 1.7411271583236627,
+            "anchor_linear_velocity_m_s": 0.21998994783359857
+          }
+        },
+        {
+          "clip": "gainer_flip",
+          "status": "fall",
+          "observed_steps": 95,
+          "planned_steps": 141,
+          "metrics": {
+            "anchor_drift_m": 0.14018739074419595,
+            "body_global_m": 0.1620558271552191,
+            "body_root_relative_m": 0.06779609096089476,
+            "body_orientation_rad": 0.3805704090744257,
+            "joint_position_rmse_rad": 0.20553573420957516,
+            "joint_velocity_rmse_rad_s": 2.421977010526155,
+            "body_linear_velocity_m_s": 1.0386375590374595,
+            "body_angular_velocity_rad_s": 4.218512354399029,
+            "anchor_linear_velocity_m_s": 0.6800417642844351
+          }
+        },
+        {
+          "clip": "run1_subject2",
+          "status": "completed",
+          "observed_steps": 11889,
+          "planned_steps": 11889,
+          "metrics": {
+            "anchor_drift_m": 0.07923602974003913,
+            "body_global_m": 0.0897466450629541,
+            "body_root_relative_m": 0.03490829311260484,
+            "body_orientation_rad": 0.16372051061989532,
+            "joint_position_rmse_rad": 0.09909449081527333,
+            "joint_velocity_rmse_rad_s": 1.259382786334378,
+            "body_linear_velocity_m_s": 0.32843466746871586,
+            "body_angular_velocity_rad_s": 1.651202548433442,
+            "anchor_linear_velocity_m_s": 0.19026347291379317
+          }
+        },
+        {
+          "clip": "sprint1_subject2",
+          "status": "completed",
+          "observed_steps": 13654,
+          "planned_steps": 13654,
+          "metrics": {
+            "anchor_drift_m": 0.12309975960029217,
+            "body_global_m": 0.13273591771796187,
+            "body_root_relative_m": 0.034079550061437924,
+            "body_orientation_rad": 0.16299953707128925,
+            "joint_position_rmse_rad": 0.09518844759034713,
+            "joint_velocity_rmse_rad_s": 1.0172478242065053,
+            "body_linear_velocity_m_s": 0.272973667657797,
+            "body_angular_velocity_rad_s": 1.357564732658273,
+            "anchor_linear_velocity_m_s": 0.15883559637522215
+          }
+        },
+        {
+          "clip": "walk1_subject1",
+          "status": "completed",
+          "observed_steps": 13064,
+          "planned_steps": 13064,
+          "metrics": {
+            "anchor_drift_m": 0.11132585079074052,
+            "body_global_m": 0.12038061077751,
+            "body_root_relative_m": 0.02916947543595114,
+            "body_orientation_rad": 0.1333434794178553,
+            "joint_position_rmse_rad": 0.07814109032552756,
+            "joint_velocity_rmse_rad_s": 0.6275828914632433,
+            "body_linear_velocity_m_s": 0.20091826974460483,
+            "body_angular_velocity_rad_s": 0.8644612529403453,
+            "anchor_linear_velocity_m_s": 0.14961846393378497
+          }
+        }
+      ]
+    },
+    {
+      "task": "Wbc-G1-Zest",
+      "job": 19792,
+      "result": "evidence/final-v12-results/Wbc-G1-Zest.json",
+      "result_sha256": "0e4a82756e55f73c5e8ed9b28ab51bb850710efe5097fd23ec8e21ecfafc84d4",
+      "checkpoint_sha256": "094d472c9889e68053cc91c77fddaa5acc9e98c9e432f55a05fd0d7e5da26661",
+      "final_iteration": 199999,
+      "all_checkpoint_tensors_finite": true,
+      "checkpoint_tensors": 92,
+      "checkpoint_elements": 11332229,
+      "all_downloaded_hashes_match_server": true,
+      "saved_config_identical_to_130k_audit": true,
+      "trials": 40,
+      "trace_samples": 83582,
+      "trace_finiteness_frames_terminal_states_checked": true,
+      "initial_array_sha256": {
+        "state": "5bd6305bad58b494315f4f7cec611e4dcc64e7a95153612ce9a173a1f34da75a",
+        "ctrl": "005cd30c504b223d7b0528e62bb37420545e22949577d0d578126ee0e229f3d3"
+      },
+      "summary": {
+        "full": {
+          "planned": 10,
+          "completed": 8,
+          "falls": 2,
+          "numerical_failures": 0,
+          "completion_rate": 0.8,
+          "observed_steps": 77741,
+          "planned_steps": 78563,
+          "trials_with_metrics": 10,
+          "mean_trial_metrics": {
+            "anchor_drift_m": 2.2195356471521874,
+            "body_global_m": 2.2340618573221294,
+            "body_root_relative_m": 0.05129178686687621,
+            "body_orientation_rad": 0.9659216511299276,
+            "joint_position_rmse_rad": 0.15430736671512404,
+            "joint_velocity_rmse_rad_s": 1.6485383876220236,
+            "body_linear_velocity_m_s": 1.0657062106534232,
+            "body_angular_velocity_rad_s": 3.262308416063854,
+            "anchor_linear_velocity_m_s": 0.8276281232479226
+          }
+        },
+        "segment_0.25": {
+          "planned": 10,
+          "completed": 9,
+          "falls": 1,
+          "numerical_failures": 0,
+          "completion_rate": 0.9,
+          "observed_steps": 2057,
+          "planned_steps": 2107,
+          "trials_with_metrics": 10,
+          "mean_trial_metrics": {
+            "anchor_drift_m": 0.2316492112621562,
+            "body_global_m": 0.257244442532818,
+            "body_root_relative_m": 0.05326686221038054,
+            "body_orientation_rad": 0.42726451802006016,
+            "joint_position_rmse_rad": 0.16749764666158337,
+            "joint_velocity_rmse_rad_s": 1.845067516360825,
+            "body_linear_velocity_m_s": 0.717147919775475,
+            "body_angular_velocity_rad_s": 3.144644375173642,
+            "anchor_linear_velocity_m_s": 0.42001024233615586
+          }
+        },
+        "segment_0.5": {
+          "planned": 10,
+          "completed": 8,
+          "falls": 2,
+          "numerical_failures": 0,
+          "completion_rate": 0.8,
+          "observed_steps": 1914,
+          "planned_steps": 1988,
+          "trials_with_metrics": 10,
+          "mean_trial_metrics": {
+            "anchor_drift_m": 0.21843272852068257,
+            "body_global_m": 0.2388231286516398,
+            "body_root_relative_m": 0.054839327569407736,
+            "body_orientation_rad": 0.4062307787208053,
+            "joint_position_rmse_rad": 0.1836664254947649,
+            "joint_velocity_rmse_rad_s": 2.0963002712702363,
+            "body_linear_velocity_m_s": 0.7403693855795828,
+            "body_angular_velocity_rad_s": 3.3961340330310223,
+            "anchor_linear_velocity_m_s": 0.4880479309007254
+          }
+        },
+        "segment_0.75": {
+          "planned": 10,
+          "completed": 10,
+          "falls": 0,
+          "numerical_failures": 0,
+          "completion_rate": 1.0,
+          "observed_steps": 1870,
+          "planned_steps": 1870,
+          "trials_with_metrics": 10,
+          "mean_trial_metrics": {
+            "anchor_drift_m": 0.11252832818276506,
+            "body_global_m": 0.12409928182184049,
+            "body_root_relative_m": 0.03594904798987873,
+            "body_orientation_rad": 0.21068997071185377,
+            "joint_position_rmse_rad": 0.12847512919768236,
+            "joint_velocity_rmse_rad_s": 1.3468975433657373,
+            "body_linear_velocity_m_s": 0.4152422289603998,
+            "body_angular_velocity_rad_s": 1.9674889263838782,
+            "anchor_linear_velocity_m_s": 0.2693959202822672
+          }
+        }
+      },
+      "export_parity": {
+        "samples": 1717,
+        "passed": true,
+        "engine": "onnx.reference.ReferenceEvaluator",
+        "elu_implementation": "negative_branch_only_v1",
+        "existing_export_checked": true
+      },
+      "local_cpu_export_rechecks": [
+        {
+          "model": "logs/stability-final-v12/completed/Wbc-G1-Zest-19792/evaluation/policy.onnx",
+          "samples": 1717,
+          "maximum_absolute_difference": 1.9073486328125e-06,
+          "passed": true
+        },
+        {
+          "model": "logs/stability-final-v12/completed/Wbc-G1-Zest-19792/params/policy.onnx",
+          "samples": 1717,
+          "maximum_absolute_difference": 1.9073486328125e-06,
+          "passed": true
+        }
+      ],
+      "tracking_targets_met": {
+        "completion_rate": false,
+        "body_global_m": false,
+        "joint_position_rmse_rad": true
+      },
+      "full_trials": [
+        {
+          "clip": "backflip",
+          "status": "fall",
+          "observed_steps": 35,
+          "planned_steps": 88,
+          "metrics": {
+            "anchor_drift_m": 0.13356495216222747,
+            "body_global_m": 0.19267240706831218,
+            "body_root_relative_m": 0.10521669941289084,
+            "body_orientation_rad": 0.5003637484141759,
+            "joint_position_rmse_rad": 0.24521703155977384,
+            "joint_velocity_rmse_rad_s": 3.041711381503514,
+            "body_linear_velocity_m_s": 1.7723969370126724,
+            "body_angular_velocity_rad_s": 6.441086285454887,
+            "anchor_linear_velocity_m_s": 1.1715956181287766
+          }
+        },
+        {
+          "clip": "dance",
+          "status": "completed",
+          "observed_steps": 246,
+          "planned_steps": 246,
+          "metrics": {
+            "anchor_drift_m": 0.2514441599634029,
+            "body_global_m": 0.28203935114045936,
+            "body_root_relative_m": 0.0796075985498151,
+            "body_orientation_rad": 0.371215319730402,
+            "joint_position_rmse_rad": 0.22900142215525474,
+            "joint_velocity_rmse_rad_s": 1.9556564817099067,
+            "body_linear_velocity_m_s": 0.7028171034847818,
+            "body_angular_velocity_rad_s": 3.162937940136204,
+            "anchor_linear_velocity_m_s": 0.39186297535775155
+          }
+        },
+        {
+          "clip": "dance1_subject1",
+          "status": "fall",
+          "observed_steps": 5804,
+          "planned_steps": 6573,
+          "metrics": {
+            "anchor_drift_m": 1.5989589110136126,
+            "body_global_m": 1.6066777166201789,
+            "body_root_relative_m": 0.038295765848494014,
+            "body_orientation_rad": 0.8261480612396619,
+            "joint_position_rmse_rad": 0.1302418121284992,
+            "joint_velocity_rmse_rad_s": 1.4758752118873133,
+            "body_linear_velocity_m_s": 0.7017033448061558,
+            "body_angular_velocity_rad_s": 2.8873527895217617,
+            "anchor_linear_velocity_m_s": 0.5247381363780073
+          }
+        },
+        {
+          "clip": "fallAndGetUp1_subject1",
+          "status": "completed",
+          "observed_steps": 8409,
+          "planned_steps": 8409,
+          "metrics": {
+            "anchor_drift_m": 1.734298313751749,
+            "body_global_m": 1.7329975028498168,
+            "body_root_relative_m": 0.036875100251634874,
+            "body_orientation_rad": 0.40872976454616106,
+            "joint_position_rmse_rad": 0.13441832075514612,
+            "joint_velocity_rmse_rad_s": 1.142481642544539,
+            "body_linear_velocity_m_s": 0.4506364375156162,
+            "body_angular_velocity_rad_s": 1.7983455154874235,
+            "anchor_linear_velocity_m_s": 0.35062954979077626
+          }
+        },
+        {
+          "clip": "fight1_subject2",
+          "status": "completed",
+          "observed_steps": 12243,
+          "planned_steps": 12243,
+          "metrics": {
+            "anchor_drift_m": 3.001971983734129,
+            "body_global_m": 3.0109364455550596,
+            "body_root_relative_m": 0.03581309399358086,
+            "body_orientation_rad": 1.4627233628508574,
+            "joint_position_rmse_rad": 0.12446991891736281,
+            "joint_velocity_rmse_rad_s": 1.4968315064286344,
+            "body_linear_velocity_m_s": 1.196013454957168,
+            "body_angular_velocity_rad_s": 3.1203243658123068,
+            "anchor_linear_velocity_m_s": 1.0407845600380394
+          }
+        },
+        {
+          "clip": "fightAndSports1_subject1",
+          "status": "completed",
+          "observed_steps": 12256,
+          "planned_steps": 12256,
+          "metrics": {
+            "anchor_drift_m": 1.1458561778918366,
+            "body_global_m": 1.1444456220781762,
+            "body_root_relative_m": 0.03678621027045917,
+            "body_orientation_rad": 0.3075856043935593,
+            "joint_position_rmse_rad": 0.12587988847780332,
+            "joint_velocity_rmse_rad_s": 1.3612680043335201,
+            "body_linear_velocity_m_s": 0.44424116072022596,
+            "body_angular_velocity_rad_s": 1.9593391321798879,
+            "anchor_linear_velocity_m_s": 0.3167932223014823
+          }
+        },
+        {
+          "clip": "gainer_flip",
+          "status": "completed",
+          "observed_steps": 141,
+          "planned_steps": 141,
+          "metrics": {
+            "anchor_drift_m": 0.46264330490908406,
+            "body_global_m": 0.49397989801058534,
+            "body_root_relative_m": 0.09577207676471865,
+            "body_orientation_rad": 1.3568746664079157,
+            "joint_position_rmse_rad": 0.24907372284231458,
+            "joint_velocity_rmse_rad_s": 2.7873790471266346,
+            "body_linear_velocity_m_s": 1.6787106282744848,
+            "body_angular_velocity_rad_s": 5.870040279753665,
+            "anchor_linear_velocity_m_s": 0.9862714557782978
+          }
+        },
+        {
+          "clip": "run1_subject2",
+          "status": "completed",
+          "observed_steps": 11889,
+          "planned_steps": 11889,
+          "metrics": {
+            "anchor_drift_m": 3.8277570145330984,
+            "body_global_m": 3.8424210162764965,
+            "body_root_relative_m": 0.029531780508030306,
+            "body_orientation_rad": 1.6961098329454476,
+            "joint_position_rmse_rad": 0.11304013482177866,
+            "joint_velocity_rmse_rad_s": 1.401484692760488,
+            "body_linear_velocity_m_s": 1.8198853040098222,
+            "body_angular_velocity_rad_s": 3.427481007979319,
+            "anchor_linear_velocity_m_s": 1.7168482938687457
+          }
+        },
+        {
+          "clip": "sprint1_subject2",
+          "status": "completed",
+          "observed_steps": 13654,
+          "planned_steps": 13654,
+          "metrics": {
+            "anchor_drift_m": 6.717410023653555,
+            "body_global_m": 6.716527172120551,
+            "body_root_relative_m": 0.028455837021841842,
+            "body_orientation_rad": 2.016305320035277,
+            "joint_position_rmse_rad": 0.1013436687146306,
+            "joint_velocity_rmse_rad_s": 1.1017857970440956,
+            "body_linear_velocity_m_s": 1.4604348002879626,
+            "body_angular_velocity_rad_s": 2.7549148227086926,
+            "anchor_linear_velocity_m_s": 1.3974541677728867
+          }
+        },
+        {
+          "clip": "walk1_subject1",
+          "status": "completed",
+          "observed_steps": 13064,
+          "planned_steps": 13064,
+          "metrics": {
+            "anchor_drift_m": 3.3214516299091823,
+            "body_global_m": 3.3179214415016585,
+            "body_root_relative_m": 0.026563706047296444,
+            "body_orientation_rad": 0.713160830735818,
+            "joint_position_rmse_rad": 0.09038774677867667,
+            "joint_velocity_rmse_rad_s": 0.7209101108815897,
+            "body_linear_velocity_m_s": 0.4302229354653433,
+            "body_angular_velocity_rad_s": 1.2012620216043892,
+            "anchor_linear_velocity_m_s": 0.379303253064462
+          }
+        }
+      ]
+    }
+  ],
+  "shared_protocol_schedule_metrics_data": true,
+  "initial_states_controls_match_historical_campaign": true
+}

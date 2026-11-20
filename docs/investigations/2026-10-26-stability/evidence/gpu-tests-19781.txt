@@ -1,0 +1,1479 @@
+wbc-mjlab-cu128.sif: OK
+Wed Oct 28 11:09:29 2026       
++-----------------------------------------------------------------------------------------+
+| NVIDIA-SMI 595.84                 Driver Version: 595.84         CUDA Version: 13.2     |
++-----------------------------------------+------------------------+----------------------+
+| GPU  Name                 Persistence-M | Bus-Id          Disp.A | Volatile Uncorr. ECC |
+| Fan  Temp   Perf          Pwr:Usage/Cap |           Memory-Usage | GPU-Util  Compute M. |
+|                                         |                        |               MIG M. |
+|=========================================+========================+======================|
+|   0  NVIDIA GeForce RTX 5090        Off |   00000000:02:00.0 Off |                  N/A |
+|  0%   43C    P8             28W /  575W |       2MiB /  32607MiB |      0%      Default |
+|                                         |                        |                  N/A |
++-----------------------------------------+------------------------+----------------------+
+
++-----------------------------------------------------------------------------------------+
+| Processes:                                                                              |
+|  GPU   GI   CI              PID   Type   Process name                        GPU Memory |
+|        ID   ID                                                               Usage      |
+|=========================================================================================|
+|  No running processes found                                                             |
++-----------------------------------------------------------------------------------------+
+Collecting pytest==9.1.1 (from -r scripts/cluster/test_requirements.txt (line 2))
+  Using cached pytest-9.1.1-py3-none-any.whl.metadata (7.6 kB)
+Collecting pluggy==1.6.0 (from -r scripts/cluster/test_requirements.txt (line 3))
+  Using cached pluggy-1.6.0-py3-none-any.whl.metadata (4.8 kB)
+Collecting iniconfig==2.3.0 (from -r scripts/cluster/test_requirements.txt (line 4))
+  Using cached iniconfig-2.3.0-py3-none-any.whl.metadata (2.5 kB)
+Collecting packaging==26.2 (from -r scripts/cluster/test_requirements.txt (line 5))
+  Using cached packaging-26.2-py3-none-any.whl.metadata (3.5 kB)
+Collecting pygments==2.20.0 (from -r scripts/cluster/test_requirements.txt (line 6))
+  Using cached pygments-2.20.0-py3-none-any.whl.metadata (2.5 kB)
+Collecting httpx==0.28.1 (from -r scripts/cluster/test_requirements.txt (line 7))
+  Using cached httpx-0.28.1-py3-none-any.whl.metadata (7.1 kB)
+Collecting httpcore==1.0.9 (from -r scripts/cluster/test_requirements.txt (line 8))
+  Using cached httpcore-1.0.9-py3-none-any.whl.metadata (21 kB)
+Collecting h11==0.16.0 (from -r scripts/cluster/test_requirements.txt (line 9))
+  Using cached h11-0.16.0-py3-none-any.whl.metadata (8.3 kB)
+Using cached pytest-9.1.1-py3-none-any.whl (386 kB)
+Using cached pluggy-1.6.0-py3-none-any.whl (20 kB)
+Using cached iniconfig-2.3.0-py3-none-any.whl (7.5 kB)
+Using cached packaging-26.2-py3-none-any.whl (100 kB)
+Using cached pygments-2.20.0-py3-none-any.whl (1.2 MB)
+Using cached httpx-0.28.1-py3-none-any.whl (73 kB)
+Using cached httpcore-1.0.9-py3-none-any.whl (78 kB)
+Using cached h11-0.16.0-py3-none-any.whl (37 kB)
+Installing collected packages: pytest, pygments, pluggy, packaging, iniconfig, httpx, httpcore, h11
+Successfully installed h11-0.16.0 httpcore-1.0.9 httpx-0.28.1 iniconfig-2.3.0 packaging-26.2 pluggy-1.6.0 pygments-2.20.0 pytest-9.1.1
+.................................................FFF.................... [ 66%]
+....................................                                     [100%]
+=================================== FAILURES ===================================
+_ test_headless_evaluator_records_failures_and_export_parity[0.0025-corrected] _
+
+env = <mjlab.envs.manager_based_rl_env.ManagerBasedRlEnv object at 0x718c04348d10>
+tmp_path = PosixPath('/tmp/pytest-of-rxing/pytest-9/test_headless_evaluator_record1')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x718c0237bdd0>
+physics_dt = 0.0025, actuator_model = 'corrected'
+
+    @pytest.mark.slow
+    @pytest.mark.parametrize(
+      "physics_dt,actuator_model",
+      [
+        (0.005, "corrected"),
+        (0.0025, "corrected"),
+        (0.001, "corrected"),
+        (0.005, "historical_unbounded"),
+      ],
+    )
+    @torch.inference_mode()
+    def test_headless_evaluator_records_failures_and_export_parity(
+      env, tmp_path, monkeypatch, physics_dt, actuator_model
+    ):
+      import json
+      import sys
+      from dataclasses import asdict
+    
+      from mjlab.rl import RslRlVecEnvWrapper
+      from mjlab.tasks.registry import load_rl_cfg
+    
+      from wbc_mjlab.rl.runner import PolicyOnlyMotionTrackingRunner
+      from wbc_mjlab.scripts.evaluate import main
+      from wbc_mjlab.tasks import prepare_wbc_run
+    
+      prepare_wbc_run(task_id="Wbc-G1-SE")
+      checkpoint = tmp_path / "random.pt"
+      agent = load_rl_cfg("Wbc-G1-SE")
+      runner = PolicyOnlyMotionTrackingRunner(
+        RslRlVecEnvWrapper(env), asdict(agent), device=env.device
+      )
+      runner.save(str(checkpoint))
+      results = []
+      for backend in ("torch", "onnx"):
+        output = tmp_path / backend
+        monkeypatch.setattr(
+          sys,
+          "argv",
+          [
+            "evaluate",
+            "--task",
+            "Wbc-G1-SE",
+            "--checkpoint",
+            str(checkpoint),
+            "--onnx-file",
+            str(checkpoint.parent / "params/policy.onnx"),
+            "--motion-file",
+            env.cfg.commands["motion"].motion_file,
+            "--output",
+            str(output),
+            "--device",
+            env.device,
+            "--backend",
+            backend,
+            "--physics-dt",
+            str(physics_dt),
+            "--actuator-model",
+            actuator_model,
+          ],
+        )
+        main()
+        result = json.loads((output / "results.json").read_text())
+        assert len(result["trials"]) == 8
+        assert all(t["status"] in ("completed", "fall") for t in result["trials"])
+        assert result["export_parity"]["passed"]
+        assert result["export_parity"]["existing_export_checked"]
+        assert result["export_parity"]["samples"] >= 8
+        for trial in result["trials"]:
+          physical = trial["physical"]
+          assert (
+            physical["motor_joint_samples"]
+            == trial["observed_steps"] * round(0.02 / physics_dt) * 29
+          )
+          assert physical["friction_dissipation_j"] >= 0
+          assert 0 <= physical["motor_saturation_fraction"] <= 1
+          with np.load(output / trial["trace"]) as trace:
+            assert len(trace["qpos"]) == trial["observed_steps"]
+        results.append(result)
+      for a, b in zip(results[0]["trials"], results[1]["trials"], strict=True):
+        assert a["status"] == b["status"]
+        assert a["observed_steps"] == b["observed_steps"]
+>       np.testing.assert_allclose(
+          a["terminal_qpos"], b["terminal_qpos"], atol=1e-3, rtol=1e-3
+        )
+E       AssertionError: 
+E       Not equal to tolerance rtol=0.001, atol=0.001
+E       
+E       Mismatched elements: 17 / 36 (47.2%)
+E       First 5 mismatches are at indices:
+E        [5]: 0.07661185413599014 (ACTUAL), 0.07845280319452286 (DESIRED)
+E        [6]: -0.009583594277501106 (ACTUAL), -0.008548114448785782 (DESIRED)
+E        [7]: -0.021541127935051918 (ACTUAL), -0.023435078561306 (DESIRED)
+E        [9]: 0.02262590266764164 (ACTUAL), 0.02107159048318863 (DESIRED)
+E        [10]: 0.024416152387857437 (ACTUAL), 0.021311525255441666 (DESIRED)
+E       Max absolute difference among violations: 0.00608698
+E       Max relative difference among violations: 0.82792142
+E        ACTUAL: array([ 8.276518e-02,  3.496510e-03,  7.843737e-01,  9.970148e-01,
+E              -6.396688e-04,  7.661185e-02, -9.583594e-03, -2.154113e-02,
+E              -8.337863e-04,  2.262590e-02,  2.441615e-02, -1.564867e-01,...
+E        DESIRED: array([ 8.360416e-02,  3.650433e-03,  7.842556e-01,  9.968811e-01,
+E              -5.314646e-04,  7.845280e-02, -8.548114e-03, -2.343508e-02,
+E              -1.576717e-03,  2.107159e-02,  2.131153e-02, -1.551817e-01,...
+
+tests/test_motion_reset.py:327: AssertionError
+----------------------------- Captured stdout call -----------------------------
+--------------------------------------------------------------------------------
+Resolved observation sets: 
+	 actor :  ('actor',)
+	 critic :  ('critic',)
+--------------------------------------------------------------------------------
+Actor Model: MLPModel(
+  (obs_normalizer): EmpiricalNormalization()
+  (distribution): GaussianDistribution()
+  (mlp): MLP(
+    (0): Linear(in_features=134, out_features=1024, bias=True)
+    (1): ELU(alpha=1.0)
+    (2): Linear(in_features=1024, out_features=512, bias=True)
+    (3): ELU(alpha=1.0)
+    (4): Linear(in_features=512, out_features=256, bias=True)
+    (5): ELU(alpha=1.0)
+    (6): Linear(in_features=256, out_features=128, bias=True)
+    (7): ELU(alpha=1.0)
+    (8): Linear(in_features=128, out_features=29, bias=True)
+  )
+)
+Critic Model: MLPModel(
+  (obs_normalizer): EmpiricalNormalization()
+  (mlp): MLP(
+    (0): Linear(in_features=1211, out_features=1024, bias=True)
+    (1): ELU(alpha=1.0)
+    (2): Linear(in_features=1024, out_features=1024, bias=True)
+    (3): ELU(alpha=1.0)
+    (4): Linear(in_features=1024, out_features=512, bias=True)
+    (5): ELU(alpha=1.0)
+    (6): Linear(in_features=512, out_features=256, bias=True)
+    (7): ELU(alpha=1.0)
+    (8): Linear(in_features=256, out_features=1, bias=True)
+  )
+)
+[INFO] Wrote WBC tracking params -> /tmp/pytest-of-rxing/pytest-9/test_headless_evaluator_record1/params/config.yaml
+[INFO] Wrote RSI bin stats -> /tmp/pytest-of-rxing/pytest-9/test_headless_evaluator_record1/params/rsi_bin_stats.npz
+Setting seed: 42
+
++---------------------------------+
+|         Base Environment        |
++------------------------+--------+
+| Property               | Value  |
++------------------------+--------+
+| Number of environments | 1      |
+| Environment device     | cuda:0 |
+| Environment seed       | 42     |
+| Physics step-size      | 0.0025 |
+| Environment step-size  | 0.02   |
++------------------------+--------+
+
+[INFO] <EventManager> contains 0 active terms.
+
+[INFO] <CommandManager> contains 1 active terms.
++--------------------------------+
+|      Active Command Terms      |
++-------+--------+---------------+
+| Index | Name   |      Type     |
++-------+--------+---------------+
+|   0   | motion | MotionCommand |
++-------+--------+---------------+
+
+[INFO] <ActionManager> contains 1 active terms.
++---------------------------------+
+| Active Action Terms (shape: 29) |
++-------+-----------+-------------+
+| Index | Name      |   Dimension |
++-------+-----------+-------------+
+|   0   | joint_pos |          29 |
++-------+-----------+-------------+
+
+[INFO] <ObservationManager> contains 2 groups.
++------------------------------------------------------------+
+| Active Observation Terms in Group: 'actor' (shape: (134,)) |
++-------+------------------------------+---------------------+
+| Index | Name                         |        Shape        |
++-------+------------------------------+---------------------+
+|   0   | ref_base_lin_vel_b           |    (3,)  ← 1×(3,)   |
+|   1   | ref_base_ang_vel_b           |    (3,)  ← 1×(3,)   |
+|   2   | ref_joint_pos                |   (29,)  ← 1×(29,)  |
+|   3   | base_ang_vel                 |    (3,)  ← 1×(3,)   |
+|   4   | joint_pos                    |   (29,)  ← 1×(29,)  |
+|   5   | joint_vel                    |   (29,)  ← 1×(29,)  |
+|   6   | actions                      |   (29,)  ← 1×(29,)  |
+|   7   | motion_anchor_pos_error_w    |    (3,)  ← 1×(3,)   |
+|   8   | motion_anchor_ori_error      |    (3,)  ← 1×(3,)   |
+|   9   | base_lin_vel                 |    (3,)  ← 1×(3,)   |
++-------+------------------------------+---------------------+
++--------------------------------------------------------------+
+| Active Observation Terms in Group: 'critic' (shape: (1211,)) |
++--------+----------------------------------------+------------+
+| Index  | Name                                   |   Shape    |
++--------+----------------------------------------+------------+
+|   0    | ref_base_height                        |    (1,)    |
+|   1    | ref_base_lin_vel_b                     |    (3,)    |
+|   2    | ref_base_ang_vel_b                     |    (3,)    |
+|   3    | ref_gravity_b                          |    (3,)    |
+|   4    | ref_joint_pos                          |   (29,)    |
+|   5    | ref_joint_vel                          |   (29,)    |
+|   6    | base_ang_vel                           |    (3,)    |
+|   7    | projected_gravity                      |    (3,)    |
+|   8    | joint_pos                              |   (29,)    |
+|   9    | joint_vel                              |   (29,)    |
+|   10   | actions                                |   (29,)    |
+|   11   | motion_anchor_pos_b                    |    (3,)    |
+|   12   | motion_anchor_ori_b                    |    (6,)    |
+|   13   | motion_anchor_pos_error_w              |    (3,)    |
+|   14   | motion_anchor_ori_error                |    (3,)    |
+|   15   | ref_body_pos                           |   (42,)    |
+|   16   | ref_body_ori                           |   (84,)    |
+|   17   | body_pos                               |   (42,)    |
+|   18   | body_ori                               |   (84,)    |
+|   19   | ref_body_lin_vel                       |   (42,)    |
+|   20   | ref_body_ang_vel                       |   (42,)    |
+|   21   | motion_body_lin_vel                    |   (42,)    |
+|   22   | motion_body_ang_vel                    |   (42,)    |
+|   23   | ref_base_lin_acc                       |    (3,)    |
+|   24   | ref_base_ang_acc                       |    (3,)    |
+|   25   | base_lin_vel                           |    (3,)    |
+|   26   | assistive_force                        |    (3,)    |
+|   27   | assistive_torque                       |    (3,)    |
+|   28   | assistive_gain                         |    (1,)    |
+|   29   | motion_segment_phase                   |    (1,)    |
+|   30   | motion_tracking_step_rewards           |   (10,)    |
+|   31   | keybody_contact_forces                 |   (588,)   |
++--------+----------------------------------------+------------+
+
+[INFO] <TerminationManager> contains 0 active terms.
++--------------------------+
+| Active Termination Terms |
++-------+------+-----------+
+| Index | Name |  Time Out |
++-------+------+-----------+
++-------+------+-----------+
+
+[INFO] <RewardManager> contains 18 active terms.
++---------------------------------------------+
+|             Active Reward Terms             |
++-------+----------------------------+--------+
+| Index | Name                       | Weight |
++-------+----------------------------+--------+
+|   0   | motion_global_root_pos     |    1.0 |
+|   1   | motion_global_root_ori     |    1.0 |
+|   2   | motion_root_lin_vel_b      |    1.0 |
+|   3   | motion_root_ang_vel_b      |    1.0 |
+|   4   | motion_body_pos            |    1.0 |
+|   5   | motion_body_ori            |    1.0 |
+|   6   | motion_body_lin_vel        |    0.5 |
+|   7   | motion_body_ang_vel        |    0.5 |
+|   8   | motion_joint_pos           |    1.0 |
+|   9   | motion_joint_vel           |    0.0 |
+|   10  | action_rate_l1             |   -0.1 |
+|   11  | joint_acc                  | -5e-06 |
+|   12  | joint_limit                |   -1.0 |
+|   13  | survival                   |    1.0 |
+|   14  | foot_slip                  |   -0.0 |
+|   15  | actuator_torque_soft_limit |   -0.1 |
+|   16  | angular_momentum           |    0.0 |
+|   17  | anti_shake                 |    0.0 |
++-------+----------------------------+--------+
+
+[INFO] <NullCurriculumManager> (inactive)
+[INFO] <NullMetricsManager> (inactive)
+[INFO] <NullRecorderManager> (inactive)
+--------------------------------------------------------------------------------
+Resolved observation sets: 
+	 actor :  ('actor',)
+	 critic :  ('critic',)
+--------------------------------------------------------------------------------
+Actor Model: MLPModel(
+  (obs_normalizer): EmpiricalNormalization()
+  (distribution): GaussianDistribution()
+  (mlp): MLP(
+    (0): Linear(in_features=134, out_features=1024, bias=True)
+    (1): ELU(alpha=1.0)
+    (2): Linear(in_features=1024, out_features=512, bias=True)
+    (3): ELU(alpha=1.0)
+    (4): Linear(in_features=512, out_features=256, bias=True)
+    (5): ELU(alpha=1.0)
+    (6): Linear(in_features=256, out_features=128, bias=True)
+    (7): ELU(alpha=1.0)
+    (8): Linear(in_features=128, out_features=29, bias=True)
+  )
+)
+Critic Model: MLPModel(
+  (obs_normalizer): EmpiricalNormalization()
+  (mlp): MLP(
+    (0): Linear(in_features=1211, out_features=1024, bias=True)
+    (1): ELU(alpha=1.0)
+    (2): Linear(in_features=1024, out_features=1024, bias=True)
+    (3): ELU(alpha=1.0)
+    (4): Linear(in_features=1024, out_features=512, bias=True)
+    (5): ELU(alpha=1.0)
+    (6): Linear(in_features=512, out_features=256, bias=True)
+    (7): ELU(alpha=1.0)
+    (8): Linear(in_features=256, out_features=1, bias=True)
+  )
+)
+Setting seed: 42
+
++---------------------------------+
+|         Base Environment        |
++------------------------+--------+
+| Property               | Value  |
++------------------------+--------+
+| Number of environments | 1      |
+| Environment device     | cuda:0 |
+| Environment seed       | 42     |
+| Physics step-size      | 0.0025 |
+| Environment step-size  | 0.02   |
++------------------------+--------+
+
+[INFO] <EventManager> contains 0 active terms.
+
+[INFO] <CommandManager> contains 1 active terms.
++--------------------------------+
+|      Active Command Terms      |
++-------+--------+---------------+
+| Index | Name   |      Type     |
++-------+--------+---------------+
+|   0   | motion | MotionCommand |
++-------+--------+---------------+
+
+[INFO] <ActionManager> contains 1 active terms.
++---------------------------------+
+| Active Action Terms (shape: 29) |
++-------+-----------+-------------+
+| Index | Name      |   Dimension |
++-------+-----------+-------------+
+|   0   | joint_pos |          29 |
++-------+-----------+-------------+
+
+[INFO] <ObservationManager> contains 2 groups.
++------------------------------------------------------------+
+| Active Observation Terms in Group: 'actor' (shape: (134,)) |
++-------+------------------------------+---------------------+
+| Index | Name                         |        Shape        |
++-------+------------------------------+---------------------+
+|   0   | ref_base_lin_vel_b           |    (3,)  ← 1×(3,)   |
+|   1   | ref_base_ang_vel_b           |    (3,)  ← 1×(3,)   |
+|   2   | ref_joint_pos                |   (29,)  ← 1×(29,)  |
+|   3   | base_ang_vel                 |    (3,)  ← 1×(3,)   |
+|   4   | joint_pos                    |   (29,)  ← 1×(29,)  |
+|   5   | joint_vel                    |   (29,)  ← 1×(29,)  |
+|   6   | actions                      |   (29,)  ← 1×(29,)  |
+|   7   | motion_anchor_pos_error_w    |    (3,)  ← 1×(3,)   |
+|   8   | motion_anchor_ori_error      |    (3,)  ← 1×(3,)   |
+|   9   | base_lin_vel                 |    (3,)  ← 1×(3,)   |
++-------+------------------------------+---------------------+
++--------------------------------------------------------------+
+| Active Observation Terms in Group: 'critic' (shape: (1211,)) |
++--------+----------------------------------------+------------+
+| Index  | Name                                   |   Shape    |
++--------+----------------------------------------+------------+
+|   0    | ref_base_height                        |    (1,)    |
+|   1    | ref_base_lin_vel_b                     |    (3,)    |
+|   2    | ref_base_ang_vel_b                     |    (3,)    |
+|   3    | ref_gravity_b                          |    (3,)    |
+|   4    | ref_joint_pos                          |   (29,)    |
+|   5    | ref_joint_vel                          |   (29,)    |
+|   6    | base_ang_vel                           |    (3,)    |
+|   7    | projected_gravity                      |    (3,)    |
+|   8    | joint_pos                              |   (29,)    |
+|   9    | joint_vel                              |   (29,)    |
+|   10   | actions                                |   (29,)    |
+|   11   | motion_anchor_pos_b                    |    (3,)    |
+|   12   | motion_anchor_ori_b                    |    (6,)    |
+|   13   | motion_anchor_pos_error_w              |    (3,)    |
+|   14   | motion_anchor_ori_error                |    (3,)    |
+|   15   | ref_body_pos                           |   (42,)    |
+|   16   | ref_body_ori                           |   (84,)    |
+|   17   | body_pos                               |   (42,)    |
+|   18   | body_ori                               |   (84,)    |
+|   19   | ref_body_lin_vel                       |   (42,)    |
+|   20   | ref_body_ang_vel                       |   (42,)    |
+|   21   | motion_body_lin_vel                    |   (42,)    |
+|   22   | motion_body_ang_vel                    |   (42,)    |
+|   23   | ref_base_lin_acc                       |    (3,)    |
+|   24   | ref_base_ang_acc                       |    (3,)    |
+|   25   | base_lin_vel                           |    (3,)    |
+|   26   | assistive_force                        |    (3,)    |
+|   27   | assistive_torque                       |    (3,)    |
+|   28   | assistive_gain                         |    (1,)    |
+|   29   | motion_segment_phase                   |    (1,)    |
+|   30   | motion_tracking_step_rewards           |   (10,)    |
+|   31   | keybody_contact_forces                 |   (588,)   |
++--------+----------------------------------------+------------+
+
+[INFO] <TerminationManager> contains 0 active terms.
++--------------------------+
+| Active Termination Terms |
++-------+------+-----------+
+| Index | Name |  Time Out |
++-------+------+-----------+
++-------+------+-----------+
+
+[INFO] <RewardManager> contains 18 active terms.
++---------------------------------------------+
+|             Active Reward Terms             |
++-------+----------------------------+--------+
+| Index | Name                       | Weight |
++-------+----------------------------+--------+
+|   0   | motion_global_root_pos     |    1.0 |
+|   1   | motion_global_root_ori     |    1.0 |
+|   2   | motion_root_lin_vel_b      |    1.0 |
+|   3   | motion_root_ang_vel_b      |    1.0 |
+|   4   | motion_body_pos            |    1.0 |
+|   5   | motion_body_ori            |    1.0 |
+|   6   | motion_body_lin_vel        |    0.5 |
+|   7   | motion_body_ang_vel        |    0.5 |
+|   8   | motion_joint_pos           |    1.0 |
+|   9   | motion_joint_vel           |    0.0 |
+|   10  | action_rate_l1             |   -0.1 |
+|   11  | joint_acc                  | -5e-06 |
+|   12  | joint_limit                |   -1.0 |
+|   13  | survival                   |    1.0 |
+|   14  | foot_slip                  |   -0.0 |
+|   15  | actuator_torque_soft_limit |   -0.1 |
+|   16  | angular_momentum           |    0.0 |
+|   17  | anti_shake                 |    0.0 |
++-------+----------------------------+--------+
+
+[INFO] <NullCurriculumManager> (inactive)
+[INFO] <NullMetricsManager> (inactive)
+[INFO] <NullRecorderManager> (inactive)
+--------------------------------------------------------------------------------
+Resolved observation sets: 
+	 actor :  ('actor',)
+	 critic :  ('critic',)
+--------------------------------------------------------------------------------
+Actor Model: MLPModel(
+  (obs_normalizer): EmpiricalNormalization()
+  (distribution): GaussianDistribution()
+  (mlp): MLP(
+    (0): Linear(in_features=134, out_features=1024, bias=True)
+    (1): ELU(alpha=1.0)
+    (2): Linear(in_features=1024, out_features=512, bias=True)
+    (3): ELU(alpha=1.0)
+    (4): Linear(in_features=512, out_features=256, bias=True)
+    (5): ELU(alpha=1.0)
+    (6): Linear(in_features=256, out_features=128, bias=True)
+    (7): ELU(alpha=1.0)
+    (8): Linear(in_features=128, out_features=29, bias=True)
+  )
+)
+Critic Model: MLPModel(
+  (obs_normalizer): EmpiricalNormalization()
+  (mlp): MLP(
+    (0): Linear(in_features=1211, out_features=1024, bias=True)
+    (1): ELU(alpha=1.0)
+    (2): Linear(in_features=1024, out_features=1024, bias=True)
+    (3): ELU(alpha=1.0)
+    (4): Linear(in_features=1024, out_features=512, bias=True)
+    (5): ELU(alpha=1.0)
+    (6): Linear(in_features=512, out_features=256, bias=True)
+    (7): ELU(alpha=1.0)
+    (8): Linear(in_features=256, out_features=1, bias=True)
+  )
+)
+_ test_headless_evaluator_records_failures_and_export_parity[0.001-corrected] __
+
+env = <mjlab.envs.manager_based_rl_env.ManagerBasedRlEnv object at 0x718c04348d10>
+tmp_path = PosixPath('/tmp/pytest-of-rxing/pytest-9/test_headless_evaluator_record2')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x718c021605f0>
+physics_dt = 0.001, actuator_model = 'corrected'
+
+    @pytest.mark.slow
+    @pytest.mark.parametrize(
+      "physics_dt,actuator_model",
+      [
+        (0.005, "corrected"),
+        (0.0025, "corrected"),
+        (0.001, "corrected"),
+        (0.005, "historical_unbounded"),
+      ],
+    )
+    @torch.inference_mode()
+    def test_headless_evaluator_records_failures_and_export_parity(
+      env, tmp_path, monkeypatch, physics_dt, actuator_model
+    ):
+      import json
+      import sys
+      from dataclasses import asdict
+    
+      from mjlab.rl import RslRlVecEnvWrapper
+      from mjlab.tasks.registry import load_rl_cfg
+    
+      from wbc_mjlab.rl.runner import PolicyOnlyMotionTrackingRunner
+      from wbc_mjlab.scripts.evaluate import main
+      from wbc_mjlab.tasks import prepare_wbc_run
+    
+      prepare_wbc_run(task_id="Wbc-G1-SE")
+      checkpoint = tmp_path / "random.pt"
+      agent = load_rl_cfg("Wbc-G1-SE")
+      runner = PolicyOnlyMotionTrackingRunner(
+        RslRlVecEnvWrapper(env), asdict(agent), device=env.device
+      )
+      runner.save(str(checkpoint))
+      results = []
+      for backend in ("torch", "onnx"):
+        output = tmp_path / backend
+        monkeypatch.setattr(
+          sys,
+          "argv",
+          [
+            "evaluate",
+            "--task",
+            "Wbc-G1-SE",
+            "--checkpoint",
+            str(checkpoint),
+            "--onnx-file",
+            str(checkpoint.parent / "params/policy.onnx"),
+            "--motion-file",
+            env.cfg.commands["motion"].motion_file,
+            "--output",
+            str(output),
+            "--device",
+            env.device,
+            "--backend",
+            backend,
+            "--physics-dt",
+            str(physics_dt),
+            "--actuator-model",
+            actuator_model,
+          ],
+        )
+        main()
+        result = json.loads((output / "results.json").read_text())
+        assert len(result["trials"]) == 8
+        assert all(t["status"] in ("completed", "fall") for t in result["trials"])
+        assert result["export_parity"]["passed"]
+        assert result["export_parity"]["existing_export_checked"]
+        assert result["export_parity"]["samples"] >= 8
+        for trial in result["trials"]:
+          physical = trial["physical"]
+          assert (
+            physical["motor_joint_samples"]
+            == trial["observed_steps"] * round(0.02 / physics_dt) * 29
+          )
+          assert physical["friction_dissipation_j"] >= 0
+          assert 0 <= physical["motor_saturation_fraction"] <= 1
+          with np.load(output / trial["trace"]) as trace:
+            assert len(trace["qpos"]) == trial["observed_steps"]
+        results.append(result)
+      for a, b in zip(results[0]["trials"], results[1]["trials"], strict=True):
+        assert a["status"] == b["status"]
+        assert a["observed_steps"] == b["observed_steps"]
+>       np.testing.assert_allclose(
+          a["terminal_qpos"], b["terminal_qpos"], atol=1e-3, rtol=1e-3
+        )
+E       AssertionError: 
+E       Not equal to tolerance rtol=0.001, atol=0.001
+E       
+E       Mismatched elements: 1 / 36 (2.78%)
+E       Mismatch at index:
+E        [25]: 0.04222379997372627 (ACTUAL), 0.04458015039563179 (DESIRED)
+E       Max absolute difference among violations: 0.00235635
+E       Max relative difference among violations: 0.05285649
+E        ACTUAL: array([ 4.190269e-02,  1.519541e-03,  7.889823e-01,  9.992443e-01,
+E              -2.981689e-04,  3.871979e-02, -3.416817e-03, -6.870373e-03,
+E              -3.125670e-04,  8.500023e-03,  3.845872e-02, -1.093622e-01,...
+E        DESIRED: array([ 4.190936e-02,  1.515888e-03,  7.889822e-01,  9.992446e-01,
+E              -2.974174e-04,  3.871030e-02, -3.440574e-03, -6.770062e-03,
+E              -3.050557e-04,  8.523694e-03,  3.833198e-02, -1.093169e-01,...
+
+tests/test_motion_reset.py:327: AssertionError
+----------------------------- Captured stdout call -----------------------------
+--------------------------------------------------------------------------------
+Resolved observation sets: 
+	 actor :  ('actor',)
+	 critic :  ('critic',)
+--------------------------------------------------------------------------------
+Actor Model: MLPModel(
+  (obs_normalizer): EmpiricalNormalization()
+  (distribution): GaussianDistribution()
+  (mlp): MLP(
+    (0): Linear(in_features=134, out_features=1024, bias=True)
+    (1): ELU(alpha=1.0)
+    (2): Linear(in_features=1024, out_features=512, bias=True)
+    (3): ELU(alpha=1.0)
+    (4): Linear(in_features=512, out_features=256, bias=True)
+    (5): ELU(alpha=1.0)
+    (6): Linear(in_features=256, out_features=128, bias=True)
+    (7): ELU(alpha=1.0)
+    (8): Linear(in_features=128, out_features=29, bias=True)
+  )
+)
+Critic Model: MLPModel(
+  (obs_normalizer): EmpiricalNormalization()
+  (mlp): MLP(
+    (0): Linear(in_features=1211, out_features=1024, bias=True)
+    (1): ELU(alpha=1.0)
+    (2): Linear(in_features=1024, out_features=1024, bias=True)
+    (3): ELU(alpha=1.0)
+    (4): Linear(in_features=1024, out_features=512, bias=True)
+    (5): ELU(alpha=1.0)
+    (6): Linear(in_features=512, out_features=256, bias=True)
+    (7): ELU(alpha=1.0)
+    (8): Linear(in_features=256, out_features=1, bias=True)
+  )
+)
+[INFO] Wrote WBC tracking params -> /tmp/pytest-of-rxing/pytest-9/test_headless_evaluator_record2/params/config.yaml
+[INFO] Wrote RSI bin stats -> /tmp/pytest-of-rxing/pytest-9/test_headless_evaluator_record2/params/rsi_bin_stats.npz
+Setting seed: 42
+
++---------------------------------+
+|         Base Environment        |
++------------------------+--------+
+| Property               | Value  |
++------------------------+--------+
+| Number of environments | 1      |
+| Environment device     | cuda:0 |
+| Environment seed       | 42     |
+| Physics step-size      | 0.001  |
+| Environment step-size  | 0.02   |
++------------------------+--------+
+
+[INFO] <EventManager> contains 0 active terms.
+
+[INFO] <CommandManager> contains 1 active terms.
++--------------------------------+
+|      Active Command Terms      |
++-------+--------+---------------+
+| Index | Name   |      Type     |
++-------+--------+---------------+
+|   0   | motion | MotionCommand |
++-------+--------+---------------+
+
+[INFO] <ActionManager> contains 1 active terms.
++---------------------------------+
+| Active Action Terms (shape: 29) |
++-------+-----------+-------------+
+| Index | Name      |   Dimension |
++-------+-----------+-------------+
+|   0   | joint_pos |          29 |
++-------+-----------+-------------+
+
+[INFO] <ObservationManager> contains 2 groups.
++------------------------------------------------------------+
+| Active Observation Terms in Group: 'actor' (shape: (134,)) |
++-------+------------------------------+---------------------+
+| Index | Name                         |        Shape        |
++-------+------------------------------+---------------------+
+|   0   | ref_base_lin_vel_b           |    (3,)  ← 1×(3,)   |
+|   1   | ref_base_ang_vel_b           |    (3,)  ← 1×(3,)   |
+|   2   | ref_joint_pos                |   (29,)  ← 1×(29,)  |
+|   3   | base_ang_vel                 |    (3,)  ← 1×(3,)   |
+|   4   | joint_pos                    |   (29,)  ← 1×(29,)  |
+|   5   | joint_vel                    |   (29,)  ← 1×(29,)  |
+|   6   | actions                      |   (29,)  ← 1×(29,)  |
+|   7   | motion_anchor_pos_error_w    |    (3,)  ← 1×(3,)   |
+|   8   | motion_anchor_ori_error      |    (3,)  ← 1×(3,)   |
+|   9   | base_lin_vel                 |    (3,)  ← 1×(3,)   |
++-------+------------------------------+---------------------+
++--------------------------------------------------------------+
+| Active Observation Terms in Group: 'critic' (shape: (1211,)) |
++--------+----------------------------------------+------------+
+| Index  | Name                                   |   Shape    |
++--------+----------------------------------------+------------+
+|   0    | ref_base_height                        |    (1,)    |
+|   1    | ref_base_lin_vel_b                     |    (3,)    |
+|   2    | ref_base_ang_vel_b                     |    (3,)    |
+|   3    | ref_gravity_b                          |    (3,)    |
+|   4    | ref_joint_pos                          |   (29,)    |
+|   5    | ref_joint_vel                          |   (29,)    |
+|   6    | base_ang_vel                           |    (3,)    |
+|   7    | projected_gravity                      |    (3,)    |
+|   8    | joint_pos                              |   (29,)    |
+|   9    | joint_vel                              |   (29,)    |
+|   10   | actions                                |   (29,)    |
+|   11   | motion_anchor_pos_b                    |    (3,)    |
+|   12   | motion_anchor_ori_b                    |    (6,)    |
+|   13   | motion_anchor_pos_error_w              |    (3,)    |
+|   14   | motion_anchor_ori_error                |    (3,)    |
+|   15   | ref_body_pos                           |   (42,)    |
+|   16   | ref_body_ori                           |   (84,)    |
+|   17   | body_pos                               |   (42,)    |
+|   18   | body_ori                               |   (84,)    |
+|   19   | ref_body_lin_vel                       |   (42,)    |
+|   20   | ref_body_ang_vel                       |   (42,)    |
+|   21   | motion_body_lin_vel                    |   (42,)    |
+|   22   | motion_body_ang_vel                    |   (42,)    |
+|   23   | ref_base_lin_acc                       |    (3,)    |
+|   24   | ref_base_ang_acc                       |    (3,)    |
+|   25   | base_lin_vel                           |    (3,)    |
+|   26   | assistive_force                        |    (3,)    |
+|   27   | assistive_torque                       |    (3,)    |
+|   28   | assistive_gain                         |    (1,)    |
+|   29   | motion_segment_phase                   |    (1,)    |
+|   30   | motion_tracking_step_rewards           |   (10,)    |
+|   31   | keybody_contact_forces                 |   (588,)   |
++--------+----------------------------------------+------------+
+
+[INFO] <TerminationManager> contains 0 active terms.
++--------------------------+
+| Active Termination Terms |
++-------+------+-----------+
+| Index | Name |  Time Out |
++-------+------+-----------+
++-------+------+-----------+
+
+[INFO] <RewardManager> contains 18 active terms.
++---------------------------------------------+
+|             Active Reward Terms             |
++-------+----------------------------+--------+
+| Index | Name                       | Weight |
++-------+----------------------------+--------+
+|   0   | motion_global_root_pos     |    1.0 |
+|   1   | motion_global_root_ori     |    1.0 |
+|   2   | motion_root_lin_vel_b      |    1.0 |
+|   3   | motion_root_ang_vel_b      |    1.0 |
+|   4   | motion_body_pos            |    1.0 |
+|   5   | motion_body_ori            |    1.0 |
+|   6   | motion_body_lin_vel        |    0.5 |
+|   7   | motion_body_ang_vel        |    0.5 |
+|   8   | motion_joint_pos           |    1.0 |
+|   9   | motion_joint_vel           |    0.0 |
+|   10  | action_rate_l1             |   -0.1 |
+|   11  | joint_acc                  | -5e-06 |
+|   12  | joint_limit                |   -1.0 |
+|   13  | survival                   |    1.0 |
+|   14  | foot_slip                  |   -0.0 |
+|   15  | actuator_torque_soft_limit |   -0.1 |
+|   16  | angular_momentum           |    0.0 |
+|   17  | anti_shake                 |    0.0 |
++-------+----------------------------+--------+
+
+[INFO] <NullCurriculumManager> (inactive)
+[INFO] <NullMetricsManager> (inactive)
+[INFO] <NullRecorderManager> (inactive)
+--------------------------------------------------------------------------------
+Resolved observation sets: 
+	 actor :  ('actor',)
+	 critic :  ('critic',)
+--------------------------------------------------------------------------------
+Actor Model: MLPModel(
+  (obs_normalizer): EmpiricalNormalization()
+  (distribution): GaussianDistribution()
+  (mlp): MLP(
+    (0): Linear(in_features=134, out_features=1024, bias=True)
+    (1): ELU(alpha=1.0)
+    (2): Linear(in_features=1024, out_features=512, bias=True)
+    (3): ELU(alpha=1.0)
+    (4): Linear(in_features=512, out_features=256, bias=True)
+    (5): ELU(alpha=1.0)
+    (6): Linear(in_features=256, out_features=128, bias=True)
+    (7): ELU(alpha=1.0)
+    (8): Linear(in_features=128, out_features=29, bias=True)
+  )
+)
+Critic Model: MLPModel(
+  (obs_normalizer): EmpiricalNormalization()
+  (mlp): MLP(
+    (0): Linear(in_features=1211, out_features=1024, bias=True)
+    (1): ELU(alpha=1.0)
+    (2): Linear(in_features=1024, out_features=1024, bias=True)
+    (3): ELU(alpha=1.0)
+    (4): Linear(in_features=1024, out_features=512, bias=True)
+    (5): ELU(alpha=1.0)
+    (6): Linear(in_features=512, out_features=256, bias=True)
+    (7): ELU(alpha=1.0)
+    (8): Linear(in_features=256, out_features=1, bias=True)
+  )
+)
+Setting seed: 42
+
++---------------------------------+
+|         Base Environment        |
++------------------------+--------+
+| Property               | Value  |
++------------------------+--------+
+| Number of environments | 1      |
+| Environment device     | cuda:0 |
+| Environment seed       | 42     |
+| Physics step-size      | 0.001  |
+| Environment step-size  | 0.02   |
++------------------------+--------+
+
+[INFO] <EventManager> contains 0 active terms.
+
+[INFO] <CommandManager> contains 1 active terms.
++--------------------------------+
+|      Active Command Terms      |
++-------+--------+---------------+
+| Index | Name   |      Type     |
++-------+--------+---------------+
+|   0   | motion | MotionCommand |
++-------+--------+---------------+
+
+[INFO] <ActionManager> contains 1 active terms.
++---------------------------------+
+| Active Action Terms (shape: 29) |
++-------+-----------+-------------+
+| Index | Name      |   Dimension |
++-------+-----------+-------------+
+|   0   | joint_pos |          29 |
++-------+-----------+-------------+
+
+[INFO] <ObservationManager> contains 2 groups.
++------------------------------------------------------------+
+| Active Observation Terms in Group: 'actor' (shape: (134,)) |
++-------+------------------------------+---------------------+
+| Index | Name                         |        Shape        |
++-------+------------------------------+---------------------+
+|   0   | ref_base_lin_vel_b           |    (3,)  ← 1×(3,)   |
+|   1   | ref_base_ang_vel_b           |    (3,)  ← 1×(3,)   |
+|   2   | ref_joint_pos                |   (29,)  ← 1×(29,)  |
+|   3   | base_ang_vel                 |    (3,)  ← 1×(3,)   |
+|   4   | joint_pos                    |   (29,)  ← 1×(29,)  |
+|   5   | joint_vel                    |   (29,)  ← 1×(29,)  |
+|   6   | actions                      |   (29,)  ← 1×(29,)  |
+|   7   | motion_anchor_pos_error_w    |    (3,)  ← 1×(3,)   |
+|   8   | motion_anchor_ori_error      |    (3,)  ← 1×(3,)   |
+|   9   | base_lin_vel                 |    (3,)  ← 1×(3,)   |
++-------+------------------------------+---------------------+
++--------------------------------------------------------------+
+| Active Observation Terms in Group: 'critic' (shape: (1211,)) |
++--------+----------------------------------------+------------+
+| Index  | Name                                   |   Shape    |
++--------+----------------------------------------+------------+
+|   0    | ref_base_height                        |    (1,)    |
+|   1    | ref_base_lin_vel_b                     |    (3,)    |
+|   2    | ref_base_ang_vel_b                     |    (3,)    |
+|   3    | ref_gravity_b                          |    (3,)    |
+|   4    | ref_joint_pos                          |   (29,)    |
+|   5    | ref_joint_vel                          |   (29,)    |
+|   6    | base_ang_vel                           |    (3,)    |
+|   7    | projected_gravity                      |    (3,)    |
+|   8    | joint_pos                              |   (29,)    |
+|   9    | joint_vel                              |   (29,)    |
+|   10   | actions                                |   (29,)    |
+|   11   | motion_anchor_pos_b                    |    (3,)    |
+|   12   | motion_anchor_ori_b                    |    (6,)    |
+|   13   | motion_anchor_pos_error_w              |    (3,)    |
+|   14   | motion_anchor_ori_error                |    (3,)    |
+|   15   | ref_body_pos                           |   (42,)    |
+|   16   | ref_body_ori                           |   (84,)    |
+|   17   | body_pos                               |   (42,)    |
+|   18   | body_ori                               |   (84,)    |
+|   19   | ref_body_lin_vel                       |   (42,)    |
+|   20   | ref_body_ang_vel                       |   (42,)    |
+|   21   | motion_body_lin_vel                    |   (42,)    |
+|   22   | motion_body_ang_vel                    |   (42,)    |
+|   23   | ref_base_lin_acc                       |    (3,)    |
+|   24   | ref_base_ang_acc                       |    (3,)    |
+|   25   | base_lin_vel                           |    (3,)    |
+|   26   | assistive_force                        |    (3,)    |
+|   27   | assistive_torque                       |    (3,)    |
+|   28   | assistive_gain                         |    (1,)    |
+|   29   | motion_segment_phase                   |    (1,)    |
+|   30   | motion_tracking_step_rewards           |   (10,)    |
+|   31   | keybody_contact_forces                 |   (588,)   |
++--------+----------------------------------------+------------+
+
+[INFO] <TerminationManager> contains 0 active terms.
++--------------------------+
+| Active Termination Terms |
++-------+------+-----------+
+| Index | Name |  Time Out |
++-------+------+-----------+
++-------+------+-----------+
+
+[INFO] <RewardManager> contains 18 active terms.
++---------------------------------------------+
+|             Active Reward Terms             |
++-------+----------------------------+--------+
+| Index | Name                       | Weight |
++-------+----------------------------+--------+
+|   0   | motion_global_root_pos     |    1.0 |
+|   1   | motion_global_root_ori     |    1.0 |
+|   2   | motion_root_lin_vel_b      |    1.0 |
+|   3   | motion_root_ang_vel_b      |    1.0 |
+|   4   | motion_body_pos            |    1.0 |
+|   5   | motion_body_ori            |    1.0 |
+|   6   | motion_body_lin_vel        |    0.5 |
+|   7   | motion_body_ang_vel        |    0.5 |
+|   8   | motion_joint_pos           |    1.0 |
+|   9   | motion_joint_vel           |    0.0 |
+|   10  | action_rate_l1             |   -0.1 |
+|   11  | joint_acc                  | -5e-06 |
+|   12  | joint_limit                |   -1.0 |
+|   13  | survival                   |    1.0 |
+|   14  | foot_slip                  |   -0.0 |
+|   15  | actuator_torque_soft_limit |   -0.1 |
+|   16  | angular_momentum           |    0.0 |
+|   17  | anti_shake                 |    0.0 |
++-------+----------------------------+--------+
+
+[INFO] <NullCurriculumManager> (inactive)
+[INFO] <NullMetricsManager> (inactive)
+[INFO] <NullRecorderManager> (inactive)
+--------------------------------------------------------------------------------
+Resolved observation sets: 
+	 actor :  ('actor',)
+	 critic :  ('critic',)
+--------------------------------------------------------------------------------
+Actor Model: MLPModel(
+  (obs_normalizer): EmpiricalNormalization()
+  (distribution): GaussianDistribution()
+  (mlp): MLP(
+    (0): Linear(in_features=134, out_features=1024, bias=True)
+    (1): ELU(alpha=1.0)
+    (2): Linear(in_features=1024, out_features=512, bias=True)
+    (3): ELU(alpha=1.0)
+    (4): Linear(in_features=512, out_features=256, bias=True)
+    (5): ELU(alpha=1.0)
+    (6): Linear(in_features=256, out_features=128, bias=True)
+    (7): ELU(alpha=1.0)
+    (8): Linear(in_features=128, out_features=29, bias=True)
+  )
+)
+Critic Model: MLPModel(
+  (obs_normalizer): EmpiricalNormalization()
+  (mlp): MLP(
+    (0): Linear(in_features=1211, out_features=1024, bias=True)
+    (1): ELU(alpha=1.0)
+    (2): Linear(in_features=1024, out_features=1024, bias=True)
+    (3): ELU(alpha=1.0)
+    (4): Linear(in_features=1024, out_features=512, bias=True)
+    (5): ELU(alpha=1.0)
+    (6): Linear(in_features=512, out_features=256, bias=True)
+    (7): ELU(alpha=1.0)
+    (8): Linear(in_features=256, out_features=1, bias=True)
+  )
+)
+_ test_headless_evaluator_records_failures_and_export_parity[0.005-historical_unbounded] _
+
+env = <mjlab.envs.manager_based_rl_env.ManagerBasedRlEnv object at 0x718c04348d10>
+tmp_path = PosixPath('/tmp/pytest-of-rxing/pytest-9/test_headless_evaluator_record3')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x718c01ee30b0>
+physics_dt = 0.005, actuator_model = 'historical_unbounded'
+
+    @pytest.mark.slow
+    @pytest.mark.parametrize(
+      "physics_dt,actuator_model",
+      [
+        (0.005, "corrected"),
+        (0.0025, "corrected"),
+        (0.001, "corrected"),
+        (0.005, "historical_unbounded"),
+      ],
+    )
+    @torch.inference_mode()
+    def test_headless_evaluator_records_failures_and_export_parity(
+      env, tmp_path, monkeypatch, physics_dt, actuator_model
+    ):
+      import json
+      import sys
+      from dataclasses import asdict
+    
+      from mjlab.rl import RslRlVecEnvWrapper
+      from mjlab.tasks.registry import load_rl_cfg
+    
+      from wbc_mjlab.rl.runner import PolicyOnlyMotionTrackingRunner
+      from wbc_mjlab.scripts.evaluate import main
+      from wbc_mjlab.tasks import prepare_wbc_run
+    
+      prepare_wbc_run(task_id="Wbc-G1-SE")
+      checkpoint = tmp_path / "random.pt"
+      agent = load_rl_cfg("Wbc-G1-SE")
+      runner = PolicyOnlyMotionTrackingRunner(
+        RslRlVecEnvWrapper(env), asdict(agent), device=env.device
+      )
+      runner.save(str(checkpoint))
+      results = []
+      for backend in ("torch", "onnx"):
+        output = tmp_path / backend
+        monkeypatch.setattr(
+          sys,
+          "argv",
+          [
+            "evaluate",
+            "--task",
+            "Wbc-G1-SE",
+            "--checkpoint",
+            str(checkpoint),
+            "--onnx-file",
+            str(checkpoint.parent / "params/policy.onnx"),
+            "--motion-file",
+            env.cfg.commands["motion"].motion_file,
+            "--output",
+            str(output),
+            "--device",
+            env.device,
+            "--backend",
+            backend,
+            "--physics-dt",
+            str(physics_dt),
+            "--actuator-model",
+            actuator_model,
+          ],
+        )
+        main()
+        result = json.loads((output / "results.json").read_text())
+        assert len(result["trials"]) == 8
+        assert all(t["status"] in ("completed", "fall") for t in result["trials"])
+        assert result["export_parity"]["passed"]
+        assert result["export_parity"]["existing_export_checked"]
+        assert result["export_parity"]["samples"] >= 8
+        for trial in result["trials"]:
+          physical = trial["physical"]
+          assert (
+            physical["motor_joint_samples"]
+            == trial["observed_steps"] * round(0.02 / physics_dt) * 29
+          )
+          assert physical["friction_dissipation_j"] >= 0
+          assert 0 <= physical["motor_saturation_fraction"] <= 1
+          with np.load(output / trial["trace"]) as trace:
+            assert len(trace["qpos"]) == trial["observed_steps"]
+        results.append(result)
+      for a, b in zip(results[0]["trials"], results[1]["trials"], strict=True):
+        assert a["status"] == b["status"]
+        assert a["observed_steps"] == b["observed_steps"]
+>       np.testing.assert_allclose(
+          a["terminal_qpos"], b["terminal_qpos"], atol=1e-3, rtol=1e-3
+        )
+E       AssertionError: 
+E       Not equal to tolerance rtol=0.001, atol=0.001
+E       
+E       Mismatched elements: 11 / 36 (30.6%)
+E       First 5 mismatches are at indices:
+E        [7]: -0.04117212072014809 (ACTUAL), -0.044931668788194656 (DESIRED)
+E        [10]: -0.002538523869588971 (ACTUAL), 0.001549379900097847 (DESIRED)
+E        [13]: -0.03636351227760315 (ACTUAL), -0.03897814452648163 (DESIRED)
+E        [15]: 0.016719074919819832 (ACTUAL), 0.01561734639108181 (DESIRED)
+E        [16]: -0.022139033302664757 (ACTUAL), -0.019342901185154915 (DESIRED)
+E       Max absolute difference among violations: 0.00986804
+E       Max relative difference among violations: 2.63841281
+E        ACTUAL: array([ 8.366531e-02,  6.457452e-03,  7.841401e-01,  9.958715e-01,
+E              -7.770560e-05,  9.054442e-02, -6.450183e-03, -4.117212e-02,
+E              -7.486320e-03,  1.914205e-02, -2.538524e-03, -1.379868e-01,...
+E        DESIRED: array([ 8.309559e-02,  6.470988e-03,  7.842225e-01,  9.958500e-01,
+E              -5.286613e-05,  9.082846e-02, -5.752901e-03, -4.493167e-02,
+E              -7.544349e-03,  1.816865e-02,  1.549380e-03, -1.388595e-01,...
+
+tests/test_motion_reset.py:327: AssertionError
+----------------------------- Captured stdout call -----------------------------
+--------------------------------------------------------------------------------
+Resolved observation sets: 
+	 actor :  ('actor',)
+	 critic :  ('critic',)
+--------------------------------------------------------------------------------
+Actor Model: MLPModel(
+  (obs_normalizer): EmpiricalNormalization()
+  (distribution): GaussianDistribution()
+  (mlp): MLP(
+    (0): Linear(in_features=134, out_features=1024, bias=True)
+    (1): ELU(alpha=1.0)
+    (2): Linear(in_features=1024, out_features=512, bias=True)
+    (3): ELU(alpha=1.0)
+    (4): Linear(in_features=512, out_features=256, bias=True)
+    (5): ELU(alpha=1.0)
+    (6): Linear(in_features=256, out_features=128, bias=True)
+    (7): ELU(alpha=1.0)
+    (8): Linear(in_features=128, out_features=29, bias=True)
+  )
+)
+Critic Model: MLPModel(
+  (obs_normalizer): EmpiricalNormalization()
+  (mlp): MLP(
+    (0): Linear(in_features=1211, out_features=1024, bias=True)
+    (1): ELU(alpha=1.0)
+    (2): Linear(in_features=1024, out_features=1024, bias=True)
+    (3): ELU(alpha=1.0)
+    (4): Linear(in_features=1024, out_features=512, bias=True)
+    (5): ELU(alpha=1.0)
+    (6): Linear(in_features=512, out_features=256, bias=True)
+    (7): ELU(alpha=1.0)
+    (8): Linear(in_features=256, out_features=1, bias=True)
+  )
+)
+[INFO] Wrote WBC tracking params -> /tmp/pytest-of-rxing/pytest-9/test_headless_evaluator_record3/params/config.yaml
+[INFO] Wrote RSI bin stats -> /tmp/pytest-of-rxing/pytest-9/test_headless_evaluator_record3/params/rsi_bin_stats.npz
+Setting seed: 42
+
++---------------------------------+
+|         Base Environment        |
++------------------------+--------+
+| Property               | Value  |
++------------------------+--------+
+| Number of environments | 1      |
+| Environment device     | cuda:0 |
+| Environment seed       | 42     |
+| Physics step-size      | 0.005  |
+| Environment step-size  | 0.02   |
++------------------------+--------+
+
+[INFO] <EventManager> contains 0 active terms.
+
+[INFO] <CommandManager> contains 1 active terms.
++--------------------------------+
+|      Active Command Terms      |
++-------+--------+---------------+
+| Index | Name   |      Type     |
++-------+--------+---------------+
+|   0   | motion | MotionCommand |
++-------+--------+---------------+
+
+[INFO] <ActionManager> contains 1 active terms.
++---------------------------------+
+| Active Action Terms (shape: 29) |
++-------+-----------+-------------+
+| Index | Name      |   Dimension |
++-------+-----------+-------------+
+|   0   | joint_pos |          29 |
++-------+-----------+-------------+
+
+[INFO] <ObservationManager> contains 2 groups.
++------------------------------------------------------------+
+| Active Observation Terms in Group: 'actor' (shape: (134,)) |
++-------+------------------------------+---------------------+
+| Index | Name                         |        Shape        |
++-------+------------------------------+---------------------+
+|   0   | ref_base_lin_vel_b           |    (3,)  ← 1×(3,)   |
+|   1   | ref_base_ang_vel_b           |    (3,)  ← 1×(3,)   |
+|   2   | ref_joint_pos                |   (29,)  ← 1×(29,)  |
+|   3   | base_ang_vel                 |    (3,)  ← 1×(3,)   |
+|   4   | joint_pos                    |   (29,)  ← 1×(29,)  |
+|   5   | joint_vel                    |   (29,)  ← 1×(29,)  |
+|   6   | actions                      |   (29,)  ← 1×(29,)  |
+|   7   | motion_anchor_pos_error_w    |    (3,)  ← 1×(3,)   |
+|   8   | motion_anchor_ori_error      |    (3,)  ← 1×(3,)   |
+|   9   | base_lin_vel                 |    (3,)  ← 1×(3,)   |
++-------+------------------------------+---------------------+
++--------------------------------------------------------------+
+| Active Observation Terms in Group: 'critic' (shape: (1211,)) |
++--------+----------------------------------------+------------+
+| Index  | Name                                   |   Shape    |
++--------+----------------------------------------+------------+
+|   0    | ref_base_height                        |    (1,)    |
+|   1    | ref_base_lin_vel_b                     |    (3,)    |
+|   2    | ref_base_ang_vel_b                     |    (3,)    |
+|   3    | ref_gravity_b                          |    (3,)    |
+|   4    | ref_joint_pos                          |   (29,)    |
+|   5    | ref_joint_vel                          |   (29,)    |
+|   6    | base_ang_vel                           |    (3,)    |
+|   7    | projected_gravity                      |    (3,)    |
+|   8    | joint_pos                              |   (29,)    |
+|   9    | joint_vel                              |   (29,)    |
+|   10   | actions                                |   (29,)    |
+|   11   | motion_anchor_pos_b                    |    (3,)    |
+|   12   | motion_anchor_ori_b                    |    (6,)    |
+|   13   | motion_anchor_pos_error_w              |    (3,)    |
+|   14   | motion_anchor_ori_error                |    (3,)    |
+|   15   | ref_body_pos                           |   (42,)    |
+|   16   | ref_body_ori                           |   (84,)    |
+|   17   | body_pos                               |   (42,)    |
+|   18   | body_ori                               |   (84,)    |
+|   19   | ref_body_lin_vel                       |   (42,)    |
+|   20   | ref_body_ang_vel                       |   (42,)    |
+|   21   | motion_body_lin_vel                    |   (42,)    |
+|   22   | motion_body_ang_vel                    |   (42,)    |
+|   23   | ref_base_lin_acc                       |    (3,)    |
+|   24   | ref_base_ang_acc                       |    (3,)    |
+|   25   | base_lin_vel                           |    (3,)    |
+|   26   | assistive_force                        |    (3,)    |
+|   27   | assistive_torque                       |    (3,)    |
+|   28   | assistive_gain                         |    (1,)    |
+|   29   | motion_segment_phase                   |    (1,)    |
+|   30   | motion_tracking_step_rewards           |   (10,)    |
+|   31   | keybody_contact_forces                 |   (588,)   |
++--------+----------------------------------------+------------+
+
+[INFO] <TerminationManager> contains 0 active terms.
++--------------------------+
+| Active Termination Terms |
++-------+------+-----------+
+| Index | Name |  Time Out |
++-------+------+-----------+
++-------+------+-----------+
+
+[INFO] <RewardManager> contains 18 active terms.
++---------------------------------------------+
+|             Active Reward Terms             |
++-------+----------------------------+--------+
+| Index | Name                       | Weight |
++-------+----------------------------+--------+
+|   0   | motion_global_root_pos     |    1.0 |
+|   1   | motion_global_root_ori     |    1.0 |
+|   2   | motion_root_lin_vel_b      |    1.0 |
+|   3   | motion_root_ang_vel_b      |    1.0 |
+|   4   | motion_body_pos            |    1.0 |
+|   5   | motion_body_ori            |    1.0 |
+|   6   | motion_body_lin_vel        |    0.5 |
+|   7   | motion_body_ang_vel        |    0.5 |
+|   8   | motion_joint_pos           |    1.0 |
+|   9   | motion_joint_vel           |    0.0 |
+|   10  | action_rate_l1             |   -0.1 |
+|   11  | joint_acc                  | -5e-06 |
+|   12  | joint_limit                |   -1.0 |
+|   13  | survival                   |    1.0 |
+|   14  | foot_slip                  |   -0.0 |
+|   15  | actuator_torque_soft_limit |   -0.1 |
+|   16  | angular_momentum           |    0.0 |
+|   17  | anti_shake                 |    0.0 |
++-------+----------------------------+--------+
+
+[INFO] <NullCurriculumManager> (inactive)
+[INFO] <NullMetricsManager> (inactive)
+[INFO] <NullRecorderManager> (inactive)
+--------------------------------------------------------------------------------
+Resolved observation sets: 
+	 actor :  ('actor',)
+	 critic :  ('critic',)
+--------------------------------------------------------------------------------
+Actor Model: MLPModel(
+  (obs_normalizer): EmpiricalNormalization()
+  (distribution): GaussianDistribution()
+  (mlp): MLP(
+    (0): Linear(in_features=134, out_features=1024, bias=True)
+    (1): ELU(alpha=1.0)
+    (2): Linear(in_features=1024, out_features=512, bias=True)
+    (3): ELU(alpha=1.0)
+    (4): Linear(in_features=512, out_features=256, bias=True)
+    (5): ELU(alpha=1.0)
+    (6): Linear(in_features=256, out_features=128, bias=True)
+    (7): ELU(alpha=1.0)
+    (8): Linear(in_features=128, out_features=29, bias=True)
+  )
+)
+Critic Model: MLPModel(
+  (obs_normalizer): EmpiricalNormalization()
+  (mlp): MLP(
+    (0): Linear(in_features=1211, out_features=1024, bias=True)
+    (1): ELU(alpha=1.0)
+    (2): Linear(in_features=1024, out_features=1024, bias=True)
+    (3): ELU(alpha=1.0)
+    (4): Linear(in_features=1024, out_features=512, bias=True)
+    (5): ELU(alpha=1.0)
+    (6): Linear(in_features=512, out_features=256, bias=True)
+    (7): ELU(alpha=1.0)
+    (8): Linear(in_features=256, out_features=1, bias=True)
+  )
+)
+Setting seed: 42
+
++---------------------------------+
+|         Base Environment        |
++------------------------+--------+
+| Property               | Value  |
++------------------------+--------+
+| Number of environments | 1      |
+| Environment device     | cuda:0 |
+| Environment seed       | 42     |
+| Physics step-size      | 0.005  |
+| Environment step-size  | 0.02   |
++------------------------+--------+
+
+[INFO] <EventManager> contains 0 active terms.
+
+[INFO] <CommandManager> contains 1 active terms.
++--------------------------------+
+|      Active Command Terms      |
++-------+--------+---------------+
+| Index | Name   |      Type     |
++-------+--------+---------------+
+|   0   | motion | MotionCommand |
++-------+--------+---------------+
+
+[INFO] <ActionManager> contains 1 active terms.
++---------------------------------+
+| Active Action Terms (shape: 29) |
++-------+-----------+-------------+
+| Index | Name      |   Dimension |
++-------+-----------+-------------+
+|   0   | joint_pos |          29 |
++-------+-----------+-------------+
+
+[INFO] <ObservationManager> contains 2 groups.
++------------------------------------------------------------+
+| Active Observation Terms in Group: 'actor' (shape: (134,)) |
++-------+------------------------------+---------------------+
+| Index | Name                         |        Shape        |
++-------+------------------------------+---------------------+
+|   0   | ref_base_lin_vel_b           |    (3,)  ← 1×(3,)   |
+|   1   | ref_base_ang_vel_b           |    (3,)  ← 1×(3,)   |
+|   2   | ref_joint_pos                |   (29,)  ← 1×(29,)  |
+|   3   | base_ang_vel                 |    (3,)  ← 1×(3,)   |
+|   4   | joint_pos                    |   (29,)  ← 1×(29,)  |
+|   5   | joint_vel                    |   (29,)  ← 1×(29,)  |
+|   6   | actions                      |   (29,)  ← 1×(29,)  |
+|   7   | motion_anchor_pos_error_w    |    (3,)  ← 1×(3,)   |
+|   8   | motion_anchor_ori_error      |    (3,)  ← 1×(3,)   |
+|   9   | base_lin_vel                 |    (3,)  ← 1×(3,)   |
++-------+------------------------------+---------------------+
++--------------------------------------------------------------+
+| Active Observation Terms in Group: 'critic' (shape: (1211,)) |
++--------+----------------------------------------+------------+
+| Index  | Name                                   |   Shape    |
++--------+----------------------------------------+------------+
+|   0    | ref_base_height                        |    (1,)    |
+|   1    | ref_base_lin_vel_b                     |    (3,)    |
+|   2    | ref_base_ang_vel_b                     |    (3,)    |
+|   3    | ref_gravity_b                          |    (3,)    |
+|   4    | ref_joint_pos                          |   (29,)    |
+|   5    | ref_joint_vel                          |   (29,)    |
+|   6    | base_ang_vel                           |    (3,)    |
+|   7    | projected_gravity                      |    (3,)    |
+|   8    | joint_pos                              |   (29,)    |
+|   9    | joint_vel                              |   (29,)    |
+|   10   | actions                                |   (29,)    |
+|   11   | motion_anchor_pos_b                    |    (3,)    |
+|   12   | motion_anchor_ori_b                    |    (6,)    |
+|   13   | motion_anchor_pos_error_w              |    (3,)    |
+|   14   | motion_anchor_ori_error                |    (3,)    |
+|   15   | ref_body_pos                           |   (42,)    |
+|   16   | ref_body_ori                           |   (84,)    |
+|   17   | body_pos                               |   (42,)    |
+|   18   | body_ori                               |   (84,)    |
+|   19   | ref_body_lin_vel                       |   (42,)    |
+|   20   | ref_body_ang_vel                       |   (42,)    |
+|   21   | motion_body_lin_vel                    |   (42,)    |
+|   22   | motion_body_ang_vel                    |   (42,)    |
+|   23   | ref_base_lin_acc                       |    (3,)    |
+|   24   | ref_base_ang_acc                       |    (3,)    |
+|   25   | base_lin_vel                           |    (3,)    |
+|   26   | assistive_force                        |    (3,)    |
+|   27   | assistive_torque                       |    (3,)    |
+|   28   | assistive_gain                         |    (1,)    |
+|   29   | motion_segment_phase                   |    (1,)    |
+|   30   | motion_tracking_step_rewards           |   (10,)    |
+|   31   | keybody_contact_forces                 |   (588,)   |
++--------+----------------------------------------+------------+
+
+[INFO] <TerminationManager> contains 0 active terms.
++--------------------------+
+| Active Termination Terms |
++-------+------+-----------+
+| Index | Name |  Time Out |
++-------+------+-----------+
++-------+------+-----------+
+
+[INFO] <RewardManager> contains 18 active terms.
++---------------------------------------------+
+|             Active Reward Terms             |
++-------+----------------------------+--------+
+| Index | Name                       | Weight |
++-------+----------------------------+--------+
+|   0   | motion_global_root_pos     |    1.0 |
+|   1   | motion_global_root_ori     |    1.0 |
+|   2   | motion_root_lin_vel_b      |    1.0 |
+|   3   | motion_root_ang_vel_b      |    1.0 |
+|   4   | motion_body_pos            |    1.0 |
+|   5   | motion_body_ori            |    1.0 |
+|   6   | motion_body_lin_vel        |    0.5 |
+|   7   | motion_body_ang_vel        |    0.5 |
+|   8   | motion_joint_pos           |    1.0 |
+|   9   | motion_joint_vel           |    0.0 |
+|   10  | action_rate_l1             |   -0.1 |
+|   11  | joint_acc                  | -5e-06 |
+|   12  | joint_limit                |   -1.0 |
+|   13  | survival                   |    1.0 |
+|   14  | foot_slip                  |   -0.0 |
+|   15  | actuator_torque_soft_limit |   -0.1 |
+|   16  | angular_momentum           |    0.0 |
+|   17  | anti_shake                 |    0.0 |
++-------+----------------------------+--------+
+
+[INFO] <NullCurriculumManager> (inactive)
+[INFO] <NullMetricsManager> (inactive)
+[INFO] <NullRecorderManager> (inactive)
+--------------------------------------------------------------------------------
+Resolved observation sets: 
+	 actor :  ('actor',)
+	 critic :  ('critic',)
+--------------------------------------------------------------------------------
+Actor Model: MLPModel(
+  (obs_normalizer): EmpiricalNormalization()
+  (distribution): GaussianDistribution()
+  (mlp): MLP(
+    (0): Linear(in_features=134, out_features=1024, bias=True)
+    (1): ELU(alpha=1.0)
+    (2): Linear(in_features=1024, out_features=512, bias=True)
+    (3): ELU(alpha=1.0)
+    (4): Linear(in_features=512, out_features=256, bias=True)
+    (5): ELU(alpha=1.0)
+    (6): Linear(in_features=256, out_features=128, bias=True)
+    (7): ELU(alpha=1.0)
+    (8): Linear(in_features=128, out_features=29, bias=True)
+  )
+)
+Critic Model: MLPModel(
+  (obs_normalizer): EmpiricalNormalization()
+  (mlp): MLP(
+    (0): Linear(in_features=1211, out_features=1024, bias=True)
+    (1): ELU(alpha=1.0)
+    (2): Linear(in_features=1024, out_features=1024, bias=True)
+    (3): ELU(alpha=1.0)
+    (4): Linear(in_features=1024, out_features=512, bias=True)
+    (5): ELU(alpha=1.0)
+    (6): Linear(in_features=512, out_features=256, bias=True)
+    (7): ELU(alpha=1.0)
+    (8): Linear(in_features=256, out_features=1, bias=True)
+  )
+)
+=============================== warnings summary ===============================
+../../usr/local/lib/python3.12/site-packages/torch/jit/_script.py:1488: 35 warnings
+  /usr/local/lib/python3.12/site-packages/torch/jit/_script.py:1488: DeprecationWarning: `torch.jit.script` is deprecated. Please switch to `torch.compile` or `torch.export`.
+    warnings.warn(
+
+tests/test_motion_reset.py: 12 warnings
+  /workspace/wbc-mjlab/src/wbc_mjlab/rl/runner.py:85: DeprecationWarning: You are using the legacy TorchScript-based ONNX export. Starting in PyTorch 2.9, the new torch.export-based ONNX exporter has become the default. Learn more about the new export logic: https://docs.pytorch.org/docs/stable/onnx_export.html. For exporting control flow: https://pytorch.org/tutorials/beginner/onnx/export_control_flow_model_to_onnx_tutorial.html
+    torch.onnx.export(
+
+tests/test_motion_reset.py: 12 warnings
+  /usr/local/lib/python3.12/site-packages/torch/onnx/_internal/torchscript_exporter/utils.py:218: DeprecationWarning: The feature will be removed. Please remove usage of this function
+    setup_onnx_logging(verbose) as log_ctx,
+
+tests/test_studio.py::test_token_auth
+  /usr/local/lib/python3.12/site-packages/fastapi/testclient.py:1: StarletteDeprecationWarning: Using `httpx` with `starlette.testclient` is deprecated; install `httpx2` instead.
+    from starlette.testclient import TestClient as TestClient  # noqa
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+=========================== short test summary info ============================
+FAILED tests/test_motion_reset.py::test_headless_evaluator_records_failures_and_export_parity[0.0025-corrected]
+FAILED tests/test_motion_reset.py::test_headless_evaluator_records_failures_and_export_parity[0.001-corrected]
+FAILED tests/test_motion_reset.py::test_headless_evaluator_records_failures_and_export_parity[0.005-historical_unbounded]
+3 failed, 105 passed, 60 warnings in 110.90s (0:01:50)

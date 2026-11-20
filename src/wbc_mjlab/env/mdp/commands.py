@@ -1224,7 +1224,7 @@ class MotionCommand(CommandTerm):
     traj_ids = torch.searchsorted(
       self.motion.segment_end_idx,
       torch.full((len(env_ids),), frame, device=self.device),
-      right=False,
+      right=True,
     )
     traj_ids = torch.clamp(traj_ids, max=self.motion.num_trajectories - 1)
     self.trajectory_ids[env_ids] = traj_ids

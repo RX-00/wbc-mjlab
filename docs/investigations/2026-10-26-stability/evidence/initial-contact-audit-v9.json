@@ -1,0 +1,1225 @@
+[
+  {
+    "trial": 0,
+    "clip": "backflip",
+    "suite": "full",
+    "initial_contacts": [
+      {
+        "penetration_m": 0.0024462714364949607,
+        "geoms": [
+          "terrain",
+          "robot/right_foot7_collision"
+        ]
+      },
+      {
+        "penetration_m": 0.0023325431113267025,
+        "geoms": [
+          "terrain",
+          "robot/right_foot6_collision"
+        ]
+      },
+      {
+        "penetration_m": 0.0020089850996029626,
+        "geoms": [
+          "terrain",
+          "robot/right_foot5_collision"
+        ]
+      },
+      {
+        "penetration_m": 0.0017905536660091249,
+        "geoms": [
+          "terrain",
+          "robot/right_foot7_collision"
+        ]
+      },
+      {
+        "penetration_m": 0.001516015685932702,
+        "geoms": [
+          "terrain",
+          "robot/right_foot4_collision"
+        ]
+      },
+      {
+        "penetration_m": 0.000970588850623573,
+        "geoms": [
+          "terrain",
+          "robot/right_foot3_collision"
+        ]
+      },
+      {
+        "penetration_m": 0.00046342986316379696,
+        "geoms": [
+          "terrain",
+          "robot/right_foot2_collision"
+        ]
+      },
+      {
+        "penetration_m": 0.00014244575790397195,
+        "geoms": [
+          "terrain",
+          "robot/right_foot6_collision"
+        ]
+      },
+      {
+        "penetration_m": 1.5078226221522384e-06,
+        "geoms": [
+          "terrain",
+          "robot/left_foot3_collision"
+        ]
+      }
+    ],
+    "rollout_peak_penetration_m": 0.013852350413799286
+  },
+  {
+    "trial": 1,
+    "clip": "backflip",
+    "suite": "segment_0.25",
+    "initial_contacts": [],
+    "rollout_peak_penetration_m": 0.0
+  },
+  {
+    "trial": 2,
+    "clip": "backflip",
+    "suite": "segment_0.5",
+    "initial_contacts": [],
+    "rollout_peak_penetration_m": 0.030831119045615196
+  },
+  {
+    "trial": 3,
+    "clip": "backflip",
+    "suite": "segment_0.75",
+    "initial_contacts": [
+      {
+        "penetration_m": 0.008350096913466188,
+        "geoms": [
+          "terrain",
+          "robot/left_foot3_collision"
+        ]
+      },
+      {
+        "penetration_m": 0.008294332473855344,
+        "geoms": [
+          "terrain",
+          "robot/left_foot4_collision"
+        ]
+      },
+      {
+        "penetration_m": 0.007524119755055231,
+        "geoms": [
+          "terrain",
+          "robot/left_foot5_collision"
+        ]
+      },
+      {
+        "penetration_m": 0.007430203288249346,
+        "geoms": [
+          "terrain",
+          "robot/left_foot2_collision"
+        ]
+      },
+      {
+        "penetration_m": 0.005943444403109616,
+        "geoms": [
+          "terrain",
+          "robot/left_foot6_collision"
+        ]
+      },
+      {
+        "penetration_m": 0.0036525165462754066,
+        "geoms": [
+          "terrain",
+          "robot/left_foot1_collision"
+        ]
+      },
+      {
+        "penetration_m": 0.0015049759344069116,
+        "geoms": [
+          "terrain",
+          "robot/left_foot7_collision"
+        ]
+      }
+    ],
+    "rollout_peak_penetration_m": 0.010304033756256104
+  },
+  {
+    "trial": 4,
+    "clip": "dance",
+    "suite": "full",
+    "initial_contacts": [],
+    "rollout_peak_penetration_m": 0.024136953055858612
+  },
+  {
+    "trial": 5,
+    "clip": "dance",
+    "suite": "segment_0.25",
+    "initial_contacts": [
+      {
+        "penetration_m": 0.014112505292376253,
+        "geoms": [
+          "terrain",
+          "robot/right_foot6_collision"
+        ]
+      },
+      {
+        "penetration_m": 0.014093375476930237,
+        "geoms": [
+          "terrain",
+          "robot/right_foot5_collision"
+        ]
+      },
+      {
+        "penetration_m": 0.013549653694828825,
+        "geoms": [
+          "terrain",
+          "robot/right_foot4_collision"
+        ]
+      },
+      {
+        "penetration_m": 0.012899494040458972,
+        "geoms": [
+          "terrain",
+          "robot/right_foot7_collision"
+        ]
+      },
+      {
+        "penetration_m": 0.012697896645886584,
+        "geoms": [
+          "terrain",
+          "robot/right_foot3_collision"
+        ]
+      },
+      {
+        "penetration_m": 0.011600643396497676,
+        "geoms": [
+          "terrain",
+          "robot/right_foot2_collision"
+        ]
+      },
+      {
+        "penetration_m": 0.009271249079745468,
+        "geoms": [
+          "terrain",
+          "robot/right_foot1_collision"
+        ]
+      },
+      {
+        "penetration_m": 0.009049053204948662,
+        "geoms": [
+          "terrain",
+          "robot/right_foot7_collision"
+        ]
+      },
+      {
+        "penetration_m": 0.005420808244235157,
+        "geoms": [
+          "terrain",
+          "robot/right_foot1_collision"
+        ]
+      },
+      {
+        "penetration_m": 0.001252032901771798,
+        "geoms": [
+          "terrain",
+          "robot/right_foot6_collision"
+        ]
+      },
+      {
+        "penetration_m": 7.777083567268687e-05,
+        "geoms": [
+          "terrain",
+          "robot/right_foot5_collision"
+        ]
+      }
+    ],
+    "rollout_peak_penetration_m": 0.020917296409606934
+  },
+  {
+    "trial": 6,
+    "clip": "dance",
+    "suite": "segment_0.5",
+    "initial_contacts": [
+      {
+        "penetration_m": 0.00988307883544219,
+        "geoms": [
+          "terrain",
+          "robot/left_foot5_collision"
+        ]
+      },
+      {
+        "penetration_m": 0.008606722240646928,
+        "geoms": [
+          "terrain",
+          "robot/left_foot6_collision"
+        ]
+      },
+      {
+        "penetration_m": 0.00845126800084471,
+        "geoms": [
+          "terrain",
+          "robot/left_foot4_collision"
+        ]
+      },
+      {
+        "penetration_m": 0.005225527342192974,
+        "geoms": [
+          "terrain",
+          "robot/left_foot3_collision"
+        ]
+      },
+      {
+        "penetration_m": 0.005214518566248201,
+        "geoms": [
+          "terrain",
+          "robot/right_foot4_collision"
+        ]
+      },
+      {
+        "penetration_m": 0.005072951757471156,
+        "geoms": [
+          "terrain",
+          "robot/right_foot5_collision"
+        ]
+      },
+      {
+        "penetration_m": 0.0046227428943571725,
+        "geoms": [
+          "terrain",
+          "robot/right_foot3_collision"
+        ]
+      },
+      {
+        "penetration_m": 0.0039696859615476025,
+        "geoms": [
+          "terrain",
+          "robot/right_foot6_collision"
+        ]
+      },
+      {
+        "penetration_m": 0.0031593100079424334,
+        "geoms": [
+          "terrain",
+          "robot/right_foot2_collision"
+        ]
+      },
+      {
+        "penetration_m": 0.0002231295527983495,
+        "geoms": [
+          "terrain",
+          "robot/left_foot2_collision"
+        ]
+      },
+      {
+        "penetration_m": 0.00015464634963465243,
+        "geoms": [
+          "terrain",
+          "robot/left_foot7_collision"
+        ]
+      }
+    ],
+    "rollout_peak_penetration_m": 0.013661112636327744
+  },
+  {
+    "trial": 7,
+    "clip": "dance",
+    "suite": "segment_0.75",
+    "initial_contacts": [
+      {
+        "penetration_m": 0.0040795653813969854,
+        "geoms": [
+          "terrain",
+          "robot/left_foot6_collision"
+        ]
+      },
+      {
+        "penetration_m": 0.0030958704725309854,
+        "geoms": [
+          "terrain",
+          "robot/left_foot7_collision"
+        ]
+      },
+      {
+        "penetration_m": 0.002792525417699313,
+        "geoms": [
+          "terrain",
+          "robot/left_foot5_collision"
+        ]
+      },
+      {
+        "penetration_m": 0.0002257591887144337,
+        "geoms": [
+          "terrain",
+          "robot/left_foot4_collision"
+        ]
+      }
+    ],
+    "rollout_peak_penetration_m": 0.011364839971065521
+  },
+  {
+    "trial": 8,
+    "clip": "dance1_subject1",
+    "suite": "full",
+    "initial_contacts": [],
+    "rollout_peak_penetration_m": 0.031339310109615326
+  },
+  {
+    "trial": 9,
+    "clip": "dance1_subject1",
+    "suite": "segment_0.25",
+    "initial_contacts": [],
+    "rollout_peak_penetration_m": 0.017570525407791138
+  },
+  {
+    "trial": 10,
+    "clip": "dance1_subject1",
+    "suite": "segment_0.5",
+    "initial_contacts": [],
+    "rollout_peak_penetration_m": 0.03601022809743881
+  },
+  {
+    "trial": 11,
+    "clip": "dance1_subject1",
+    "suite": "segment_0.75",
+    "initial_contacts": [
+      {
+        "penetration_m": 0.0060584126634736415,
+        "geoms": [
+          "terrain",
+          "robot/left_foot4_collision"
+        ]
+      },
+      {
+        "penetration_m": 0.005302565541932111,
+        "geoms": [
+          "terrain",
+          "robot/left_foot5_collision"
+        ]
+      },
+      {
+        "penetration_m": 0.005117203444602541,
+        "geoms": [
+          "terrain",
+          "robot/left_foot3_collision"
+        ]
+      },
+      {
+        "penetration_m": 0.002406861785141842,
+        "geoms": [
+          "terrain",
+          "robot/left_foot6_collision"
+        ]
+      },
+      {
+        "penetration_m": 0.0020732100099486086,
+        "geoms": [
+          "terrain",
+          "robot/left_foot2_collision"
+        ]
+      }
+    ],
+    "rollout_peak_penetration_m": 0.02126927487552166
+  },
+  {
+    "trial": 12,
+    "clip": "fallAndGetUp1_subject1",
+    "suite": "full",
+    "initial_contacts": [],
+    "rollout_peak_penetration_m": 0.016315530985593796
+  },
+  {
+    "trial": 13,
+    "clip": "fallAndGetUp1_subject1",
+    "suite": "segment_0.25",
+    "initial_contacts": [
+      {
+        "penetration_m": 0.021598154685176577,
+        "geoms": [
+          "terrain",
+          "robot/left_foot2_collision"
+        ]
+      },
+      {
+        "penetration_m": 0.0215926407733461,
+        "geoms": [
+          "terrain",
+          "robot/left_foot3_collision"
+        ]
+      },
+      {
+        "penetration_m": 0.016573145861320242,
+        "geoms": [
+          "terrain",
+          "robot/left_foot4_collision"
+        ]
+      },
+      {
+        "penetration_m": 0.009721944099850896,
+        "geoms": [
+          "terrain",
+          "robot/left_foot1_collision"
+        ]
+      },
+      {
+        "penetration_m": 0.008583219825005322,
+        "geoms": [
+          "terrain",
+          "robot/left_foot5_collision"
+        ]
+      },
+      {
+        "penetration_m": 0.003802150205293904,
+        "geoms": [
+          "terrain",
+          "robot/left_thigh_collision"
+        ]
+      }
+    ],
+    "rollout_peak_penetration_m": 0.022271335124969482
+  },
+  {
+    "trial": 14,
+    "clip": "fallAndGetUp1_subject1",
+    "suite": "segment_0.5",
+    "initial_contacts": [],
+    "rollout_peak_penetration_m": 0.012251440435647964
+  },
+  {
+    "trial": 15,
+    "clip": "fallAndGetUp1_subject1",
+    "suite": "segment_0.75",
+    "initial_contacts": [
+      {
+        "penetration_m": 0.07360482789611966,
+        "geoms": [
+          "terrain",
+          "robot/left_shoulder_yaw_collision"
+        ]
+      },
+      {
+        "penetration_m": 0.07070174208054317,
+        "geoms": [
+          "terrain",
+          "robot/left_elbow_yaw_collision"
+        ]
+      },
+      {
+        "penetration_m": 0.06779882486695205,
+        "geoms": [
+          "terrain",
+          "robot/head_collision"
+        ]
+      },
+      {
+        "penetration_m": 0.06345303275293557,
+        "geoms": [
+          "terrain",
+          "robot/torso_collision"
+        ]
+      },
+      {
+        "penetration_m": 0.05600833133395684,
+        "geoms": [
+          "terrain",
+          "robot/right_shoulder_yaw_collision"
+        ]
+      },
+      {
+        "penetration_m": 0.05372033890559096,
+        "geoms": [
+          "terrain",
+          "robot/right_elbow_yaw_collision"
+        ]
+      },
+      {
+        "penetration_m": 0.05072142896726635,
+        "geoms": [
+          "terrain",
+          "robot/torso_collision"
+        ]
+      },
+      {
+        "penetration_m": 0.03857721935380953,
+        "geoms": [
+          "terrain",
+          "robot/left_shoulder_yaw_collision"
+        ]
+      },
+      {
+        "penetration_m": 0.03237055664441239,
+        "geoms": [
+          "terrain",
+          "robot/right_shoulder_yaw_collision"
+        ]
+      },
+      {
+        "penetration_m": 0.01369585475229231,
+        "geoms": [
+          "terrain",
+          "robot/right_foot3_collision"
+        ]
+      },
+      {
+        "penetration_m": 0.012864023405218144,
+        "geoms": [
+          "terrain",
+          "robot/right_foot2_collision"
+        ]
+      },
+      {
+        "penetration_m": 0.010485909190554947,
+        "geoms": [
+          "terrain",
+          "robot/right_foot4_collision"
+        ]
+      },
+      {
+        "penetration_m": 0.0051510962560275455,
+        "geoms": [
+          "terrain",
+          "robot/right_foot5_collision"
+        ]
+      }
+    ],
+    "rollout_peak_penetration_m": 0.07360485196113586
+  },
+  {
+    "trial": 16,
+    "clip": "fight1_subject2",
+    "suite": "full",
+    "initial_contacts": [
+      {
+        "penetration_m": 0.0023518794333084623,
+        "geoms": [
+          "terrain",
+          "robot/right_foot4_collision"
+        ]
+      },
+      {
+        "penetration_m": 0.0022242794237931638,
+        "geoms": [
+          "terrain",
+          "robot/right_foot3_collision"
+        ]
+      },
+      {
+        "penetration_m": 0.0021584538640259093,
+        "geoms": [
+          "terrain",
+          "robot/right_foot5_collision"
+        ]
+      },
+      {
+        "penetration_m": 0.0016085584901043698,
+        "geoms": [
+          "terrain",
+          "robot/right_foot2_collision"
+        ]
+      },
+      {
+        "penetration_m": 0.001490072482523308,
+        "geoms": [
+          "terrain",
+          "robot/right_foot6_collision"
+        ]
+      }
+    ],
+    "rollout_peak_penetration_m": 0.02982371300458908
+  },
+  {
+    "trial": 17,
+    "clip": "fight1_subject2",
+    "suite": "segment_0.25",
+    "initial_contacts": [
+      {
+        "penetration_m": 0.0014425214743980386,
+        "geoms": [
+          "terrain",
+          "robot/left_foot2_collision"
+        ]
+      },
+      {
+        "penetration_m": 0.0007106344862088752,
+        "geoms": [
+          "terrain",
+          "robot/left_foot3_collision"
+        ]
+      }
+    ],
+    "rollout_peak_penetration_m": 0.019025737419724464
+  },
+  {
+    "trial": 18,
+    "clip": "fight1_subject2",
+    "suite": "segment_0.5",
+    "initial_contacts": [
+      {
+        "penetration_m": 0.012049309196058997,
+        "geoms": [
+          "robot/right_hip_collision",
+          "robot/right_hand_collision"
+        ]
+      },
+      {
+        "penetration_m": 0.0071658803006519195,
+        "geoms": [
+          "robot/right_hip_collision",
+          "robot/right_wrist_collision"
+        ]
+      },
+      {
+        "penetration_m": 0.004238853429129842,
+        "geoms": [
+          "terrain",
+          "robot/right_foot4_collision"
+        ]
+      },
+      {
+        "penetration_m": 0.004159449237804711,
+        "geoms": [
+          "terrain",
+          "robot/right_foot3_collision"
+        ]
+      },
+      {
+        "penetration_m": 0.003946785916660483,
+        "geoms": [
+          "terrain",
+          "robot/right_foot5_collision"
+        ]
+      },
+      {
+        "penetration_m": 0.0035015711586734192,
+        "geoms": [
+          "terrain",
+          "robot/right_foot2_collision"
+        ]
+      },
+      {
+        "penetration_m": 0.0031187771806138074,
+        "geoms": [
+          "terrain",
+          "robot/right_foot6_collision"
+        ]
+      }
+    ],
+    "rollout_peak_penetration_m": 0.023107316344976425
+  },
+  {
+    "trial": 19,
+    "clip": "fight1_subject2",
+    "suite": "segment_0.75",
+    "initial_contacts": [
+      {
+        "penetration_m": 0.005620439444310035,
+        "geoms": [
+          "terrain",
+          "robot/right_foot3_collision"
+        ]
+      },
+      {
+        "penetration_m": 0.0055222596831536915,
+        "geoms": [
+          "terrain",
+          "robot/right_foot4_collision"
+        ]
+      },
+      {
+        "penetration_m": 0.005064702554438361,
+        "geoms": [
+          "terrain",
+          "robot/right_foot2_collision"
+        ]
+      },
+      {
+        "penetration_m": 0.005027654485249385,
+        "geoms": [
+          "terrain",
+          "robot/right_foot5_collision"
+        ]
+      },
+      {
+        "penetration_m": 0.003997689628129193,
+        "geoms": [
+          "terrain",
+          "robot/right_foot6_collision"
+        ]
+      }
+    ],
+    "rollout_peak_penetration_m": 0.022242262959480286
+  },
+  {
+    "trial": 20,
+    "clip": "fightAndSports1_subject1",
+    "suite": "full",
+    "initial_contacts": [],
+    "rollout_peak_penetration_m": 0.007448283489793539
+  },
+  {
+    "trial": 21,
+    "clip": "fightAndSports1_subject1",
+    "suite": "segment_0.25",
+    "initial_contacts": [],
+    "rollout_peak_penetration_m": 0.016264311969280243
+  },
+  {
+    "trial": 22,
+    "clip": "fightAndSports1_subject1",
+    "suite": "segment_0.5",
+    "initial_contacts": [],
+    "rollout_peak_penetration_m": 0.021134693175554276
+  },
+  {
+    "trial": 23,
+    "clip": "fightAndSports1_subject1",
+    "suite": "segment_0.75",
+    "initial_contacts": [],
+    "rollout_peak_penetration_m": 0.015011023730039597
+  },
+  {
+    "trial": 24,
+    "clip": "gainer_flip",
+    "suite": "full",
+    "initial_contacts": [],
+    "rollout_peak_penetration_m": 0.02949129231274128
+  },
+  {
+    "trial": 25,
+    "clip": "gainer_flip",
+    "suite": "segment_0.25",
+    "initial_contacts": [
+      {
+        "penetration_m": 0.014172300107729349,
+        "geoms": [
+          "terrain",
+          "robot/right_foot6_collision"
+        ]
+      },
+      {
+        "penetration_m": 0.013769740264863963,
+        "geoms": [
+          "terrain",
+          "robot/right_foot7_collision"
+        ]
+      },
+      {
+        "penetration_m": 0.01350139621446433,
+        "geoms": [
+          "terrain",
+          "robot/right_foot5_collision"
+        ]
+      },
+      {
+        "penetration_m": 0.012209898834203047,
+        "geoms": [
+          "terrain",
+          "robot/right_foot4_collision"
+        ]
+      },
+      {
+        "penetration_m": 0.010650035519909163,
+        "geoms": [
+          "terrain",
+          "robot/right_foot3_collision"
+        ]
+      },
+      {
+        "penetration_m": 0.010415166089456487,
+        "geoms": [
+          "terrain",
+          "robot/right_foot7_collision"
+        ]
+      },
+      {
+        "penetration_m": 0.009039850857530046,
+        "geoms": [
+          "terrain",
+          "robot/right_foot2_collision"
+        ]
+      },
+      {
+        "penetration_m": 0.006356202459020521,
+        "geoms": [
+          "terrain",
+          "robot/right_foot1_collision"
+        ]
+      },
+      {
+        "penetration_m": 0.0030016282836130455,
+        "geoms": [
+          "terrain",
+          "robot/right_foot1_collision"
+        ]
+      },
+      {
+        "penetration_m": 0.0029680223618683416,
+        "geoms": [
+          "terrain",
+          "robot/right_foot6_collision"
+        ]
+      },
+      {
+        "penetration_m": 0.0012907462159810756,
+        "geoms": [
+          "terrain",
+          "robot/right_foot5_collision"
+        ]
+      }
+    ],
+    "rollout_peak_penetration_m": 0.02508704364299774
+  },
+  {
+    "trial": 26,
+    "clip": "gainer_flip",
+    "suite": "segment_0.5",
+    "initial_contacts": [],
+    "rollout_peak_penetration_m": 0.008752724155783653
+  },
+  {
+    "trial": 27,
+    "clip": "gainer_flip",
+    "suite": "segment_0.75",
+    "initial_contacts": [
+      {
+        "penetration_m": 0.003144519546022107,
+        "geoms": [
+          "terrain",
+          "robot/right_foot4_collision"
+        ]
+      },
+      {
+        "penetration_m": 0.0030784096214452198,
+        "geoms": [
+          "terrain",
+          "robot/right_foot3_collision"
+        ]
+      },
+      {
+        "penetration_m": 0.002987677262474905,
+        "geoms": [
+          "terrain",
+          "robot/right_foot5_collision"
+        ]
+      },
+      {
+        "penetration_m": 0.002724536200816188,
+        "geoms": [
+          "terrain",
+          "robot/right_foot2_collision"
+        ]
+      },
+      {
+        "penetration_m": 0.002561217954669617,
+        "geoms": [
+          "terrain",
+          "robot/right_foot6_collision"
+        ]
+      },
+      {
+        "penetration_m": 0.0014788539476907857,
+        "geoms": [
+          "terrain",
+          "robot/right_foot1_collision"
+        ]
+      },
+      {
+        "penetration_m": 0.001242949814367962,
+        "geoms": [
+          "terrain",
+          "robot/right_foot7_collision"
+        ]
+      }
+    ],
+    "rollout_peak_penetration_m": 0.015403566882014275
+  },
+  {
+    "trial": 28,
+    "clip": "run1_subject2",
+    "suite": "full",
+    "initial_contacts": [
+      {
+        "penetration_m": 0.007868597644961766,
+        "geoms": [
+          "terrain",
+          "robot/right_foot4_collision"
+        ]
+      },
+      {
+        "penetration_m": 0.007707456232773044,
+        "geoms": [
+          "terrain",
+          "robot/right_foot5_collision"
+        ]
+      },
+      {
+        "penetration_m": 0.007612285383734157,
+        "geoms": [
+          "terrain",
+          "robot/right_foot3_collision"
+        ]
+      },
+      {
+        "penetration_m": 0.006910617225555931,
+        "geoms": [
+          "terrain",
+          "robot/right_foot6_collision"
+        ]
+      },
+      {
+        "penetration_m": 0.006739309697285938,
+        "geoms": [
+          "terrain",
+          "robot/right_foot2_collision"
+        ]
+      }
+    ],
+    "rollout_peak_penetration_m": 0.024302752688527107
+  },
+  {
+    "trial": 29,
+    "clip": "run1_subject2",
+    "suite": "segment_0.25",
+    "initial_contacts": [],
+    "rollout_peak_penetration_m": 0.020962033420801163
+  },
+  {
+    "trial": 30,
+    "clip": "run1_subject2",
+    "suite": "segment_0.5",
+    "initial_contacts": [],
+    "rollout_peak_penetration_m": 0.023325946182012558
+  },
+  {
+    "trial": 31,
+    "clip": "run1_subject2",
+    "suite": "segment_0.75",
+    "initial_contacts": [],
+    "rollout_peak_penetration_m": 0.022609015926718712
+  },
+  {
+    "trial": 32,
+    "clip": "sprint1_subject2",
+    "suite": "full",
+    "initial_contacts": [],
+    "rollout_peak_penetration_m": 0.03577040135860443
+  },
+  {
+    "trial": 33,
+    "clip": "sprint1_subject2",
+    "suite": "segment_0.25",
+    "initial_contacts": [
+      {
+        "penetration_m": 0.0030790141556203774,
+        "geoms": [
+          "terrain",
+          "robot/right_foot5_collision"
+        ]
+      },
+      {
+        "penetration_m": 0.0028627547381137493,
+        "geoms": [
+          "terrain",
+          "robot/right_foot4_collision"
+        ]
+      },
+      {
+        "penetration_m": 0.0026510298156629426,
+        "geoms": [
+          "terrain",
+          "robot/right_foot6_collision"
+        ]
+      },
+      {
+        "penetration_m": 0.0022708753993804145,
+        "geoms": [
+          "terrain",
+          "robot/right_foot3_collision"
+        ]
+      },
+      {
+        "penetration_m": 0.0011963800544310087,
+        "geoms": [
+          "terrain",
+          "robot/right_foot2_collision"
+        ]
+      }
+    ],
+    "rollout_peak_penetration_m": 0.010421945713460445
+  },
+  {
+    "trial": 34,
+    "clip": "sprint1_subject2",
+    "suite": "segment_0.5",
+    "initial_contacts": [
+      {
+        "penetration_m": 0.06169377477165674,
+        "geoms": [
+          "robot/left_thigh_collision",
+          "robot/left_hand_collision"
+        ]
+      },
+      {
+        "penetration_m": 0.061554731142324653,
+        "geoms": [
+          "robot/right_thigh_collision",
+          "robot/right_hand_collision"
+        ]
+      },
+      {
+        "penetration_m": 0.04148075716508281,
+        "geoms": [
+          "robot/left_hip_collision",
+          "robot/left_wrist_collision"
+        ]
+      },
+      {
+        "penetration_m": 0.039392438191057325,
+        "geoms": [
+          "robot/right_hip_collision",
+          "robot/right_wrist_collision"
+        ]
+      },
+      {
+        "penetration_m": 0.019606543999790317,
+        "geoms": [
+          "robot/left_thigh_collision",
+          "robot/left_wrist_collision"
+        ]
+      },
+      {
+        "penetration_m": 0.01852286332990811,
+        "geoms": [
+          "robot/right_thigh_collision",
+          "robot/right_wrist_collision"
+        ]
+      },
+      {
+        "penetration_m": 0.015625128329697438,
+        "geoms": [
+          "robot/left_hip_collision",
+          "robot/left_hand_collision"
+        ]
+      },
+      {
+        "penetration_m": 0.010936921291056945,
+        "geoms": [
+          "robot/right_hip_collision",
+          "robot/right_hand_collision"
+        ]
+      },
+      {
+        "penetration_m": 0.0009688573117303933,
+        "geoms": [
+          "terrain",
+          "robot/right_foot3_collision"
+        ]
+      },
+      {
+        "penetration_m": 0.0009342275494490463,
+        "geoms": [
+          "terrain",
+          "robot/right_foot4_collision"
+        ]
+      },
+      {
+        "penetration_m": 0.0005875162812152782,
+        "geoms": [
+          "terrain",
+          "robot/right_foot5_collision"
+        ]
+      },
+      {
+        "penetration_m": 0.0004972307120316034,
+        "geoms": [
+          "terrain",
+          "robot/right_foot2_collision"
+        ]
+      }
+    ],
+    "rollout_peak_penetration_m": 0.06169365718960762
+  },
+  {
+    "trial": 35,
+    "clip": "sprint1_subject2",
+    "suite": "segment_0.75",
+    "initial_contacts": [
+      {
+        "penetration_m": 0.04826386081313884,
+        "geoms": [
+          "robot/left_hip_collision",
+          "robot/left_hand_collision"
+        ]
+      },
+      {
+        "penetration_m": 0.0394828750441825,
+        "geoms": [
+          "robot/left_thigh_collision",
+          "robot/left_hand_collision"
+        ]
+      },
+      {
+        "penetration_m": 0.01581054023055125,
+        "geoms": [
+          "robot/right_thigh_collision",
+          "robot/right_hand_collision"
+        ]
+      },
+      {
+        "penetration_m": 0.008517495359401397,
+        "geoms": [
+          "robot/right_hip_collision",
+          "robot/right_hand_collision"
+        ]
+      }
+    ],
+    "rollout_peak_penetration_m": 0.04826393350958824
+  },
+  {
+    "trial": 36,
+    "clip": "walk1_subject1",
+    "suite": "full",
+    "initial_contacts": [],
+    "rollout_peak_penetration_m": 0.020472103729844093
+  },
+  {
+    "trial": 37,
+    "clip": "walk1_subject1",
+    "suite": "segment_0.25",
+    "initial_contacts": [
+      {
+        "penetration_m": 0.08224300430253267,
+        "geoms": [
+          "robot/left_hip_collision",
+          "robot/left_hand_collision"
+        ]
+      },
+      {
+        "penetration_m": 0.060275234013855816,
+        "geoms": [
+          "robot/left_hip_collision",
+          "robot/left_wrist_collision"
+        ]
+      },
+      {
+        "penetration_m": 0.038215068361499197,
+        "geoms": [
+          "robot/left_thigh_collision",
+          "robot/left_hand_collision"
+        ]
+      }
+    ],
+    "rollout_peak_penetration_m": 0.0822427049279213
+  },
+  {
+    "trial": 38,
+    "clip": "walk1_subject1",
+    "suite": "segment_0.5",
+    "initial_contacts": [],
+    "rollout_peak_penetration_m": 0.016753360629081726
+  },
+  {
+    "trial": 39,
+    "clip": "walk1_subject1",
+    "suite": "segment_0.75",
+    "initial_contacts": [],
+    "rollout_peak_penetration_m": 0.012079262174665928
+  }
+]

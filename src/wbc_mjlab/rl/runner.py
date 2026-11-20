@@ -66,6 +66,9 @@ class PolicyOnlyMotionTrackingRunner(MotionTrackingOnPolicyRunner):
     device: str = "cpu",
     registry_name: str | None = None,
   ):
+    from wbc_mjlab.diagnostics import install_failure_capture
+
+    install_failure_capture(env.unwrapped)
     super().__init__(env, train_cfg, log_dir, device)
     self.registry_name = registry_name
 

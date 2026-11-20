@@ -31,6 +31,8 @@ def env(tmp_path_factory):
     body_quat_w=np.tile(data.xquat[None, 1:], (frames, 1, 1)),
     body_lin_vel_w=np.zeros((frames, model.nbody - 1, 3)),
     body_ang_vel_w=np.zeros((frames, model.nbody - 1, 3)),
+    segment_start_idx=np.array([0, frames // 2]),
+    segment_length=np.array([frames // 2, frames // 2]),
   )
   cfg = get_g1_task_config("Wbc-G1-SE").build_env_cfg()
   cfg.scene.num_envs = 2
@@ -101,6 +103,18 @@ def test_clip_wrap_refreshes_derived_kinematics(env):
 
 
 @pytest.mark.slow
+def test_reset_to_frame_at_segment_boundary_selects_next_clip(env):
+  with torch.inference_mode():
+    env.reset()
+    motion = env.command_manager.get_term("motion")
+    ids = torch.tensor([0], device=env.device)
+    start = int(motion.motion.segment_start_idx[1])
+    motion.reset_to_frame(ids, start)
+    assert motion.trajectory_ids[0] == 1
+    assert motion.time_steps[0] == start
+
+
+@pytest.mark.slow
 def test_nonfinite_physics_writes_replayable_dump(env, tmp_path):
   guard = NanGuard(
     NanGuardCfg(enabled=True, output_dir=str(tmp_path), buffer_size=2),
@@ -110,6 +124,7 @@ def test_nonfinite_physics_writes_replayable_dump(env, tmp_path):
   try:
     with torch.inference_mode():
       env.reset()
+
       guard.capture(env.sim.data)
       env.sim.data.qvel[0, 0] = float("nan")
       assert guard.check_and_dump(env.sim.data)
@@ -124,3 +139,283 @@ def test_nonfinite_physics_writes_replayable_dump(env, tmp_path):
   finally:
     with torch.inference_mode():
       env.reset()
+
+
+@pytest.mark.slow
+def test_unitree_initialized_controls_and_simulator_effort(env):
+  """Real G1 initialization, custom dispatch, ctrl writes and MuJoCo forces."""
+  import math
+
+  from mjlab.actuator.fused_group import FusedActuatorGroup
+
+  with torch.inference_mode():
+    env.reset()
+
+    robot = env.scene["robot"]
+    _, custom = FusedActuatorGroup.process(robot.actuators)
+    assert tuple(robot.actuators) == custom
+    for speed in (0.0, 10.0, 50.0):
+      velocity = torch.full_like(robot.data.joint_vel, speed)
+      velocity[1] *= -1
+      position = robot.data.joint_pos.clone()
+      robot.write_joint_state_to_sim(position, velocity)
+      for sign in (-1, 1):
+        target = position + sign * 1000
+        robot.set_joint_position_target(target)
+        robot.set_joint_velocity_target(torch.zeros_like(velocity))
+        robot.set_joint_effort_target(torch.zeros_like(velocity))
+        env.scene.write_data_to_sim()
+        env.sim.forward()
+        for actuator in robot.actuators:
+          cfg = actuator.cfg
+          expected = torch.empty_like(actuator.motor_effort)
+          for world, v in enumerate((speed, -speed)):
+            peak = cfg.y1 if v * sign > 0 else cfg.y2
+            taper = (
+              1 if abs(v) <= cfg.x1 else max(0, (cfg.x2 - abs(v)) / (cfg.x2 - cfg.x1))
+            )
+            friction = cfg.fs * math.tanh(v / cfg.va) + cfg.fd * v
+            expected[world] = sign * peak * taper - friction
+          torch.testing.assert_close(
+            env.sim.data.ctrl[:, actuator.global_ctrl_ids], expected
+          )
+          torch.testing.assert_close(
+            robot.data.actuator_force[:, actuator.ctrl_ids], expected
+          )
+    env.reset()
+
+
+@pytest.mark.slow
+@pytest.mark.parametrize(
+  "stage,field",
+  [
+    ("pre_step", "ctrl"),
+    ("post_step", "qacc"),
+    ("sense", "sensordata"),
+  ],
+)
+def test_physical_failure_artifact_precedes_fatal_notification(
+  env, tmp_path, stage, field
+):
+  import json
+
+  from wbc_mjlab.diagnostics import PhysicalFailureCapture
+
+  original_cfg = env.cfg.sim.nan_guard
+  env.cfg.sim.nan_guard = NanGuardCfg(
+    enabled=True, output_dir=str(tmp_path), buffer_size=2
+  )
+  guard = PhysicalFailureCapture(env)
+  env.cfg.sim.nan_guard = original_cfg
+  original_dump = guard._dump_buffer
+
+  def checked_dump(ids):
+    assert len(list(tmp_path.glob("physical_failure_*.json"))) == 1
+    assert len(list(tmp_path.glob("physical_failure_*.pt"))) == 1
+    original_dump(ids)
+
+  guard._dump_buffer = checked_dump
+  try:
+    with torch.inference_mode():
+      env.reset()
+      for _ in range(3):
+        guard.capture(env.sim.data)
+      assert len(guard.buffer) == 2
+      tensor = getattr(env.sim.data, field)
+      tensor[1, 0] = float("nan")
+      with pytest.raises(FloatingPointError, match=stage):
+        guard.check(stage, {field: tensor})
+    metadata = json.loads(next(tmp_path.glob("physical_failure_*.json")).read_text())
+    assert metadata["stage"] == stage
+    assert metadata["environment_ids"] == [1]
+    assert metadata["faults"][0]["indices"] == [[1, 0]]
+    payload = torch.load(
+      next(tmp_path.glob("physical_failure_*.pt")), weights_only=True
+    )
+    assert len(payload["history"]) == 2
+    assert "ctrl" in payload["history"][0]
+    assert "xfrc_applied" in payload["history"][0]
+    assert "body_mass" in payload["model"]
+    assert payload["context"]["raw_action"].shape[0] == 1
+    assert torch.isnan(payload["detected"][field][0, 0])
+  finally:
+    with torch.inference_mode():
+      env.reset()
+
+
+@pytest.mark.slow
+@pytest.mark.parametrize(
+  "physics_dt,actuator_model",
+  [
+    (0.005, "corrected"),
+    (0.0025, "corrected"),
+    (0.001, "corrected"),
+    (0.005, "historical_unbounded"),
+  ],
+)
+@torch.inference_mode()
+def test_headless_evaluator_records_failures_and_export_parity(
+  env, tmp_path, monkeypatch, physics_dt, actuator_model
+):
+  import json
+  import sys
+  from dataclasses import asdict
+
+  from mjlab.rl import RslRlVecEnvWrapper
+  from mjlab.tasks.registry import load_rl_cfg
+
+  from wbc_mjlab.rl.runner import PolicyOnlyMotionTrackingRunner
+  from wbc_mjlab.scripts.evaluate import main
+  from wbc_mjlab.tasks import prepare_wbc_run
+
+  prepare_wbc_run(task_id="Wbc-G1-SE")
+  checkpoint = tmp_path / "random.pt"
+  agent = load_rl_cfg("Wbc-G1-SE")
+  runner = PolicyOnlyMotionTrackingRunner(
+    RslRlVecEnvWrapper(env), asdict(agent), device=env.device
+  )
+  runner.save(str(checkpoint))
+  results = []
+  for backend in ("torch", "onnx"):
+    output = tmp_path / backend
+    monkeypatch.setattr(
+      sys,
+      "argv",
+      [
+        "evaluate",
+        "--task",
+        "Wbc-G1-SE",
+        "--checkpoint",
+        str(checkpoint),
+        "--onnx-file",
+        str(checkpoint.parent / "params/policy.onnx"),
+        "--motion-file",
+        env.cfg.commands["motion"].motion_file,
+        "--output",
+        str(output),
+        "--device",
+        env.device,
+        "--backend",
+        backend,
+        "--physics-dt",
+        str(physics_dt),
+        "--actuator-model",
+        actuator_model,
+      ],
+    )
+    main()
+    result = json.loads((output / "results.json").read_text())
+    assert len(result["trials"]) == 8
+    assert all(t["status"] in ("completed", "fall") for t in result["trials"])
+    assert result["export_parity"]["passed"]
+    assert result["export_parity"]["existing_export_checked"]
+    assert result["export_parity"]["samples"] >= 8
+    for trial in result["trials"]:
+      physical = trial["physical"]
+      assert (
+        physical["motor_joint_samples"]
+        == trial["observed_steps"] * round(0.02 / physics_dt) * 29
+      )
+      assert physical["friction_dissipation_j"] >= 0
+      assert 0 <= physical["motor_saturation_fraction"] <= 1
+      with np.load(output / trial["trace"]) as trace:
+        assert len(trace["qpos"]) == trial["observed_steps"]
+    results.append(result)
+  for a, b in zip(results[0]["trials"], results[1]["trials"], strict=True):
+    assert a["status"] == b["status"]
+    assert a["observed_steps"] == b["observed_steps"]
+    np.testing.assert_allclose(
+      a["terminal_qpos"], b["terminal_qpos"], atol=1e-3, rtol=1e-3
+    )
+  if physics_dt == 0.005 and actuator_model == "corrected":
+    import subprocess
+
+    subprocess.run(
+      [
+        sys.executable,
+        "-m",
+        "wbc_mjlab.scripts.render_evaluation",
+        "--evaluation",
+        str(tmp_path / "torch"),
+        "--output",
+        str(tmp_path / "video"),
+      ],
+      env={**os.environ, "MUJOCO_GL": "egl"},
+      check=True,
+    )
+    manifest = json.loads((tmp_path / "video/videos.json").read_text())
+    assert manifest["state"] == "completed"
+    assert len(manifest["videos"]) == 2
+    assert all(
+      (tmp_path / "video" / row["video"]).stat().st_size > 1000
+      for row in manifest["videos"]
+    )
+
+
+@pytest.mark.slow
+@torch.inference_mode()
+def test_evaluator_rejects_broadphase_capacity_overflow(env, tmp_path, monkeypatch):
+  import json
+
+  from wbc_mjlab.scripts.evaluate import check_collision_capacity
+
+  monkeypatch.setattr(env.cfg.sim.nan_guard, "output_dir", str(tmp_path))
+  counter = env.sim.data.ncollision
+  saved = counter.clone()
+  try:
+    counter[:] = env.sim.wp_data.naconmax + 1
+    with pytest.raises(RuntimeError, match="capacity overflow"):
+      check_collision_capacity(env)
+    report = json.loads((tmp_path / "capacity_failure.json").read_text())
+    assert report["broadphase_pairs"]["counts"] == [env.sim.wp_data.naconmax + 1]
+    assert (tmp_path / "capacity_failure.pt").is_file()
+  finally:
+    counter.copy_(saved)
+
+
+@pytest.mark.slow
+@torch.inference_mode()
+def test_capture_rejects_raw_reward_before_sanitized_result(env, tmp_path, monkeypatch):
+  import json
+
+  from wbc_mjlab.diagnostics import install_failure_capture
+
+  # Register restoration for the fixture's methods before installing wrappers.
+  for owner, name in (
+    (env.sim, "nan_guard"),
+    (env.sim, "forward"),
+    (env.sim, "sense"),
+    (env.action_manager, "process_action"),
+    (env.reward_manager, "compute"),
+  ):
+    monkeypatch.setattr(owner, name, getattr(owner, name))
+  for name in env.reward_manager.active_terms:
+    cfg = env.reward_manager.get_term_cfg(name)
+    monkeypatch.setattr(cfg, "func", cfg.func)
+  monkeypatch.setattr(
+    env.cfg.sim,
+    "nan_guard",
+    NanGuardCfg(
+      enabled=True,
+      output_dir=str(tmp_path),
+      buffer_size=2,
+    ),
+  )
+  cfg = env.reward_manager.get_term_cfg("motion_global_root_pos")
+  monkeypatch.setattr(
+    cfg,
+    "func",
+    lambda env, **kwargs: torch.full(
+      (env.num_envs,),
+      float("nan"),
+      device=env.device,
+    ),
+  )
+  guard = install_failure_capture(env)
+  env.reset()
+  guard.capture(env.sim.data)
+  with pytest.raises(FloatingPointError, match="raw_rewards"):
+    env.reward_manager.compute(env.step_dt)
+  metadata = json.loads(next(tmp_path.glob("physical_failure_*.json")).read_text())
+  assert metadata["stage"] == "raw_rewards"
+  assert metadata["faults"][0]["array"] == "motion_global_root_pos"

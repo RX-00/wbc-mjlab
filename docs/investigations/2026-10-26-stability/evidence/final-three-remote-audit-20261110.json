@@ -1,0 +1,1353 @@
+{
+  "observed_utc": "2026-11-10T16:44:52.000856+00:00",
+  "jobs": {
+    "20236": {
+      "status": {
+        "task": "Wbc-G1",
+        "phase": "train",
+        "job_id": "20236",
+        "node": "a2r-wolf",
+        "started": 1793816548.6714962,
+        "command": [
+          "/usr/local/bin/python",
+          "-m",
+          "wbc_mjlab.scripts.train",
+          "--task",
+          "Wbc-G1",
+          "--dataset-path",
+          "/workspace/wbc-mjlab/data/g1/samples",
+          "--env.scene.num-envs",
+          "2048",
+          "--env.sim.njmax",
+          "1024",
+          "--env.sim.contact-sensor-maxmatch",
+          "128",
+          "--enable-nan-guard",
+          "True",
+          "--env.sim.nan-guard.buffer-size",
+          "64",
+          "--env.sim.nan-guard.output-dir",
+          "/runs/diagnostics/train_Wbc-G1_job20236",
+          "--env.observations.actor.nan-policy",
+          "error",
+          "--env.observations.critic.nan-policy",
+          "error",
+          "--agent.seed",
+          "42",
+          "--agent.resume",
+          "False",
+          "--agent.max-iterations",
+          "200000",
+          "--agent.num-steps-per-env",
+          "24",
+          "--agent.save-interval",
+          "5000",
+          "--agent.logger",
+          "tensorboard",
+          "--agent.run-name",
+          "train_seed42_job20236",
+          "--log-root",
+          "/runs/train",
+          "--env.sim.mujoco.timestep",
+          "0.0025",
+          "--env.decimation",
+          "8",
+          "--env.scene.sensors.1.history-length",
+          "8",
+          "--env.rewards.actuator-torque-soft-limit.weight",
+          "-0.1"
+        ],
+        "diagnostics": "/runs/diagnostics/train_Wbc-G1_job20236",
+        "versions": {
+          "mjlab": "1.6.0",
+          "mujoco": "3.11.0",
+          "mujoco-warp": "3.11.0",
+          "warp-lang": "1.14.0",
+          "torch": "2.11.0+cu128"
+        },
+        "actuator_model": "unitree_speed_envelope_then_passive_friction_v1",
+        "torque_penalty": "corrected",
+        "snapshot_manifest_sha256": "b327448336d595a857ee3603daecf5c2b9b3835270ccffdb5da88c111d17b722",
+        "checkpoint": "/runs/train/wbc_g1/2026-11-04_13-22-41_train_seed42_job20236/model_199999.pt",
+        "evaluation_command": [
+          "/usr/local/bin/python",
+          "-m",
+          "wbc_mjlab.scripts.evaluate",
+          "--task",
+          "Wbc-G1",
+          "--checkpoint",
+          "/runs/train/wbc_g1/2026-11-04_13-22-41_train_seed42_job20236/model_199999.pt",
+          "--onnx-file",
+          "/runs/train/wbc_g1/2026-11-04_13-22-41_train_seed42_job20236/params/policy.onnx",
+          "--motion-file",
+          "/workspace/wbc-mjlab/data/g1/samples",
+          "--physics-dt",
+          "0.0025",
+          "--output",
+          "/runs/evaluation/train_Wbc-G1_job20236"
+        ],
+        "evaluation": "/runs/evaluation/train_Wbc-G1_job20236/results.json",
+        "state": "completed",
+        "exit_code": 0,
+        "finished": 1794032533.6297832,
+        "elapsed_seconds": 215984.9582874775
+      },
+      "logs": {
+        "out": {
+          "path": "/home/rxing/wbc-mjlab-runs/2026-10-26_stability/final-v12-2p5ms/console/wbc_train_Wbc-G1-20236.out",
+          "bytes": 549898617,
+          "lines": 11200595,
+          "sha256": "028c3792e757ffab90f71470ac75c6f8dfcad41f87f99b124ac14ebd7388f116",
+          "fatal_matches": [],
+          "last_iteration": "199999/200000"
+        },
+        "err": {
+          "path": "/home/rxing/wbc-mjlab-runs/2026-10-26_stability/final-v12-2p5ms/console/wbc_train_Wbc-G1-20236.err",
+          "bytes": 0,
+          "lines": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "fatal_matches": [],
+          "last_iteration": null
+        }
+      },
+      "diagnostics": [
+        "diagnostics/train_Wbc-G1_job20236/capture_capacity.json"
+      ]
+    },
+    "19795": {
+      "status": {
+        "task": "Wbc-G1-EE",
+        "phase": "train",
+        "job_id": "19795",
+        "node": "a2r-wolf",
+        "started": 1794032543.3085477,
+        "command": [
+          "/usr/local/bin/python",
+          "-m",
+          "wbc_mjlab.scripts.train",
+          "--task",
+          "Wbc-G1-EE",
+          "--dataset-path",
+          "/workspace/wbc-mjlab/data/g1/samples",
+          "--env.scene.num-envs",
+          "2048",
+          "--env.sim.njmax",
+          "1024",
+          "--env.sim.contact-sensor-maxmatch",
+          "128",
+          "--enable-nan-guard",
+          "True",
+          "--env.sim.nan-guard.buffer-size",
+          "64",
+          "--env.sim.nan-guard.output-dir",
+          "/runs/diagnostics/train_Wbc-G1-EE_job19795",
+          "--env.observations.actor.nan-policy",
+          "error",
+          "--env.observations.critic.nan-policy",
+          "error",
+          "--agent.seed",
+          "42",
+          "--agent.resume",
+          "False",
+          "--agent.max-iterations",
+          "200000",
+          "--agent.num-steps-per-env",
+          "24",
+          "--agent.save-interval",
+          "5000",
+          "--agent.logger",
+          "tensorboard",
+          "--agent.run-name",
+          "train_seed42_job19795",
+          "--log-root",
+          "/runs/train",
+          "--env.sim.mujoco.timestep",
+          "0.0025",
+          "--env.decimation",
+          "8",
+          "--env.scene.sensors.1.history-length",
+          "8",
+          "--env.rewards.actuator-torque-soft-limit.weight",
+          "-0.1"
+        ],
+        "diagnostics": "/runs/diagnostics/train_Wbc-G1-EE_job19795",
+        "versions": {
+          "mjlab": "1.6.0",
+          "mujoco": "3.11.0",
+          "mujoco-warp": "3.11.0",
+          "warp-lang": "1.14.0",
+          "torch": "2.11.0+cu128"
+        },
+        "actuator_model": "unitree_speed_envelope_then_passive_friction_v1",
+        "torque_penalty": "corrected",
+        "snapshot_manifest_sha256": "b327448336d595a857ee3603daecf5c2b9b3835270ccffdb5da88c111d17b722",
+        "checkpoint": "/runs/train/wbc_g1_ee/2026-11-07_01-22-33_train_seed42_job19795/model_199999.pt",
+        "evaluation_command": [
+          "/usr/local/bin/python",
+          "-m",
+          "wbc_mjlab.scripts.evaluate",
+          "--task",
+          "Wbc-G1-EE",
+          "--checkpoint",
+          "/runs/train/wbc_g1_ee/2026-11-07_01-22-33_train_seed42_job19795/model_199999.pt",
+          "--onnx-file",
+          "/runs/train/wbc_g1_ee/2026-11-07_01-22-33_train_seed42_job19795/params/policy.onnx",
+          "--motion-file",
+          "/workspace/wbc-mjlab/data/g1/samples",
+          "--physics-dt",
+          "0.0025",
+          "--output",
+          "/runs/evaluation/train_Wbc-G1-EE_job19795"
+        ],
+        "evaluation": "/runs/evaluation/train_Wbc-G1-EE_job19795/results.json",
+        "state": "completed",
+        "exit_code": 0,
+        "finished": 1794249140.8687108,
+        "elapsed_seconds": 216597.56016373634
+      },
+      "logs": {
+        "out": {
+          "path": "/home/rxing/wbc-mjlab-runs/2026-10-26_stability/final-v12-2p5ms/console/wbc_train_Wbc-G1-EE-19795.out",
+          "bytes": 549901765,
+          "lines": 11200588,
+          "sha256": "a37f78c9e79daaec187baeb2f7b395036f202f4430d2d3d6f8d1ddbf4389eb10",
+          "fatal_matches": [],
+          "last_iteration": "199999/200000"
+        },
+        "err": {
+          "path": "/home/rxing/wbc-mjlab-runs/2026-10-26_stability/final-v12-2p5ms/console/wbc_train_Wbc-G1-EE-19795.err",
+          "bytes": 0,
+          "lines": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "fatal_matches": [],
+          "last_iteration": null
+        }
+      },
+      "diagnostics": [
+        "diagnostics/train_Wbc-G1-EE_job19795/capture_capacity.json"
+      ]
+    },
+    "19796": {
+      "status": {
+        "task": "Wbc-G1-EE-SE",
+        "phase": "train",
+        "job_id": "19796",
+        "node": "a2r-fox",
+        "started": 1793816569.5953274,
+        "command": [
+          "/usr/local/bin/python",
+          "-m",
+          "wbc_mjlab.scripts.train",
+          "--task",
+          "Wbc-G1-EE-SE",
+          "--dataset-path",
+          "/workspace/wbc-mjlab/data/g1/samples",
+          "--env.scene.num-envs",
+          "2048",
+          "--env.sim.njmax",
+          "1024",
+          "--env.sim.contact-sensor-maxmatch",
+          "128",
+          "--enable-nan-guard",
+          "True",
+          "--env.sim.nan-guard.buffer-size",
+          "64",
+          "--env.sim.nan-guard.output-dir",
+          "/runs/diagnostics/train_Wbc-G1-EE-SE_job19796",
+          "--env.observations.actor.nan-policy",
+          "error",
+          "--env.observations.critic.nan-policy",
+          "error",
+          "--agent.seed",
+          "42",
+          "--agent.resume",
+          "False",
+          "--agent.max-iterations",
+          "200000",
+          "--agent.num-steps-per-env",
+          "24",
+          "--agent.save-interval",
+          "5000",
+          "--agent.logger",
+          "tensorboard",
+          "--agent.run-name",
+          "train_seed42_job19796",
+          "--log-root",
+          "/runs/train",
+          "--env.sim.mujoco.timestep",
+          "0.0025",
+          "--env.decimation",
+          "8",
+          "--env.scene.sensors.1.history-length",
+          "8",
+          "--env.rewards.actuator-torque-soft-limit.weight",
+          "-0.1"
+        ],
+        "diagnostics": "/runs/diagnostics/train_Wbc-G1-EE-SE_job19796",
+        "versions": {
+          "mjlab": "1.6.0",
+          "mujoco": "3.11.0",
+          "mujoco-warp": "3.11.0",
+          "warp-lang": "1.14.0",
+          "torch": "2.11.0+cu128"
+        },
+        "actuator_model": "unitree_speed_envelope_then_passive_friction_v1",
+        "torque_penalty": "corrected",
+        "snapshot_manifest_sha256": "b327448336d595a857ee3603daecf5c2b9b3835270ccffdb5da88c111d17b722",
+        "checkpoint": "/runs/train/wbc_g1_ee_se/2026-11-04_13-23-00_train_seed42_job19796/model_199999.pt",
+        "evaluation_command": [
+          "/usr/local/bin/python",
+          "-m",
+          "wbc_mjlab.scripts.evaluate",
+          "--task",
+          "Wbc-G1-EE-SE",
+          "--checkpoint",
+          "/runs/train/wbc_g1_ee_se/2026-11-04_13-23-00_train_seed42_job19796/model_199999.pt",
+          "--onnx-file",
+          "/runs/train/wbc_g1_ee_se/2026-11-04_13-23-00_train_seed42_job19796/params/policy.onnx",
+          "--motion-file",
+          "/workspace/wbc-mjlab/data/g1/samples",
+          "--physics-dt",
+          "0.0025",
+          "--output",
+          "/runs/evaluation/train_Wbc-G1-EE-SE_job19796"
+        ],
+        "evaluation": "/runs/evaluation/train_Wbc-G1-EE-SE_job19796/results.json",
+        "state": "completed",
+        "exit_code": 0,
+        "finished": 1794037388.3083162,
+        "elapsed_seconds": 220818.7129895687
+      },
+      "logs": {
+        "out": {
+          "path": "/home/rxing/wbc-mjlab-runs/2026-10-26_stability/final-v12-2p5ms/console/wbc_train_Wbc-G1-EE-SE-19796.out",
+          "bytes": 549937302,
+          "lines": 11200588,
+          "sha256": "f7f784cd4338cbb8bae07c371b9b704ad8b1622a31a4e7c7caf52347ffa2013c",
+          "fatal_matches": [],
+          "last_iteration": "199999/200000"
+        },
+        "err": {
+          "path": "/home/rxing/wbc-mjlab-runs/2026-10-26_stability/final-v12-2p5ms/console/wbc_train_Wbc-G1-EE-SE-19796.err",
+          "bytes": 0,
+          "lines": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "fatal_matches": [],
+          "last_iteration": null
+        }
+      },
+      "diagnostics": [
+        "diagnostics/train_Wbc-G1-EE-SE_job19796/capture_capacity.json"
+      ]
+    }
+  },
+  "artifacts": {
+    "completed/Wbc-G1-20236/model_199999.pt": {
+      "remote_path": "/home/rxing/wbc-mjlab-runs/2026-10-26_stability/final-v12-2p5ms/train/wbc_g1/2026-11-04_13-22-41_train_seed42_job20236/model_199999.pt",
+      "bytes": 45356985,
+      "sha256": "e0606d2bc2e86984642a8d46aa076f92860a105d8302475d7a0bb371b0b86609"
+    },
+    "completed/Wbc-G1-20236/status.json": {
+      "remote_path": "/home/rxing/wbc-mjlab-runs/2026-10-26_stability/final-v12-2p5ms/status/train_Wbc-G1_job20236.json",
+      "bytes": 2436,
+      "sha256": "ab0991a65a1c2014196293d9070215e61f899e05a02ae8cd4bc0bc75b4764700"
+    },
+    "completed/Wbc-G1-20236/params/agent.yaml": {
+      "remote_path": "/home/rxing/wbc-mjlab-runs/2026-10-26_stability/final-v12-2p5ms/train/wbc_g1/2026-11-04_13-22-41_train_seed42_job20236/params/agent.yaml",
+      "bytes": 1321,
+      "sha256": "4fd3f1a2640a7d6b170d1c47e58de77d5dd1b9809fb2054557b32cea88dc5855"
+    },
+    "completed/Wbc-G1-20236/params/config.yaml": {
+      "remote_path": "/home/rxing/wbc-mjlab-runs/2026-10-26_stability/final-v12-2p5ms/train/wbc_g1/2026-11-04_13-22-41_train_seed42_job20236/params/config.yaml",
+      "bytes": 4602,
+      "sha256": "a646687843846d417d24d6b2c9f3a4dc51343d149491f63478363f6e3112fb17"
+    },
+    "completed/Wbc-G1-20236/params/env.yaml": {
+      "remote_path": "/home/rxing/wbc-mjlab-runs/2026-10-26_stability/final-v12-2p5ms/train/wbc_g1/2026-11-04_13-22-41_train_seed42_job20236/params/env.yaml",
+      "bytes": 58404,
+      "sha256": "dc987f5e9d4e49d15ab72b35570fe98eb89ed92371d723e44dca19c944e54f43"
+    },
+    "completed/Wbc-G1-20236/params/policy.onnx": {
+      "remote_path": "/home/rxing/wbc-mjlab-runs/2026-10-26_stability/final-v12-2p5ms/train/wbc_g1/2026-11-04_13-22-41_train_seed42_job20236/params/policy.onnx",
+      "bytes": 3676425,
+      "sha256": "015928a3236d8cda63b96487e78bae6c3dd8992eb1c7cc89419228e5bc0918dd"
+    },
+    "completed/Wbc-G1-20236/params/rsi_bin_stats.npz": {
+      "remote_path": "/home/rxing/wbc-mjlab-runs/2026-10-26_stability/final-v12-2p5ms/train/wbc_g1/2026-11-04_13-22-41_train_seed42_job20236/params/rsi_bin_stats.npz",
+      "bytes": 11334,
+      "sha256": "ad85ee1e9d8f39fcb793684eb3671fb994dbe142460071135f2c3660d87155c7"
+    },
+    "completed/Wbc-G1-20236/evaluation/diagnostics/capture_capacity.json": {
+      "remote_path": "/home/rxing/wbc-mjlab-runs/2026-10-26_stability/final-v12-2p5ms/evaluation/train_Wbc-G1_job20236/diagnostics/capture_capacity.json",
+      "bytes": 366,
+      "sha256": "b11d943147e5cd82e4d1d1030f6a501b1bd4a37fe596404b51d03880df25cf88"
+    },
+    "completed/Wbc-G1-20236/evaluation/export_parity.npz": {
+      "remote_path": "/home/rxing/wbc-mjlab-runs/2026-10-26_stability/final-v12-2p5ms/evaluation/train_Wbc-G1_job20236/export_parity.npz",
+      "bytes": 1038193,
+      "sha256": "2bf3e5f2dffc689026f2fffe5211fd5711d67b166a90955af2823a076f253f16"
+    },
+    "completed/Wbc-G1-20236/evaluation/initial_states.npz": {
+      "remote_path": "/home/rxing/wbc-mjlab-runs/2026-10-26_stability/final-v12-2p5ms/evaluation/train_Wbc-G1_job20236/initial_states.npz",
+      "bytes": 15410,
+      "sha256": "998434ea8ab548ebe1db451c8bfb43c53e1619cb89fa192d4a1bbcb465e6c226"
+    },
+    "completed/Wbc-G1-20236/evaluation/model.mjb.gz": {
+      "remote_path": "/home/rxing/wbc-mjlab-runs/2026-10-26_stability/final-v12-2p5ms/evaluation/train_Wbc-G1_job20236/model.mjb.gz",
+      "bytes": 34962720,
+      "sha256": "eb0b292c4ff910048f67627fad0cde77bb073b528a9dbcd0acfc29ec36c06ed0"
+    },
+    "completed/Wbc-G1-20236/evaluation/policy.onnx": {
+      "remote_path": "/home/rxing/wbc-mjlab-runs/2026-10-26_stability/final-v12-2p5ms/evaluation/train_Wbc-G1_job20236/policy.onnx",
+      "bytes": 3318611,
+      "sha256": "2ed27d7c00d2393e5f29b01e6e96316ac97cd7a96fe3f3ddd951e7c790de900f"
+    },
+    "completed/Wbc-G1-20236/evaluation/protocol.json": {
+      "remote_path": "/home/rxing/wbc-mjlab-runs/2026-10-26_stability/final-v12-2p5ms/evaluation/train_Wbc-G1_job20236/protocol.json",
+      "bytes": 17820,
+      "sha256": "2f02ab0b0edba5aec0b35a3d54069571e4a97180a2752844dcffe283238dc4d0"
+    },
+    "completed/Wbc-G1-20236/evaluation/results.json": {
+      "remote_path": "/home/rxing/wbc-mjlab-runs/2026-10-26_stability/final-v12-2p5ms/evaluation/train_Wbc-G1_job20236/results.json",
+      "bytes": 128159,
+      "sha256": "a15485a89a939ff449c7f99bb35afc3539989f7448106be76a293aae4d4b664f"
+    },
+    "completed/Wbc-G1-20236/evaluation/trial_000_trace.npz": {
+      "remote_path": "/home/rxing/wbc-mjlab-runs/2026-10-26_stability/final-v12-2p5ms/evaluation/train_Wbc-G1_job20236/trial_000_trace.npz",
+      "bytes": 9212,
+      "sha256": "b15eba1fa89cd015dc06365857ec02d8beaf1fe7bc75b6325bf310088e34d4ea"
+    },
+    "completed/Wbc-G1-20236/evaluation/trial_001_trace.npz": {
+      "remote_path": "/home/rxing/wbc-mjlab-runs/2026-10-26_stability/final-v12-2p5ms/evaluation/train_Wbc-G1_job20236/trial_001_trace.npz",
+      "bytes": 7317,
+      "sha256": "8cb7a893bff2ac3e9a71a735cc7bfa60ced31b1ed741e85b00c0ee07230012ac"
+    },
+    "completed/Wbc-G1-20236/evaluation/trial_002_trace.npz": {
+      "remote_path": "/home/rxing/wbc-mjlab-runs/2026-10-26_stability/final-v12-2p5ms/evaluation/train_Wbc-G1_job20236/trial_002_trace.npz",
+      "bytes": 6590,
+      "sha256": "09e7fddb84219b84ce455944c1dd8ebccb2a5e4584058f8c61adf5aa7bccb67f"
+    },
+    "completed/Wbc-G1-20236/evaluation/trial_003_trace.npz": {
+      "remote_path": "/home/rxing/wbc-mjlab-runs/2026-10-26_stability/final-v12-2p5ms/evaluation/train_Wbc-G1_job20236/trial_003_trace.npz",
+      "bytes": 9215,
+      "sha256": "f5d8d040401447b8a5227110f979392309a76667c5e876d9eeabeb1658783017"
+    },
+    "completed/Wbc-G1-20236/evaluation/trial_004_trace.npz": {
+      "remote_path": "/home/rxing/wbc-mjlab-runs/2026-10-26_stability/final-v12-2p5ms/evaluation/train_Wbc-G1_job20236/trial_004_trace.npz",
+      "bytes": 93515,
+      "sha256": "46a7ed6f794bdc6995868f26def910c978237ed4eeca2ff35d2557f2300f8c4d"
+    },
+    "completed/Wbc-G1-20236/evaluation/trial_005_trace.npz": {
+      "remote_path": "/home/rxing/wbc-mjlab-runs/2026-10-26_stability/final-v12-2p5ms/evaluation/train_Wbc-G1_job20236/trial_005_trace.npz",
+      "bytes": 70456,
+      "sha256": "0609b05b502adcac5b029b73b70378769751cf5515be63221b10021c6d54788d"
+    },
+    "completed/Wbc-G1-20236/evaluation/trial_006_trace.npz": {
+      "remote_path": "/home/rxing/wbc-mjlab-runs/2026-10-26_stability/final-v12-2p5ms/evaluation/train_Wbc-G1_job20236/trial_006_trace.npz",
+      "bytes": 47118,
+      "sha256": "37a67d9c4bd1abde3eaf497cea873c6bf7d0d1ccb668acaca5dbf7379e3af1fc"
+    },
+    "completed/Wbc-G1-20236/evaluation/trial_007_trace.npz": {
+      "remote_path": "/home/rxing/wbc-mjlab-runs/2026-10-26_stability/final-v12-2p5ms/evaluation/train_Wbc-G1_job20236/trial_007_trace.npz",
+      "bytes": 24165,
+      "sha256": "eac2a8a4340af42f3ddb267e9f61b7c4c685ee907bda69687a856551461495d9"
+    },
+    "completed/Wbc-G1-20236/evaluation/trial_008_trace.npz": {
+      "remote_path": "/home/rxing/wbc-mjlab-runs/2026-10-26_stability/final-v12-2p5ms/evaluation/train_Wbc-G1_job20236/trial_008_trace.npz",
+      "bytes": 2472358,
+      "sha256": "352409262655fdc672f192a61281ed378b7c7d41cea7980ace281f499cf99c8d"
+    },
+    "completed/Wbc-G1-20236/evaluation/trial_009_trace.npz": {
+      "remote_path": "/home/rxing/wbc-mjlab-runs/2026-10-26_stability/final-v12-2p5ms/evaluation/train_Wbc-G1_job20236/trial_009_trace.npz",
+      "bytes": 94944,
+      "sha256": "67cfc1005fa67b9cd266d5dc0516d615b8d1cc143e161a51eec91d77b28485c0"
+    },
+    "completed/Wbc-G1-20236/evaluation/trial_010_trace.npz": {
+      "remote_path": "/home/rxing/wbc-mjlab-runs/2026-10-26_stability/final-v12-2p5ms/evaluation/train_Wbc-G1_job20236/trial_010_trace.npz",
+      "bytes": 94948,
+      "sha256": "4bf80785046367dc80c9abe6c1d26140672be741cf9d144ecae9998f7b5d8721"
+    },
+    "completed/Wbc-G1-20236/evaluation/trial_011_trace.npz": {
+      "remote_path": "/home/rxing/wbc-mjlab-runs/2026-10-26_stability/final-v12-2p5ms/evaluation/train_Wbc-G1_job20236/trial_011_trace.npz",
+      "bytes": 94890,
+      "sha256": "79e4d69558e7c762c149cf8693584c3d010e690193708caea2d803f322dc03a8"
+    },
+    "completed/Wbc-G1-20236/evaluation/trial_012_trace.npz": {
+      "remote_path": "/home/rxing/wbc-mjlab-runs/2026-10-26_stability/final-v12-2p5ms/evaluation/train_Wbc-G1_job20236/trial_012_trace.npz",
+      "bytes": 3164961,
+      "sha256": "0ab419c40c7d887e241eb95f09315a9b8aa974ca19ceb0bc017cd48c1b691c60"
+    },
+    "completed/Wbc-G1-20236/evaluation/trial_013_trace.npz": {
+      "remote_path": "/home/rxing/wbc-mjlab-runs/2026-10-26_stability/final-v12-2p5ms/evaluation/train_Wbc-G1_job20236/trial_013_trace.npz",
+      "bytes": 94868,
+      "sha256": "dfaeae56979790c9700ef2879264bf1db82275eafb796eb3567ebfae3ec879d8"
+    },
+    "completed/Wbc-G1-20236/evaluation/trial_014_trace.npz": {
+      "remote_path": "/home/rxing/wbc-mjlab-runs/2026-10-26_stability/final-v12-2p5ms/evaluation/train_Wbc-G1_job20236/trial_014_trace.npz",
+      "bytes": 95080,
+      "sha256": "6ff2bc62edae5115284d6da416daaca22b8f778e72e3aa57cb7b1db8ed4e397d"
+    },
+    "completed/Wbc-G1-20236/evaluation/trial_015_trace.npz": {
+      "remote_path": "/home/rxing/wbc-mjlab-runs/2026-10-26_stability/final-v12-2p5ms/evaluation/train_Wbc-G1_job20236/trial_015_trace.npz",
+      "bytes": 95069,
+      "sha256": "a23be1a3e4f774af490aa4db6966f13d28cbaad23c6d20e653bf9b8e1aaf45f0"
+    },
+    "completed/Wbc-G1-20236/evaluation/trial_016_trace.npz": {
+      "remote_path": "/home/rxing/wbc-mjlab-runs/2026-10-26_stability/final-v12-2p5ms/evaluation/train_Wbc-G1_job20236/trial_016_trace.npz",
+      "bytes": 4606683,
+      "sha256": "4d1b67f945f33f3b2b30d0311d1c80bcaf8d00ca5b3992d7d9e4309118e1367e"
+    },
+    "completed/Wbc-G1-20236/evaluation/trial_017_trace.npz": {
+      "remote_path": "/home/rxing/wbc-mjlab-runs/2026-10-26_stability/final-v12-2p5ms/evaluation/train_Wbc-G1_job20236/trial_017_trace.npz",
+      "bytes": 95100,
+      "sha256": "935014256daa9f5f9aefdba969c7f046f23441531104779e831b00b538cf0816"
+    },
+    "completed/Wbc-G1-20236/evaluation/trial_018_trace.npz": {
+      "remote_path": "/home/rxing/wbc-mjlab-runs/2026-10-26_stability/final-v12-2p5ms/evaluation/train_Wbc-G1_job20236/trial_018_trace.npz",
+      "bytes": 95076,
+      "sha256": "cf4c9999c4110043cca702f66a4a5b606f8d33377771cecacdaffb5ee0f18d21"
+    },
+    "completed/Wbc-G1-20236/evaluation/trial_019_trace.npz": {
+      "remote_path": "/home/rxing/wbc-mjlab-runs/2026-10-26_stability/final-v12-2p5ms/evaluation/train_Wbc-G1_job20236/trial_019_trace.npz",
+      "bytes": 94959,
+      "sha256": "c250a139cf8b36e748e7be4218ca3519f9c27af047ebbc120e097df64f862247"
+    },
+    "completed/Wbc-G1-20236/evaluation/trial_020_trace.npz": {
+      "remote_path": "/home/rxing/wbc-mjlab-runs/2026-10-26_stability/final-v12-2p5ms/evaluation/train_Wbc-G1_job20236/trial_020_trace.npz",
+      "bytes": 4610903,
+      "sha256": "8dc80e2ea0d68934c17351d5536aba1bc891a7f574991aad38f3960cde60bba0"
+    },
+    "completed/Wbc-G1-20236/evaluation/trial_021_trace.npz": {
+      "remote_path": "/home/rxing/wbc-mjlab-runs/2026-10-26_stability/final-v12-2p5ms/evaluation/train_Wbc-G1_job20236/trial_021_trace.npz",
+      "bytes": 94959,
+      "sha256": "093893932b0d5a7abd3c294a2b88e97a7ee54de5a8d931240757776f69bc9861"
+    },
+    "completed/Wbc-G1-20236/evaluation/trial_022_trace.npz": {
+      "remote_path": "/home/rxing/wbc-mjlab-runs/2026-10-26_stability/final-v12-2p5ms/evaluation/train_Wbc-G1_job20236/trial_022_trace.npz",
+      "bytes": 95202,
+      "sha256": "c0d103a2d23481730d18c7f00e4c03fbc0ea7b722a77c8ff6e824c24d60da10e"
+    },
+    "completed/Wbc-G1-20236/evaluation/trial_023_trace.npz": {
+      "remote_path": "/home/rxing/wbc-mjlab-runs/2026-10-26_stability/final-v12-2p5ms/evaluation/train_Wbc-G1_job20236/trial_023_trace.npz",
+      "bytes": 95054,
+      "sha256": "d1a4c89411f080c911086b80d0610426de73182684df5282dfacf78e323ad973"
+    },
+    "completed/Wbc-G1-20236/evaluation/trial_024_trace.npz": {
+      "remote_path": "/home/rxing/wbc-mjlab-runs/2026-10-26_stability/final-v12-2p5ms/evaluation/train_Wbc-G1_job20236/trial_024_trace.npz",
+      "bytes": 36618,
+      "sha256": "2f470318fd7e6360fcd5ed31c2a09b044c4d1a86c7158b29db66c9aae17c7641"
+    },
+    "completed/Wbc-G1-20236/evaluation/trial_025_trace.npz": {
+      "remote_path": "/home/rxing/wbc-mjlab-runs/2026-10-26_stability/final-v12-2p5ms/evaluation/train_Wbc-G1_job20236/trial_025_trace.npz",
+      "bytes": 23086,
+      "sha256": "3114d051a77a704ad781e2e0adeedd9faa1bb013466ccb4098fd0e23d6d70241"
+    },
+    "completed/Wbc-G1-20236/evaluation/trial_026_trace.npz": {
+      "remote_path": "/home/rxing/wbc-mjlab-runs/2026-10-26_stability/final-v12-2p5ms/evaluation/train_Wbc-G1_job20236/trial_026_trace.npz",
+      "bytes": 9935,
+      "sha256": "1d4527d2f259b11e50f6ed6a1b7c7bd97bb1d5467d0c3941142259d4fb94eb9d"
+    },
+    "completed/Wbc-G1-20236/evaluation/trial_027_trace.npz": {
+      "remote_path": "/home/rxing/wbc-mjlab-runs/2026-10-26_stability/final-v12-2p5ms/evaluation/train_Wbc-G1_job20236/trial_027_trace.npz",
+      "bytes": 14460,
+      "sha256": "f80a97cf7f026a6c38d3344a4deddf0f4af23e1d93add680eafca5950065129c"
+    },
+    "completed/Wbc-G1-20236/evaluation/trial_028_trace.npz": {
+      "remote_path": "/home/rxing/wbc-mjlab-runs/2026-10-26_stability/final-v12-2p5ms/evaluation/train_Wbc-G1_job20236/trial_028_trace.npz",
+      "bytes": 4475099,
+      "sha256": "c7e07748faaadb7bfabee7947edd1162468b0ae5ca1017515baa7a39bfbbbc97"
+    },
+    "completed/Wbc-G1-20236/evaluation/trial_029_trace.npz": {
+      "remote_path": "/home/rxing/wbc-mjlab-runs/2026-10-26_stability/final-v12-2p5ms/evaluation/train_Wbc-G1_job20236/trial_029_trace.npz",
+      "bytes": 94975,
+      "sha256": "a27cb3520b4f44cc47bc425457b5526aebe951e41e9a474d9abb7da7cd599606"
+    },
+    "completed/Wbc-G1-20236/evaluation/trial_030_trace.npz": {
+      "remote_path": "/home/rxing/wbc-mjlab-runs/2026-10-26_stability/final-v12-2p5ms/evaluation/train_Wbc-G1_job20236/trial_030_trace.npz",
+      "bytes": 94943,
+      "sha256": "b2a93262b906e5515f45e183f0251a9adc4f01a1d5ce7f4eaf125a766edd6217"
+    },
+    "completed/Wbc-G1-20236/evaluation/trial_031_trace.npz": {
+      "remote_path": "/home/rxing/wbc-mjlab-runs/2026-10-26_stability/final-v12-2p5ms/evaluation/train_Wbc-G1_job20236/trial_031_trace.npz",
+      "bytes": 94947,
+      "sha256": "d907508a642d010c5d8557a07977f3dddd2cba6c1cc33e18069236391423e8da"
+    },
+    "completed/Wbc-G1-20236/evaluation/trial_032_trace.npz": {
+      "remote_path": "/home/rxing/wbc-mjlab-runs/2026-10-26_stability/final-v12-2p5ms/evaluation/train_Wbc-G1_job20236/trial_032_trace.npz",
+      "bytes": 5134553,
+      "sha256": "8bd09767f7a3be110370d6fde0db55a4b660b99e97211ed6baf543ba24d41fd5"
+    },
+    "completed/Wbc-G1-20236/evaluation/trial_033_trace.npz": {
+      "remote_path": "/home/rxing/wbc-mjlab-runs/2026-10-26_stability/final-v12-2p5ms/evaluation/train_Wbc-G1_job20236/trial_033_trace.npz",
+      "bytes": 95063,
+      "sha256": "30d1f84c3fcf789dda91981141588f1cb4e713264ba1af7ccedddb5664802b43"
+    },
+    "completed/Wbc-G1-20236/evaluation/trial_034_trace.npz": {
+      "remote_path": "/home/rxing/wbc-mjlab-runs/2026-10-26_stability/final-v12-2p5ms/evaluation/train_Wbc-G1_job20236/trial_034_trace.npz",
+      "bytes": 94697,
+      "sha256": "486c3d88e6a14ba0769d98760f9b538c3b7ef25226399d9c76efd51decbedee2"
+    },
+    "completed/Wbc-G1-20236/evaluation/trial_035_trace.npz": {
+      "remote_path": "/home/rxing/wbc-mjlab-runs/2026-10-26_stability/final-v12-2p5ms/evaluation/train_Wbc-G1_job20236/trial_035_trace.npz",
+      "bytes": 94511,
+      "sha256": "255b94f5f132c3a196616d3607d8b38016bed0816601bc92b3161346bebe7236"
+    },
+    "completed/Wbc-G1-20236/evaluation/trial_036_trace.npz": {
+      "remote_path": "/home/rxing/wbc-mjlab-runs/2026-10-26_stability/final-v12-2p5ms/evaluation/train_Wbc-G1_job20236/trial_036_trace.npz",
+      "bytes": 4916202,
+      "sha256": "a9e423fa3b2dd1b95b92bb788af3a0aac0439db5ad85686cfaaefbc39caf54c4"
+    },
+    "completed/Wbc-G1-20236/evaluation/trial_037_trace.npz": {
+      "remote_path": "/home/rxing/wbc-mjlab-runs/2026-10-26_stability/final-v12-2p5ms/evaluation/train_Wbc-G1_job20236/trial_037_trace.npz",
+      "bytes": 95022,
+      "sha256": "224cfca3d6a19128c20528c6fc686e739abd8e54bbfc32574212a8f180954766"
+    },
+    "completed/Wbc-G1-20236/evaluation/trial_038_trace.npz": {
+      "remote_path": "/home/rxing/wbc-mjlab-runs/2026-10-26_stability/final-v12-2p5ms/evaluation/train_Wbc-G1_job20236/trial_038_trace.npz",
+      "bytes": 95054,
+      "sha256": "51b975a4847126f34f734c4d397dc4b7da3a044de55e7d2c097970fdde54e84f"
+    },
+    "completed/Wbc-G1-20236/evaluation/trial_039_trace.npz": {
+      "remote_path": "/home/rxing/wbc-mjlab-runs/2026-10-26_stability/final-v12-2p5ms/evaluation/train_Wbc-G1_job20236/trial_039_trace.npz",
+      "bytes": 95035,
+      "sha256": "e149add923f2d9248c54dffc7c3f5a0b59dda8ff214504319356d7c49494badf"
+    },
+    "completed/Wbc-G1-20236/evaluation/trials.jsonl": {
+      "remote_path": "/home/rxing/wbc-mjlab-runs/2026-10-26_stability/final-v12-2p5ms/evaluation/train_Wbc-G1_job20236/trials.jsonl",
+      "bytes": 88174,
+      "sha256": "67d910ce3a437b3192200beea7d58f1c1d01e30bdab64f543388ce26e249b7da"
+    },
+    "completed/Wbc-G1-20236/full-videos-gpu/trial_000.mp4": {
+      "remote_path": "/home/rxing/wbc-mjlab-runs/2026-10-26_stability/final-v12-2p5ms/videos/Wbc-G1/trial_000.mp4",
+      "bytes": 271575,
+      "sha256": "c710c711a13474a13b4020e9d1d4622f914bf4281e69ac2da1bcc364eb913450"
+    },
+    "completed/Wbc-G1-20236/full-videos-gpu/trial_004.mp4": {
+      "remote_path": "/home/rxing/wbc-mjlab-runs/2026-10-26_stability/final-v12-2p5ms/videos/Wbc-G1/trial_004.mp4",
+      "bytes": 2325816,
+      "sha256": "d6fc890301bdf8ed3a806585876f75c49d3e73f8596521cfec1331b847394699"
+    },
+    "completed/Wbc-G1-20236/full-videos-gpu/trial_008.mp4": {
+      "remote_path": "/home/rxing/wbc-mjlab-runs/2026-10-26_stability/final-v12-2p5ms/videos/Wbc-G1/trial_008.mp4",
+      "bytes": 61894684,
+      "sha256": "4060018b13ce937710619871a8a4333745dc417dda9fd24da1afd9f2444811cd"
+    },
+    "completed/Wbc-G1-20236/full-videos-gpu/trial_012.mp4": {
+      "remote_path": "/home/rxing/wbc-mjlab-runs/2026-10-26_stability/final-v12-2p5ms/videos/Wbc-G1/trial_012.mp4",
+      "bytes": 76265822,
+      "sha256": "bc30b73fab073c7346f131ef09e9c0938b7ee9a7e25f2563a845fbe8cd5814c8"
+    },
+    "completed/Wbc-G1-20236/full-videos-gpu/trial_016.mp4": {
+      "remote_path": "/home/rxing/wbc-mjlab-runs/2026-10-26_stability/final-v12-2p5ms/videos/Wbc-G1/trial_016.mp4",
+      "bytes": 118446692,
+      "sha256": "d6dde63e78101370c706b863a9080076fb361710fb49d027538cad6f9b5e48e1"
+    },
+    "completed/Wbc-G1-20236/full-videos-gpu/trial_020.mp4": {
+      "remote_path": "/home/rxing/wbc-mjlab-runs/2026-10-26_stability/final-v12-2p5ms/videos/Wbc-G1/trial_020.mp4",
+      "bytes": 117258355,
+      "sha256": "7827e5563b67d5d66f2ea3d2e976ffacb339ebe5b2f73323f09eddedada4d554"
+    },
+    "completed/Wbc-G1-20236/full-videos-gpu/trial_024.mp4": {
+      "remote_path": "/home/rxing/wbc-mjlab-runs/2026-10-26_stability/final-v12-2p5ms/videos/Wbc-G1/trial_024.mp4",
+      "bytes": 1128913,
+      "sha256": "0cae7f005503bb9d155a32fd2533a834e507705f71441e1632dc00e501752c15"
+    },
+    "completed/Wbc-G1-20236/full-videos-gpu/trial_028.mp4": {
+      "remote_path": "/home/rxing/wbc-mjlab-runs/2026-10-26_stability/final-v12-2p5ms/videos/Wbc-G1/trial_028.mp4",
+      "bytes": 118868390,
+      "sha256": "821851a85b5667b8d75b50beba9382fbdeb25a27d7f58f628a7944ae87875f43"
+    },
+    "completed/Wbc-G1-20236/full-videos-gpu/trial_032.mp4": {
+      "remote_path": "/home/rxing/wbc-mjlab-runs/2026-10-26_stability/final-v12-2p5ms/videos/Wbc-G1/trial_032.mp4",
+      "bytes": 119798352,
+      "sha256": "d9c076d667c7744e98701283bfc64e99907c4350bbb7556c199be3c2703d5571"
+    },
+    "completed/Wbc-G1-20236/full-videos-gpu/trial_036.mp4": {
+      "remote_path": "/home/rxing/wbc-mjlab-runs/2026-10-26_stability/final-v12-2p5ms/videos/Wbc-G1/trial_036.mp4",
+      "bytes": 108028748,
+      "sha256": "3ffb51a6ac9b14ef4dd7c761c3ba65fd861f1da14aab181bb2ec39560ee887fa"
+    },
+    "completed/Wbc-G1-20236/full-videos-gpu/videos.json": {
+      "remote_path": "/home/rxing/wbc-mjlab-runs/2026-10-26_stability/final-v12-2p5ms/videos/Wbc-G1/videos.json",
+      "bytes": 1589,
+      "sha256": "00bfdac291b047b568e9ac89f35daa3bee79f61b8489d7ecdfec938f1036c76e"
+    },
+    "completed/Wbc-G1-EE-19795/model_199999.pt": {
+      "remote_path": "/home/rxing/wbc-mjlab-runs/2026-10-26_stability/final-v12-2p5ms/train/wbc_g1_ee/2026-11-07_01-22-33_train_seed42_job19795/model_199999.pt",
+      "bytes": 45443001,
+      "sha256": "c37df53e7704f3a54b97104ece0cfcb787614c5f446bd29223d6c57c113f6f85"
+    },
+    "completed/Wbc-G1-EE-19795/status.json": {
+      "remote_path": "/home/rxing/wbc-mjlab-runs/2026-10-26_stability/final-v12-2p5ms/status/train_Wbc-G1-EE_job19795.json",
+      "bytes": 2467,
+      "sha256": "c142843ed2fc85627ed3d3cae9c43edc9a92bd399daae82d81870b9fc9b4efe6"
+    },
+    "completed/Wbc-G1-EE-19795/params/agent.yaml": {
+      "remote_path": "/home/rxing/wbc-mjlab-runs/2026-10-26_stability/final-v12-2p5ms/train/wbc_g1_ee/2026-11-07_01-22-33_train_seed42_job19795/params/agent.yaml",
+      "bytes": 1324,
+      "sha256": "720c32a4bbd7dc3bc8218512dae2aa8b18799ffe06036699645b90ef94a11080"
+    },
+    "completed/Wbc-G1-EE-19795/params/config.yaml": {
+      "remote_path": "/home/rxing/wbc-mjlab-runs/2026-10-26_stability/final-v12-2p5ms/train/wbc_g1_ee/2026-11-07_01-22-33_train_seed42_job19795/params/config.yaml",
+      "bytes": 4973,
+      "sha256": "2221962b7fcda4aa4ea9851a5b40d1f175fc8e55b2dea169fb65ab1c929cb668"
+    },
+    "completed/Wbc-G1-EE-19795/params/env.yaml": {
+      "remote_path": "/home/rxing/wbc-mjlab-runs/2026-10-26_stability/final-v12-2p5ms/train/wbc_g1_ee/2026-11-07_01-22-33_train_seed42_job19795/params/env.yaml",
+      "bytes": 59285,
+      "sha256": "2af35aa20a7f1b1d8bcd2d8f29763222702f5403ac20e7ffc3e7db291a36f836"
+    },
+    "completed/Wbc-G1-EE-19795/params/policy.onnx": {
+      "remote_path": "/home/rxing/wbc-mjlab-runs/2026-10-26_stability/final-v12-2p5ms/train/wbc_g1_ee/2026-11-07_01-22-33_train_seed42_job19795/params/policy.onnx",
+      "bytes": 3705163,
+      "sha256": "2b6448b0c38d3c9fb4666d74eddf6ebbf26c76df919ece029412848744826885"
+    },
+    "completed/Wbc-G1-EE-19795/params/rsi_bin_stats.npz": {
+      "remote_path": "/home/rxing/wbc-mjlab-runs/2026-10-26_stability/final-v12-2p5ms/train/wbc_g1_ee/2026-11-07_01-22-33_train_seed42_job19795/params/rsi_bin_stats.npz",
+      "bytes": 11334,
+      "sha256": "1e7d25c07499f8b9f3f4d153aa6c3ef4d239b0a77156db0484dc023489cf7cca"
+    },
+    "completed/Wbc-G1-EE-19795/evaluation/diagnostics/capture_capacity.json": {
+      "remote_path": "/home/rxing/wbc-mjlab-runs/2026-10-26_stability/final-v12-2p5ms/evaluation/train_Wbc-G1-EE_job19795/diagnostics/capture_capacity.json",
+      "bytes": 366,
+      "sha256": "b11d943147e5cd82e4d1d1030f6a501b1bd4a37fe596404b51d03880df25cf88"
+    },
+    "completed/Wbc-G1-EE-19795/evaluation/export_parity.npz": {
+      "remote_path": "/home/rxing/wbc-mjlab-runs/2026-10-26_stability/final-v12-2p5ms/evaluation/train_Wbc-G1-EE_job19795/export_parity.npz",
+      "bytes": 1074969,
+      "sha256": "6004ad584d34eeba440bd56944615c7148931ab5ae804011ea2188e8fa4b7646"
+    },
+    "completed/Wbc-G1-EE-19795/evaluation/initial_states.npz": {
+      "remote_path": "/home/rxing/wbc-mjlab-runs/2026-10-26_stability/final-v12-2p5ms/evaluation/train_Wbc-G1-EE_job19795/initial_states.npz",
+      "bytes": 15410,
+      "sha256": "998434ea8ab548ebe1db451c8bfb43c53e1619cb89fa192d4a1bbcb465e6c226"
+    },
+    "completed/Wbc-G1-EE-19795/evaluation/model.mjb.gz": {
+      "remote_path": "/home/rxing/wbc-mjlab-runs/2026-10-26_stability/final-v12-2p5ms/evaluation/train_Wbc-G1-EE_job19795/model.mjb.gz",
+      "bytes": 34962720,
+      "sha256": "c1105a7b76263bf57048ef44d305bb9ca046219593d6677000db33df2194253a"
+    },
+    "completed/Wbc-G1-EE-19795/evaluation/policy.onnx": {
+      "remote_path": "/home/rxing/wbc-mjlab-runs/2026-10-26_stability/final-v12-2p5ms/evaluation/train_Wbc-G1-EE_job19795/policy.onnx",
+      "bytes": 3347339,
+      "sha256": "ae18d50af2a6afb397de31f91bff9f43a5bacf138b05ad00e12aaf9ad42a94cd"
+    },
+    "completed/Wbc-G1-EE-19795/evaluation/protocol.json": {
+      "remote_path": "/home/rxing/wbc-mjlab-runs/2026-10-26_stability/final-v12-2p5ms/evaluation/train_Wbc-G1-EE_job19795/protocol.json",
+      "bytes": 17851,
+      "sha256": "1d71c249677daf19bfa1e5a05624906dbb5a24b0cf99c314c742526c9667692a"
+    },
+    "completed/Wbc-G1-EE-19795/evaluation/results.json": {
+      "remote_path": "/home/rxing/wbc-mjlab-runs/2026-10-26_stability/final-v12-2p5ms/evaluation/train_Wbc-G1-EE_job19795/results.json",
+      "bytes": 128473,
+      "sha256": "7ca751d33df70f0dc7ae3994cc5a488eee81aa7fd04c2453bb2daaf9b024cf1b"
+    },
+    "completed/Wbc-G1-EE-19795/evaluation/trial_000_trace.npz": {
+      "remote_path": "/home/rxing/wbc-mjlab-runs/2026-10-26_stability/final-v12-2p5ms/evaluation/train_Wbc-G1-EE_job19795/trial_000_trace.npz",
+      "bytes": 14086,
+      "sha256": "8f2d723778310544fbec3e94e3adc89ee2c1557d46f7ed71d32e82d95fe50ca9"
+    },
+    "completed/Wbc-G1-EE-19795/evaluation/trial_001_trace.npz": {
+      "remote_path": "/home/rxing/wbc-mjlab-runs/2026-10-26_stability/final-v12-2p5ms/evaluation/train_Wbc-G1-EE_job19795/trial_001_trace.npz",
+      "bytes": 7300,
+      "sha256": "0a3357fa18cdf258df134253a4f002a92a651b4e71717e2d5c482206d16adcdc"
+    },
+    "completed/Wbc-G1-EE-19795/evaluation/trial_002_trace.npz": {
+      "remote_path": "/home/rxing/wbc-mjlab-runs/2026-10-26_stability/final-v12-2p5ms/evaluation/train_Wbc-G1-EE_job19795/trial_002_trace.npz",
+      "bytes": 6941,
+      "sha256": "80d6893fb1a35f73ba44bd67319223b6689bdaf9bd67521170e34dd2fbc54d0f"
+    },
+    "completed/Wbc-G1-EE-19795/evaluation/trial_003_trace.npz": {
+      "remote_path": "/home/rxing/wbc-mjlab-runs/2026-10-26_stability/final-v12-2p5ms/evaluation/train_Wbc-G1-EE_job19795/trial_003_trace.npz",
+      "bytes": 9210,
+      "sha256": "92a3bdde07b53df4d7725a5ab006b7f60771ef68a707d82b0b5182d4be8f2f33"
+    },
+    "completed/Wbc-G1-EE-19795/evaluation/trial_004_trace.npz": {
+      "remote_path": "/home/rxing/wbc-mjlab-runs/2026-10-26_stability/final-v12-2p5ms/evaluation/train_Wbc-G1-EE_job19795/trial_004_trace.npz",
+      "bytes": 93467,
+      "sha256": "1e8af0573681ed9c3269a73cf52b8847080b2abbda6e3dfa0eeec51fdeabe67e"
+    },
+    "completed/Wbc-G1-EE-19795/evaluation/trial_005_trace.npz": {
+      "remote_path": "/home/rxing/wbc-mjlab-runs/2026-10-26_stability/final-v12-2p5ms/evaluation/train_Wbc-G1-EE_job19795/trial_005_trace.npz",
+      "bytes": 70372,
+      "sha256": "fb08db8d0089ec9bb0afbec956cfb2d32bbcee940d9c84f9d1ebb7d15f8037b5"
+    },
+    "completed/Wbc-G1-EE-19795/evaluation/trial_006_trace.npz": {
+      "remote_path": "/home/rxing/wbc-mjlab-runs/2026-10-26_stability/final-v12-2p5ms/evaluation/train_Wbc-G1-EE_job19795/trial_006_trace.npz",
+      "bytes": 47201,
+      "sha256": "eb7e7493a987ad6103d171792ac29a81f440fca22908596265b694327ac46c0e"
+    },
+    "completed/Wbc-G1-EE-19795/evaluation/trial_007_trace.npz": {
+      "remote_path": "/home/rxing/wbc-mjlab-runs/2026-10-26_stability/final-v12-2p5ms/evaluation/train_Wbc-G1-EE_job19795/trial_007_trace.npz",
+      "bytes": 24163,
+      "sha256": "7d7bc4d5c71280f19d0c36048d9647b5a198047ca10d81575b0556d5f00cd351"
+    },
+    "completed/Wbc-G1-EE-19795/evaluation/trial_008_trace.npz": {
+      "remote_path": "/home/rxing/wbc-mjlab-runs/2026-10-26_stability/final-v12-2p5ms/evaluation/train_Wbc-G1-EE_job19795/trial_008_trace.npz",
+      "bytes": 2016169,
+      "sha256": "58ce8aeef83ebb4367c68c230d899b64e7c24de67f60746418411fe8dc184f93"
+    },
+    "completed/Wbc-G1-EE-19795/evaluation/trial_009_trace.npz": {
+      "remote_path": "/home/rxing/wbc-mjlab-runs/2026-10-26_stability/final-v12-2p5ms/evaluation/train_Wbc-G1-EE_job19795/trial_009_trace.npz",
+      "bytes": 95023,
+      "sha256": "3d0674a6998ef906e281eaa11501550a7d6c99192d55e251e7596f01fd9a2635"
+    },
+    "completed/Wbc-G1-EE-19795/evaluation/trial_010_trace.npz": {
+      "remote_path": "/home/rxing/wbc-mjlab-runs/2026-10-26_stability/final-v12-2p5ms/evaluation/train_Wbc-G1-EE_job19795/trial_010_trace.npz",
+      "bytes": 94994,
+      "sha256": "ba766525767c3106457ef42c7f7dcee9e6a11f3bb2e1094a7ebec6eff44d8c89"
+    },
+    "completed/Wbc-G1-EE-19795/evaluation/trial_011_trace.npz": {
+      "remote_path": "/home/rxing/wbc-mjlab-runs/2026-10-26_stability/final-v12-2p5ms/evaluation/train_Wbc-G1-EE_job19795/trial_011_trace.npz",
+      "bytes": 94992,
+      "sha256": "90cf3350ee54d33dd4b7c8726556d2c07ecd56ac57f84d8c14760f7f6f92b4ad"
+    },
+    "completed/Wbc-G1-EE-19795/evaluation/trial_012_trace.npz": {
+      "remote_path": "/home/rxing/wbc-mjlab-runs/2026-10-26_stability/final-v12-2p5ms/evaluation/train_Wbc-G1-EE_job19795/trial_012_trace.npz",
+      "bytes": 3167316,
+      "sha256": "2b1d2f6a522b36006e11a7a8f776eaf991689e90fd333d1bfb2e99070d238f15"
+    },
+    "completed/Wbc-G1-EE-19795/evaluation/trial_013_trace.npz": {
+      "remote_path": "/home/rxing/wbc-mjlab-runs/2026-10-26_stability/final-v12-2p5ms/evaluation/train_Wbc-G1-EE_job19795/trial_013_trace.npz",
+      "bytes": 95077,
+      "sha256": "4e7d5475f5d1a23203ef4518cbf464cbce725d62fd6a8799ec1429ac8cef6470"
+    },
+    "completed/Wbc-G1-EE-19795/evaluation/trial_014_trace.npz": {
+      "remote_path": "/home/rxing/wbc-mjlab-runs/2026-10-26_stability/final-v12-2p5ms/evaluation/train_Wbc-G1-EE_job19795/trial_014_trace.npz",
+      "bytes": 95108,
+      "sha256": "51438fbe4d952a6acf8e1bddc55142c463a34e55ccfc5a9df5e29888f4aca13f"
+    },
+    "completed/Wbc-G1-EE-19795/evaluation/trial_015_trace.npz": {
+      "remote_path": "/home/rxing/wbc-mjlab-runs/2026-10-26_stability/final-v12-2p5ms/evaluation/train_Wbc-G1-EE_job19795/trial_015_trace.npz",
+      "bytes": 95129,
+      "sha256": "a4fd67924db5e19abdbac71f94975eca12458cf8d9fc140e9a4db1c94ff58365"
+    },
+    "completed/Wbc-G1-EE-19795/evaluation/trial_016_trace.npz": {
+      "remote_path": "/home/rxing/wbc-mjlab-runs/2026-10-26_stability/final-v12-2p5ms/evaluation/train_Wbc-G1-EE_job19795/trial_016_trace.npz",
+      "bytes": 4605917,
+      "sha256": "3a397289488b2a478f3b1d15c5db2f1c0829c7152e07c1474c8776a5374c4d92"
+    },
+    "completed/Wbc-G1-EE-19795/evaluation/trial_017_trace.npz": {
+      "remote_path": "/home/rxing/wbc-mjlab-runs/2026-10-26_stability/final-v12-2p5ms/evaluation/train_Wbc-G1-EE_job19795/trial_017_trace.npz",
+      "bytes": 95151,
+      "sha256": "cb1fedcbcbcce410b403f864be52721b10da2f529eb63aa4fb10a2e7d5040b14"
+    },
+    "completed/Wbc-G1-EE-19795/evaluation/trial_018_trace.npz": {
+      "remote_path": "/home/rxing/wbc-mjlab-runs/2026-10-26_stability/final-v12-2p5ms/evaluation/train_Wbc-G1-EE_job19795/trial_018_trace.npz",
+      "bytes": 95041,
+      "sha256": "4e146baa28187b2028b9b1af959d26112874a67c8eaaf47741ae74c71cb7d8c5"
+    },
+    "completed/Wbc-G1-EE-19795/evaluation/trial_019_trace.npz": {
+      "remote_path": "/home/rxing/wbc-mjlab-runs/2026-10-26_stability/final-v12-2p5ms/evaluation/train_Wbc-G1-EE_job19795/trial_019_trace.npz",
+      "bytes": 94984,
+      "sha256": "bb5360a240101000894085ac3586946aa9de1fff7d84a5f8bb4a1886ff270ff4"
+    },
+    "completed/Wbc-G1-EE-19795/evaluation/trial_020_trace.npz": {
+      "remote_path": "/home/rxing/wbc-mjlab-runs/2026-10-26_stability/final-v12-2p5ms/evaluation/train_Wbc-G1-EE_job19795/trial_020_trace.npz",
+      "bytes": 4615379,
+      "sha256": "b1f7752b66907b1ab69ef5e43e9b54d7aaa09ae5b286b839d295942074a99046"
+    },
+    "completed/Wbc-G1-EE-19795/evaluation/trial_021_trace.npz": {
+      "remote_path": "/home/rxing/wbc-mjlab-runs/2026-10-26_stability/final-v12-2p5ms/evaluation/train_Wbc-G1-EE_job19795/trial_021_trace.npz",
+      "bytes": 94963,
+      "sha256": "8b5b38942ae19284eeb507c882cc41bd1d100a139b16e61497c687d458391557"
+    },
+    "completed/Wbc-G1-EE-19795/evaluation/trial_022_trace.npz": {
+      "remote_path": "/home/rxing/wbc-mjlab-runs/2026-10-26_stability/final-v12-2p5ms/evaluation/train_Wbc-G1-EE_job19795/trial_022_trace.npz",
+      "bytes": 95415,
+      "sha256": "6fd9fbd1b50bee713072c2c30714dfeaa9e33cbd7aafd8f377928747b1cd5948"
+    },
+    "completed/Wbc-G1-EE-19795/evaluation/trial_023_trace.npz": {
+      "remote_path": "/home/rxing/wbc-mjlab-runs/2026-10-26_stability/final-v12-2p5ms/evaluation/train_Wbc-G1-EE_job19795/trial_023_trace.npz",
+      "bytes": 95202,
+      "sha256": "1e4301c3e2c5159501928bfe95dee71e65e7d550d129c8904dc468e328aef86d"
+    },
+    "completed/Wbc-G1-EE-19795/evaluation/trial_024_trace.npz": {
+      "remote_path": "/home/rxing/wbc-mjlab-runs/2026-10-26_stability/final-v12-2p5ms/evaluation/train_Wbc-G1-EE_job19795/trial_024_trace.npz",
+      "bytes": 37344,
+      "sha256": "bfa087107ee50f8128a4a346f0b8e26a890c0e0dcaf51612f1ffc24bd84b939a"
+    },
+    "completed/Wbc-G1-EE-19795/evaluation/trial_025_trace.npz": {
+      "remote_path": "/home/rxing/wbc-mjlab-runs/2026-10-26_stability/final-v12-2p5ms/evaluation/train_Wbc-G1-EE_job19795/trial_025_trace.npz",
+      "bytes": 24567,
+      "sha256": "6ca41c55e5d53a730dfccf23c16adc99f304cdb1cb6a2ec4c5bb5a8dc323a6d1"
+    },
+    "completed/Wbc-G1-EE-19795/evaluation/trial_026_trace.npz": {
+      "remote_path": "/home/rxing/wbc-mjlab-runs/2026-10-26_stability/final-v12-2p5ms/evaluation/train_Wbc-G1-EE_job19795/trial_026_trace.npz",
+      "bytes": 11040,
+      "sha256": "4ababf3aa3c01b2d0202c1a90295fc41e9f8a3159c814db5464ad1e9f1f1750c"
+    },
+    "completed/Wbc-G1-EE-19795/evaluation/trial_027_trace.npz": {
+      "remote_path": "/home/rxing/wbc-mjlab-runs/2026-10-26_stability/final-v12-2p5ms/evaluation/train_Wbc-G1-EE_job19795/trial_027_trace.npz",
+      "bytes": 14434,
+      "sha256": "3a96bf13f518395b392fd703fa3a8530c2e62be466492ff6b3cf803d229989ed"
+    },
+    "completed/Wbc-G1-EE-19795/evaluation/trial_028_trace.npz": {
+      "remote_path": "/home/rxing/wbc-mjlab-runs/2026-10-26_stability/final-v12-2p5ms/evaluation/train_Wbc-G1-EE_job19795/trial_028_trace.npz",
+      "bytes": 4477110,
+      "sha256": "59346ad2e5009d63c0d0d0fe25e537aaee408c8c452957b19bc273ef0e7cde47"
+    },
+    "completed/Wbc-G1-EE-19795/evaluation/trial_029_trace.npz": {
+      "remote_path": "/home/rxing/wbc-mjlab-runs/2026-10-26_stability/final-v12-2p5ms/evaluation/train_Wbc-G1-EE_job19795/trial_029_trace.npz",
+      "bytes": 95110,
+      "sha256": "accb50f50112864cb193a29ee6e35111bc10fb384f5f1d78615afa708db8cb7d"
+    },
+    "completed/Wbc-G1-EE-19795/evaluation/trial_030_trace.npz": {
+      "remote_path": "/home/rxing/wbc-mjlab-runs/2026-10-26_stability/final-v12-2p5ms/evaluation/train_Wbc-G1-EE_job19795/trial_030_trace.npz",
+      "bytes": 95019,
+      "sha256": "e1804bb27ba0982e509724d8861c7273891fe90c129c41fb18423f3d7ee4f248"
+    },
+    "completed/Wbc-G1-EE-19795/evaluation/trial_031_trace.npz": {
+      "remote_path": "/home/rxing/wbc-mjlab-runs/2026-10-26_stability/final-v12-2p5ms/evaluation/train_Wbc-G1-EE_job19795/trial_031_trace.npz",
+      "bytes": 94981,
+      "sha256": "181947155ebb254fe1e9527d56accebe32fccdd77100f9861032e18f1ae22358"
+    },
+    "completed/Wbc-G1-EE-19795/evaluation/trial_032_trace.npz": {
+      "remote_path": "/home/rxing/wbc-mjlab-runs/2026-10-26_stability/final-v12-2p5ms/evaluation/train_Wbc-G1-EE_job19795/trial_032_trace.npz",
+      "bytes": 5133643,
+      "sha256": "2744c3395fce71595347b69a030cd85cd0c8c80502712274c38d209f9031f6d9"
+    },
+    "completed/Wbc-G1-EE-19795/evaluation/trial_033_trace.npz": {
+      "remote_path": "/home/rxing/wbc-mjlab-runs/2026-10-26_stability/final-v12-2p5ms/evaluation/train_Wbc-G1-EE_job19795/trial_033_trace.npz",
+      "bytes": 94962,
+      "sha256": "bb12fdc7e7cecd202728d1a8caafb8bbf6d9669c48f758a1ae9b70981c5642ec"
+    },
+    "completed/Wbc-G1-EE-19795/evaluation/trial_034_trace.npz": {
+      "remote_path": "/home/rxing/wbc-mjlab-runs/2026-10-26_stability/final-v12-2p5ms/evaluation/train_Wbc-G1-EE_job19795/trial_034_trace.npz",
+      "bytes": 94574,
+      "sha256": "a61cd416b32ed644e82d19a3bc1ae7a417d3cff0ee471f366bed77afedab0036"
+    },
+    "completed/Wbc-G1-EE-19795/evaluation/trial_035_trace.npz": {
+      "remote_path": "/home/rxing/wbc-mjlab-runs/2026-10-26_stability/final-v12-2p5ms/evaluation/train_Wbc-G1-EE_job19795/trial_035_trace.npz",
+      "bytes": 94427,
+      "sha256": "1b21e13d886c9d7462c5c261e03dd0e5e6bcf5437c679e37f651926dc17b4a16"
+    },
+    "completed/Wbc-G1-EE-19795/evaluation/trial_036_trace.npz": {
+      "remote_path": "/home/rxing/wbc-mjlab-runs/2026-10-26_stability/final-v12-2p5ms/evaluation/train_Wbc-G1-EE_job19795/trial_036_trace.npz",
+      "bytes": 4913697,
+      "sha256": "74406b65c5f36647377ef6ab78f171e2467b42329e6ad126d83f98f14606bccf"
+    },
+    "completed/Wbc-G1-EE-19795/evaluation/trial_037_trace.npz": {
+      "remote_path": "/home/rxing/wbc-mjlab-runs/2026-10-26_stability/final-v12-2p5ms/evaluation/train_Wbc-G1-EE_job19795/trial_037_trace.npz",
+      "bytes": 94875,
+      "sha256": "6c826325dbdf386ffeb043f2cf72e1e39fd0a63b957329a35dc32fa2c54180de"
+    },
+    "completed/Wbc-G1-EE-19795/evaluation/trial_038_trace.npz": {
+      "remote_path": "/home/rxing/wbc-mjlab-runs/2026-10-26_stability/final-v12-2p5ms/evaluation/train_Wbc-G1-EE_job19795/trial_038_trace.npz",
+      "bytes": 95106,
+      "sha256": "cab5bc7803be8ac96bc404a4ea4d7968771b6b1c17da1291954175d1057e265c"
+    },
+    "completed/Wbc-G1-EE-19795/evaluation/trial_039_trace.npz": {
+      "remote_path": "/home/rxing/wbc-mjlab-runs/2026-10-26_stability/final-v12-2p5ms/evaluation/train_Wbc-G1-EE_job19795/trial_039_trace.npz",
+      "bytes": 94987,
+      "sha256": "6bf5ce15c7666b47df893084d1522b1a31fdf11610d41b703197193bd84bd7e6"
+    },
+    "completed/Wbc-G1-EE-19795/evaluation/trials.jsonl": {
+      "remote_path": "/home/rxing/wbc-mjlab-runs/2026-10-26_stability/final-v12-2p5ms/evaluation/train_Wbc-G1-EE_job19795/trials.jsonl",
+      "bytes": 88453,
+      "sha256": "7e18bfd8d1411e6416aa401d2e0f1572a13652ffcccf9d6a14aece7d3eb22540"
+    },
+    "completed/Wbc-G1-EE-19795/full-videos-gpu/trial_000.mp4": {
+      "remote_path": "/home/rxing/wbc-mjlab-runs/2026-10-26_stability/final-v12-2p5ms/videos/Wbc-G1-EE/trial_000.mp4",
+      "bytes": 401964,
+      "sha256": "b4fb66fb51f170fcaf79b8736ded3cc39b1c51d595c146f236355df2f3ac4358"
+    },
+    "completed/Wbc-G1-EE-19795/full-videos-gpu/trial_004.mp4": {
+      "remote_path": "/home/rxing/wbc-mjlab-runs/2026-10-26_stability/final-v12-2p5ms/videos/Wbc-G1-EE/trial_004.mp4",
+      "bytes": 2226247,
+      "sha256": "c9920152f353cee762607d6a09d3f8ec822948aa0e5cfbd2828a41cafe8638f9"
+    },
+    "completed/Wbc-G1-EE-19795/full-videos-gpu/trial_008.mp4": {
+      "remote_path": "/home/rxing/wbc-mjlab-runs/2026-10-26_stability/final-v12-2p5ms/videos/Wbc-G1-EE/trial_008.mp4",
+      "bytes": 49607453,
+      "sha256": "766847601287f78cc8fc1ca96f925e490f3c84d2b9fbd1eb6513ad4adf8d1425"
+    },
+    "completed/Wbc-G1-EE-19795/full-videos-gpu/trial_012.mp4": {
+      "remote_path": "/home/rxing/wbc-mjlab-runs/2026-10-26_stability/final-v12-2p5ms/videos/Wbc-G1-EE/trial_012.mp4",
+      "bytes": 76040627,
+      "sha256": "cd99711b02a88e66ab20c221c2cab548a85ed5c134499bc13e2335a1b828ad31"
+    },
+    "completed/Wbc-G1-EE-19795/full-videos-gpu/trial_016.mp4": {
+      "remote_path": "/home/rxing/wbc-mjlab-runs/2026-10-26_stability/final-v12-2p5ms/videos/Wbc-G1-EE/trial_016.mp4",
+      "bytes": 118956855,
+      "sha256": "859707f3c54adaad30e937a3aece98ffc6324e525217fe696a895a9fa626d4a6"
+    },
+    "completed/Wbc-G1-EE-19795/full-videos-gpu/trial_020.mp4": {
+      "remote_path": "/home/rxing/wbc-mjlab-runs/2026-10-26_stability/final-v12-2p5ms/videos/Wbc-G1-EE/trial_020.mp4",
+      "bytes": 117667042,
+      "sha256": "19c3604388b0c1f6dd72aad5cfc960c29d67952d0e4ede49f903581f4b5ae7ba"
+    },
+    "completed/Wbc-G1-EE-19795/full-videos-gpu/trial_024.mp4": {
+      "remote_path": "/home/rxing/wbc-mjlab-runs/2026-10-26_stability/final-v12-2p5ms/videos/Wbc-G1-EE/trial_024.mp4",
+      "bytes": 1150668,
+      "sha256": "65eaddc837d07b576a30ddc32bef138accd56ec62dbe9808f94816e1930b4995"
+    },
+    "completed/Wbc-G1-EE-19795/full-videos-gpu/trial_028.mp4": {
+      "remote_path": "/home/rxing/wbc-mjlab-runs/2026-10-26_stability/final-v12-2p5ms/videos/Wbc-G1-EE/trial_028.mp4",
+      "bytes": 119058977,
+      "sha256": "58ed177973d3b4cd7720ee0430cb0830960e7a62876c93380a4d819feec88cd0"
+    },
+    "completed/Wbc-G1-EE-19795/full-videos-gpu/trial_032.mp4": {
+      "remote_path": "/home/rxing/wbc-mjlab-runs/2026-10-26_stability/final-v12-2p5ms/videos/Wbc-G1-EE/trial_032.mp4",
+      "bytes": 119137579,
+      "sha256": "e7eaa07f073aed1568fc9d508d55e7f418dc209b3b6a8249c1493f031f964e55"
+    },
+    "completed/Wbc-G1-EE-19795/full-videos-gpu/trial_036.mp4": {
+      "remote_path": "/home/rxing/wbc-mjlab-runs/2026-10-26_stability/final-v12-2p5ms/videos/Wbc-G1-EE/trial_036.mp4",
+      "bytes": 109413646,
+      "sha256": "c7d8327b437ea2e4bbf5d976b8ff48ce8ffb7696ab763816d50404deda189ac1"
+    },
+    "completed/Wbc-G1-EE-19795/full-videos-gpu/videos.json": {
+      "remote_path": "/home/rxing/wbc-mjlab-runs/2026-10-26_stability/final-v12-2p5ms/videos/Wbc-G1-EE/videos.json",
+      "bytes": 1590,
+      "sha256": "2a76dd453e1c9655dfbfb02d46dab6ccf461e4f0fb10e3340e5eda23f3befd62"
+    },
+    "completed/Wbc-G1-EE-SE-19796/model_199999.pt": {
+      "remote_path": "/home/rxing/wbc-mjlab-runs/2026-10-26_stability/final-v12-2p5ms/train/wbc_g1_ee_se/2026-11-04_13-23-00_train_seed42_job19796/model_199999.pt",
+      "bytes": 45467577,
+      "sha256": "cb397092fa2e04cd88ce62d7e2d94935aaf5d37b449e195321bd2888800f8c67"
+    },
+    "completed/Wbc-G1-EE-SE-19796/status.json": {
+      "remote_path": "/home/rxing/wbc-mjlab-runs/2026-10-26_stability/final-v12-2p5ms/status/train_Wbc-G1-EE-SE_job19796.json",
+      "bytes": 2495,
+      "sha256": "7795515508e31452c5d7e3011ad333468528f4ec99e5f7e1e84d51b5f239410e"
+    },
+    "completed/Wbc-G1-EE-SE-19796/params/agent.yaml": {
+      "remote_path": "/home/rxing/wbc-mjlab-runs/2026-10-26_stability/final-v12-2p5ms/train/wbc_g1_ee_se/2026-11-04_13-23-00_train_seed42_job19796/params/agent.yaml",
+      "bytes": 1327,
+      "sha256": "1a35e2d6be40c434391f562b452e6556365572e5aca30fb1016d18f28a00af9c"
+    },
+    "completed/Wbc-G1-EE-SE-19796/params/config.yaml": {
+      "remote_path": "/home/rxing/wbc-mjlab-runs/2026-10-26_stability/final-v12-2p5ms/train/wbc_g1_ee_se/2026-11-04_13-23-00_train_seed42_job19796/params/config.yaml",
+      "bytes": 4979,
+      "sha256": "7b6823c77136cff5e9fa3c1c361187d4c73d1a66be248d792671d64912b0d9b6"
+    },
+    "completed/Wbc-G1-EE-SE-19796/params/env.yaml": {
+      "remote_path": "/home/rxing/wbc-mjlab-runs/2026-10-26_stability/final-v12-2p5ms/train/wbc_g1_ee_se/2026-11-04_13-23-00_train_seed42_job19796/params/env.yaml",
+      "bytes": 59354,
+      "sha256": "abbbc9f2509565bc8b881532d761376b8666f051840af030a187bd9e9fa970ae"
+    },
+    "completed/Wbc-G1-EE-SE-19796/params/policy.onnx": {
+      "remote_path": "/home/rxing/wbc-mjlab-runs/2026-10-26_stability/final-v12-2p5ms/train/wbc_g1_ee_se/2026-11-04_13-23-00_train_seed42_job19796/params/policy.onnx",
+      "bytes": 3713386,
+      "sha256": "f21d79adf99a21ecedc36607e97b56def655e27761843f00cab1d9a5ced01158"
+    },
+    "completed/Wbc-G1-EE-SE-19796/params/rsi_bin_stats.npz": {
+      "remote_path": "/home/rxing/wbc-mjlab-runs/2026-10-26_stability/final-v12-2p5ms/train/wbc_g1_ee_se/2026-11-04_13-23-00_train_seed42_job19796/params/rsi_bin_stats.npz",
+      "bytes": 11334,
+      "sha256": "d146fae769ad8dff94c4029d4ab97a3372c4f25ad39151b55f3ef2edc79cfe32"
+    },
+    "completed/Wbc-G1-EE-SE-19796/evaluation/diagnostics/capture_capacity.json": {
+      "remote_path": "/home/rxing/wbc-mjlab-runs/2026-10-26_stability/final-v12-2p5ms/evaluation/train_Wbc-G1-EE-SE_job19796/diagnostics/capture_capacity.json",
+      "bytes": 366,
+      "sha256": "b11d943147e5cd82e4d1d1030f6a501b1bd4a37fe596404b51d03880df25cf88"
+    },
+    "completed/Wbc-G1-EE-SE-19796/evaluation/export_parity.npz": {
+      "remote_path": "/home/rxing/wbc-mjlab-runs/2026-10-26_stability/final-v12-2p5ms/evaluation/train_Wbc-G1-EE-SE_job19796/export_parity.npz",
+      "bytes": 1089688,
+      "sha256": "1e876caf2ade888eda2d44aa40dbce4794c5dc0ae219db683af32bf8789cbbf0"
+    },
+    "completed/Wbc-G1-EE-SE-19796/evaluation/initial_states.npz": {
+      "remote_path": "/home/rxing/wbc-mjlab-runs/2026-10-26_stability/final-v12-2p5ms/evaluation/train_Wbc-G1-EE-SE_job19796/initial_states.npz",
+      "bytes": 15410,
+      "sha256": "998434ea8ab548ebe1db451c8bfb43c53e1619cb89fa192d4a1bbcb465e6c226"
+    },
+    "completed/Wbc-G1-EE-SE-19796/evaluation/model.mjb.gz": {
+      "remote_path": "/home/rxing/wbc-mjlab-runs/2026-10-26_stability/final-v12-2p5ms/evaluation/train_Wbc-G1-EE-SE_job19796/model.mjb.gz",
+      "bytes": 34962720,
+      "sha256": "2da93dfa134359da2edf2f208b359d33f9b4906365772818076057793a100cf8"
+    },
+    "completed/Wbc-G1-EE-SE-19796/evaluation/policy.onnx": {
+      "remote_path": "/home/rxing/wbc-mjlab-runs/2026-10-26_stability/final-v12-2p5ms/evaluation/train_Wbc-G1-EE-SE_job19796/policy.onnx",
+      "bytes": 3355547,
+      "sha256": "83db2105e454c8099912da695d9961da8870731bb163998f14fb59678e76a0da"
+    },
+    "completed/Wbc-G1-EE-SE-19796/evaluation/protocol.json": {
+      "remote_path": "/home/rxing/wbc-mjlab-runs/2026-10-26_stability/final-v12-2p5ms/evaluation/train_Wbc-G1-EE-SE_job19796/protocol.json",
+      "bytes": 17878,
+      "sha256": "fc88f194f7b375ca4fac057edf5519b96c31ef5061b0d57f9d72a55c2f7f6ef9"
+    },
+    "completed/Wbc-G1-EE-SE-19796/evaluation/results.json": {
+      "remote_path": "/home/rxing/wbc-mjlab-runs/2026-10-26_stability/final-v12-2p5ms/evaluation/train_Wbc-G1-EE-SE_job19796/results.json",
+      "bytes": 128439,
+      "sha256": "95677770869c9d60c45ff9205c0386e808401e5cc8132b59502e10c062354db1"
+    },
+    "completed/Wbc-G1-EE-SE-19796/evaluation/trial_000_trace.npz": {
+      "remote_path": "/home/rxing/wbc-mjlab-runs/2026-10-26_stability/final-v12-2p5ms/evaluation/train_Wbc-G1-EE-SE_job19796/trial_000_trace.npz",
+      "bytes": 8452,
+      "sha256": "c1592410f75cef949dd75612f372f7306870763a7766f1d2b6b186b67404acdc"
+    },
+    "completed/Wbc-G1-EE-SE-19796/evaluation/trial_001_trace.npz": {
+      "remote_path": "/home/rxing/wbc-mjlab-runs/2026-10-26_stability/final-v12-2p5ms/evaluation/train_Wbc-G1-EE-SE_job19796/trial_001_trace.npz",
+      "bytes": 8811,
+      "sha256": "5aa835402da9bbc50bc3de3119afbb338864849aba444910143c91b82f539c16"
+    },
+    "completed/Wbc-G1-EE-SE-19796/evaluation/trial_002_trace.npz": {
+      "remote_path": "/home/rxing/wbc-mjlab-runs/2026-10-26_stability/final-v12-2p5ms/evaluation/train_Wbc-G1-EE-SE_job19796/trial_002_trace.npz",
+      "bytes": 5844,
+      "sha256": "a8aa7521ec031ff01ad5de9d9d4d074bbd1d1e507a68245809171728561c1ddb"
+    },
+    "completed/Wbc-G1-EE-SE-19796/evaluation/trial_003_trace.npz": {
+      "remote_path": "/home/rxing/wbc-mjlab-runs/2026-10-26_stability/final-v12-2p5ms/evaluation/train_Wbc-G1-EE-SE_job19796/trial_003_trace.npz",
+      "bytes": 9190,
+      "sha256": "49cbc79c3f581dd421eaa4e974aac195c0a3801ffdcb6971b06053b31d78521e"
+    },
+    "completed/Wbc-G1-EE-SE-19796/evaluation/trial_004_trace.npz": {
+      "remote_path": "/home/rxing/wbc-mjlab-runs/2026-10-26_stability/final-v12-2p5ms/evaluation/train_Wbc-G1-EE-SE_job19796/trial_004_trace.npz",
+      "bytes": 93493,
+      "sha256": "28b78377628c86d4dd8c63a687ee2f4891dd241a4d61be0837c323bf2e3149bd"
+    },
+    "completed/Wbc-G1-EE-SE-19796/evaluation/trial_005_trace.npz": {
+      "remote_path": "/home/rxing/wbc-mjlab-runs/2026-10-26_stability/final-v12-2p5ms/evaluation/train_Wbc-G1-EE-SE_job19796/trial_005_trace.npz",
+      "bytes": 70439,
+      "sha256": "0157692fef9b5fe0986b82aa1ed128a5064f1e6af696f88e4b060db4cd81afcb"
+    },
+    "completed/Wbc-G1-EE-SE-19796/evaluation/trial_006_trace.npz": {
+      "remote_path": "/home/rxing/wbc-mjlab-runs/2026-10-26_stability/final-v12-2p5ms/evaluation/train_Wbc-G1-EE-SE_job19796/trial_006_trace.npz",
+      "bytes": 47143,
+      "sha256": "1e5e31c677649da4d26f25ff7e42668ca70af0cb2bee85773638287297895931"
+    },
+    "completed/Wbc-G1-EE-SE-19796/evaluation/trial_007_trace.npz": {
+      "remote_path": "/home/rxing/wbc-mjlab-runs/2026-10-26_stability/final-v12-2p5ms/evaluation/train_Wbc-G1-EE-SE_job19796/trial_007_trace.npz",
+      "bytes": 24181,
+      "sha256": "53cc2c21ed2f5c137a6ed45d81e9099ecf36ea35281f364aae9a9370636ea227"
+    },
+    "completed/Wbc-G1-EE-SE-19796/evaluation/trial_008_trace.npz": {
+      "remote_path": "/home/rxing/wbc-mjlab-runs/2026-10-26_stability/final-v12-2p5ms/evaluation/train_Wbc-G1-EE-SE_job19796/trial_008_trace.npz",
+      "bytes": 2015496,
+      "sha256": "e2b012d221dde0e94d9c6d43eee5796a6807c329a618c30b19677f1182d9f37c"
+    },
+    "completed/Wbc-G1-EE-SE-19796/evaluation/trial_009_trace.npz": {
+      "remote_path": "/home/rxing/wbc-mjlab-runs/2026-10-26_stability/final-v12-2p5ms/evaluation/train_Wbc-G1-EE-SE_job19796/trial_009_trace.npz",
+      "bytes": 95053,
+      "sha256": "94f9cac4685c733665eb2520d6048b0bd29e1688702abb421c2985f6c23857e2"
+    },
+    "completed/Wbc-G1-EE-SE-19796/evaluation/trial_010_trace.npz": {
+      "remote_path": "/home/rxing/wbc-mjlab-runs/2026-10-26_stability/final-v12-2p5ms/evaluation/train_Wbc-G1-EE-SE_job19796/trial_010_trace.npz",
+      "bytes": 94932,
+      "sha256": "2a760212f2c89d70a907a4f348a20d7d2101a471eb2d789fe776342b53a69956"
+    },
+    "completed/Wbc-G1-EE-SE-19796/evaluation/trial_011_trace.npz": {
+      "remote_path": "/home/rxing/wbc-mjlab-runs/2026-10-26_stability/final-v12-2p5ms/evaluation/train_Wbc-G1-EE-SE_job19796/trial_011_trace.npz",
+      "bytes": 94999,
+      "sha256": "5f01858decba52fafc6c1de157e0c70e0294f4a5731ede104f4dab16a5c98fc6"
+    },
+    "completed/Wbc-G1-EE-SE-19796/evaluation/trial_012_trace.npz": {
+      "remote_path": "/home/rxing/wbc-mjlab-runs/2026-10-26_stability/final-v12-2p5ms/evaluation/train_Wbc-G1-EE-SE_job19796/trial_012_trace.npz",
+      "bytes": 3168903,
+      "sha256": "7041ecbc180ba602c3679c010ab345181bbd89b7d8a5c8cc78d5a16f600c11a7"
+    },
+    "completed/Wbc-G1-EE-SE-19796/evaluation/trial_013_trace.npz": {
+      "remote_path": "/home/rxing/wbc-mjlab-runs/2026-10-26_stability/final-v12-2p5ms/evaluation/train_Wbc-G1-EE-SE_job19796/trial_013_trace.npz",
+      "bytes": 95137,
+      "sha256": "d929cc779c4c9d2f9151119663f0032420c0a379701b75ec9a178804b752f18c"
+    },
+    "completed/Wbc-G1-EE-SE-19796/evaluation/trial_014_trace.npz": {
+      "remote_path": "/home/rxing/wbc-mjlab-runs/2026-10-26_stability/final-v12-2p5ms/evaluation/train_Wbc-G1-EE-SE_job19796/trial_014_trace.npz",
+      "bytes": 95173,
+      "sha256": "68eaf8cb323275240a873694295a1e34b04a7d87b0fa7f7b1a53a42ab1d50103"
+    },
+    "completed/Wbc-G1-EE-SE-19796/evaluation/trial_015_trace.npz": {
+      "remote_path": "/home/rxing/wbc-mjlab-runs/2026-10-26_stability/final-v12-2p5ms/evaluation/train_Wbc-G1-EE-SE_job19796/trial_015_trace.npz",
+      "bytes": 95183,
+      "sha256": "08d39c29faa9940429260d75083f09656103e88cdb1a32374de41de7d98dd03f"
+    },
+    "completed/Wbc-G1-EE-SE-19796/evaluation/trial_016_trace.npz": {
+      "remote_path": "/home/rxing/wbc-mjlab-runs/2026-10-26_stability/final-v12-2p5ms/evaluation/train_Wbc-G1-EE-SE_job19796/trial_016_trace.npz",
+      "bytes": 4608256,
+      "sha256": "8dda1610710628baf8e41688fe26ea19c333868f8d71384a4b7982ef85b65840"
+    },
+    "completed/Wbc-G1-EE-SE-19796/evaluation/trial_017_trace.npz": {
+      "remote_path": "/home/rxing/wbc-mjlab-runs/2026-10-26_stability/final-v12-2p5ms/evaluation/train_Wbc-G1-EE-SE_job19796/trial_017_trace.npz",
+      "bytes": 95115,
+      "sha256": "d86860009b7e086c4d75c4033d1c5d3078d9a92a03a9d0c7225519d6b40d4dd8"
+    },
+    "completed/Wbc-G1-EE-SE-19796/evaluation/trial_018_trace.npz": {
+      "remote_path": "/home/rxing/wbc-mjlab-runs/2026-10-26_stability/final-v12-2p5ms/evaluation/train_Wbc-G1-EE-SE_job19796/trial_018_trace.npz",
+      "bytes": 95092,
+      "sha256": "f477562a241c18b2b38322e0e8262463c2ea3ae30c7685e39f743dde2e39e601"
+    },
+    "completed/Wbc-G1-EE-SE-19796/evaluation/trial_019_trace.npz": {
+      "remote_path": "/home/rxing/wbc-mjlab-runs/2026-10-26_stability/final-v12-2p5ms/evaluation/train_Wbc-G1-EE-SE_job19796/trial_019_trace.npz",
+      "bytes": 95042,
+      "sha256": "df0580d8a430c758fe55323cd9749ae3ffc7ff3724fc0f8ccd42892fb96a790d"
+    },
+    "completed/Wbc-G1-EE-SE-19796/evaluation/trial_020_trace.npz": {
+      "remote_path": "/home/rxing/wbc-mjlab-runs/2026-10-26_stability/final-v12-2p5ms/evaluation/train_Wbc-G1-EE-SE_job19796/trial_020_trace.npz",
+      "bytes": 4617494,
+      "sha256": "6b133bc5cd1b1a69effbff3de24a7570ea2e2914adbe5e40358126ae4c127a97"
+    },
+    "completed/Wbc-G1-EE-SE-19796/evaluation/trial_021_trace.npz": {
+      "remote_path": "/home/rxing/wbc-mjlab-runs/2026-10-26_stability/final-v12-2p5ms/evaluation/train_Wbc-G1-EE-SE_job19796/trial_021_trace.npz",
+      "bytes": 94869,
+      "sha256": "30d1def11d0aeefee5a91fbb1f13c6ee4bdf6deb326a9a77f5b098b830c06bed"
+    },
+    "completed/Wbc-G1-EE-SE-19796/evaluation/trial_022_trace.npz": {
+      "remote_path": "/home/rxing/wbc-mjlab-runs/2026-10-26_stability/final-v12-2p5ms/evaluation/train_Wbc-G1-EE-SE_job19796/trial_022_trace.npz",
+      "bytes": 95404,
+      "sha256": "521e9f10f2fc5b4c39383feed20520be8c40c50f38d8b5b7d4fc14e351df5dad"
+    },
+    "completed/Wbc-G1-EE-SE-19796/evaluation/trial_023_trace.npz": {
+      "remote_path": "/home/rxing/wbc-mjlab-runs/2026-10-26_stability/final-v12-2p5ms/evaluation/train_Wbc-G1-EE-SE_job19796/trial_023_trace.npz",
+      "bytes": 95303,
+      "sha256": "141b9fcd44159ebe8345008e5a4e6addebaa1fe87a19af88d023891488a1439a"
+    },
+    "completed/Wbc-G1-EE-SE-19796/evaluation/trial_024_trace.npz": {
+      "remote_path": "/home/rxing/wbc-mjlab-runs/2026-10-26_stability/final-v12-2p5ms/evaluation/train_Wbc-G1-EE-SE_job19796/trial_024_trace.npz",
+      "bytes": 40344,
+      "sha256": "091a46ccae69ed2d1cd5bc5f651aed8c0711993ebd1923ca288f5b88d2ff74e4"
+    },
+    "completed/Wbc-G1-EE-SE-19796/evaluation/trial_025_trace.npz": {
+      "remote_path": "/home/rxing/wbc-mjlab-runs/2026-10-26_stability/final-v12-2p5ms/evaluation/train_Wbc-G1-EE-SE_job19796/trial_025_trace.npz",
+      "bytes": 27919,
+      "sha256": "aef44318349b3c1440ddf30d309c7e7b0e4d86685bfd9b57cbe6c9b013a69a71"
+    },
+    "completed/Wbc-G1-EE-SE-19796/evaluation/trial_026_trace.npz": {
+      "remote_path": "/home/rxing/wbc-mjlab-runs/2026-10-26_stability/final-v12-2p5ms/evaluation/train_Wbc-G1-EE-SE_job19796/trial_026_trace.npz",
+      "bytes": 9907,
+      "sha256": "92a1ad78c69d9d33c3c9206347d0047b60770d267cef06c01efd7589457d2765"
+    },
+    "completed/Wbc-G1-EE-SE-19796/evaluation/trial_027_trace.npz": {
+      "remote_path": "/home/rxing/wbc-mjlab-runs/2026-10-26_stability/final-v12-2p5ms/evaluation/train_Wbc-G1-EE-SE_job19796/trial_027_trace.npz",
+      "bytes": 14457,
+      "sha256": "c40b4e618bbea5141996bd41a79b28a0142c23c2c8cd2e6168d5461e0f60103f"
+    },
+    "completed/Wbc-G1-EE-SE-19796/evaluation/trial_028_trace.npz": {
+      "remote_path": "/home/rxing/wbc-mjlab-runs/2026-10-26_stability/final-v12-2p5ms/evaluation/train_Wbc-G1-EE-SE_job19796/trial_028_trace.npz",
+      "bytes": 4478772,
+      "sha256": "595ae8eaa278fe8b6304eb29b0f1dcbca4d7888d04ac9a9df128fe96f7d037a7"
+    },
+    "completed/Wbc-G1-EE-SE-19796/evaluation/trial_029_trace.npz": {
+      "remote_path": "/home/rxing/wbc-mjlab-runs/2026-10-26_stability/final-v12-2p5ms/evaluation/train_Wbc-G1-EE-SE_job19796/trial_029_trace.npz",
+      "bytes": 95124,
+      "sha256": "5afa7429e191a37460c8666c52a2a2a95824577a94ba3fad37080e348b8a1bd8"
+    },
+    "completed/Wbc-G1-EE-SE-19796/evaluation/trial_030_trace.npz": {
+      "remote_path": "/home/rxing/wbc-mjlab-runs/2026-10-26_stability/final-v12-2p5ms/evaluation/train_Wbc-G1-EE-SE_job19796/trial_030_trace.npz",
+      "bytes": 95075,
+      "sha256": "4b37fd188dd8359e381e40b2bd45a2c9fdf57c8bdf1748d0c4cf15f310cf4a69"
+    },
+    "completed/Wbc-G1-EE-SE-19796/evaluation/trial_031_trace.npz": {
+      "remote_path": "/home/rxing/wbc-mjlab-runs/2026-10-26_stability/final-v12-2p5ms/evaluation/train_Wbc-G1-EE-SE_job19796/trial_031_trace.npz",
+      "bytes": 95063,
+      "sha256": "dc73b8804a56dda3bc11d57ddda93ac6e2c695840be5457f4c829615aa48bc9a"
+    },
+    "completed/Wbc-G1-EE-SE-19796/evaluation/trial_032_trace.npz": {
+      "remote_path": "/home/rxing/wbc-mjlab-runs/2026-10-26_stability/final-v12-2p5ms/evaluation/train_Wbc-G1-EE-SE_job19796/trial_032_trace.npz",
+      "bytes": 5134508,
+      "sha256": "eaf49befb91bca2cb22246cf2e20fc84cb3184fbb57164dddf35583d90368c76"
+    },
+    "completed/Wbc-G1-EE-SE-19796/evaluation/trial_033_trace.npz": {
+      "remote_path": "/home/rxing/wbc-mjlab-runs/2026-10-26_stability/final-v12-2p5ms/evaluation/train_Wbc-G1-EE-SE_job19796/trial_033_trace.npz",
+      "bytes": 94943,
+      "sha256": "e877d01bb70cb47cb7e37bcb2b98f3389dac7a15f540758b6fb8350dad891acc"
+    },
+    "completed/Wbc-G1-EE-SE-19796/evaluation/trial_034_trace.npz": {
+      "remote_path": "/home/rxing/wbc-mjlab-runs/2026-10-26_stability/final-v12-2p5ms/evaluation/train_Wbc-G1-EE-SE_job19796/trial_034_trace.npz",
+      "bytes": 94696,
+      "sha256": "cca7ce2f28268da6cc2f226ad91e65ec94767bcef2462ca205efd250cb88d676"
+    },
+    "completed/Wbc-G1-EE-SE-19796/evaluation/trial_035_trace.npz": {
+      "remote_path": "/home/rxing/wbc-mjlab-runs/2026-10-26_stability/final-v12-2p5ms/evaluation/train_Wbc-G1-EE-SE_job19796/trial_035_trace.npz",
+      "bytes": 94120,
+      "sha256": "efbba65d8d6d8a5a24148254005d4e26f9d0330d99f1c3a959482e40f4b5f4bb"
+    },
+    "completed/Wbc-G1-EE-SE-19796/evaluation/trial_036_trace.npz": {
+      "remote_path": "/home/rxing/wbc-mjlab-runs/2026-10-26_stability/final-v12-2p5ms/evaluation/train_Wbc-G1-EE-SE_job19796/trial_036_trace.npz",
+      "bytes": 4916367,
+      "sha256": "6cc6a54c9c49717821cf856f3ba8009ccfb0fbf0252ce1c6f6efdbd2fe281e5e"
+    },
+    "completed/Wbc-G1-EE-SE-19796/evaluation/trial_037_trace.npz": {
+      "remote_path": "/home/rxing/wbc-mjlab-runs/2026-10-26_stability/final-v12-2p5ms/evaluation/train_Wbc-G1-EE-SE_job19796/trial_037_trace.npz",
+      "bytes": 94888,
+      "sha256": "7333b3e1a991cb76a77743c0a2ae9e189a45da3ba168dae102377ea1d8531531"
+    },
+    "completed/Wbc-G1-EE-SE-19796/evaluation/trial_038_trace.npz": {
+      "remote_path": "/home/rxing/wbc-mjlab-runs/2026-10-26_stability/final-v12-2p5ms/evaluation/train_Wbc-G1-EE-SE_job19796/trial_038_trace.npz",
+      "bytes": 95155,
+      "sha256": "5a7fd8870a5dedf994a3e3bbf9b4acad786b59c712b68751513a23c4833467f6"
+    },
+    "completed/Wbc-G1-EE-SE-19796/evaluation/trial_039_trace.npz": {
+      "remote_path": "/home/rxing/wbc-mjlab-runs/2026-10-26_stability/final-v12-2p5ms/evaluation/train_Wbc-G1-EE-SE_job19796/trial_039_trace.npz",
+      "bytes": 95055,
+      "sha256": "0429c43e8cdf2f1c7c15606228569d285fe1293eeeb8cd98fc483df52375bfea"
+    },
+    "completed/Wbc-G1-EE-SE-19796/evaluation/trials.jsonl": {
+      "remote_path": "/home/rxing/wbc-mjlab-runs/2026-10-26_stability/final-v12-2p5ms/evaluation/train_Wbc-G1-EE-SE_job19796/trials.jsonl",
+      "bytes": 88387,
+      "sha256": "a02368c6c7ad97ab62f5ed52548d1ee7cf40e297821feb98d35ff54dacd4ca0a"
+    },
+    "completed/Wbc-G1-EE-SE-19796/full-videos-gpu/trial_000.mp4": {
+      "remote_path": "/home/rxing/wbc-mjlab-runs/2026-10-26_stability/final-v12-2p5ms/videos/Wbc-G1-EE-SE/trial_000.mp4",
+      "bytes": 241038,
+      "sha256": "0a03bb1bd5f7fee9cb70fdcac2d5c1973cae9d8685ce73d1ae9f353dbbee062d"
+    },
+    "completed/Wbc-G1-EE-SE-19796/full-videos-gpu/trial_004.mp4": {
+      "remote_path": "/home/rxing/wbc-mjlab-runs/2026-10-26_stability/final-v12-2p5ms/videos/Wbc-G1-EE-SE/trial_004.mp4",
+      "bytes": 2183638,
+      "sha256": "b251c5f0dbf34fc70fb20e50440b739c455e3f447321db183681e0a6dab46d4f"
+    },
+    "completed/Wbc-G1-EE-SE-19796/full-videos-gpu/trial_008.mp4": {
+      "remote_path": "/home/rxing/wbc-mjlab-runs/2026-10-26_stability/final-v12-2p5ms/videos/Wbc-G1-EE-SE/trial_008.mp4",
+      "bytes": 49628858,
+      "sha256": "042e67f7233d5f8916629773f46d3c668b5ff5d2a7d678a0d550fb9f7fc0dd38"
+    },
+    "completed/Wbc-G1-EE-SE-19796/full-videos-gpu/trial_012.mp4": {
+      "remote_path": "/home/rxing/wbc-mjlab-runs/2026-10-26_stability/final-v12-2p5ms/videos/Wbc-G1-EE-SE/trial_012.mp4",
+      "bytes": 76433693,
+      "sha256": "766d7a7748ef2345ae1d8f52f72753b0a4172869da13bbf0dcac0bf4d5ce6912"
+    },
+    "completed/Wbc-G1-EE-SE-19796/full-videos-gpu/trial_016.mp4": {
+      "remote_path": "/home/rxing/wbc-mjlab-runs/2026-10-26_stability/final-v12-2p5ms/videos/Wbc-G1-EE-SE/trial_016.mp4",
+      "bytes": 119015254,
+      "sha256": "619623c3e3fd318d897e9600dff8dfac9f922e56b801145ca774b7b4bba2ebe8"
+    },
+    "completed/Wbc-G1-EE-SE-19796/full-videos-gpu/trial_020.mp4": {
+      "remote_path": "/home/rxing/wbc-mjlab-runs/2026-10-26_stability/final-v12-2p5ms/videos/Wbc-G1-EE-SE/trial_020.mp4",
+      "bytes": 118048821,
+      "sha256": "16fc2fd8e1411e3cc1011aedb8d123dc1f97eae954e80667b14e18cfec31057e"
+    },
+    "completed/Wbc-G1-EE-SE-19796/full-videos-gpu/trial_024.mp4": {
+      "remote_path": "/home/rxing/wbc-mjlab-runs/2026-10-26_stability/final-v12-2p5ms/videos/Wbc-G1-EE-SE/trial_024.mp4",
+      "bytes": 1238522,
+      "sha256": "8825d30bb6f7ec376b4519ac32e4dd25c7ebeac463414a149191226b93896250"
+    },
+    "completed/Wbc-G1-EE-SE-19796/full-videos-gpu/trial_028.mp4": {
+      "remote_path": "/home/rxing/wbc-mjlab-runs/2026-10-26_stability/final-v12-2p5ms/videos/Wbc-G1-EE-SE/trial_028.mp4",
+      "bytes": 118627194,
+      "sha256": "f7bde5fad6e310cf19483fea95dfd246ed07cb731d6a5f0cd1d0f771ded96f27"
+    },
+    "completed/Wbc-G1-EE-SE-19796/full-videos-gpu/trial_032.mp4": {
+      "remote_path": "/home/rxing/wbc-mjlab-runs/2026-10-26_stability/final-v12-2p5ms/videos/Wbc-G1-EE-SE/trial_032.mp4",
+      "bytes": 118853789,
+      "sha256": "e792a936117d13a4d0077acdf441ea8f7a99131f76fc742161f46799fca88a73"
+    },
+    "completed/Wbc-G1-EE-SE-19796/full-videos-gpu/trial_036.mp4": {
+      "remote_path": "/home/rxing/wbc-mjlab-runs/2026-10-26_stability/final-v12-2p5ms/videos/Wbc-G1-EE-SE/trial_036.mp4",
+      "bytes": 109349908,
+      "sha256": "59e36819fc180d573714d69d8d6c89005369f5803206f9ba3172d4c94c1e18cd"
+    },
+    "completed/Wbc-G1-EE-SE-19796/full-videos-gpu/videos.json": {
+      "remote_path": "/home/rxing/wbc-mjlab-runs/2026-10-26_stability/final-v12-2p5ms/videos/Wbc-G1-EE-SE/videos.json",
+      "bytes": 1597,
+      "sha256": "4d297a00286c818e730f4ba9c33e01545b670c760abd8935cd14887f78447f55"
+    },
+    "completed/Wbc-G1-20236/native/commands.gdb": {
+      "remote_path": "/home/rxing/wbc-mjlab-runs/2026-10-26_stability/final-v12-2p5ms/native-fresh/train_seed42_job20236/commands.gdb",
+      "bytes": 612,
+      "sha256": "12520eba746350cc0e50f79094527b865ba38072327dcedfe1408cf3c8300c9f"
+    },
+    "completed/Wbc-G1-20236/native/native-stack.txt": {
+      "remote_path": "/home/rxing/wbc-mjlab-runs/2026-10-26_stability/final-v12-2p5ms/native-fresh/train_seed42_job20236/native-stack.txt",
+      "bytes": 467,
+      "sha256": "a647d909fde038e43ef4932d7cdd01311356e0f55915583801673c9f914e8c55"
+    },
+    "completed/Wbc-G1-20236/native/status.json": {
+      "remote_path": "/home/rxing/wbc-mjlab-runs/2026-10-26_stability/final-v12-2p5ms/native-fresh/train_seed42_job20236/status.json",
+      "bytes": 2908,
+      "sha256": "0c2a316eef9a0ef99a9affda5c779dc157e2c85f2dc776c1f68bfd3b677132bc"
+    }
+  },
+  "accounting": "JobID|State|ExitCode|Elapsed|NodeList\n19795|COMPLETED|0:0|2-12:10:07|a2r-wolf\n19795.batch|COMPLETED|0:0|2-12:10:07|a2r-wolf\n19796|COMPLETED|0:0|2-13:20:29|a2r-fox\n19796.batch|COMPLETED|0:0|2-13:20:29|a2r-fox\n19810|COMPLETED|0:0|00:03:46|a2r-wolf\n19810.batch|COMPLETED|0:0|00:03:46|a2r-wolf\n19811|COMPLETED|0:0|00:03:53|a2r-wolf\n19811.batch|COMPLETED|0:0|00:03:53|a2r-wolf\n20236|COMPLETED|0:0|2-11:59:55|a2r-wolf\n20236.batch|COMPLETED|0:0|2-11:59:55|a2r-wolf\n20237|COMPLETED|0:0|00:03:59|a2r-wolf\n20237.batch|COMPLETED|0:0|00:03:59|a2r-wolf\n",
+  "queue": "             JOBID PARTITION     NAME     USER ST       TIME  NODES NODELIST(REASON)\n"
+}

@@ -1,0 +1,525 @@
+{
+  "protocol_version": 3,
+  "source_snapshot": "stability-20261027-capacity-v9",
+  "evaluations": [
+    {
+      "evaluation": "physics-v9/Wbc-G1-SE_0.001/results.json",
+      "result_sha256": "8f83199fdbb8952b29b3992622988a9a29fc5c068ed131b6c3dbe4e73192630d",
+      "task": "Wbc-G1-SE",
+      "physics_dt": 0.001,
+      "full": {
+        "planned": 10,
+        "completed": 2,
+        "falls": 8,
+        "numerical_failures": 0,
+        "completion_rate": 0.2,
+        "observed_steps": 31334,
+        "planned_steps": 78563,
+        "trials_with_metrics": 10,
+        "mean_trial_metrics": {
+          "anchor_drift_m": 1.5641685347281453,
+          "body_global_m": 1.5974098389859122,
+          "body_root_relative_m": 0.0774538757810952,
+          "body_orientation_rad": 0.5480770605684209,
+          "joint_position_rmse_rad": 0.21572155252407352,
+          "joint_velocity_rmse_rad_s": 1.9861684158350617,
+          "body_linear_velocity_m_s": 0.9099605315433991,
+          "body_angular_velocity_rad_s": 3.3638734641319394,
+          "anchor_linear_velocity_m_s": 0.6429528777526191
+        }
+      },
+      "all_trial_simulated_seconds": 732.8000000000001,
+      "all_trial_wall_seconds": 2438.3101703184657,
+      "simulated_seconds_per_wall_second": 0.3005360060095593,
+      "penetration_peak_m": 0.0822427049279213,
+      "joint_speed_peak_rad_s": 50.948150634765625,
+      "export_parity": {
+        "samples": 768,
+        "passed": true,
+        "engine": "onnx.reference.ReferenceEvaluator",
+        "existing_export_checked": true
+      }
+    },
+    {
+      "evaluation": "physics-v9/Wbc-G1-SE_0.0025/results.json",
+      "result_sha256": "9a2a64099994e5549c7d8489cd06aadd4fb8fa81a7382f19defc9967a8899e7c",
+      "task": "Wbc-G1-SE",
+      "physics_dt": 0.0025,
+      "full": {
+        "planned": 10,
+        "completed": 2,
+        "falls": 8,
+        "numerical_failures": 0,
+        "completion_rate": 0.2,
+        "observed_steps": 31099,
+        "planned_steps": 78563,
+        "trials_with_metrics": 10,
+        "mean_trial_metrics": {
+          "anchor_drift_m": 1.6221881384428052,
+          "body_global_m": 1.6565758634345755,
+          "body_root_relative_m": 0.07671882963032055,
+          "body_orientation_rad": 0.5480018960108397,
+          "joint_position_rmse_rad": 0.21318192312389012,
+          "joint_velocity_rmse_rad_s": 1.8877530277934853,
+          "body_linear_velocity_m_s": 0.8984290028284871,
+          "body_angular_velocity_rad_s": 3.2572557953388888,
+          "anchor_linear_velocity_m_s": 0.6376201133953228
+        }
+      },
+      "all_trial_simulated_seconds": 730.9,
+      "all_trial_wall_seconds": 1210.2431903462857,
+      "simulated_seconds_per_wall_second": 0.6039282070166975,
+      "penetration_peak_m": 0.0822427049279213,
+      "joint_speed_peak_rad_s": 62.53792190551758,
+      "export_parity": {
+        "samples": 766,
+        "passed": true,
+        "engine": "onnx.reference.ReferenceEvaluator",
+        "existing_export_checked": true
+      }
+    },
+    {
+      "evaluation": "physics-v9/Wbc-G1-SE_0.005/results.json",
+      "result_sha256": "972c94dd7fe6938b8d1b0ca0b09b630dbbb0c25b57fe7cc0ef6099dd2ef0b7f5",
+      "task": "Wbc-G1-SE",
+      "physics_dt": 0.005,
+      "full": {
+        "planned": 10,
+        "completed": 2,
+        "falls": 8,
+        "numerical_failures": 0,
+        "completion_rate": 0.2,
+        "observed_steps": 28685,
+        "planned_steps": 78563,
+        "trials_with_metrics": 10,
+        "mean_trial_metrics": {
+          "anchor_drift_m": 1.521204656481007,
+          "body_global_m": 1.5558998304912834,
+          "body_root_relative_m": 0.0762612488315098,
+          "body_orientation_rad": 0.5501005596635067,
+          "joint_position_rmse_rad": 0.2126592379107338,
+          "joint_velocity_rmse_rad_s": 1.9223890513374307,
+          "body_linear_velocity_m_s": 0.8968776444068126,
+          "body_angular_velocity_rad_s": 3.2565804849688895,
+          "anchor_linear_velocity_m_s": 0.644013547594388
+        }
+      },
+      "all_trial_simulated_seconds": 677.94,
+      "all_trial_wall_seconds": 690.7483517590445,
+      "simulated_seconds_per_wall_second": 0.9814572821977396,
+      "penetration_peak_m": 0.0822427049279213,
+      "joint_speed_peak_rad_s": 54.83108139038086,
+      "export_parity": {
+        "samples": 714,
+        "passed": true,
+        "engine": "onnx.reference.ReferenceEvaluator",
+        "existing_export_checked": true
+      }
+    },
+    {
+      "evaluation": "physics-v9/Wbc-G1-Zest_0.001/results.json",
+      "result_sha256": "6a5cd72b9a1ea1c41ba206baff8b971f91a0e3f501fc827f6e350f082e56ba3a",
+      "task": "Wbc-G1-Zest",
+      "physics_dt": 0.001,
+      "full": {
+        "planned": 10,
+        "completed": 4,
+        "falls": 6,
+        "numerical_failures": 0,
+        "completion_rate": 0.4,
+        "observed_steps": 54694,
+        "planned_steps": 78563,
+        "trials_with_metrics": 10,
+        "mean_trial_metrics": {
+          "anchor_drift_m": 3.2165767179066913,
+          "body_global_m": 3.244001717110879,
+          "body_root_relative_m": 0.0806553902833735,
+          "body_orientation_rad": 1.1642683928561737,
+          "joint_position_rmse_rad": 0.22214902451848656,
+          "joint_velocity_rmse_rad_s": 1.893917857759971,
+          "body_linear_velocity_m_s": 1.1390836819362002,
+          "body_angular_velocity_rad_s": 3.644264677631766,
+          "anchor_linear_velocity_m_s": 0.8611242328664226
+        }
+      },
+      "all_trial_simulated_seconds": 1203.3600000000001,
+      "all_trial_wall_seconds": 4010.0599472566973,
+      "simulated_seconds_per_wall_second": 0.3000852894538958,
+      "penetration_peak_m": 0.0822427049279213,
+      "joint_speed_peak_rad_s": 39.257015228271484,
+      "export_parity": {
+        "samples": 1241,
+        "passed": true,
+        "engine": "onnx.reference.ReferenceEvaluator",
+        "existing_export_checked": true
+      }
+    },
+    {
+      "evaluation": "physics-v9/Wbc-G1-Zest_0.0025/results.json",
+      "result_sha256": "ab28e71189d92e13924cf728c5724f697d34308842cb42265cbd7162fabd7ffc",
+      "task": "Wbc-G1-Zest",
+      "physics_dt": 0.0025,
+      "full": {
+        "planned": 10,
+        "completed": 5,
+        "falls": 5,
+        "numerical_failures": 0,
+        "completion_rate": 0.5,
+        "observed_steps": 58209,
+        "planned_steps": 78563,
+        "trials_with_metrics": 10,
+        "mean_trial_metrics": {
+          "anchor_drift_m": 3.6374363395249345,
+          "body_global_m": 3.6668626382720007,
+          "body_root_relative_m": 0.08000018440259282,
+          "body_orientation_rad": 1.0642992509280145,
+          "joint_position_rmse_rad": 0.22114235705685198,
+          "joint_velocity_rmse_rad_s": 1.8621206141531672,
+          "body_linear_velocity_m_s": 1.0820189087234684,
+          "body_angular_velocity_rad_s": 3.543279503147491,
+          "anchor_linear_velocity_m_s": 0.8064464623330052
+        }
+      },
+      "all_trial_simulated_seconds": 1273.72,
+      "all_trial_wall_seconds": 2021.8761654437985,
+      "simulated_seconds_per_wall_second": 0.62996934321169,
+      "penetration_peak_m": 0.0822427049279213,
+      "joint_speed_peak_rad_s": 54.947750091552734,
+      "export_parity": {
+        "samples": 1312,
+        "passed": true,
+        "engine": "onnx.reference.ReferenceEvaluator",
+        "existing_export_checked": true
+      }
+    },
+    {
+      "evaluation": "physics-v9/Wbc-G1-Zest_0.005/results.json",
+      "result_sha256": "1764e7b2d044832118acddc558ab219bf26c0c6f3acbcb8ebb66298712c2a256",
+      "task": "Wbc-G1-Zest",
+      "physics_dt": 0.005,
+      "full": {
+        "planned": 10,
+        "completed": 5,
+        "falls": 5,
+        "numerical_failures": 0,
+        "completion_rate": 0.5,
+        "observed_steps": 65597,
+        "planned_steps": 78563,
+        "trials_with_metrics": 10,
+        "mean_trial_metrics": {
+          "anchor_drift_m": 3.6295573503205305,
+          "body_global_m": 3.6517807685798673,
+          "body_root_relative_m": 0.07737044486408459,
+          "body_orientation_rad": 1.1554942865173294,
+          "joint_position_rmse_rad": 0.2153813111226402,
+          "joint_velocity_rmse_rad_s": 1.9870728995126978,
+          "body_linear_velocity_m_s": 1.1329129205080626,
+          "body_angular_velocity_rad_s": 3.7004473682610333,
+          "anchor_linear_velocity_m_s": 0.8576332002629314
+        }
+      },
+      "all_trial_simulated_seconds": 1421.46,
+      "all_trial_wall_seconds": 1407.033014995046,
+      "simulated_seconds_per_wall_second": 1.010253480089808,
+      "penetration_peak_m": 0.0822427049279213,
+      "joint_speed_peak_rad_s": 52.7031364440918,
+      "export_parity": {
+        "samples": 1460,
+        "passed": true,
+        "engine": "onnx.reference.ReferenceEvaluator",
+        "existing_export_checked": true
+      }
+    },
+    {
+      "evaluation": "physics-v9/Wbc-G1_0.001/results.json",
+      "result_sha256": "31bab1b18d325e7fd914a7dba2c429f5aa9366070c8a594bf6195f07af781f86",
+      "task": "Wbc-G1",
+      "physics_dt": 0.001,
+      "full": {
+        "planned": 10,
+        "completed": 2,
+        "falls": 8,
+        "numerical_failures": 0,
+        "completion_rate": 0.2,
+        "observed_steps": 30880,
+        "planned_steps": 78563,
+        "trials_with_metrics": 10,
+        "mean_trial_metrics": {
+          "anchor_drift_m": 2.130390411336779,
+          "body_global_m": 2.1490715677665433,
+          "body_root_relative_m": 0.07362902482998698,
+          "body_orientation_rad": 0.9692610754021265,
+          "joint_position_rmse_rad": 0.21094457390726878,
+          "joint_velocity_rmse_rad_s": 1.737920662929295,
+          "body_linear_velocity_m_s": 1.0228120717038383,
+          "body_angular_velocity_rad_s": 3.2927141046530233,
+          "anchor_linear_velocity_m_s": 0.7940648551074443
+        }
+      },
+      "all_trial_simulated_seconds": 727.0,
+      "all_trial_wall_seconds": 2435.9070287900977,
+      "simulated_seconds_per_wall_second": 0.2984514562368569,
+      "penetration_peak_m": 0.0822427049279213,
+      "joint_speed_peak_rad_s": 39.24388122558594,
+      "export_parity": {
+        "samples": 763,
+        "passed": true,
+        "engine": "onnx.reference.ReferenceEvaluator",
+        "existing_export_checked": true
+      }
+    },
+    {
+      "evaluation": "physics-v9/Wbc-G1_0.0025/results.json",
+      "result_sha256": "54c8a3b104f14abf5ee92ec5dc05f182417add5e1c219c3a59b6fd345b0f5a58",
+      "task": "Wbc-G1",
+      "physics_dt": 0.0025,
+      "full": {
+        "planned": 10,
+        "completed": 2,
+        "falls": 8,
+        "numerical_failures": 0,
+        "completion_rate": 0.2,
+        "observed_steps": 28306,
+        "planned_steps": 78563,
+        "trials_with_metrics": 10,
+        "mean_trial_metrics": {
+          "anchor_drift_m": 2.641025632779502,
+          "body_global_m": 2.661748542663923,
+          "body_root_relative_m": 0.07408157069525975,
+          "body_orientation_rad": 0.9800778278854858,
+          "joint_position_rmse_rad": 0.21038089314275377,
+          "joint_velocity_rmse_rad_s": 1.739510013571513,
+          "body_linear_velocity_m_s": 1.0516664468793326,
+          "body_angular_velocity_rad_s": 3.3031383580164992,
+          "anchor_linear_velocity_m_s": 0.8262571998883812
+        }
+      },
+      "all_trial_simulated_seconds": 675.64,
+      "all_trial_wall_seconds": 1079.527479964774,
+      "simulated_seconds_per_wall_second": 0.6258664207622086,
+      "penetration_peak_m": 0.0822427049279213,
+      "joint_speed_peak_rad_s": 42.25754165649414,
+      "export_parity": {
+        "samples": 711,
+        "passed": true,
+        "engine": "onnx.reference.ReferenceEvaluator",
+        "existing_export_checked": true
+      }
+    },
+    {
+      "evaluation": "physics-v9/Wbc-G1_0.005/results.json",
+      "result_sha256": "4d6d839a0118412c10f84f4bc3428a98c3d3e2a87447f265abd0448b279fbcf0",
+      "task": "Wbc-G1",
+      "physics_dt": 0.005,
+      "full": {
+        "planned": 10,
+        "completed": 1,
+        "falls": 9,
+        "numerical_failures": 0,
+        "completion_rate": 0.1,
+        "observed_steps": 19429,
+        "planned_steps": 78563,
+        "trials_with_metrics": 10,
+        "mean_trial_metrics": {
+          "anchor_drift_m": 2.091495906840481,
+          "body_global_m": 2.1137777867805854,
+          "body_root_relative_m": 0.074392303183733,
+          "body_orientation_rad": 0.9055606498809375,
+          "joint_position_rmse_rad": 0.21040856922283419,
+          "joint_velocity_rmse_rad_s": 1.777226756402349,
+          "body_linear_velocity_m_s": 1.0158731673677948,
+          "body_angular_velocity_rad_s": 3.3043665763487136,
+          "anchor_linear_velocity_m_s": 0.7926170473128742
+        }
+      },
+      "all_trial_simulated_seconds": 496.76,
+      "all_trial_wall_seconds": 519.144716958981,
+      "simulated_seconds_per_wall_second": 0.956881547230019,
+      "penetration_peak_m": 0.0822427049279213,
+      "joint_speed_peak_rad_s": 54.389862060546875,
+      "export_parity": {
+        "samples": 529,
+        "passed": true,
+        "engine": "onnx.reference.ReferenceEvaluator",
+        "existing_export_checked": true
+      }
+    },
+    {
+      "evaluation": "remaining-pilots-v9/Wbc-G1-EE-SE_0.005/results.json",
+      "result_sha256": "d9121bb5045708907c3976a7fca6ff0e81c550305db9ab51878ecc77a1c96c25",
+      "task": "Wbc-G1-EE-SE",
+      "physics_dt": 0.005,
+      "full": {
+        "planned": 10,
+        "completed": 1,
+        "falls": 9,
+        "numerical_failures": 0,
+        "completion_rate": 0.1,
+        "observed_steps": 28572,
+        "planned_steps": 78563,
+        "trials_with_metrics": 10,
+        "mean_trial_metrics": {
+          "anchor_drift_m": 0.6467595047409257,
+          "body_global_m": 0.6733346653091472,
+          "body_root_relative_m": 0.09367749398674409,
+          "body_orientation_rad": 0.5751065193660174,
+          "joint_position_rmse_rad": 0.33999600975850097,
+          "joint_velocity_rmse_rad_s": 2.2576379685821313,
+          "body_linear_velocity_m_s": 0.8627606770372325,
+          "body_angular_velocity_rad_s": 3.5756242632576254,
+          "anchor_linear_velocity_m_s": 0.5958045178934899
+        }
+      },
+      "all_trial_simulated_seconds": 678.86,
+      "all_trial_wall_seconds": 711.6970084037166,
+      "simulated_seconds_per_wall_second": 0.9538609717113079,
+      "penetration_peak_m": 0.0822427049279213,
+      "joint_speed_peak_rad_s": 54.479244232177734,
+      "export_parity": {
+        "samples": 709,
+        "passed": true,
+        "engine": "onnx.reference.ReferenceEvaluator",
+        "existing_export_checked": true
+      }
+    },
+    {
+      "evaluation": "remaining-pilots-v9/Wbc-G1-EE_0.005/results.json",
+      "result_sha256": "ae8e1789b82ab7eed91918bbfae1b3c7078c4bbe06e5f499633ac1b83f3958d3",
+      "task": "Wbc-G1-EE",
+      "physics_dt": 0.005,
+      "full": {
+        "planned": 10,
+        "completed": 1,
+        "falls": 9,
+        "numerical_failures": 0,
+        "completion_rate": 0.1,
+        "observed_steps": 12633,
+        "planned_steps": 78563,
+        "trials_with_metrics": 10,
+        "mean_trial_metrics": {
+          "anchor_drift_m": 0.8241484478129635,
+          "body_global_m": 0.8546718613309116,
+          "body_root_relative_m": 0.10318061572428232,
+          "body_orientation_rad": 0.5300871039548578,
+          "joint_position_rmse_rad": 0.3377575509073924,
+          "joint_velocity_rmse_rad_s": 2.078164913725808,
+          "body_linear_velocity_m_s": 0.8785362109774753,
+          "body_angular_velocity_rad_s": 3.2813330703248056,
+          "anchor_linear_velocity_m_s": 0.6580626019290675
+        }
+      },
+      "all_trial_simulated_seconds": 356.88,
+      "all_trial_wall_seconds": 380.54886690410785,
+      "simulated_seconds_per_wall_second": 0.9378033441627037,
+      "penetration_peak_m": 0.0822427049279213,
+      "joint_speed_peak_rad_s": 52.7990837097168,
+      "export_parity": {
+        "samples": 390,
+        "passed": true,
+        "engine": "onnx.reference.ReferenceEvaluator",
+        "existing_export_checked": true
+      }
+    },
+    {
+      "evaluation": "remaining-pilots-v9/Wbc-G1-Zest-SE_0.005/results.json",
+      "result_sha256": "a9fc1adf4f1df1fa34ba86f8abf48f0e88aab1eca718d22807624ed2dc962611",
+      "task": "Wbc-G1-Zest-SE",
+      "physics_dt": 0.005,
+      "full": {
+        "planned": 10,
+        "completed": 3,
+        "falls": 7,
+        "numerical_failures": 0,
+        "completion_rate": 0.3,
+        "observed_steps": 40802,
+        "planned_steps": 78563,
+        "trials_with_metrics": 10,
+        "mean_trial_metrics": {
+          "anchor_drift_m": 1.7230665110446644,
+          "body_global_m": 1.7558779338792974,
+          "body_root_relative_m": 0.08518621202172058,
+          "body_orientation_rad": 0.4753818198923009,
+          "joint_position_rmse_rad": 0.22387614088823832,
+          "joint_velocity_rmse_rad_s": 1.9483851961467618,
+          "body_linear_velocity_m_s": 0.877618226718598,
+          "body_angular_velocity_rad_s": 3.2498849684142384,
+          "anchor_linear_velocity_m_s": 0.5990191167499351
+        }
+      },
+      "all_trial_simulated_seconds": 920.62,
+      "all_trial_wall_seconds": 940.3400348857976,
+      "simulated_seconds_per_wall_second": 0.979028825579895,
+      "penetration_peak_m": 0.0822427049279213,
+      "joint_speed_peak_rad_s": 50.4796257019043,
+      "export_parity": {
+        "samples": 955,
+        "passed": true,
+        "engine": "onnx.reference.ReferenceEvaluator",
+        "existing_export_checked": true
+      }
+    }
+  ],
+  "short_trace_comparisons_to_1ms": [
+    {
+      "task": "Wbc-G1-SE",
+      "physics_dt": 0.005,
+      "mean_trial_first_second_joint_rmse_rad": 0.03483516280539334,
+      "mean_trial_first_second_base_position_m": 0.014001520170131699,
+      "mean_trial_first_second_joint_velocity_rmse_rad_s": 1.1777625009417534
+    },
+    {
+      "task": "Wbc-G1-SE",
+      "physics_dt": 0.0025,
+      "mean_trial_first_second_joint_rmse_rad": 0.020870668778661637,
+      "mean_trial_first_second_base_position_m": 0.0073220353508077094,
+      "mean_trial_first_second_joint_velocity_rmse_rad_s": 0.6583101535215974
+    },
+    {
+      "task": "Wbc-G1-Zest",
+      "physics_dt": 0.005,
+      "mean_trial_first_second_joint_rmse_rad": 0.03411653507500887,
+      "mean_trial_first_second_base_position_m": 0.009875039242615458,
+      "mean_trial_first_second_joint_velocity_rmse_rad_s": 0.9537959523499012
+    },
+    {
+      "task": "Wbc-G1-Zest",
+      "physics_dt": 0.0025,
+      "mean_trial_first_second_joint_rmse_rad": 0.013788596884114667,
+      "mean_trial_first_second_base_position_m": 0.004136237168131629,
+      "mean_trial_first_second_joint_velocity_rmse_rad_s": 0.445841159299016
+    },
+    {
+      "task": "Wbc-G1",
+      "physics_dt": 0.005,
+      "mean_trial_first_second_joint_rmse_rad": 0.032620678562670945,
+      "mean_trial_first_second_base_position_m": 0.01133507521590218,
+      "mean_trial_first_second_joint_velocity_rmse_rad_s": 1.0164391189813613
+    },
+    {
+      "task": "Wbc-G1",
+      "physics_dt": 0.0025,
+      "mean_trial_first_second_joint_rmse_rad": 0.014898390742018819,
+      "mean_trial_first_second_base_position_m": 0.005338250471686479,
+      "mean_trial_first_second_joint_velocity_rmse_rad_s": 0.49068109411746264
+    }
+  ],
+  "decision": {
+    "provisional_training_dt_s": 0.0025,
+    "control_period_s": 0.02,
+    "decimation": 8,
+    "integrator": "implicitfast",
+    "solver": "newton",
+    "iterations": 10,
+    "ls_iterations": 20,
+    "friction": "original explicit tanh/static plus viscous, unchanged",
+    "torque_penalty": "corrected active effort / stationary peak",
+    "status": "Provisional for six smoke checks and fresh 10k SE/Zest pilots; final campaign profile not frozen",
+    "rationale": "2.5 ms approximately halves short-horizon joint differences vs 1 ms compared with 5 ms, at about 1.6 times evaluation cost rather than 3.3 times for 1 ms. Tracking completion changes are mixed. 1 ms is a sensitivity reference, not ground truth.",
+    "limits": [
+      "Three closed-loop terminal-qpos regression failures remain; action export parity passes.",
+      "Local stationary no-contact Jacobian is unstable at all three tested timesteps; nonlinear limit-cycle sensitivity remains, not a claim of unbounded rollout failure.",
+      "Largest penetrations are already present in shared reference initial states; see initial-contact-audit-v9.json.",
+      "Only 1000-iteration policies evaluated; long-run stability and final tracking quality unproven."
+    ]
+  }
+}
