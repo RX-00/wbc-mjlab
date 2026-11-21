@@ -7,6 +7,7 @@ from mjlab.envs import ManagerBasedRlEnvCfg
 from wbc_mjlab.env.mdp.commands import MotionCommandCfg
 from wbc_mjlab.presets.binary_failure import apply_binary_failure
 from wbc_mjlab.presets.end_effector import apply_end_effector
+from wbc_mjlab.presets.preview import apply_preview
 from wbc_mjlab.presets.se_actor import apply_se_actor
 from wbc_mjlab.presets.terrain import apply_terrain_scan
 from wbc_mjlab.presets.wbc import apply_wbc
@@ -31,6 +32,12 @@ def g1_wbc_env_cfg() -> ManagerBasedRlEnvCfg:
     motion_body_names=G1_MOTION_BODY_NAMES,
     ee_termination_bodies=G1_EE_TERMINATION_BODY_NAMES,
   )
+  return cfg
+
+
+def g1_wbc_preview_env_cfg() -> ManagerBasedRlEnvCfg:
+  cfg = g1_wbc_env_cfg()
+  apply_preview(cfg)
   return cfg
 
 
@@ -97,6 +104,13 @@ G1_WBC_TASKS: tuple[WbcTaskConfig, ...] = (
     ),
     experiment_name="wbc_g1",
     build_env_cfg=g1_wbc_env_cfg,
+  ),
+  WbcTaskConfig(
+    task_id="Wbc-G1-Preview",
+    robot_id="g1",
+    description="WBC PPO with ten sensor frames and a 0.9-second joint and pelvis reference window.",
+    experiment_name="wbc_g1_preview",
+    build_env_cfg=g1_wbc_preview_env_cfg,
   ),
   WbcTaskConfig(
     task_id="Wbc-G1-Terrain-Scan",

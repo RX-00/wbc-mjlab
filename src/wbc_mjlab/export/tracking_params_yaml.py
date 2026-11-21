@@ -25,6 +25,7 @@ MANIFEST_FILENAME = "wbc_tracking_params_manifest.yaml"
 
 # WBC reference obs terms in ``make_base_wbc_env_cfg`` (subset may be removed per task).
 REFERENCE_OBS_TERM_NAMES = (
+  "ref_motion_window",
   "ref_base_height",
   "ref_anchor_pos_w",
   "ref_anchor_ori_6d",
@@ -140,6 +141,8 @@ def _observation_dim(
   joint_count: int,
   body_count: int,
 ) -> int:
+  if name == "ref_motion_window":
+    return 10 * (2 * joint_count + 6)
   if name == "ref_base_height":
     return 1
   if name == "motion_anchor_pos_z_b":
@@ -320,6 +323,13 @@ def build_wbc_tracking_params(
       "scale": [1.0] * dim,
       "params": params,
     }
+
+  if "ref_motion_window" in actor_terms:
+    for name, term in actor_terms.items():
+      actor_observations[name]["history_length"] = max(1, term.history_length)
+    actor_observations["ref_motion_window"]["params"].update(
+      offsets=list(range(0, 50, 5)), orientation_frame="measured_pelvis"
+    )
 
   stiffness, damping, default_pos = _pd_from_robot(cfg, joint_names)
 

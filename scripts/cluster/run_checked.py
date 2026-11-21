@@ -19,6 +19,7 @@ import yaml
 
 TASKS = (
   "Wbc-G1",
+  "Wbc-G1-Preview",
   "Wbc-G1-SE",
   "Wbc-G1-Zest",
   "Wbc-G1-Zest-SE",
@@ -143,6 +144,7 @@ def main():
   parser.add_argument("--run-root", type=Path, default=Path("/runs"))
   parser.add_argument("--job-id", required=True)
   parser.add_argument("--num-envs", type=int, default=2048)
+  parser.add_argument("--dataset-path", default="/workspace/wbc-mjlab/data/g1/samples")
   parser.add_argument("--seed", type=int, default=42)
   parser.add_argument("--njmax", type=int, default=1024)
   parser.add_argument(
@@ -169,7 +171,7 @@ def main():
     "--task",
     args.task,
     "--dataset-path",
-    "/workspace/wbc-mjlab/data/g1/samples",
+    args.dataset_path,
     "--env.scene.num-envs",
     str(args.num_envs),
     "--env.sim.njmax",
@@ -260,7 +262,7 @@ def main():
         "--onnx-file",
         str(Path(result["checkpoint"]).parent / "params/policy.onnx"),
         "--motion-file",
-        "/workspace/wbc-mjlab/data/g1/samples",
+        args.dataset_path,
         "--physics-dt",
         str(args.physics_dt),
         "--output",

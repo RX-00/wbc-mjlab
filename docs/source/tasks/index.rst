@@ -151,3 +151,16 @@ To add a task in code: :doc:`adding`.
    wbc-g1-ee-se
    wbc-g1-terrain-scan
    adding
+
+Planner preview comparison
+--------------------------
+
+``Wbc-G1-Preview`` retains the G1 PPO rewards, reset sampler and joint-reference
+residual action. Its actor reads ten frames of projected gravity, pelvis gyro,
+relative encoder positions, joint velocities and previous actions. Each sensor
+term is flattened oldest first. The final term contains commanded joint
+positions and velocities at offsets 0, 5, ..., 45 control ticks, then the first
+two rotation-matrix columns of each target pelvis orientation relative to the
+current pelvis. At a clip boundary the window clamps to that clip's last frame.
+The comparison adapter estimates attitude from the gyro and a common initial
+alignment. Training uses ideal simulated pelvis attitude for that transform.

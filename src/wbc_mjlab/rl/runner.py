@@ -32,7 +32,7 @@ def _tracking_policy_onnx_metadata(
   scale = joint_action._scale
   if isinstance(scale, torch.Tensor):
     action_scale: list | float = (
-      scale[0].item() if scale.numel() == 1 else scale.flatten().cpu().tolist()
+      scale[0].item() if scale.numel() == 1 else scale[0].flatten().cpu().tolist()
     )
   else:
     action_scale = scale
@@ -119,6 +119,10 @@ class PolicyOnlyMotionTrackingRunner(MotionTrackingOnPolicyRunner):
         "wbc_command_dim": motion_term.wbc_command_dim,
       }
     )
+    if "ref_motion_window" in metadata["observation_names"]:
+      metadata["wbc_command_dim"] = 10 * (2 * len(metadata["joint_names"]) + 6)
+      metadata["preview_offsets"] = list(range(0, 50, 5))
+      metadata["sensor_history_length"] = 10
     return metadata
 
   def save(self, path: str, infos=None) -> None:
