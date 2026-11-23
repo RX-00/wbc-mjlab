@@ -80,7 +80,9 @@ def main():
   p.add_argument("--split", required=True, choices=["validation", "test"])
   p.add_argument("--rates", nargs="+", type=int, required=True)
   p.add_argument("--horizons", nargs="+", type=int, required=True)
-  p.add_argument("--revisions", nargs="+", choices=["none", "slow"], required=True)
+  p.add_argument(
+    "--revisions", nargs="+", choices=["none", "slow", "settle"], required=True
+  )
   p.add_argument("--workers", type=int, default=4)
   a = p.parse_args()
   with a.manifest.open() as f:

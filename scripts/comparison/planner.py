@@ -30,22 +30,33 @@ class Planner:
     }
     self.length = len(self.original["joint_pos"])
     # An integer second is a common publication instant for every tested rate.
-    self.switch = max(0, self.length // 100) * 50
+    self.switch = min(max(1, self.length // 100) * 50, (self.length - 2) // 50 * 50)
     self.revised = self.original if revision == "none" else self.revise(revision)
     self.published_at = -1
 
   def revise(self, kind):
     if self.switch < 1:
-      raise ValueError("A revision trial needs at least two seconds")
-    if kind != "slow":
-      raise ValueError(kind)
+      raise ValueError(
+        "A revision trial needs a common publication tick before its endpoint"
+      )
     # Stretch the remaining performance with a continuous change in speed.
     # Keep the same trial clock. The revised endpoint occurs earlier in the
     # source clip, as a receding-horizon planner may change its destination.
     t = np.arange(self.length, dtype=float)
     elapsed = np.maximum(0, (t - self.switch) / 50)
-    speed = 1 - 0.25 * np.minimum(elapsed / 0.5, 1)
-    u = t - 50 * 0.25 * np.where(elapsed < 0.5, elapsed**2, elapsed - 0.25)
+    if kind == "slow":
+      speed = 1 - 0.25 * np.minimum(elapsed / 0.5, 1)
+      u = t - 50 * 0.25 * np.where(elapsed < 0.5, elapsed**2, elapsed - 0.25)
+    elif kind == "settle":
+      # Validation diagnostic on upright clips selected for a planted endpoint.
+      # Ramp speed to zero over 1 s, then hold the pose 25 source ticks ahead.
+      if self.switch + 50 >= self.length:
+        raise ValueError("A settle trial needs at least one second after revision")
+      advance = np.minimum(elapsed, 1)
+      speed = 1 - advance
+      u = np.where(t <= self.switch, t, self.switch + 50 * (advance - 0.5 * advance**2))
+    else:
+      raise ValueError(kind)
     lo = u.astype(int)
     hi = np.minimum(lo + 1, self.length - 1)
     result = {}

@@ -8,8 +8,8 @@ from pathlib import Path
 import imageio.v2 as imageio
 import mujoco
 import numpy as np
-from PIL import Image, ImageDraw, ImageFont
 from convert_reference import load_model
+from PIL import Image, ImageDraw, ImageFont
 
 
 def load_trial(folder):
@@ -24,7 +24,7 @@ def load_trial(folder):
   return record, trace
 
 
-def render(model, folders, labels, output):
+def render(model, folders, labels, output, credit=None):
   trials = [load_trial(p) for p in folders]
   r, z = max(trials, key=lambda trial: trial[0]["observed"])
   for other, t in trials:
@@ -40,6 +40,7 @@ def render(model, folders, labels, output):
         raise ValueError(f"Unpaired {key}")
     np.testing.assert_array_equal(t["ref_qpos"], z["ref_qpos"][: other["observed"]])
     np.testing.assert_array_equal(t["initial"], z["initial"])
+    np.testing.assert_array_equal(t["initial_velocity"], z["initial_velocity"])
   m = load_model(model)
   ref, actual = mujoco.MjData(m), mujoco.MjData(m)
   option, perturb = mujoco.MjvOption(), mujoco.MjvPerturb()
@@ -47,7 +48,7 @@ def render(model, folders, labels, output):
   camera.azimuth, camera.elevation = 110, -13
   width, height = 480, 360
   font = ImageFont.truetype("DejaVuSans.ttf", 14)
-  panel_height = height + 64
+  panel_height = height + 64 + (22 if credit else 0)
   output.parent.mkdir(parents=True, exist_ok=True)
   # Camera moves with the reference; both panels use identical framing and zoom.
   max_gap = max(
@@ -72,11 +73,11 @@ def render(model, folders, labels, output):
       camera.lookat[:] = [*ref.qpos[:2], 0.68]
       canvas = Image.new("RGB", (width * len(trials), panel_height + 36), "#162026")
       draw = ImageDraw.Draw(canvas)
-      marker = (
-        "  |  Revised speed"
-        if r["revision"] == "slow" and i + 1 >= r["revision_tick"]
-        else ""
-      )
+      marker = ""
+      if i + 1 >= r["revision_tick"]:
+        marker = {"slow": "  |  Revised speed", "settle": "  |  Settle to stand"}.get(
+          r["revision"], ""
+        )
       title = f"{r['motion']}     {(i + 1) / 50:.2f} s     {r['rate']} Hz / {r['preview_steps'] / 50:.2f} s preview{marker}"
       draw.text((9, 9), title, font=font, fill="white")
       for j, ((other, t), label) in enumerate(zip(trials, labels, strict=True)):
@@ -111,6 +112,8 @@ def render(model, folders, labels, output):
           fill="white",
         )
         draw.text((x, height + 78), "Cyan = commanded pose", font=font, fill="#38d9ed")
+      if credit:
+        draw.text((9, height + 99), credit, font=font, fill="white")
       writer.append_data(np.asarray(canvas))
 
 
@@ -120,5 +123,6 @@ if __name__ == "__main__":
   p.add_argument("output", type=Path)
   p.add_argument("--trial", action="append", required=True, type=Path)
   p.add_argument("--label", action="append", required=True)
+  p.add_argument("--credit")
   a = p.parse_args()
-  render(a.model, a.trial, a.label, a.output)
+  render(a.model, a.trial, a.label, a.output, a.credit)

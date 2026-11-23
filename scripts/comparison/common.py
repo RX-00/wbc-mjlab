@@ -293,7 +293,7 @@ def main():
     ap.add_argument(arg, type=Path)
   ap.add_argument("--rate", type=int, required=True)
   ap.add_argument("--preview-steps", type=int, required=True)
-  ap.add_argument("--revision", choices=["none", "slow"], default="none")
+  ap.add_argument("--revision", choices=["none", "slow", "settle"], default="none")
   ap.add_argument("--bias-deg-s", type=float, default=0)
   a = ap.parse_args()
   torch.set_num_threads(1)
