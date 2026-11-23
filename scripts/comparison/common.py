@@ -43,6 +43,7 @@ class Actor:
         raise ValueError("SuperMimic action and sensor orders differ")
       self.scale, self.default = map(np.array, (contract["scale"], contract["offset"]))
       self.sm = torch.jit.load(str(folder / "actor.ts"), map_location="cpu").eval()
+      self.preview = True
       self.widths = contract["widths"]
       self.length = contract["history_length"]
       self.gains = contract["gains"]
@@ -63,19 +64,44 @@ class Actor:
       )
       self.terms = c["observation_names"]
       if (
-        self.task not in ("Wbc-G1", "Wbc-G1-Zest")
+        self.task not in ("Wbc-G1", "Wbc-G1-Zest", "Wbc-G1-Preview")
         or c["action_mode"] != "reference_residual"
       ):
         raise ValueError(f"{self.task} requires additional deployed state estimation")
       options = ort.SessionOptions()
       options.intra_op_num_threads = 1
       options.inter_op_num_threads = 1
+      export = folder / "evaluation/policy.onnx"
+      if not export.is_file():
+        export = folder / "params/policy.onnx"
       self.model = ort.InferenceSession(
-        str(folder / "params/policy.onnx"), options, providers=["CPUExecutionProvider"]
+        str(export), options, providers=["CPUExecutionProvider"]
       )
       self.identity = results["checkpoint_sha256"]
       self.offsets = np.array([0])
       self.gains = None
+      self.preview = self.task == "Wbc-G1-Preview"
+      if self.preview:
+        fields = [
+          "projected_gravity",
+          "base_ang_vel",
+          "joint_pos",
+          "joint_vel",
+          "actions",
+          "ref_motion_window",
+        ]
+        self.length = c["sensor_history_length"]
+        self.widths = [3, 3, 29, 29, 29]
+        self.offsets = np.array(c["preview_offsets"])
+        if (
+          self.terms != fields
+          or self.length != 10
+          or c["wbc_command_dim"] != 640
+          or self.offsets.tolist() != list(range(0, 50, 5))
+          or self.model.get_inputs()[0].shape[-1]
+          != self.length * sum(self.widths) + 640
+        ):
+          raise ValueError("Unexpected WBC preview layout")
 
   def start(self):
     self.history = None
@@ -90,7 +116,7 @@ class Actor:
       joint_vel=velocity,
       actions=self.last,
     )
-    if self.sm is not None:
+    if self.preview:
       now = np.concatenate(list(terms.values()))
       self.history = (
         np.tile(now, (self.length, 1))
