@@ -11,7 +11,7 @@ art="$sm/artifacts/pipeline-comparison"
 base="$wbc/logs/stability-final-v12/completed/Wbc-G1-20236"
 store="$art/wbc-matched/seed-$seed"
 out="$sm/logs/pipeline-comparison/wbc-matched/seed-$seed"
-run="wbc-mjlab-runs/comparison-matched-20261120/train/wbc_g1_preview/*seed${seed}_job${job}"
+parent_job=$job
 motion="$art/wbc-bones/validation/npz/crouch_turn_270_R_002__A244.npz"
 py=${WBC_PYTHON:?WBC environment python executable}
 mkdir -p "$store" "$out"
@@ -23,11 +23,29 @@ for step in 5000 25000 45000 75000 100000 150000 175000 199999; do
   if [[ -f "$dest/finished" ]]; then continue; fi
   mkdir -p "$dest"
   checkpoint="model_${step}.pt"
+  job=$parent_job
+  prior_seconds=0
+  closed_parent=false
+  if [[ -f "$out/recovery.json" ]]; then
+    jq -e --arg parent "$parent_job" '.parent_job == $parent' "$out/recovery.json" >/dev/null
+    boundary=$(jq -er .parent_iteration "$out/recovery.json")
+    if (( step <= boundary )); then
+      closed_parent=true
+    else
+      job=$(jq -er .successor_job "$out/recovery.json")
+      prior_seconds=$(jq -er .parent_allocated_seconds "$out/recovery.json")
+    fi
+  fi
+  run="wbc-mjlab-runs/comparison-matched-20261120/train/wbc_g1_preview/*seed${seed}_job${job}"
   # A later checkpoint or completed job establishes the writer has closed this file.
   while true; do
     state=$("${remote[@]}" "sacct -X -n -P -j $job -o State")
     case "$state" in
       COMPLETED*) break ;;
+      FAILED*)
+        if [[ "$closed_parent" == true ]] && "${remote[@]}" "test -s $run/$checkpoint"; then break; fi
+        echo "Training job $job failed before validation step $step" >&2
+        exit 1 ;;
       RUNNING*|PENDING*|CONFIGURING*|COMPLETING*)
         if (( step < 199999 )) && "${remote[@]}" "test -s $run/model_$((step+5000)).pt"; then break; fi ;;
       *) echo "Unexpected Slurm state for $job: $state" >&2; exit 1 ;;
@@ -36,7 +54,11 @@ for step in 5000 25000 45000 75000 100000 150000 175000 199999; do
   done
   remote_record=$("${remote[@]}" "sha256sum $run/$checkpoint && stat -c %Y $run/$checkpoint && sacct -X -n -P -j $job -o Start")
   printf '%s\n' "$remote_record" > "$dest/cluster-checkpoint.txt"
+  if (( prior_seconds > 0 )); then printf '%s\n' "$prior_seconds" > "$dest/prior-allocation-seconds.txt"; fi
   remote_hash=${remote_record%% *}
+  if [[ "$closed_parent" == true && "$step" == "$boundary" ]]; then
+    [[ "$remote_hash" == "$(jq -er .parent_sha256 "$out/recovery.json")" ]]
+  fi
   if [[ ! -f "$store/$checkpoint" ]]; then
     rsync -at -e "ssh -o BatchMode=yes -p $port" "$host:$run/$checkpoint" "$store/"
   fi
